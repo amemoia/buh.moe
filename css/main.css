@@ -1,0 +1,13 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-family: 'Comfortaa', bold;
+    background: #222222;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+  

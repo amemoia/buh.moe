@@ -11,6 +11,12 @@ body {
     background: transparent;
 }
 
+img {
+  border-radius: 50%;
+  width: 128px;
+  margin-top: -8%;
+  float: right;
+}
 
 /* cool hue thing */
 

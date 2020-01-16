@@ -1,16 +1,19 @@
 html,
 body {
-    position: absolute;
     text-align: center;
-    font-family: 'Comfortaa', bold;
+/*    font-family: 'Comfortaa', bold; */
+    font-family: 'Playfair Display', serif;
     background: RGB(10, 10, 10);
+    color: RGB(200, 200, 200);
+  }
+
+.vertical-center {
+    margin: 0;
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%); /* IE 9 */
-    -webkit-transform: translate(-50%, -50%); /* Chrome, Safari, Opera */	    
-}
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -25,13 +28,13 @@ img {
 
 /* cool hue thing */
 
-.fadedivider {
+.faded {
     height: 40px;
     width: 100vw;
-    background: hsl(348, 100%, 61%); /* Old browsers */
+    background: hsl(355, 100%, 50%); /* Old browsers */
   }
     
-  .fadedivider.animated {
+  .faded.animated {
     -webkit-animation: filter-animation 8s infinite;
     animation: filter-animation 8s infinite;
   }
@@ -94,3 +97,7 @@ img {
           -webkit-filter: hue-rotate(360deg);
       }
     }
+
+a {
+  color: rgb(192, 57, 255)
+}

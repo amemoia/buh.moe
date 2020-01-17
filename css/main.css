@@ -1,11 +1,19 @@
 html,
 body {
-    text-align: center;
 /*    font-family: 'Comfortaa', bold; */
     font-family: 'Playfair Display', serif;
     background: RGB(10, 10, 10);
     color: RGB(200, 200, 200);
   }
+
+.text-is-centered {
+  text-align: center;
+}
+
+.image-is-centered {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .vertical-center {
     margin: 0;
@@ -13,7 +21,7 @@ body {
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-  }
+}
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -23,7 +31,6 @@ body {
 img {
   width: 128px;
   margin-top: -8%;
-  float: right;
 }
 
 /* cool hue thing */

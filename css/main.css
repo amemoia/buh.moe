@@ -1,110 +1,139 @@
-html,
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+
+/* Color scheme inspired by "HOPE LEFT ME" by Astrophysics */
+
+:root {
+    --bg-main: #000000;
+    --text: #FFFFFF;
+    --accent: #fb2746;
+    --softaccent: #fb536d;
+    --accent-alt: #6a4bea;
+    --softaccent-alt: #4230af;
+}
+
+html {
+    display: flex;
+    flex-direction: column;
+}
+
 body {
-/*    font-family: 'Comfortaa', bold; */
-    font-family: 'Playfair Display', serif;
-    background: RGB(10, 10, 10);
-    color: RGB(200, 200, 200);
-  }
-
-.text-is-centered {
-  text-align: center;
-}
-
-.image-is-centered {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.vertical-center {
+    font-family: 'Alata', sans-serif;
+    font-size: 24px;
+    background-color: var(--bg-main);
+    color: var(--text);
     margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    max-width: 45em;
+    padding: 2em 2.5em;
 }
-
-::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-}
-
-img {
-  width: 128px;
-  margin-top: -8%;
-}
-
-/* cool hue thing */
-
-.faded {
-    height: 40px;
-    width: 100vw;
-    background: hsl(355, 100%, 50%); /* Old browsers */
-  }
-    
-  .faded.animated {
-    -webkit-animation: filter-animation 8s infinite;
-    animation: filter-animation 8s infinite;
-  }
-  
-  @-webkit-keyframes filter-animation { 
-    0% {
-        -webkit-filter: hue-rotate(0deg);
-      }
-    10% {
-        -webkit-filter: hue-rotate(36deg);
-      }
-    20% {
-        -webkit-filter: hue-rotate(74deg);
-      }
-    30% {
-        -webkit-filter: hue-rotate(108deg);
-      }
-    40% {
-        -webkit-filter: hue-rotate(144deg);
-      }
-    50% {
-        -webkit-filter: hue-rotate(180deg);
-      }
-    60% {
-        -webkit-filter: hue-rotate(216deg);
-      }
-    70% {
-        -webkit-filter: hue-rotate(252deg);
-      }
-    80% {
-        -webkit-filter: hue-rotate(288deg);
-      }
-    90% {
-        -webkit-filter: hue-rotate(324deg);
-      }
-    100% {
-        -webkit-filter: hue-rotate(360deg);
-      }
-
-  }
-  
-  @keyframes filter-animation {
-      0% {
-        -webkit-filter: hue-rotate(0deg);
-      }
-      
-      25% {
-        -webkit-filter: hue-rotate(90deg);
-      }
-      
-      50% {
-        -webkit-filter: hue-rotate(180deg);
-      }
-  
-      75% {
-          -webkit-filter: hue-rotate(270deg);
-        }
-        
-      100% {
-          -webkit-filter: hue-rotate(360deg);
-      }
-    }
 
 a {
-  color: rgb(192, 57, 255)
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+i {
+    margin-right: 8px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.rowflex {
+    display: flex;
+    flex-direction: row;
+}
+
+.center {
+    align-self: center;
+}
+
+.titlesec {
+    justify-content: center;
+    margin-bottom: -0.5em;
+    height: 128px;
+}
+
+.titlehr {
+    width: 724px;
+    border: 1px solid white;
+    border-radius: 0.1em;
+    margin-left: 0;
+}
+
+.spacehr {
+    width: 10%;
+    border-top: 2px dashed var(--text);
+    border-bottom: 0px dashed var(--text);
+}
+
+.ame-img {
+    width: 128px;
+    margin-right: 0;
+}
+
+.title {
+    font-size: 64px;
+    margin-left: 0.5em;
+    font-weight: bold;
+    position: relative;
+    top: -12px;
+}
+
+.subtitle {
+    letter-spacing: 0;
+    font-size: 24px;
+    color: var(--text);
+    margin-top: 0;
+    margin-bottom: 0;
+    position: relative;
+}
+
+.ul {
+    text-decoration: underline;
+    text-underline-offset: 8px;
+}
+.spaced {
+    letter-spacing: 4px;
+}
+
+.nice {
+    font-size: 40px;
+    margin-bottom: 0.4em;
+}
+
+.accent {
+    color: var(--accent);
+}
+
+.softaccent {
+    color: var(--softaccent);
+}
+
+.accent-alt {
+    color: var(--accent-alt);
+}
+
+.softaccent-alt {
+    color: var(--softaccent-alt);
+}
+
+.lower {
+    text-transform: lowercase;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+.links {
+    gap: 0.6em;
+}
+
+.translucent {
+    opacity: 75%;
 }

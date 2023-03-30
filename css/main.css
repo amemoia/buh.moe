@@ -11,94 +11,59 @@
     --softaccent-alt: #4230af;
 }
 
-html {
-    display: flex;
-    flex-direction: column;
-}
-
-body {
-    font-family: 'Alata', sans-serif;
+main {
+    margin-top: 3em;
     font-size: 24px;
-    background-color: var(--bg-main);
-    color: var(--text);
-    margin: 0;
-    max-width: 45em;
-    padding: 2em 2.5em;
+    font-family: 'Alata', sans-serif !important;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-a {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
 i {
     margin-right: 8px;
 }
 
+.gapped {
+    gap: 0.8em;
+}
+
 .flex {
     display: flex;
+}
+
+.flexcol {
     flex-direction: column;
 }
 
-.rowflex {
-    display: flex;
+.flexrow {
     flex-direction: row;
 }
 
-.center {
-    align-self: center;
+.amebanner {
+    margin-top: auto;
 }
 
-.titlesec {
-    justify-content: center;
-    margin-bottom: -0.5em;
+.sprite {
     height: 128px;
-}
-
-.titlehr {
-    width: 724px;
-    border: 1px solid white;
-    border-radius: 0.1em;
-    margin-left: 0;
-}
-
-.spacehr {
-    width: 10%;
-    border-top: 2px dashed var(--text);
-    border-bottom: 0px dashed var(--text);
-}
-
-.ame-img {
     width: 128px;
-    margin-right: 0;
+    margin-right: 2em;
+    float: left;
 }
 
 .title {
-    font-size: 64px;
-    margin-left: 0.5em;
+    line-height: 1em;
+}
+
+.bold {
     font-weight: bold;
-    position: relative;
-    top: -12px;
 }
 
-.subtitle {
-    letter-spacing: 0;
+.larger {
+    font-size: 48px;
+}
+
+.large {
     font-size: 24px;
-    color: var(--text);
-    margin-top: 0;
-    margin-bottom: 0;
-    position: relative;
-}
-
-.ul {
-    text-decoration: underline;
-    text-underline-offset: 8px;
-}
-.spaced {
-    letter-spacing: 4px;
 }
 
 .nice {
@@ -106,20 +71,43 @@ i {
     margin-bottom: 0.4em;
 }
 
+.ul {
+    text-decoration: underline;
+    text-underline-offset: 8px;
+}
+
+.spaced {
+    letter-spacing: 4px;
+}
+
 .accent {
-    color: var(--accent);
+    color: var(--accent) !important;
+    -webkit-text-decoration-color: var(--accent) !important;
+    text-decoration-color: var(--accent) !important;
 }
 
 .softaccent {
-    color: var(--softaccent);
+    color: var(--softaccent) !important;
+    -webkit-text-decoration-color: var(--softaccent) !important;
+    text-decoration-color: var(--softaccent) !important;
 }
 
 .accent-alt {
-    color: var(--accent-alt);
+    color: var(--accent-alt) !important;
+    -webkit-text-decoration-color: var(--accent-alt) !important;
+    text-decoration-color: var(--accent-alt) !important;
 }
 
 .softaccent-alt {
-    color: var(--softaccent-alt);
+    color: var(--softaccent-alt) !important;
+    -webkit-text-decoration-color: var(--softaccent-alt) !important;
+    text-decoration-color: var(--softaccent-alt) !important;
+}
+
+.subtitle {
+    color: var(--text);
+    opacity: 75%;
+    line-height: 1em;
 }
 
 .lower {
@@ -130,10 +118,8 @@ i {
     text-transform: uppercase;
 }
 
-.links {
-    gap: 0.6em;
-}
-
-.translucent {
-    opacity: 75%;
+.bannerhr {
+    border: 1px solid white;
+    border-radius: 2px;
+    margin-top: -16px;
 }

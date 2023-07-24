@@ -27,6 +27,8 @@ body {
 main {
     padding-top: 14em;
     padding-bottom: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 @media only screen and (min-width:992px) {
@@ -199,40 +201,34 @@ li::before {
 }
 
 .proj-card {
-    background: rgba(251, 199, 212, 0.5);
+    margin-top: 1em;
+    background: rgba(251, 199, 212, 0.1);
     border-radius: 8px;
     padding: 1em;
     margin-bottom: 0;
     padding-bottom: 1.5em;
+    width: fit-content;
 }
 
 .proj-header {
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 
 .proj-header .bi {
     color: white;
     font-size: 2em;
-}
-
-.proj-header img {
-    width: 2em;
-    height: 2em;
-    margin-top: 0.475em;
+    vertical-align: sub;
 }
 
 .proj-name {
+    padding-left: 0.5em;
     font-weight: bold;
     font-size: 1.25em;
     color: var(--title);
-    margin-top: 0.375em;
-}
-
-.proj-grid {
-    margin-left: 0.55em;
 }
 
 .proj-tech {
+    margin-right: 0.5em;
     font-size: 0.85em;
     background-color:rgba(0, 0, 0, 0.25);
     border-radius: 6px;
@@ -250,10 +246,15 @@ li::before {
 }
 
 .proj-techgrid {
+    display: flex;
     margin-bottom: 0;
     margin-left: 0.025em;
 }
-
+@media only screen and (max-width:992px) {
+    .proj-techgrid {
+        justify-content: center;
+    }
+}
 .row {
     margin-bottom: 30px;
     list-style: none;
@@ -279,4 +280,8 @@ li::before {
 
 .nospace {
     margin-bottom: 0 !important;
+}
+
+.fixmargin {
+    margin-left: 0em;
 }

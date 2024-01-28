@@ -1,0 +1,161 @@
+/* Fonts */
+@font-face {
+font-family: PixelMplus10;
+src: url('https://cdn.leafscape.be/PixelMplus/PixelMplus10-Regular_web.woff2') format("woff2");
+}
+@font-face {
+font-family: PixelMplus10;
+src: url('https://cdn.leafscape.be/PixelMplus/PixelMplus10-Bold_web.woff2') format("woff2");
+font-weight: bold;
+}
+@font-face {
+font-family: PixelMplus12;
+src: url('https://cdn.leafscape.be/PixelMplus/PixelMplus12-Regular_web.woff2') format("woff2");
+}
+@font-face {
+font-family: PixelMplus12;
+src: url('https://cdn.leafscape.be/PixelMplus/PixelMplus12-Bold_web.woff2') format("woff2");
+font-weight: bold;
+}
+@font-face {
+font-family: Zpix;
+src: url('resources/fonts/zpix.ttf');
+}
+@font-face {
+    font-family: 'DinkieBitmap 9px Demo';
+    src: url('resources/fonts/DinkieBitmap-9pxDemo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DinkieBitmap 7px Demo';
+    src: url('resources/fonts/DinkieBitmap-7pxDemo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    background-color: #8F15D8;
+    background-image: url(resources/odekake_bg_0.png);
+    background-position: top;
+    background-repeat: repeat-x;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+body {
+    -ms-overflow-style: none;  /* IE, Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+:root {
+    --color-mainaccent: #4D23CF;
+    --window-active: #90F4E4;
+    --window-titlebar-bg: #F0D1F1;
+    --window-content-bg: #FFF8FF;
+    --window-footer-rect: #EAA0E8;
+    --window-shadow: rgba(77, 35, 207, 0.5);
+}
+
+main {
+    padding: 16px;
+    background-image: url(resources/bg-tile.png);
+    background-repeat: repeat;
+    min-height: calc(100vh - 32px);
+    margin: auto;
+}
+
+.window {
+    border: 2px solid var(--color-mainaccent);
+    padding: 4px;
+    padding-bottom: 13px;
+    background-color: var(--window-active);
+    width: 80%;
+    max-width: 600px;
+    box-shadow: var(--window-shadow) 4px 4px;
+}
+
+.window-titlebar {
+    font-family: 'DinkieBitmap 9px Demo';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+
+    border: 2px solid var(--color-mainaccent);
+    color: var(--color-mainaccent);
+    padding: 3px;
+    background-color: var(--window-titlebar-bg);
+    margin-bottom: 4px;
+}
+
+.window-titlebar::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-bottom: -3px;
+    margin-right: 6px;
+    background-color: var(--color-mainaccent);
+}
+
+.window-content {
+    font-family: 'DinkieBitmap 9px Demo';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+
+    border: 2px solid var(--color-mainaccent);
+    color: var(--color-mainaccent);
+    padding: 3px;
+    background-color: var(--window-content-bg);
+}
+
+.window-footer {
+    display: block;
+    float: left;
+    width: 28px;
+    height: 7px;
+    margin-top: 4px;
+    margin-bottom: -6px;
+    border: 2px solid var(--color-mainaccent);
+    border-bottom: 0px;
+    background-color: var(--window-footer-rect);
+}
+
+.squares {
+    float: left;
+    display: inline;
+    margin-left: 2px;
+}
+
+.squares div {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border: 2px solid var(--color-mainaccent);
+    background-color: transparent;
+    margin-bottom: 3px;
+    margin-left: 0px;
+    margin-right: -2px;
+}
+
+@media only screen and (max-width: 768px) {
+    /* Mobile */
+    main {
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 768px) {
+    /* Desktop */
+    main {
+        width: 75%;
+    }
+}

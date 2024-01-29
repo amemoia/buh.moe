@@ -8,18 +8,32 @@
 </head>
 <body>
     <main>
-        <div class="window">
-            <div class="window-titlebar">Welcome!</div>
-            <div class="window-content">
-                <p>this website is going to drive me to insanity</p>
+        <div class="greeting">
+            <div class="window">
+                <div class="window-titlebar">Welcome</div>
+                <div class="window-content">
+                    <div class="row">
+                        <div class="col pfp">
+                            <img src="resources/icons/icon_jine_ame.png" class="ame-jine">
+                        </div>
+                        <div class="col intro">
+                            <h2>amemoia</h2><hr>
+                            <p>Hi! I'm annie. I'm a 19yo student from Poland.</p>
+                            <p>I have an interest in front-end development and UI design.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="window-footer"></div>
-            <div class="squares">
-                <div></div>
-                <div></div>
-                <div></div>
+        </div>
+
+        <div class="window webcam-width-override webcam-position-override">
+            <div class="window-titlebar webcam-width-override">Webcam</div>
+            <div class="webcam">
+                <img class="ame-sprite" id="ame-sprite">
+                <script src="spriteHandler.js"></script>
             </div>
         </div>
     </main>
+    <script src="windowAppends.js"></script>
 </body>
 </html>

@@ -28,12 +28,18 @@ src: url('resources/fonts/zpix.ttf');
     font-style: normal;
     font-display: swap;
 }
-
 @font-face {
     font-family: 'DinkieBitmap 7px Demo';
     src: url('resources/fonts/DinkieBitmap-7pxDemo.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'DinkieBitmap 9px Demo';
+    src: url('resources/fonts/DinkieBitmap-9pxItalicDemo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
     font-display: swap;
 }
 
@@ -74,13 +80,14 @@ main {
 }
 
 .window {
+    clear: both;
     border: 2px solid var(--color-mainaccent);
     padding: 4px;
     padding-bottom: 13px;
+    width: 90%;
     background-color: var(--window-active);
-    width: 80%;
-    max-width: 600px;
     box-shadow: var(--window-shadow) 4px 4px;
+    margin-bottom: 16px;
 }
 
 .window-titlebar {
@@ -91,9 +98,23 @@ main {
 
     border: 2px solid var(--color-mainaccent);
     color: var(--color-mainaccent);
-    padding: 3px;
+    padding: 4px;
     background-color: var(--window-titlebar-bg);
     margin-bottom: 4px;
+    padding-top: 0px;
+    padding-bottom: 3px;
+}
+.window-titlebar span {
+    display: inline-block;
+    height: 18px;
+}
+.window-titlebar img {
+    float:right;
+    position: relative;
+    top: 4px;
+    margin-left: 4px;
+    width: 20px;
+    height: 20px;
 }
 
 .window-titlebar::before {
@@ -107,14 +128,14 @@ main {
 }
 
 .window-content {
-    font-family: 'DinkieBitmap 9px Demo';
+    font-family: 'Zpix';
     font-weight: normal;
     font-style: normal;
     font-size: 20px;
 
     border: 2px solid var(--color-mainaccent);
     color: var(--color-mainaccent);
-    padding: 3px;
+    padding: 8px;
     background-color: var(--window-content-bg);
 }
 
@@ -156,6 +177,100 @@ main {
 @media only screen and (min-width: 768px) {
     /* Desktop */
     main {
-        width: 75%;
+        width: 65%;
+    }
+}
+
+/* Window specific styles */
+
+.greeting {
+    float: right;
+    max-width: 900px;
+}
+.ame-jine {
+    width: 128px;
+    height: 128px;
+}
+
+.col {
+    float: left;
+}
+@media screen and (max-width: 768px) {
+    .col {
+        width: 100%;
+        float: none;
+        margin: auto;
+    }
+}
+.pfp {
+    width: fit-content;
+}
+.intro {
+    margin-left: 16px;
+    width: 70%;
+}
+@media screen and (max-width: 768px) {
+    .intro {
+        width: 100%;
+        float: none;
+        margin: auto;
+    }
+    .intro h2 {
+        text-align: center;
+    }
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+h2 {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-weight: normal;
+}
+hr {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: 100%;
+    border: 1px solid var(--window-titlebar-bg);
+}
+
+/* Webcam */
+
+.webcam {
+    background-image: url(resources/bg_stream.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    max-width: 696px;
+    max-height: 454px;
+    border: 2px solid var(--color-mainaccent);
+    color: var(--color-mainaccent);
+    display: flex;
+    justify-content: center;
+}
+.webcam-width-override {
+    max-width: 696px;
+}
+.ame-sprite {
+    max-width: 696px;
+    max-height: 454px;
+}
+
+/* 
+    This breakpoint accounts for situations
+    where the two windows max out on width and stack
+    on top of each other for nearly their entire length
+*/
+@media screen and (min-width: 1280px) {
+    .webcam-position-override {
+        position: relative;
+        bottom: 38px
     }
 }

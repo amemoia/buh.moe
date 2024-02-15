@@ -163,16 +163,13 @@ main {
     margin-right: -2px;
 }
 
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 768px) {
     /* Mobile */
     main {
         width: 100%;
     }
-    .hideonmobile {
-        display: none;
-    }
 }
-@media only screen and (min-width: 1080px) {
+@media only screen and (min-width: 768px) {
     /* Desktop */
     main {
         width: 65%;

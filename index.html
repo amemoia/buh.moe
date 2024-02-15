@@ -1,160 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" id="home">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="css/main.css">
-    <title>amemoia's site</title>
-    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <title>amemoia</title>
+    <link rel="stylesheet" href="main.css" type="text/css">
 </head>
-
 <body>
-    <main class="text-center text-lg-start">
-        <div class="container spacer">
-            <img src="img/amemoia.jpg" class="main-icon">
-            <h1 class="title">hi, I'm <span class="accent">amemoia</span>.</h1>
-            <h3 class="subtitle">I occasionally make things.</h3>
-            <p>I'm a 19yo computer science student from <span class="accent-soft">Lublin, Poland</span>.</p>
-            <p>I have an interest in front-end development and UI design.</p>
-            <a href="https://twitter.com/amemoia">
-                <button type="button" class="btn btn-outline-info btn-lg"><i class="bi bi-twitter"></i> say hi</button>
-            </a>
-            <a href="https://discord.com/users/254204775497859073">
-                <button type="button" class="btn btn-outline-info btn-lg"><i class="bi bi-discord"></i> contact me</button>
-            </a>
-        </div>
-
-        <div class="container">
-            <h2 class="header" id="socials">/ socials <hr></h2>
-            <p>These are the websites you can find me on.</p>
-            <p>Feel free to contact me if you have any questions, or if you just want to be friends!</p>
-            <div class="row row-cols-auto">
-                <div class="col">
-                    <a href="https://twitter.com/amemoia">
-                        <button type="button" class="btn btn-outline-info btn-lg"><i class="bi bi-twitter"></i> Twitter</button>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="https://bsky.app/profile/amemoia.bsky.social">
-                        <button type="button" class="btn btn-outline-info btn-lg"><i class="bi bi-cloud-fill"></i> Bluesky</button>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="https://discord.com/users/254204775497859073">
-                        <button type="button" class="btn btn-outline-info btn-lg"><i class="bi bi-discord"></i> Discord</button>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="https://steamcommunity.com/id/amemoia/">
-                        <button type="button" class="btn btn-outline-info btn-lg"><i class="bi bi-steam"></i> Steam</button>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="https://github.com/amemoia">
-                        <button type="button" class="btn btn-outline-info btn-lg"><i class="bi bi-github"></i> GitHub</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <h2 class="header" id="about">/ about <hr></h2>
-            <p>I am currently preparing for my Matura exams as well as the <span class="accent-soft">INF.03 IT Engineering</span> exam.</p>
-            <p>I have a passion for video games and as such devote most of my projects to them.</p>
-
-            <p class="spacer-top">Here are some technologies I've worked with:</p>
-            <div class="row row-cols-auto smgap nospace">
-                <div class="col"><i class="bi bi-filetype-html"></i> .HTML</div>
-                <div class="col"><i class="bi bi-filetype-css"></i> .CSS</div>
-                <div class="col"><i class="bi bi-filetype-js"></i> .JS</div>
-                <div class="col"><i class="bi bi-filetype-php"></i> .PHP</div>
-                <div class="col"><i class="bi bi-filetype-sql"></i> .SQL</div>
-                <div class="col"><i class="bi bi-filetype-py"></i> .PY</div>
-            </div>
-            <p>Outside of programming I have dealt with video & image editing as well as modding PC games.</p>
-
-            <p class="spacer-top">I'm also decent at learning languages!</p>
-            <p>Currently, I know <i class="twa twa-flag-united-kingdom flags"></i> English, <i class="twa twa-flag-poland flags"></i> Polish, as well as a bit of <i class="twa twa-flag-germany flags"></i> German and <i class="twa twa-flag-japan flags"></i> Japanese.</p>
-        </div>
-
-        <div class="container">
-            <h2 class="header" id="experience">/ experience <hr></h2>
-            <p>As part of my education I had to spend two months working at an IT company to gather work experience.</p>
-
-            <p class="spacer-top">I spent this time at <a class="accent-soft" href="https://enkon.pl/en">Enkon</a>, a company set in Lublin that offers a wide variety of IT solutions.</p>
-            <p>There, I helped set up LAN networks for different companies and set up a website according to the client's wishes.</p>
-
-            <p class="spacer-top">I also have multiple certificates from courses on <a class="accent-soft" href="https://www.netacad.com/">Cisco's Networking Academy</a>, namely:</p>
-            <div class="row row-cols-auto nogap">
-                <div class="col"><i class="bi bi-cpu"></i> IT Essentials: PC Hardware and Software</div>
-                <div class="col"><i class="bi bi-wifi"></i> CCNAv7: Introduction to Networks</div>
-            </div>
-        </div>
-
-        <div class="container">
-            <h2 class="header" id="projects">/ projects <hr></h2>
-            <p>I've been focusing on school and my personal life, so a lot of my old projects ended up abandoned.</p>
-            <p>I don't really consider them very special, so I won't put them here.</p>
-            <p>Regardless, here's something I've been cooking up recently:</p>
-            
-            <div class="row row-cols-2 fixmargin">
-                <div class="proj-card col">
-                    <a href="https://github.com/amemoia/Statsy">
-                        <p class="proj-header">
-                            <i class="bi bi-discord"></i>
-                            <span class="proj-name">Statsy</span>
-                        </p>
-                    </a>
-                    <p class="proj-desc">
-                        A Discord bot for fetching game-related info and stats.
-                    </p>
-                    <p>Supports the following games:</p>
-                    <div class="proj-techgrid">
-                        <a href="https://overfast-api.tekrop.fr/">
-                            <p class="proj-tech">Overwatch 2</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="proj-card col">
-                    <a href="https://github.com/amemoia/overfast-py">
-                        <p class="proj-header">
-                            <i class="bi bi-database-fill-gear"></i>
-                            <span class="proj-name">overfast-py</span>
-                        </p>
-                    </a>
-                    <p class="proj-desc">
-                        An API wrapper for the OverFast API, written in Python.
-                    </p>
-                    <p>Available on:</p>
-                    <div class="proj-techgrid">
-                        <a href="https://github.com/amemoia/overfast-py">
-                            <p class="proj-tech">GitHub</p>
-                        </a>
-                        <a href="https://pypi.org/project/overfast-py/">
-                            <p class="proj-tech">PyPI</p>
-                        </a>
+    <main>
+        <div class="greeting">
+            <div class="window">
+                <div class="window-titlebar">Welcome</div>
+                <div class="window-content">
+                    <div class="row">
+                        <div class="col pfp">
+                            <img src="resources/icons/icon_jine_ame.png" class="ame-jine">
+                        </div>
+                        <div class="col intro">
+                            <h2>amemoia</h2><hr>
+                            <p>Hi! I'm annie. I'm a 19yo student from Poland.</p>
+                            <p>I have an interest in front-end development and UI design.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container credits">
-            <p>Built by amemoia. Resources used: Bootstrap, Boostrap Icons, Twemoji Awesome, Alata Font</p>
+
+        <div class="window webcam-width-override webcam-position-override">
+            <div class="window-titlebar webcam-width-override">Webcam</div>
+            <div class="webcam">
+                <img class="ame-sprite" id="ame-sprite">
+                <script src="spriteHandler.js"></script>
+            </div>
+        </div>
+
+        <div>
+            <div class="socials webcam-position-override">
+                <div class="window">
+                    <div class="window-titlebar">Socials</div>
+                    <div class="window-content">
+                        <div class="row">
+                            <ul id="social-list">
+                                <li><a href="https://discord.com/users/254204775497859073" target="_blank"> <span><b>Discord</b> @amemoia</span> </li></a>
+                                <li><a href="https://twitter.com/amemoia" target="_blank"> <span><b>Twitter / X</b> @amemoia</span></li></a>
+                                <li><a href="https://bsky.app/profile/amemoia.bsky.social" target="_blank"> <span><b>BlueSky</b> @amemoia.bsky.social</span></li></a>
+                                <li><a href="https://steamcommunity.com/id/amemoia/" target=_blank""> <span><b>Steam</b> /id/amemoia</span></li></a>
+                                <li><a href="https://github.com/amemoia" target="_blank"> <span><b>GitHub</b> @amemoia</span></li></a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="devices webcam-position-override">
+            <div class="window">
+                <div class="window-titlebar">Devices</div>
+                <div class="window-content">
+                    <div class="row">
+                        <div class="col">
+                            <h3>My PC</h3>
+                            <p><b>CPU:</b> i5-7400</p>
+                            <p><b>GPU:</b> GTX 1650 Super</p>
+                            <p><b>RAM:</b> 16GB</p>
+                            <p><b>OS:</b> Windows 11</p>
+                        </div>
+                        <div class="col">
+                            <h3>Peripherals</h3>
+                            <p><b>Mouse:</b> Logitech G Pro Superlight</p>
+                            <p><b>Mousepad:</b> Logitech G640</p>
+                            <p><b>Keyboard:</b> Razer BlackWidow Elite</p>
+                            <p><b>Headset:</b> Razer Kraken Pro V2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
-
-    <div class="sidebar container d-none d-lg-block">
-        <div class="sidebar-links">
-            <a href="#home">/home</a>
-            <a href="#socials">/socials</a>
-            <a href="#about">/about</a>
-            <a href="#experience">/experience</a>
-            <a href="#projects">/projects</a>
-        </div>
-        <div class="logos"></div>
-    </div>
+    <script src="windowAppends.js"></script>
 </body>
-
 </html>

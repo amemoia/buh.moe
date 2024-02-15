@@ -29,3 +29,32 @@ for (let i = 0; i < windows.length; i++) {
     windows[i].appendChild(windowfooter)
     windows[i].appendChild(squares)
 };
+
+var baseSocIconDir = "resources/icons/"
+const socialImages = [
+    "icon_desktop_jine2.png",
+    "icon_desktop_twitter.png",
+    "icon_desktop_egosearch.png",
+    "icon_desktop_game.png",
+    "icon_desktop_asobu.png",
+]
+
+var newSheet = document.createElement('style'),
+	sheet;
+document.body.appendChild(newSheet);
+sheet = newSheet.sheet;
+
+var socialList = document.getElementById('social-list')
+for (let i = 0; i < socialList.children.length; i++) {
+    socialList.children[i].children[0].id = "social"+i;
+    let imgDir = baseSocIconDir + socialImages[i]
+    let setStyle = "#social" + i + "::before"
+                 + " {"
+                 + " content: '';"
+                 + " display: inline-block;"
+                 + " width: 64px;"
+                 + " height: 64px;"
+                 + " background-image: url(" + imgDir + ");"
+                 + " }"
+    sheet.insertRule(setStyle, i)
+}

@@ -53,15 +53,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Chrome, Safari and Opera */
-body::-webkit-scrollbar {
-    display: none;
-}
-body {
-    -ms-overflow-style: none;  /* IE, Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
 :root {
     --color-mainaccent: #4D23CF;
     --window-active: #90F4E4;
@@ -268,9 +259,60 @@ hr {
     where the two windows max out on width and stack
     on top of each other for nearly their entire length
 */
+
+ul {
+    list-style-type: none;
+}
+
+.socials {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.devices {
+    max-width: 820px;
+    margin: 0 0 0 auto;
+}
+
+/* Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+    display: none;
+}
+html {
+    -ms-overflow-style: none;  /* IE, Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.devices .col {
+    padding-right: 64px;
+}
+.devices .col h3 {
+    margin-top: 8px;
+    margin-bottom: 16px
+}
+
+#social-list li span {
+    position: relative;
+    bottom: 24px;
+    padding-left: 16px;
+    padding-right: 24px;
+}
+
+#social-list a {
+    text-decoration: none;
+}
+
+a, a:visited {
+    color: var(--color-mainaccent);
+}
+
 @media screen and (min-width: 1280px) {
     .webcam-position-override {
         position: relative;
         bottom: 38px
+    }
+    .devices {
+        position: relative;
+        bottom: 80px;
     }
 }

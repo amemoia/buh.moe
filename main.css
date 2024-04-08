@@ -346,6 +346,7 @@ a, a:visited {
 }
 
 textarea {
+    font-size: 10px;
     resize: none;
     outline: none;
     border: solid 1px var(--color-mainaccent);

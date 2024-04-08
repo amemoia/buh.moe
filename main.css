@@ -373,3 +373,13 @@ textarea {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+@media screen and (max-width: 767px) {
+    .links {
+        text-align: left;
+    }
+    .links .window {
+        width: 90%;
+        margin: 0;
+    }
+}

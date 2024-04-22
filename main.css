@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 
 :root {
     --background: #000000;
@@ -9,6 +10,7 @@
     --accent-blue: #6942f0;
     --text: #ffffff;
     --font-main: "Poppins", sans-serif;
+    --font-code: "Fira Code", monospace;
 }
 
 body {
@@ -157,4 +159,41 @@ hr {
 }
 .smaller {
     font-size: smaller;
+}
+.buttons {
+    gap: 4px;
+    padding-left: 0;
+}
+textarea {
+    resize: none;
+    background-color: var(--background-alt);
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-code);
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    color: var(--text);
+    width: 45em;
+    font-size: 14;
+}
+textarea::selection {
+    background-color: var(--accent-red-alt);
+}
+textarea:focus {
+    outline: none;
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+    display: none;
+}
+html {
+    -ms-overflow-style: none;  /* IE, Edge */
+    scrollbar-width: none;  /* Firefox */
 }

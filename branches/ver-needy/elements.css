@@ -1,0 +1,22 @@
+/* This file defines how custom elements will look like, setting CSS that breaks main nekoweb site on purpose is prohibited and may result in ban and site deletion! */
+
+/* Must start with ".site-box". Change how your website will appear on main nekoweb site: https://lune.dimden.dev/405a44b7e5.png */
+.site-box {
+    text-align: center;
+    background-image: url(https://amemoia.nekoweb.org/resources/elements/silly.png); /* Only nekoweb URLs allowed, use full url to your site like https://example.nekoweb.org/images/coolbg.png */
+    background-repeat: no-repeat;
+    color: #4D23CF;
+    font-size: 12px;
+}
+.site-box > a > p {
+    font-weight: bold;
+    color: #4D23CF;
+}
+.site-box > a > span {
+    color: #4D23CF;
+    visibility: hidden;
+}
+
+.site-box > a > .sitefeature {
+    border: none;
+}

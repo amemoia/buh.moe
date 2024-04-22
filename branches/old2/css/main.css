@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+
+/* Color scheme inspired by "HOPE LEFT ME" by Astrophysics */
+
+:root {
+    --bg-main: #000000;
+    --text: #FFFFFF;
+    --accent: #fb2746;
+    --softaccent: #fb536d;
+    --accent-alt: #6a4bea;
+    --softaccent-alt: #4230af;
+}
+
+main {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    font-size: 24px;
+    font-family: 'Alata', sans-serif !important;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+i {
+    margin-right: 8px;
+}
+
+.gapped {
+    gap: 0.8em;
+}
+
+.flex {
+    display: flex;
+}
+
+.flexcol {
+    flex-direction: column;
+}
+
+.flexrow {
+    flex-direction: row;
+}
+
+.amebanner {
+    margin-top: auto;
+}
+
+.sprite {
+    height: 128px;
+    width: 128px;
+    margin-right: 2em;
+    float: left;
+}
+
+.title {
+    line-height: 1em;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.larger {
+    font-size: 48px;
+}
+
+.large {
+    font-size: 24px;
+}
+
+.nice {
+    font-size: 40px;
+    margin-bottom: 0.4em;
+}
+
+.ul {
+    text-decoration: underline;
+    text-underline-offset: 8px;
+}
+
+.spaced {
+    letter-spacing: 4px;
+}
+
+.accent {
+    color: var(--accent) !important;
+    -webkit-text-decoration-color: var(--accent) !important;
+    text-decoration-color: var(--accent) !important;
+}
+
+.softaccent {
+    color: var(--softaccent) !important;
+    -webkit-text-decoration-color: var(--softaccent) !important;
+    text-decoration-color: var(--softaccent) !important;
+}
+
+.accent-alt {
+    color: var(--accent-alt) !important;
+    -webkit-text-decoration-color: var(--accent-alt) !important;
+    text-decoration-color: var(--accent-alt) !important;
+}
+
+.softaccent-alt {
+    color: var(--softaccent-alt) !important;
+    -webkit-text-decoration-color: var(--softaccent-alt) !important;
+    text-decoration-color: var(--softaccent-alt) !important;
+}
+
+.subtitle {
+    color: var(--text);
+    opacity: 75%;
+    line-height: 1em;
+}
+
+.lower {
+    text-transform: lowercase;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+.bannerhr {
+    border: 1px solid white;
+    border-radius: 2px;
+    margin-top: -16px;
+}

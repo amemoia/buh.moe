@@ -7,108 +7,73 @@
     <title>amemoia</title>
     <link rel="stylesheet" href="main.css" type="text/css">
     <link rel="apple-touch-icon" sizes="180x180" href="resources/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="resources/favicon//favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/favicon//favicon-16x16.png">
-    <link rel="manifest" href="resources/favicon//site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="resources/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="resources/favicon/favicon-16x16.png">
+    <link rel="manifest" href="resources/favicon/site.webmanifest">
+    <link rel="mask-icon" href="resources/favicon/safari-pinned-tab.svg" color="#000000">
+    <meta name="msapplication-TileColor" content="#fc2348">
+    <meta name="theme-color" content="#000000">
     <meta name="og:title" content="amemoia's website">
     <meta name="og:description" content="buh">
     <meta property="og:url" content="https://amemoia.nekoweb.org">
-    <meta property="og:image" content="https://amemoia.nekoweb.org/resources/icons/icon_jine_ame.png">
+    <meta property="og:image" content="resources/icons/hopeleftme2.png">
 </head>
 <body>
     <main>
-        <div class="greeting">
-            <div class="window">
-                <div class="window-titlebar">Welcome</div>
-                <div class="window-content">
-                    <div class="row">
-                        <div class="col pfp">
-                            <img src="resources/icons/icon_jine_ame.png" class="ame-jine">
-                        </div>
-                        <div class="col intro">
-                            <h2>amemoia</h2><hr>
-                            <p>Hi! I'm annie. I'm a 20yo student from Poland.</p>
-                            <p>I have an interest in front-end development and UI design.</p>
-                            <p>This website is based on a game called Needy Streamer Overload.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="container intro">
+            <span>
+                <img src="resources/icons/hopeleftme2.png" class="pfp">
+                <h2>annie</h2>
+                <span class="intro-row">
+                    <h4>amemoia</h4>
+                    <span class="pronouns">she/they</span>
+                    <span class="flags-container">
+                        <img class="flag" src="resources/emoji/flag-trans.png">
+                        <img class="flag" src="resources/emoji/flag-lesbian.png">
+                    </span>
+                </span>
+                <section class="links">
+                    <a href="index.html" class="accent-red underlined">home</a>
+                    <a href="about.html" class="accent-red">about</a>
+                    <a href="projects.html" class="accent-red">projects</a>
+                    <a href="credits.html" class="accent-red">credits</a>
+                </section>
+                <p>
+                    Hi! I'm annie, I'm a 20yo student from <span class="accent-red">Poland</span>.
+                </p>
+                <p>
+                    I have an interest in programming, front-end development and UI design.
+                    <br>
+                    I also have experience in video and image editing.
+                </p>
+            </span>
         </div>
-
-        <div class="window webcam-width-override webcam-position-override">
-            <div class="window-titlebar webcam-width-override">Webcam</div>
-            <div class="webcam">
-                <img class="ame-sprite" id="ame-sprite">
-                <script src="spriteHandler.js"></script>
-            </div>
+        <div class="container">
+            <span>
+                <h2>contact</h2>
+            </span>
+            <p>
+                You can find me on the following websites:
+            </p>
+            <ul>
+                <li>
+                    <a href="https://discord.com/users/254204775497859073" target="_blank"
+                    class="accent-red">Discord</a> <span class="link-handle">- @amemoia</span>
+                </li>
+                <li>
+                    <a href="https://twitter.com/amemoia" target="_blank"
+                    class="accent-red">Twitter / X</a> <span class="link-handle">- @amemoia</span>
+                </li>
+                <li>
+                    <a href="https://github.com/amemoia" target="_blank"
+                    class="accent-red">GitHub</a> <span class="link-handle">- @amemoia</span>
+                </li>
+                <li>
+                    <a href="https://steamcommunity.com/id/amemoia/" target="_blank"
+                    class="accent-red">Steam</a> <span class="link-handle">- /id/@amemoia</span>
+                </li>
+            </ul>
         </div>
-
-        <div>
-            <div class="socials webcam-position-override">
-                <div class="window">
-                    <div class="window-titlebar">Socials</div>
-                    <div class="window-content">
-                        <div class="row">
-                            <ul id="social-list">
-                                <li><a href="https://discord.com/users/254204775497859073" target="_blank"> <span><b>Discord</b></span> </li></a>
-                                <li><a href="https://twitter.com/amemoia" target="_blank"> <span><b>Twitter / X</b></span></li></a>
-                                <li><a href="https://bsky.app/profile/amemoia.bsky.social" target="_blank"> <span><b>BlueSky</b></span></li></a>
-                                <li><a href="https://steamcommunity.com/id/amemoia/" target=_blank""> <span><b>Steam</b></span></li></a>
-                                <li><a href="https://github.com/amemoia" target="_blank"> <span><b>GitHub</b></span></li></a>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="devices webcam-position-override">
-            <div class="window">
-                <div class="window-titlebar">Devices</div>
-                <div class="window-content">
-                    <div class="row">
-                        <div class="col">
-                            <h3>My PC</h3>
-                            <p><b>CPU:</b> i5-7400</p>
-                            <p><b>GPU:</b> GTX 1650 Super</p>
-                            <p><b>RAM:</b> 16GB</p>
-                            <p><b>OS:</b> Windows 11</p>
-                        </div>
-                        <div class="col">
-                            <h3>Peripherals</h3>
-                            <p><b>Mouse:</b> Logitech G Pro Superlight</p>
-                            <p><b>Mousepad:</b> Logitech G640</p>
-                            <p><b>Keyboard:</b> Razer BlackWidow Elite</p>
-                            <p><b>Headset:</b> Razer Kraken Pro V2</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="links webcam-position-override">
-            <div class="window">
-                <div class="window-titlebar">Cool places</div>
-                <div class="window-content">
-                    <div class="row-links">
-                        <a href="https://nekoweb.org/"><img src="https://nekoweb.org/assets/buttons/button6.gif"></a>
-                        <a href="https://remblanc.nekoweb.org"><img src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" title="remblanc's incredible site"></a>
-                        <a href="https://razzpixel.nekoweb.org/" target="_blank"><img src="https://razzpixel.nekoweb.org/img/link/nekoweb-link.gif"></a>
-                        <a href="https://dimden.dev/"><img src="https://dimden.dev/services/images/88x31.gif"></a>
-                        <a href="https://sapphic.moe/" title="sapphic's site" target="_blank" ><img alt="Webring of sapphic" height="31" loading="lazy" src="resources/buttons/sapphic.png" width="88"></a>
-                        <a href="https://nvkomata.gitlab.io/" target="_blank"><img src="https://nvkomata.gitlab.io/button/nvkomata.png"></a>
-                    </div>
-                    <div class="my-link">
-                        <h4>My Button</h4>
-                        <a href="https://amemoia.nekoweb.org/" target="_blank"><img src="https://amemoia.nekoweb.org/resources/buttons/amemoia.png"></a>
-                        <textarea onclick="this.select()" readonly><a href="https://amemoia.nekoweb.org/" target="_blank"><img src="https://amemoia.nekoweb.org/resources/buttons/amemoia.png"></a></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </main>
-    <script src="windowAppends.js"></script>
 </body>
 </html>

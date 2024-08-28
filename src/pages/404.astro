@@ -1,0 +1,16 @@
+---
+import Image from "astro/components/Image.astro";
+import BaseLayout from "../components/BaseLayout.astro";
+const notFound = "/resources/NotFound.png"
+const pageTitle = "not found :c"
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <div class="flexcol">
+        <img src={notFound} alt="404 Not Found" />
+    </div>
+    <div class="container">
+        <h2>Oops!</h2>
+        <p class="lastp">The page you're looking for could not be found.</p>
+    </div>
+</BaseLayout>

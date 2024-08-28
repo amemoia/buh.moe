@@ -1,0 +1,59 @@
+---
+import NavHeader from "../components/NavHeader.astro"
+import ParseTwemoji from "../components/ParseTwemoji.astro"
+import Footer from "../components/Footer.astro"
+import BaseLayout from "../components/BaseLayout.astro"
+import Image from "astro/components/Image.astro"
+const pageTitle = "amemoia"
+const twitter = "https://x.com/amemoia"
+const discord = "https://discord.com/users/254204775497859073"
+const github = "https://github.com/amemoia"
+const steam = "https://steamcommunity.com/id/amemoia/"
+---
+<BaseLayout pageTitle={pageTitle}>
+	<div class="container">
+		<h2>Hi there!</h2>
+		<p>I'm Annie, I'm a 20yo student from <span class="accent">Poland 🇵🇱</span></p>
+		<p class="lastp">I have an interest in programming, front-end development, UI design and video games. Feel free to look around :3</p>
+	</div>
+	<div class="flexcol container">
+		<h2>Contact</h2>
+		<p>You can find me on the following websites:</p>
+		<a href={twitter} target="_blank">
+			<i class="fa-brands fa-twitter"></i>
+			Twitter / X <span class="accent-none">— @amemoia</span>
+		</a>
+		<a href={discord} target="_blank">
+			<i class="fa-brands fa-discord"></i>
+			Discord <span class="accent-none">— @amemoia</span>
+		</a>
+		<a href={github} target="_blank">
+			<i class="fa-brands fa-github"></i>
+			GitHub <span class="accent-none">— @amemoia</span>
+		</a>
+		<a href={steam} target="_blank">
+			<i class="fa-brands fa-steam"></i>
+			Steam <span class="accent-none">— /id/amemoia</span>
+		</a>
+	</div>
+	<div class="buttons-section flexcol container">
+		<h2>cool places</h2>
+		<div class="buttons flexrow">
+			<a href="https://themooskyfish.nekoweb.org" target="_blank"><Image src="https://themooskyfish.nekoweb.org/res/moosky.gif" width="88" height="31" alt="TheMooskyFish" /></a> 
+			<a href="https://sapphic.moe"><Image src="https://sapphic.moe/buttons/friends/sapphic/image.png" width="88" height="31" alt="sapphic.moe"/></a>
+			<a href="https://nvkomata.gitlab.io/" target="_blank"><Image src="https://nvkomata.gitlab.io/button/nvkomata.gif" width="88" height="31" alt="nvkomata" /></a>
+			<a href="https://remblanc.nekoweb.org"><Image src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" width="88" height="31" title="remblanc's incredible site" /></a>
+			<a href="https://razzpixel.nekoweb.org/" target="_blank"><Image src="https://razzpixel.nekoweb.org/img/link/nekoweb-link.gif" width="88" height="31" alt="Razzpixel" /></a>
+			<a href="https://dimden.dev/" ><Image src="https://dimden.dev/services/images/88x31.gif" width="88" height="31" alt="dimden" /></a>
+			<a href="https://nekoweb.org/"><Image src="https://nekoweb.org/assets/buttons/button6.gif" width="88" height="31" alt="Nekoweb" /></a>
+		</div>
+		<div class="buttons-my">
+			<p>My button:</p>
+			<div class="myButtonDiv flexrow">
+				<a href="https://amemoia.nekoweb.org/" target="_blank"><Image src="https://amemoia.github.io/resources/buttons/88x31.png" width="88" height="31" alt="amemoia" /></a>
+				<!-- This textarea throws a bunch of typescript errors but this site doesn't even use typescript so it's fine -->
+				<textarea onclick="this.select()" readonly cols="70" rows="2"><a href="https://amemoia.github.io/" target="_blank"><img src="https://amemoia.github.io/resources/buttons/88x31.png"></a></textarea>
+			</div>
+		</div>
+	</div>
+</BaseLayout>

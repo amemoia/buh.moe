@@ -1,0 +1,25 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import YakuzaChecklist from "./YakuzaChecklist.astro";
+import Image from "astro/components/Image.astro";
+const currentGame = "https://store.steampowered.com/app/2072450/Like_a_Dragon_Infinite_Wealth/"
+const pageTitle = "amemoia's Yakuza series progress"
+
+import yakuzaTierlist from "../img/sites/Yakuza-Tierlist.png"
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <div>
+        <h1 class="yakuza-intro"><span>Annie's Yakuza Series Progress</span></h1>
+    </div>
+    <div class="container">
+        <h2>Currently on: <a href={currentGame}>Like a Dragon: Infinite Wealth</a></h2>
+        <div class="yakuza-checklist">
+            <slot />
+        </div>
+    </div>
+    <div class="container">
+        <h2>Tier list so far:</h2>
+        <Image src={yakuzaTierlist} class="yakuza-tierlist" alt="My personal tier list of games in the Yakuza / Like a Dragon franchise."/>
+    </div>
+</BaseLayout>

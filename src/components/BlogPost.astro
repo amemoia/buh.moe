@@ -1,0 +1,15 @@
+---
+const { url, title, description, date } = Astro.props;
+const d = new Date(date)
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const mon = months[d.getMonth()];
+const day = d.getDate()
+const yr = d.getFullYear();
+---
+<a href={url} class="accent-none nohover">
+    <div class="container">
+        <h3 class="blogPostTitle">{title}</h3>
+        <p class="blogPostDescription">{description}</p>
+        <p class="blogPostDate"><i class="fa-solid fa-calendar-days"></i> {mon + " " + day + ", " + yr}</p>
+    </div>
+</a>

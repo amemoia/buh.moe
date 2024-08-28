@@ -1,0 +1,23 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+const d = new Date(frontmatter.pubDate)
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const mon = months[d.getMonth()];
+const day = d.getDate()
+const yr = d.getFullYear();
+---
+<BaseLayout pageTitle={frontmatter.title}>
+    <div class="container blogPostContainer">
+        <div class="blogPostHeader flexcol">
+            <h1 class="blogPostTitle">{frontmatter.title}</h1>
+            <p class="blogPostDescription">{frontmatter.description}</p>
+            <p class="blogPostDate"><i class="fa-solid fa-calendar-days"></i> {mon + " " + day + ", " + yr}</p>
+        </div>
+        <div class="blogPostContent">
+            <slot />
+        </div>
+    </div>
+    
+</BaseLayout>

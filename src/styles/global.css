@@ -76,6 +76,7 @@ body {
 @media screen and (max-width: 899px) {
     body {
         width: 95%;
+        padding-top: 0.5em;
         padding-left: 0;
         padding-right: 0;
         flex-wrap: wrap;

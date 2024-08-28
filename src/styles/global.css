@@ -125,7 +125,11 @@ a:hover {
     }
     .profile-text {
         flex-direction: column;
-        gap: 0.25em;
+    }
+}
+@media screen and (max-width: 350px) {
+    .profile-text {
+        gap: 0.5em;
     }
 }
 .profile-text span {

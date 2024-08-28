@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.7",
-    "astro": "^4.14.5",
+    "astro": "^4.14.6",
     "twemoji-parser": "^14.0.0",
     "typescript": "^5.5.4"
   }

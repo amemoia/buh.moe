@@ -205,7 +205,11 @@ footer div {
 hr {
     border: 1px solid var(--border);
 }
-
+@media screen and (max-width: 899px) {
+    footer div {
+        justify-content: center;
+    }
+}
 .container {
     border-radius: 16px;
     width: 670px;

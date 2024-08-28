@@ -68,16 +68,14 @@ html {
 }
 body {
     padding: 2em;
+    max-width: 40em;
 }
-@media screen and (min-width: 900px) {
-    body {
-        max-width: 40em;
-    }
-}
+
 @media screen and (max-width: 899px) {
     body {
-        width: 90%;
-        padding: 2em;
+        width: 95%;
+        padding-left: 0;
+        padding-right: 0;
         flex-wrap: wrap;
     }
 }

@@ -351,6 +351,8 @@ textarea:focus {
 .blogPostContent p img {
     display: block;
     margin: 0 auto 0 auto;
+    height: auto;
+    width: 100%;
 }
 .blogPostContent p sub {
     font-style: italic;

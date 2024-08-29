@@ -1,12 +1,18 @@
 ---
+import { pagesGlobToRssItems } from "@astrojs/rss";
 import BaseLayout from "../components/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
-const blogPosts = await Astro.glob('./posts/*.md')
+import BlogTaglist from "../components/BlogTaglist.astro";
+import rss, { pagesGlobToRssItems } from '@astrojs/rss';
+import { getCollection } from "astro:content";
+
+const blogPosts = await getCollection('blog')
 const pageTitle = "amemoia's blog"
 ---
 
 <BaseLayout pageTitle={pageTitle}>
+    <BlogTaglist />
     {
-        blogPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} description={post.frontmatter.description} date={post.frontmatter.pubDate} />)
+        blogPosts.map((post) => <BlogPost url={`/blog/${post.slug}/`} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
     }
 </BaseLayout>

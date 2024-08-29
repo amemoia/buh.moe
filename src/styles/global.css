@@ -239,6 +239,14 @@ hr {
 .nohover:hover {
     text-decoration-color: #00000000;
 }
+.fullnohover:hover {
+    color: inherit;
+    text-decoration-color: #00000000;
+}
+.manualhover:hover {
+    color: var(--accent-300);
+    transition: color 0.25s;
+}
 
 /*
     EVIL HACK!!! Checkboxes cannot be styled!!
@@ -357,6 +365,7 @@ textarea:focus {
 }
 .blogPostDate {
     color: var(--accent-600);
+    margin-right: 0.5em;
 }
 .blogPostContent p img {
     display: block;
@@ -372,6 +381,9 @@ textarea:focus {
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
+}
+.blogPostTags {
+    gap: 0.5em;
 }
 
 /* FFXIV */
@@ -486,4 +498,26 @@ textarea:focus {
 /* Specs */
 .specs-div {
     gap: 2em
+}
+
+/* Tag list */
+.tagbutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accent-900);
+    padding: 0.25em;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+.tagbutton {
+    color: var(--alwayswhite-text-alt);
+}
+.tagbutton:hover {
+    background-color: var(--accent-700);
+    transition: background-color 0.25s;
+}
+.tagPageAdjust {
+    align-items: center;
+    gap: 0.5em;
 }

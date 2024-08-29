@@ -13,7 +13,23 @@ const yr = d.getFullYear();
         <div class="blogPostHeader flexcol">
             <h1 class="blogPostTitle">{frontmatter.title}</h1>
             <p class="blogPostDescription">{frontmatter.description}</p>
-            <p class="blogPostDate"><i class="fa-solid fa-calendar-days"></i> {mon + " " + day + ", " + yr}</p>
+            <div class="blogPostTags flexrow">
+                <p class="blogPostDate"><i class="fa-solid fa-calendar-days"></i> {mon + " " + day + ", " + yr}</p>
+                <script is:inline define:vars={{frontmatter}}>
+                    const hashtagHTML = '<i class="fa-solid fa-hashtag"></i>';
+                    const tagDiv = document.getElementsByClassName('blogPostTags')[0];
+                    const tags = frontmatter.tags;
+                    tags.forEach(tag => {
+                        const tagLink = document.createElement('a');
+                        tagLink.href = "/tags/"+tag
+                        const tagSpan = document.createElement('span');
+                        tagSpan.innerHTML = hashtagHTML + "" + tag
+                        tagSpan.classList.add('accent')
+                        tagLink.appendChild(tagSpan)
+                        tagDiv.appendChild(tagLink)
+                    });
+                </script>
+            </div>
         </div>
         <div class="blogPostContent">
             <slot />

@@ -1,15 +1,32 @@
 ---
-const { url, title, description, date } = Astro.props;
+const { url, title, description, date, tags } = Astro.props;
 const d = new Date(date)
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const mon = months[d.getMonth()];
 const day = d.getDate()
 const yr = d.getFullYear();
 ---
-<a href={url} class="accent-none nohover">
+<a href={url} class="accent-none fullnohover">
     <div class="container">
-        <h3 class="blogPostTitle">{title}</h3>
-        <p class="blogPostDescription">{description}</p>
-        <p class="blogPostDate"><i class="fa-solid fa-calendar-days"></i> {mon + " " + day + ", " + yr}</p>
+        <div class="manualhover">
+            <h3 class="blogPostTitle">{title}</h3>
+            <p class="blogPostDescription">{description}</p>
+        </div>
+        <div class="blogPostTags flexrow">
+            <p class="blogPostDate"><i class="fa-solid fa-calendar-days"></i> {mon + " " + day + ", " + yr}</p>
+            <script is:inline define:vars={{tags}}>
+                const hashtagHTML = '<i class="fa-solid fa-hashtag"></i>';
+                const tagDiv = document.getElementsByClassName('blogPostTags')[0];
+                tags.forEach(tag => {
+                    const tagLink = document.createElement('a');
+                    tagLink.href = "/tags/"+tag
+                    const tagSpan = document.createElement('span');
+                    tagSpan.innerHTML = hashtagHTML + "" + tag
+                    tagSpan.classList.add('accent')
+                    tagLink.appendChild(tagSpan)
+                    tagDiv.appendChild(tagLink)
+                });
+            </script>
+        </div>
     </div>
 </a>

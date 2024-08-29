@@ -2,7 +2,7 @@
 title: "Markdown made me nuke my website for the 7th time"
 description: "basically how I set up this blog"
 pubDate: 2024-08-27
-layout: ../../components/BlogPostLayout.astro
+tags: ['astro', 'yapping']
 ---
 
 **I LOVE MARKDOWN!!** It's very fun to use and makes text formatting *super easy*, regardless of length or application.

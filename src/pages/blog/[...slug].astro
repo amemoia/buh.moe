@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPostLayout from '../../components/BlogPostLayout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const d = new Date(entry.data.pubDate)
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const mon = months[d.getMonth()];
+const day = d.getDate()
+const yr = d.getFullYear();
+---
+<BlogPostLayout frontmatter={entry.data}>
+    <Content />
+</BlogPostLayout>

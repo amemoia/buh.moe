@@ -2,7 +2,7 @@
 layout: ../components/YakuzaLayout.astro
 ---
 - [x] 👑 Yakuza 0 <sub>60 hrs</sub>
-- [x] 🔎 Yakuza Kiwami 1 <sub>30 hrs</sub>
+- [x] 👑 Yakuza Kiwami 1 <sub>30 hrs</sub>
 - [x] 🔎 Yakuza Kiwami 2 <sub>35 hrs</sub>
 - [x] Yakuza 3 Remastered <sub>20 hrs</sub>
 - [x] Yakuza 4 Remastered <sub>20 hrs</sub>

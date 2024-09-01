@@ -367,16 +367,20 @@ textarea:focus {
     color: var(--accent-600);
     margin-right: 0.5em;
 }
-.blogPostContent p img {
+.blogPostContent p img, .blogPostContent video {
     display: block;
     margin: 0 auto 0 auto;
     height: auto;
-    width: 100%;
+    max-width: 100%;
+}
+.blogPostContent video {
+    margin-bottom: 1em;
 }
 .blogPostContent p sub {
     font-style: italic;
     font-size: medium;
     color: var(--text-subtext);
+    text-align: center;
     display: block;
     margin-left: auto;
     margin-right: auto;

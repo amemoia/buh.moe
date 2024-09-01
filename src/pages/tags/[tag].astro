@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 const { tag } = Astro.params;
 const { posts } = Astro.props;
 const postCount = posts.length
-const label = "post"
+var label = "post"
 if (postCount > 1) {label="posts"}
 ---
 <BaseLayout pageTitle={tag}>
@@ -35,6 +35,6 @@ if (postCount > 1) {label="posts"}
         </script>
     </div>
     {
-        posts.map((post) => <BlogPost  url={`/blog/${post.slug}/`} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
+        posts.map((post) => <BlogPost  slug={post.slug} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
     }
 </BaseLayout>

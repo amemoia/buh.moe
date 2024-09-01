@@ -1,10 +1,12 @@
 ---
-const { url, title, description, date, tags } = Astro.props;
+const { slug, title, description, date, tags } = Astro.props;
+const url = `/blog/${slug}/`
 const d = new Date(date)
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const mon = months[d.getMonth()];
 const day = d.getDate()
 const yr = d.getFullYear();
+const uniqueClass = "blogPostTags-"+slug
 ---
 <a href={url} class="accent-none fullnohover">
     <div class="container">
@@ -12,11 +14,11 @@ const yr = d.getFullYear();
             <h3 class="blogPostTitle">{title}</h3>
             <p class="blogPostDescription">{description}</p>
         </div>
-        <div class="blogPostTags flexrow">
+        <div class={uniqueClass+ " blogPostTags flexrow"}>
             <p class="blogPostDate"><i class="fa-solid fa-calendar-days"></i> {mon + " " + day + ", " + yr}</p>
-            <script is:inline define:vars={{tags}}>
+            <script is:inline define:vars={{tags , uniqueClass}}>
                 const hashtagHTML = '<i class="fa-solid fa-hashtag"></i>';
-                const tagDiv = document.getElementsByClassName('blogPostTags')[0];
+                const tagDiv = document.getElementsByClassName(uniqueClass)[0];
                 tags.forEach(tag => {
                     const tagLink = document.createElement('a');
                     tagLink.href = "/tags/"+tag

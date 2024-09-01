@@ -13,6 +13,6 @@ const pageTitle = "amemoia's blog"
 <BaseLayout pageTitle={pageTitle}>
     <BlogTaglist />
     {
-        blogPosts.map((post) => <BlogPost url={`/blog/${post.slug}/`} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
+        blogPosts.map((post) => <BlogPost slug={post.slug} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
     }
 </BaseLayout>

@@ -9,6 +9,7 @@ const twitter = "https://x.com/amemoia"
 const discord = "https://discord.com/users/254204775497859073"
 const github = "https://github.com/amemoia"
 const steam = "https://steamcommunity.com/id/amemoia/"
+const bsky = "https://bsky.app/profile/amemoia.bsky.social"
 ---
 <BaseLayout pageTitle={pageTitle}>
 	<div class="container">
@@ -19,6 +20,10 @@ const steam = "https://steamcommunity.com/id/amemoia/"
 	<div class="flexcol container">
 		<h2>Contact</h2>
 		<p>You can find me on the following websites:</p>
+		<a href={bsky} target="_blank">
+			<i class="fa-brands fa-bluesky"></i>
+			Bluesky <span class="accent-none">— @amemoia.bsky.social</span>
+		</a>
 		<a href={twitter} target="_blank">
 			<i class="fa-brands fa-twitter"></i>
 			Twitter / X <span class="accent-none">— @amemoia</span>

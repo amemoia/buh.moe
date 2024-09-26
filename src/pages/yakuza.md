@@ -10,7 +10,7 @@ layout: ../components/YakuzaLayout.astro
 - [x] 🔎 Yakuza 6: The Song of Life <sub>30 hrs</sub>
 - [x] 👑 Yakuza: Like a Dragon <sub>80 hrs</sub>
 - [x] 👑 Like a Dragon Gaiden <sub>30 hrs</sub>
-- [ ] ✨ Like a Dragon: Infinite Wealth
+- [x] ✨ Like a Dragon: Infinite Wealth
 - [ ] Like a Dragon: Ishin!
 - [ ] Judgment
 - [ ] Lost Judgment

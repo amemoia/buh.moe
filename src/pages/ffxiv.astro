@@ -28,60 +28,55 @@ import bocchiRender from "../img/sites/bocchi-render.jpg";
         />
     </div>
     <div class="container">
-        <h2>
-            <a href={charLink} target="_blank">B'occhi Rhock</a>
-            <div class="ffxiv-characterinfo flexrow flexrow-mobile-override">
-                <Image
-                    src={bocchiRender}
-                    alt="A render of B'occhi Rhock"
-                    class="ffxiv-render"
-                />
-                <div class="ffxiv-infopanel flexcol">
-                    <div>
-                        <p class="bold">World</p>
-                        {world}
-                    </div>
-                    <div>
-                        <p class="bold">Free Company</p>
-                        <a href={fcLink} target="_blank"
-                            ><p>Rapid Synthesis «RNG»</p></a
-                        >
-                    </div>
-                    <div>
-                        <p class="bold">MSQ Progress</p>
-                        <p>{msq}</p>
-                    </div>
-                    <div>
-                        <p class="bold">Main Jobs</p>
-                        <div class="ffxiv-jobs flexrow">
-                            <script define:vars={{ jobs }}>
-                                const jobdiv =
-                                    document.getElementsByClassName(
-                                        "ffxiv-jobs",
-                                    )[0];
-                                for (const [jobname, level] of Object.entries(
-                                    jobs,
-                                )) {
-                                    const classjob =
-                                        document.createElement("div");
-                                    classjob.classList.add("classjob");
-                                    const img = document.createElement("img");
-                                    img.src =
-                                        "/resources/classjob/" +
-                                        jobname +
-                                        ".png";
-                                    img.classList.add("ffxiv-jobicon");
-                                    const span = document.createElement("span");
-                                    span.innerHTML = level;
-                                    jobdiv.appendChild(classjob);
-                                    classjob.appendChild(img);
-                                    classjob.appendChild(span);
-                                }
-                            </script>
-                        </div>
+        <h2><a href={charLink} target="_blank">B'occhi Rhock</a></h2>
+        <div class="ffxiv-characterinfo flexrow flexrow-mobile-override">
+            <Image
+                src={bocchiRender}
+                alt="A render of B'occhi Rhock"
+                class="ffxiv-render"
+            />
+            <div class="ffxiv-infopanel flexcol">
+                <div>
+                    <p class="bold">World</p>
+                    {world}
+                </div>
+                <div>
+                    <p class="bold">Free Company</p>
+                    <a href={fcLink} target="_blank"
+                        ><p>Rapid Synthesis «RNG»</p></a
+                    >
+                </div>
+                <div>
+                    <p class="bold">MSQ Progress</p>
+                    <p>{msq}</p>
+                </div>
+                <div>
+                    <p class="bold">Main Jobs</p>
+                    <div class="ffxiv-jobs flexrow">
+                        <script define:vars={{ jobs }}>
+                            const jobdiv =
+                                document.getElementsByClassName(
+                                    "ffxiv-jobs",
+                                )[0];
+                            for (const [jobname, level] of Object.entries(
+                                jobs,
+                            )) {
+                                const classjob = document.createElement("div");
+                                classjob.classList.add("classjob");
+                                const img = document.createElement("img");
+                                img.src =
+                                    "/resources/classjob/" + jobname + ".png";
+                                img.classList.add("ffxiv-jobicon");
+                                const span = document.createElement("span");
+                                span.innerHTML = level;
+                                jobdiv.appendChild(classjob);
+                                classjob.appendChild(img);
+                                classjob.appendChild(span);
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
-        </h2>
+        </div>
     </div>
 </BaseLayout>

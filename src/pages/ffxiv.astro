@@ -1,65 +1,87 @@
 ---
 import BaseLayout from "../components/BaseLayout.astro";
 import Image from "astro/components/Image.astro";
-const pageTitle = "amemoia's FFXIV progress"
-const fcLink = "https://eu.finalfantasyxiv.com/lodestone/community_finder/f8f85cb264692976949160eb178f6d4de8ff72bc/";
-
-const world = "✿ Phoenix (Light DC)"
-const msq = "Post-Endwalker"
+const pageTitle = "amemoia's FFXIV progress";
+const fcLink =
+    "https://eu.finalfantasyxiv.com/lodestone/community_finder/f8f85cb264692976949160eb178f6d4de8ff72bc/";
+const charLink = "https://eu.finalfantasyxiv.com/lodestone/character/46616687/";
+const world = "✿ Phoenix (Light DC)";
+const msq = "Post-Endwalker (Inactive)";
 
 const jobs = {
-    "pictomancer" : "90+",
-    "redmage" : "90",
-    "bard" : "90",
-    "samurai" : "80+"
-}
+    pictomancer: "90+",
+    redmage: "90",
+    bard: "90",
+    samurai: "80+",
+};
 
-import bocchiPlate from "../img/sites/bocchi-plate.png"
-import bocchiRender from "../img/sites/bocchi-render.jpg"
+import bocchiPlate from "../img/sites/bocchi-plate.png";
+import bocchiRender from "../img/sites/bocchi-render.jpg";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
     <div class="ffxiv-divplate">
-        <Image src={bocchiPlate} alt="B'occhi Rhock's Adventurer Plate" class="ffxiv-advplate" />
+        <Image
+            src={bocchiPlate}
+            alt="B'occhi Rhock's Adventurer Plate"
+            class="ffxiv-advplate"
+        />
     </div>
     <div class="container">
-        <h2>B'occhi Rhock</h2>
-        <div class="ffxiv-characterinfo flexrow flexrow-mobile-override">
-            <Image src={bocchiRender} alt="A render of B'occhi Rhock" class="ffxiv-render" />
-            <div class="ffxiv-infopanel flexcol">
-                <div>
-                    <p class="bold">World</p>
-                    {world}
-                </div>
-                <div>
-                    <p class="bold">Free Company</p>
-                    <a href={fcLink}><p>Rapid Synthesis «RNG»</p></a>
-                </div>
-                <div>
-                    <p class="bold">MSQ Progress</p>
-                    <p>{msq}</p>
-                </div>
-                <div>
-                    <p class="bold">Main Jobs</p>
-                    <div class="ffxiv-jobs flexrow">
-                        <script define:vars={{jobs}}>
-                            const jobdiv = document.getElementsByClassName("ffxiv-jobs")[0];
-                            for (const [jobname, level] of Object.entries(jobs)) {
-                                const classjob = document.createElement('div');
-                                classjob.classList.add("classjob");
-                                const img = document.createElement('img');
-                                img.src = "/resources/classjob/" + jobname + ".png";
-                                img.classList.add("ffxiv-jobicon");
-                                const span = document.createElement('span')
-                                span.innerHTML = level;
-                                jobdiv.appendChild(classjob);
-                                classjob.appendChild(img);
-                                classjob.appendChild(span);
-                            }
-                        </script>
+        <h2>
+            <a href={charLink} target="_blank">B'occhi Rhock</a>
+            <div class="ffxiv-characterinfo flexrow flexrow-mobile-override">
+                <Image
+                    src={bocchiRender}
+                    alt="A render of B'occhi Rhock"
+                    class="ffxiv-render"
+                />
+                <div class="ffxiv-infopanel flexcol">
+                    <div>
+                        <p class="bold">World</p>
+                        {world}
+                    </div>
+                    <div>
+                        <p class="bold">Free Company</p>
+                        <a href={fcLink} target="_blank"
+                            ><p>Rapid Synthesis «RNG»</p></a
+                        >
+                    </div>
+                    <div>
+                        <p class="bold">MSQ Progress</p>
+                        <p>{msq}</p>
+                    </div>
+                    <div>
+                        <p class="bold">Main Jobs</p>
+                        <div class="ffxiv-jobs flexrow">
+                            <script define:vars={{ jobs }}>
+                                const jobdiv =
+                                    document.getElementsByClassName(
+                                        "ffxiv-jobs",
+                                    )[0];
+                                for (const [jobname, level] of Object.entries(
+                                    jobs,
+                                )) {
+                                    const classjob =
+                                        document.createElement("div");
+                                    classjob.classList.add("classjob");
+                                    const img = document.createElement("img");
+                                    img.src =
+                                        "/resources/classjob/" +
+                                        jobname +
+                                        ".png";
+                                    img.classList.add("ffxiv-jobicon");
+                                    const span = document.createElement("span");
+                                    span.innerHTML = level;
+                                    jobdiv.appendChild(classjob);
+                                    classjob.appendChild(img);
+                                    classjob.appendChild(span);
+                                }
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </h2>
     </div>
 </BaseLayout>

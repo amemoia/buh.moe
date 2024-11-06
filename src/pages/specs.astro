@@ -6,34 +6,49 @@ const components = {
     "GPU" : "GTX 1650 Super",
     "RAM" : "16GB",
     "OS" : "Windows 11"
-}
+};
 const peripherals = {
-    "Mouse" : "Logitech G Pro Superlight",
-    "Mousepad" : "Logitech G640",
-    "Keyboard" : "Razer BlackWidow Elite",
-    "Headset" : "Razer Kraken Pro V2"
-}
+    "Mouse": "Logitech G Pro Superlight",
+    "Mousepad": "Logitech G640",
+    "Keyboard": "Razer BlackWidow Elite",
+    "Headset": "Razer Kraken Pro V2"
+};
+const laptop = {
+    "Model": "MacBook Air (2022)",
+    "OS": "macOS Sequoia 15.2 (Beta)",
+    "CPU": "Apple M2 (8-core) @ 3.50 GHz",
+    "GPU": "Apple M2 (10-core)",
+    "RAM": "16 GB",
+    "Disk": "512 GB",
+    "Display": "13,6-inch (2560 × 1664)"
+};
 const software = {
-    "Authenticator" : "Ente Auth",
-    "Browser" : "Arc",
-    "Notes" : "Obsidian",
-    "Editor" : "VS Code"
-}
+    "Browser": "Arc",
+    "Notes": "Notion",
+    "Authenticator": "Ente Auth",
+    "Terminal": "Warp",
+    "Code Editor": "Zed",
+    "Code Assistant": "GitHub Copilot"
+};
 ---
 
 <BaseLayout>
-    <div class="container flexrow flexrow-mobile-override specs-div">        
+    <div class="container flexrow flexrow-mobile-override specs-div">
         <div class="specs-pc">
             <h2>My PC</h2>
-            <script define:vars={{components}}>
+            <script define:vars={{ components }}>
                 let x = 0;
                 for (const [component, name] of Object.entries(components)) {
-                    div = document.getElementsByClassName("specs-pc")[0]
+                    div = document.getElementsByClassName("specs-pc")[0];
                     p = document.createElement("p");
-                    p.innerHTML = "<span class='accent'>"+component+":</span> " + name;
+                    p.innerHTML =
+                        "<span class='accent'>" +
+                        component +
+                        ":</span> " +
+                        name;
                     x++;
                     if (x == Object.keys(components).length) {
-                        p.classList.add("lastp")
+                        p.classList.add("lastp");
                     }
                     div.appendChild(p);
                 }
@@ -41,15 +56,66 @@ const software = {
         </div>
         <div class="specs-peripherals">
             <h2>Peripherals</h2>
-            <script define:vars={{peripherals}}>
+            <script define:vars={{ peripherals }}>
                 let y = 0;
                 for (const [component, name] of Object.entries(peripherals)) {
-                    div = document.getElementsByClassName("specs-peripherals")[0]
+                    div =
+                        document.getElementsByClassName("specs-peripherals")[0];
                     p = document.createElement("p");
-                    p.innerHTML = "<span class='accent'>"+component+":</span> " + name;
+                    p.innerHTML =
+                        "<span class='accent'>" +
+                        component +
+                        ":</span> " +
+                        name;
                     y++;
                     if (y == Object.keys(peripherals).length) {
-                        p.classList.add("lastp")
+                        p.classList.add("lastp");
+                    }
+                    div.appendChild(p);
+                }
+            </script>
+        </div>
+    </div>
+    <div class="container flexrow flexrow-mobile-override specs-div">
+        <div class="specs-laptop">
+            <h2>Laptop</h2>
+            <script define:vars={{ laptop }}>
+                let z = 0;
+                for (const [component, name] of Object.entries(laptop)) {
+                    div =
+                        document.getElementsByClassName("specs-laptop")[0];
+                    p = document.createElement("p");
+                    p.innerHTML =
+                        "<span class='accent'>" +
+                        component +
+                        ":</span> " +
+                        name;
+                    z++;
+                    if (z == Object.keys(laptop).length) {
+                        p.classList.add("lastp");
+                    }
+                    div.appendChild(p);
+                }
+            </script>
+        </div>
+    </div>
+    <div class="container flexrow flexrow-mobile-override specs-div">
+        <div class="specs-software">
+            <h2>Software</h2>
+            <script define:vars={{ software }}>
+                let a = 0;
+                for (const [component, name] of Object.entries(software)) {
+                    div =
+                        document.getElementsByClassName("specs-software")[0];
+                    p = document.createElement("p");
+                    p.innerHTML =
+                        "<span class='accent'>" +
+                        component +
+                        ":</span> " +
+                        name;
+                    a++;
+                    if (a == Object.keys(software).length) {
+                        p.classList.add("lastp");
                     }
                     div.appendChild(p);
                 }

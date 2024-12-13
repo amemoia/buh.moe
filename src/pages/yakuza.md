@@ -11,9 +11,10 @@ layout: ../components/YakuzaLayout.astro
 - [x] 👑 Yakuza: Like a Dragon <sub>80 hrs</sub>
 - [x] 👑 Like a Dragon Gaiden <sub>30 hrs</sub>
 - [x] 🔎 Like a Dragon: Infinite Wealth <sub>110 hrs</sub>
-- [ ] ✨ Like a Dragon: Ishin!
+- [x] 🔎 Like a Dragon: Ishin!
 - [ ] Judgment
 - [ ] Lost Judgment
+- [ ] Like a Dragon: Pirate Yakuza in Hawaii
 
 <sub>🔎 — Games I plan to come back to for side stories I missed</sub>
 

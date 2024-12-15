@@ -25,13 +25,13 @@ import  SpeedInsights  from "@vercel/speed-insights/astro"
             href={new URL("rss.xml", Astro.site)}
         />
 		<title>{pageTitle}</title>
+		<Analytics />
+		<SpeedInsights />
 	</head>
 	<body>
 		<NavHeader />
         <slot />
 		<Footer />
-		<Analytics />
-		<SpeedInsights />
 	</body>
 	<ParseTwemoji />
 </html>

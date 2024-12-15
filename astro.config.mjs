@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 // Import /static for a static site
-import vercelStatic from '@astrojs/vercel/static';
+import vercelStatic from '@astrojs/vercel';
 export default defineConfig({
     // Must be 'static' or 'hybrid'
     site: "https://buh.moe",

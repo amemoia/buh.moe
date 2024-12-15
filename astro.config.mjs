@@ -1,6 +1,13 @@
 import { defineConfig } from 'astro/config';
-
-// https://astro.build/config
+// Import /static for a static site
+import vercelStatic from '@astrojs/vercel/static';
 export default defineConfig({
-    site: "https://amemoia.github.io"
-});
+    // Must be 'static' or 'hybrid'
+    site: "https://buh.moe",
+    output: 'static',
+    adapter: vercelStatic({
+        webAnalytics: {
+            enabled: true,
+        }
+    }),
+  });

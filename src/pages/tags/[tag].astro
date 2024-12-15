@@ -35,6 +35,6 @@ if (postCount > 1) {label="posts"}
         </script>
     </div>
     {
-        posts.map((post) => <BlogPost  slug={post.slug} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
+        posts.map((post) => <BlogPost  id={post.id} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
     }
 </BaseLayout>

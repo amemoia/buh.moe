@@ -1,12 +1,12 @@
 ---
-const { slug, title, description, date, tags } = Astro.props;
-const url = `/blog/${slug}/`
+const { id, title, description, date, tags } = Astro.props;
+const url = `/blog/${id}/`
 const d = new Date(date)
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const mon = months[d.getMonth()];
 const day = d.getDate()
 const yr = d.getFullYear();
-const uniqueClass = "blogPostTags-"+slug
+const uniqueClass = "blogPostTags-"+id
 ---
 <a href={url} class="accent-none fullnohover">
     <div class="container">

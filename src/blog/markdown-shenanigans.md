@@ -19,7 +19,7 @@ Implementing a blog on this site would also be quite difficult due to the fact t
 
 I decided to take a step back and research Markdown based software and websites in general to see how they look and work. I sometimes use [Obsidian](https://obsidian.md/) for taking notes, making checklists and the like. It uses Markdown files and fully supports frontmatter through [Properties](https://help.obsidian.md/Editing+and+formatting/Properties).
 
-![Properties in Obsidian](<../../img/blog/Obsidian Properties.png>)
+![Properties in Obsidian](<../img/blog/Obsidian Properties.png>)
 <sub>Properties in Obsidian</sub>
 
 Obsidian also has a paid service called [Obsidian Publish](https://obsidian.md/publish) which creates functional websites from your Markdown files. Researching this made me realize that many static site generators straight up support Markdown, and I am incredibly stupid for trying to do this by myself in raw JavaScript. You could say this was the final nail in the coffin for my NSO site. By the next day I had a website built in [Astro](https://astro.build/) mostly ready, paired with a design that I really like.
@@ -38,5 +38,5 @@ Honestly, I'm really proud of this website. Making it was very fun, it supports 
 
 Allow me to express my gratitude if you read this far! I know my yapping probably wasn't very interesting, but I needed a blog post to test on and since making this site was a whole journey in itself, the length of it got kinda... out of hand. As a form of thanks you can have this super cool gif.
 
-![buhOverShakeyFlipExplode.gif](<../../img/blog/buhOverShakeyFlipExplode.gif>)
+![buhOverShakeyFlipExplode.gif](<../img/blog/buhOverShakeyFlipExplode.gif>)
 <sub>buhOverShakeyFlipExplode.gif</sub>

@@ -5,5 +5,9 @@ export default defineConfig({
     // Must be 'static' or 'hybrid'
     site: "https://buh.moe",
     output: 'static',
-    adapter: vercel(),
+    adapter: vercel({
+      webAnalytics: {
+        enabled: true,
+      },
+    }),
   });

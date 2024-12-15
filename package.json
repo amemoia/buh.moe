@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.7",
     "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.1.0",
     "astro": "^4.16.1",
     "markdown-it": "^14.1.0",
     "sanitize-html": "^2.13.0",

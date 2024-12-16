@@ -3,6 +3,7 @@ import NavHeader from "../components/NavHeader.astro"
 import ParseTwemoji from "../components/ParseTwemoji.astro"
 import Footer from "../components/Footer.astro"
 import BaseLayout from "../components/BaseLayout.astro"
+import FriendButton from "../components/FriendButton.astro"
 import { Image } from "astro:assets"
 const pageTitle = "amemoia"
 const twitter = "https://x.com/amemoia"
@@ -44,23 +45,23 @@ const bsky = "https://bsky.app/profile/buh.moe"
 	<div class="buttons-section flexcol container">
 		<h2>cool places and friends</h2>
 		<div class="buttons flexrow">
-			<a href="https://themooskyfish.nekoweb.org" target="_blank"><Image src="https://themooskyfish.nekoweb.org/res/moosky.gif" width="88" height="31" alt="TheMooskyFish" /></a>
-			<a href="https://remblanc.nekoweb.org" target="_blank"><Image src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" width="88" height="31" title="remblanc's incredible site" /></a>
-			<a href="https://sapphic.moe" target="_blank"><Image src="https://sapphic.moe/buttons/friends/sapphic/image.png" width="88" height="31" alt="sapphic.moe"/></a>
-			<a href="https://ada.cat" target="_blank"><Image src="https://ada.cat/b/me.gif" style="image-rendering:pixelated;" width="88" height="31" alt="ada.cat"/></a>
-			<a href="https://onz.ee/" target="_blank"><Image src="https://onz.ee/assets/88x31s/png/onzecki.png" alt="onzecki" width="88" height="31" /></a>
-			<a href="https://meow-d.github.io/" target="_blank"><Image src="https://meow-d.github.io/assets/images/buttons/meow_d.webp" alt="meow_d" title="meow_d" width="88" height="31"/></a>
-			<a href="https://alyxia.dev/" target="_blank"><Image src="https://alyxia.dev/static/img/88x31/self.png" alt="alexia" width="88" height="31" /></a>
-			<a href="https://nanoshinono.me/" target="_blank"><Image src="https://nanoshinono.me/prefetcher.gif" alt="prefetcher" width="88" height="31" /></a>
-			<a href="https://ata.moe/" target="_blank"><Image src="https://ata.moe/88x31.png" alt="prefetcher" width="88" height="31" /></a>
-			<!--
-			<a href="https://aria.coffee/" target="_blank"><Image src="https://aria.coffee/public/static/img/buttons/aria.png" alt="aria.coffee" width="88" height="31" /></a>
-			-->
-			<a href="https://notnite.com/" target="_blank"><Image src="https://notnite.com/buttons/notnite.png" alt="notnite" width="88" height="31" /></a>
-			<a href="https://hl2.sh/" target="_blank"><Image src="https://hl2.sh/buttons/jay.png" width="88" height="31" alt="hl2.sh" /></a>
-			<a href="https://dimden.dev/" target="_blank"><Image src="https://dimden.dev/services/images/88x31.gif" width="88" height="31" alt="dimden" /></a>
-			<a href="https://nekoweb.org/" target="_blank"><Image src="https://nekoweb.org/assets/buttons/button6.gif" width="88" height="31" alt="Nekoweb" /></a>			
-		</a>
+			<FriendButton link="https://themooskyfish.nekoweb.org" image="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" />
+			<FriendButton link="https://remblanc.nekoweb.org" image="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" />
+			<FriendButton link="https://sapphic.moe" image="https://sapphic.moe/buttons/friends/sapphic/image.png" alt="sapphic.moe" />
+			<FriendButton link="https://ada.cat" image="https://ada.cat/b/me.gif" alt="ada.cat" />
+			<FriendButton link="https://onz.ee/" image="https://onz.ee/assets/88x31s/png/onzecki.png" alt="onzecki" />
+			<FriendButton link="https://meow-d.github.io/" image="https://meow-d.github.io/assets/images/buttons/meow_d.webp" alt="meow_d" />
+			<FriendButton link="https://alyxia.dev/" image="https://alyxia.dev/static/img/88x31/self.png" alt="alexia" />
+			<FriendButton link="https://nanoshinono.me/" image="https://nanoshinono.me/prefetcher.gif" alt="prefetcher" />
+			<FriendButton link="https://ata.moe/" image="https://ata.moe/88x31.png" alt="ata.moe" />
+			<FriendButton link="https://aria.coffee/" image="https://aria.coffee/static/img/buttons/aria.gif" alt="aria.coffee" />
+			<FriendButton link="https://notnite.com/" image="https://notnite.com/buttons/notnite.png" alt="notnite" />
+			<FriendButton link="https://hl2.sh/" image="https://hl2.sh/buttons/jay.png" alt="hl2.sh" />
+			<FriendButton link="https://erisdump.neocities.org/" image="https://erisdump.neocities.org/buttons/88x31.gif" alt="eris" />
+			<FriendButton link="https://hayden.moe/" image="https://hayden.moe/88x31/hayden.png" alt="hayden" />
+			<FriendButton link="https://dimden.dev/" image="https://dimden.dev/services/images/88x31.gif" alt="dimden" />
+			<FriendButton link="https://nekoweb.org/" image="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" />
+			<FriendButton link="https://eightyeightthirty.one" image="https://eightyeightthirty.one/88x31.png" alt="eightyeightthirty.one" />
 		</div>
 		<div class="buttons-my">
 			<p>My button:</p>

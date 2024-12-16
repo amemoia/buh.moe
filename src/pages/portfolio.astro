@@ -38,13 +38,11 @@ import { Image } from "astro:assets"
 	<div class="container">
 		<h2>Other</h2>
         <p>You can see things I've worked on that aren't worth listing here on my <a href={github} target="_blank">GitHub</a>.</p>
-		<p>Apart from the above, I've also messed around in the following languages and software in the past:</p>
-        <p class="accent">
-            Python, Webdev, C++, C#
-        </p>
-        <p class="accent">
-            After Effects, VEGAS Pro, Source Engine mods
-        </p>
+		<p>Apart from the above, here's some other stuff I messed around in before:</p>
+        <div class="flexcol portfolio-tags">
+            <p><span class="accent">Video Editing</span> (After Effects, VEGAS Pro)</p>
+            <p><span class="accent">Image Editing and Logo Design</span> (Photoshop, Paint.NET)</p>
+        </div>
         <Image class="portfolio-interesting" src={interesting} alt="A discord screenshot showing the following. amemoia: guys what do i put on my portfolio? archie: Faggot"/>
 	</div>
 </BaseLayout>

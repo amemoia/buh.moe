@@ -2,7 +2,8 @@
 import BaseLayout from "./BaseLayout.astro";
 import { Image } from "astro:assets";
 const currentGame =
-    "https://store.steampowered.com/app/2072450/Like_a_Dragon_Infinite_Wealth/";
+    "https://store.steampowered.com/app/1805480/Like_a_Dragon_Ishin/";
+const currentTitle = "Like a Dragon: Ishin!"
 const pageTitle = "ame / yakuza";
 
 import yakuzaTierlist from "../img/sites/Yakuza-Tierlist.png";
@@ -17,7 +18,7 @@ import yakuzaTierlist from "../img/sites/Yakuza-Tierlist.png";
     <div class="container">
         <h2>
             Currently on: <a href={currentGame}
-                >Like a Dragon: Infinite Wealth</a
+                >{currentTitle}</a
             >
         </h2>
         <div class="yakuza-checklist">

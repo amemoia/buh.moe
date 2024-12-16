@@ -1,0 +1,12 @@
+---
+const { name, date, tags, link, description } = Astro.props;
+---
+<div class="container flexcol">
+    <h2><a href={link} target="_blank">{name}</a></h2>
+    <div class="portfolio-tags">
+        <p>Date: <span class="accent">{date}</span></p>
+        <p class="accent">{tags}</p>
+        <hr>
+    </div>
+    <p class="portfolio-desc">{description}</p>
+</div>

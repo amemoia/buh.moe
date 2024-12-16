@@ -525,3 +525,21 @@ textarea:focus {
     align-items: center;
     gap: 0.5em;
 }
+.portfolio-interesting {
+    width: auto;
+    height: auto;
+    max-height: 136px;
+}
+@media screen and (max-width: 786px) {
+    .portfolio-interesting {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.portfolio-tags p {
+    margin: 0;
+}
+.portfolio-desc {
+    margin: 0;
+}

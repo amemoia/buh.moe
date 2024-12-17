@@ -6,7 +6,9 @@ import rss, { pagesGlobToRssItems } from '@astrojs/rss';
 import { getCollection } from "astro:content";
 
 const blogPosts = await getCollection('blog')
+// Embed information
 const pageTitle = "ame / blog"
+const description = "buh"
 ---
 
 <BaseLayout pageTitle={pageTitle}>

@@ -14,6 +14,7 @@ layout: ../components/YakuzaLayout.astro
 - [x] 🔎 Like a Dragon: Ishin!
 - [ ] Judgment
 - [ ] Lost Judgment
+- [ ] Lost Judgment: The Kaito Files
 - [ ] Like a Dragon: Pirate Yakuza in Hawaii
 
 <sub>🔎 — Games I plan to come back to for side stories I missed</sub>

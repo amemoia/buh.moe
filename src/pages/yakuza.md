@@ -12,7 +12,7 @@ layout: ../components/YakuzaLayout.astro
 - [x] 👑 Like a Dragon Gaiden <sub>30 hrs</sub>
 - [x] 🔎 Like a Dragon: Infinite Wealth <sub>110 hrs</sub>
 - [x] 🔎 Like a Dragon: Ishin! <sub>28 hrs</sub>
-- [ ] Judgment
+- [x] 👑 Judgment <sub>64 hrs</sub>
 - [ ] Lost Judgment
 - [ ] Lost Judgment: The Kaito Files
 - [ ] Like a Dragon: Pirate Yakuza in Hawaii

@@ -1,0 +1,339 @@
+/*
+    This file and page serve as a testing ground for my bloodppuccin theme.
+    It is loosely based on catppuccin, just with my own twist put on it.
+    The goal of this site is to serve as a palette for theme-making,
+    in a way that simply allows me to replace colors in catppuccin themes.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/edo-sz');
+
+/* bloodpuccin colorscheme dark */
+:root {
+    /* Colors */
+    --rosewater:      hsl(10deg, 56%, 91%);
+    --flamingo:       hsl(0deg, 59%, 88%);
+    --pink:           hsl(316deg, 72%, 86%);
+    --mauve:          hsl(267deg, 84%, 81%);
+    --red:            hsl(343deg, 81%, 75%);
+    --maroon:         hsl(350deg, 65%, 77%);
+    --peach:          hsl(23deg, 92%, 75%);
+    --yellow:         hsl(41deg, 86%, 83%);
+    --green:          hsl(115deg, 54%, 76%);
+    --teal:           hsl(170deg, 57%, 73%);
+    --sky:            hsl(189deg, 71%, 73%);
+    --sapphire:       hsl(199deg, 76%, 69%);
+    --blue:           hsl(217deg, 92%, 76%);
+    --lavender:       hsl(232deg, 97%, 85%);
+    --accent:         hsl(351deg, 76%, 51%);
+
+    /* Background Pane */
+    --base:           hsl(0, 3%, 6%);
+    --cat-base:       hsl(240deg, 21%, 15%);
+    /* Secondary Panes */
+    --crust:          hsl(0, 2%, 2%);
+    --mantle:         hsl(0, 2%, 4%);
+    --cat-crust:      hsl(240deg, 23%, 9%);
+    --cat-mantle:     hsl(240deg, 21%, 12%);
+    /* Surface Elements */
+    --surface0:       hsl(0, 4%, 23%);
+    --surface1:       hsl(0, 3%, 31%);
+    --surface2:       hsl(0, 3%, 39%);
+    --cat-surface0:   hsl(237deg, 16%, 23%);
+    --cat-surface1:   hsl(234deg, 13%, 31%);
+    --cat-surface2:   hsl(233deg, 12%, 39%);
+    /* Overlays */
+    --overlay0:       hsl(0, 3%, 47%);
+    --overlay1:       hsl(0, 4%, 55%);
+    --overlay2:       hsl(0, 5%, 64%);
+    --cat-overlay0:   hsl(231deg, 11%, 47%);
+    --cat-overlay1:   hsl(230deg, 13%, 55%);
+    --cat-overlay2:   hsl(228deg, 17%, 64%);
+    /* Typography */
+    --text:           hsl(0, 16%, 88%);
+    --subtext0:       hsl(0, 6%, 72%);
+    --subtext1:       hsl(0, 8%, 80%);
+    --cat-text:       hsl(226deg, 64%, 88%);
+    --cat-subtext0:   hsl(228deg, 24%, 72%);
+    --cat-subtext1:   hsl(227deg, 35%, 80%);
+    --subtle:           var(--overlay1);
+}
+
+/* bloodpuccin colorscheme light */
+:root {
+    /* Colors */
+    --Lrosewater:     hsl(11deg, 59%, 67%);
+    --Lflamingo:      hsl(0deg, 60%, 67%);
+    --Lpink:          hsl(316deg, 73%, 69%);
+    --Lmauve:         hsl(266deg, 85%, 58%);
+    --Lred:           hsl(347deg, 87%, 44%);
+    --Lmaroon:        hsl(355deg, 76%, 59%);
+    --Lpeach:         hsl(22deg, 99%, 52%);
+    --Lyellow:        hsl(35deg, 77%, 49%);
+    --Lgreen:         hsl(109deg, 58%, 40%);
+    --Lteal:          hsl(183deg, 74%, 35%);
+    --Lsky:           hsl(197deg, 97%, 46%);
+    --Lsapphire:      hsl(189deg, 70%, 42%);
+    --Lblue:          hsl(220deg, 91%, 54%);
+    --Llavender:      hsl(231deg, 97%, 72%);
+
+    /* Background Pane */
+    --Lbase:          hsl(220deg, 23%, 95%);
+    --Lcat-base:      hsl(220deg, 23%, 95%);
+    /* Secondary Panes */
+    --Lcrust:         hsl(220deg, 21%, 89%);
+    --Lmantle:        hsl(220deg, 22%, 92%);
+    --Lcat-crust:     hsl(220deg, 21%, 89%);
+    --Lcat-mantle:    hsl(220deg, 22%, 92%);
+    /* Surface Elements */
+    --Lsurface0:      hsl(223deg, 16%, 83%);
+    --Lsurface1:      hsl(225deg, 14%, 77%);
+    --Lsurface2:      hsl(227deg, 12%, 71%);
+    --Lcat-surface0:  hsl(223deg, 16%, 83%);
+    --Lcat-surface1:  hsl(225deg, 14%, 77%);
+    --Lcat-surface2:  hsl(227deg, 12%, 71%);
+    /* Overlays */
+    --Loverlay0:      hsl(228deg, 11%, 65%);
+    --Loverlay1:      hsl(231deg, 10%, 59%);
+    --Loverlay2:      hsl(232deg, 10%, 53%);
+    --Lcat-overlay0:  hsl(228deg, 11%, 65%);
+    --Lcat-overlay1:  hsl(231deg, 10%, 59%);
+    --Lcat-overlay2:  hsl(232deg, 10%, 53%);
+    /* Typography */
+    --Ltext:          hsl(234deg, 16%, 35%);
+    --Lsubtext0:      hsl(233deg, 10%, 47%);
+    --Lsubtext1:      hsl(233deg, 13%, 41%);
+    --Lcat-text:      hsl(234deg, 16%, 35%);
+    --Lcat-subtext0:  hsl(233deg, 10%, 47%);
+    --Lcat-subtext1:  hsl(233deg, 13%, 41%);
+    --Lsubtle:          var(--overlay1);
+}
+
+/* Override for light theme */
+@media screen and (prefers-color-scheme: light) {
+    :root {
+        /* Colors */
+        --rosewater:    var(--Lrosewater);
+        --flamingo:     var(--Lflamingo);
+        --pink:         var(--Lpink);
+        --mauve:        var(--Lmauve);
+        --red:          var(--Lred);
+        --maroon:       var(--Lmaroon);
+        --peach:        var(--Lpeach);
+        --yellow:       var(--Lyellow);
+        --green:        var(--Lgreen);
+        --teal:         var(--Lteal);
+        --sky:          var(--Lsky);
+        --sapphire:     var(--Lsapphire);
+        --blue:         var(--Lblue);
+        --lavender:     var(--Llavender);
+    
+        /* Background Pane */
+        --base:         var(--Lbase);
+        --cat-base:     var(--Lcat-base);
+        /* Secondary Panes */
+        --crust:        var(--Lcrust);
+        --mantle:       var(--Lmantle);
+        --cat-crust:    var(--Lcat-crust);
+        --cat-mantle:   var(--Lcat-mantle);
+        /* Surface Elements */
+        --surface0:     var(--Lsurface0);
+        --surface1:     var(--Lsurface1);
+        --surface2:     var(--Lsurface2);
+        --cat-surface0: var(--Lcat-surface0);
+        --cat-surface1: var(--Lcat-surface1);
+        --cat-surface2: var(--Lcat-surface2);
+        /* Overlays */
+        --overlay0:     var(--Loverlay0);
+        --overlay1:     var(--Loverlay1);
+        --overlay2:     var(--Loverlay2);
+        --cat-overlay0: var(--Lcat-overlay0);
+        --cat-overlay1: var(--Lcat-overlay1);
+        --cat-overlay2: var(--Lcat-overlay2);
+        /* Typography */
+        --text:         var(--Ltext);
+        --subtext0:     var(--Lsubtext0);
+        --subtext1:     var(--Lsubtext1);
+        --cat-text:     var(--Lcat-text);
+        --cat-subtext0: var(--Lcat-subtext0);
+        --cat-subtext1: var(--Lcat-subtext1);
+        --subtle:       var(--Loverlay1);
+    }
+}
+
+/*  Color  Classes  */
+.accent {
+    color: var(--accent);
+}
+.subtle {
+    color: var(--subtle);
+}
+a, a:hover {
+    color: var(--blue);
+    text-decoration-color: var(--blue);
+}
+.success {
+    color: var(--green);
+}
+.warning {
+    color: var(--yellow);
+}
+.error {
+    color: var(--red);
+}
+::selection {
+    background-color: var(--overlay2);
+    opacity: 20%;
+}
+html {
+    /* text cursor */
+    caret-color: var(--rosewater);
+    /* main bg */
+    background-color: var(--base);
+    /* text color */
+    color: var(--text);
+}
+.crust {
+    background-color: var(--crust);
+}
+.mantle {
+    background-color: var(--mantle);
+}
+
+/*  Base   Classes  */
+html {
+    font-family: "Poppins", sans-serif;
+    font-size: large;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+body {
+    padding: 2em;
+    max-width: 40em;
+}
+@media screen and (max-width: 899px) {
+    body {
+        width: 95%;
+        padding-top: 0.5em;
+        padding-left: 0;
+        padding-right: 0;
+        flex-wrap: wrap;
+    }
+}
+
+a {
+    text-decoration: underline 2px;
+    text-underline-offset: 2px;
+    text-decoration-color: #00000000;
+}
+a:hover {
+    transition: color 0.25s, text-decoration-color 0.25s;
+}
+
+/*  Layout Classes  */
+
+.profile {
+    color: var(--text);
+    border-radius: 6px;
+    padding-top: 1.25em;
+    align-items: start;
+}
+.profile-text {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    align-items: center;
+    gap: 1em;
+}
+.pfp {
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+}
+.flexcol {
+    display: flex;
+    flex-direction: column;
+}
+.flexrow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.navbar {
+    font-size: large;
+    gap: 1em;
+}
+.container {
+    border-radius: 6px;
+    width: 670px;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+.profile-text span {
+    padding: 8px;
+    background-color: #00000080;
+    border-radius: 6px;
+}
+.profile-text h2 {
+    margin: 0;
+}
+.emoji {
+    width: 1.3em;
+    height: 1.3em;
+    vertical-align: middle;
+}
+footer {
+    gap: 0.25em;
+}
+footer div {
+    gap: 1em;
+}
+
+.navbar a, footer a {
+    color: var(--accent);
+    text-decoration-color: #00000000;
+}
+.navbar a:hover, footer a:hover {
+    text-decoration-color: var(--accent);
+}
+
+@media screen and (max-width: 899px) {
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .profile-text, .pfp {
+        flex-direction: column;
+        gap: 0;
+        align-self: center;
+    }
+    .flexrow-mobile-override {
+        flex-direction: column;
+    }
+    footer div {
+        justify-content: center;
+    }
+    .container {
+        width: auto;
+        max-width: 670px;
+    }
+}
+@media screen and (max-width: 350px) {
+    .profile-text {
+        gap: 0.5em;
+    }
+}
+
+:root::-webkit-scrollbar {
+    display: none;
+}
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+:root {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}

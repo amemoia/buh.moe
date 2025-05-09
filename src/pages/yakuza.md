@@ -15,7 +15,7 @@ layout: ../components/YakuzaLayout.astro
 - [x] ⭐ Judgment <sub>64 hrs</sub>
 - [x] 🔎 Lost Judgment <sub>43 hrs</sub>
 - [x] ⭐ Lost Judgment: The Kaito Files <sub>8 hrs</sub>
-- [ ] Like a Dragon: Pirate Yakuza in Hawaii
+- [x] 🔎 Like a Dragon: Pirate Yakuza in Hawaii <sub>55 hrs</sub>
 
 <sub>🔎 — Games I plan to come back to for side stories I missed</sub>
 

@@ -48,6 +48,22 @@ Klasa to szablon za pomocą którego tworzymy obiekty.
 
 Metoda to jakaś funkcja zapisana w klasie. Specjalne typy metod to akcesory `(gettery)` i mutatory `(settery)` - służą do zwracania wartości pól klasy lub ich zmieniania. Jest to potrzebne gdy mamy do czynienia z polami prywatnymi
 
+Istnieją również metody statyczne, oznaczane słowem kluczowym `static`. Taka metoda nie wymaga obiektu, mamy dostęp do niej bezpośrednio z klasy. Dobrym przykładem jest np. String.format(). Zmienne, z których taka metoda korzysta, muszą być dane jako argument lub być również zdefiniowane jako statyczne. Zmienne statyczne są dostępne w taki sam sposób jak metody statyczne: `Klasa.zmienna`
+
+```java
+class Matma {
+    public static int guh = 7;
+    public static int dodaj(int a, int b) {
+        return a + b;
+    }
+}
+
+int buh = Matma.dodaj(5, 6);
+int muh = Matma.guh;
+// buh = 11
+// muh = 7
+```
+
 ### Enkapsulacja
 Jest to sposób ograniczenia dostępu do pól i metod klasy
 
@@ -59,7 +75,7 @@ public class Machine {
 }
 
 // Main.java
-Machine machine = new Machine;
+Machine machine = new Machine();
 int x = machine.number;
 machine.number = machine.number + 5;
 ```
@@ -78,7 +94,7 @@ public class Machine {
 }
 
 // Main.java
-Machine machine = new Machine;
+Machine machine = new Machine();
 int x = machine.getNumber();
 machine.setNumber(10);
 ```
@@ -91,7 +107,7 @@ public class Machine {
 }
 
 // Supercomputer.java
-public class Supercomputer extends Machina {
+public class Supercomputer extends Machine {
     // klasa Supercomputer ma dostęp do pola number z klasy Machina
 }
 
@@ -134,7 +150,7 @@ public class Car {
     protected int power;
     public Car(int power) { this.power = power; }
     public void start() { /* ... */ }
-    public void getPower() { return this.power; }
+    public int getPower() { return this.power; }
 }
 
 // RaceCar.java

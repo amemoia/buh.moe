@@ -214,7 +214,7 @@ html {
 }
 body {
     padding: 2em;
-    max-width: 40em;
+    max-width: 900px;
 }
 @media screen and (max-width: 899px) {
     body {
@@ -269,10 +269,14 @@ a:hover {
 }
 .container {
     border-radius: 6px;
-    width: 670px;
+    width: 900px;
     padding: 1em;
     margin-bottom: 1em;
 }
+.container h2 {
+    margin-top: 0.25em;
+}
+
 .profile-text span {
     padding: 8px;
     background-color: #00000080;
@@ -336,4 +340,23 @@ footer div {
 :root {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+}
+
+.astro-code {
+    padding: 1.5em;
+    width: 100%;
+    border-radius: 8px;
+}
+code {
+    color: var(--accent);
+}
+ul li a {
+    color:var(--accent);
+}
+ul li a:hover {
+    color:var(--accent);
+    text-decoration-color: var(--accent);
+}
+ul li a:visited {
+    color:var(--accent);
 }

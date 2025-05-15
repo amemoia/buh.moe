@@ -360,3 +360,36 @@ ul li a:hover {
 ul li a:visited {
     color:var(--accent);
 }
+
+.backToTop {
+    display: flex;
+    position: fixed;
+    z-index: 99;
+    bottom: 2em;
+    right: 6em;
+    border-radius: 8px;
+    width: 2em;
+    height: 2em;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent);
+    color: var(--text);
+}
+.backToTop:hover {
+    color: var(--text);
+    text-decoration: none;
+}
+.backToTop:visited {
+    color: var(--text);
+}
+@media screen and (max-width: 1200px) {
+    .backToTop {
+        right: 2em;
+    }
+}
+
+@media screen and (max-width: 899px) {
+    .astro-code {
+        width: 88%;
+    }
+}

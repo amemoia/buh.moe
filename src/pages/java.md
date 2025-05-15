@@ -3,6 +3,7 @@ layout: ../components/JavaLayout.astro
 ---
 
 ### Quick Access
+- [Przydatna składnia](#przydatna-składnia)
 - [Klasa](#klasa-metody)
 - [Enkapsulacja](#enkapsulacja)
 - [Obiekty, Konstruktory](#obiekty-konstruktory)
@@ -11,6 +12,36 @@ layout: ../components/JavaLayout.astro
 - [Interfejs](#interfejs)
 - [Kontenery](#kontenery)
 - [Wyjątki](#wyjątki)
+- [Pliki](#pliki)
+- [Typy generyczne](#typy-generyczne)
+
+### Przydatna składnia
+```java
+String result = "";
+// dla każdego Polygona p w zbiorze this.polygons
+for (Polygon p : this.polygons) {
+    result += "<...>";
+}
+
+// formatowanie Stringów
+String toInsert = "def";
+String buh = String.format("abc %s ghi", toInsert);
+// buh = "abc def ghi"
+
+// tablica typu obiektowego
+private Shape[] shapes = new Shape[30];
+private Star[] stars = new Star[]{new Star(), new Star(), new Star()};
+
+// komparator rozmiarów dwóch różnych typów kontenerów
+import java.util.Collection;
+import java.util.Comparator;
+public class CollectionSizeComparator implements Comparator<Collection<?>> {
+    @Override
+    public int compare(Collection<?> c1, Collection<?> c2) {
+        return Integer.compare(c1.size(), c2.size());
+    }
+}
+```
 
 ### Klasa, Metody
 Klasa to szablon za pomocą którego tworzymy obiekty.
@@ -93,6 +124,8 @@ Machine machina2 = new Machine(5);
 Dziedziczenie pozwala danej klasie wykorzystywać pola i metody innej klasy. Dziedziczone metody można wywoływać w klasie pochodnej za pomocą `super()`. Samo wywołanie `super()` spowoduje wywołanie konstruktora, można odwołać się do konkretnej metody poprzez `super.metoda()`
 
 Metody dziedziczone można też nadpisać dopisując `@Override`. Aby klasa dziedziczyła po innej wykorzystujemy `extends` przy nagłówku klasy. Dany obiekt NIE MOŻE dziedziczyć po wielu obiektach.
+
+Każda klasa dodatkowo dziedziczy po Object.
 
 ```java
 // Car.java
@@ -260,4 +293,108 @@ public class RaceCar extends Car implements Refuelable {
         currentFuel += amount;
     }
 }
+```
+
+### Pliki
+Ponieważ java ma pierdyliard różnych klas z których możemy korzystać, istnieje sporo metod na operacje z plikami
+
+Odczyt:
+
+```java
+// Odczyt pliku z BufferedReader, FileReader
+import java.io.*;
+try (BufferedReader br = new BufferedReader(new FileReader("plik.txt"))) {
+    String linia;
+    while ((linia = br.readLine()) != null) {
+        System.out.println(linia);
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+```java
+// Odczyt pliku z Scanner, File
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+try {
+    File plik = new File("dane.txt");
+    Scanner scanner = new Scanner(plik);
+    while (scanner.hasNextLine()) {
+        String linia = scanner.nextLine();
+        System.out.println(linia);
+    }
+    scanner.close();
+} catch (FileNotFoundException e) {
+    System.out.println("Nie znaleziono pliku.");
+}
+```
+
+```java
+// Odczyt pliku z Files.readAllLines()
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+try {
+    List<String> linie = Files.readAllLines(Paths.get("plik.txt"));
+    for (String linia : linie) {
+        System.out.println(linia);
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+Zapis:
+
+```java
+// Zapis pliku z BufferedWriter, FileWriter
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+try (BufferedWriter writer = new BufferedWriter(new FileWriter("wynik.txt"))) {
+    writer.write("To jest pierwszy wiersz.");
+    writer.newLine();
+    writer.write("To jest drugi wiersz.");
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+```java
+// Zapis pliku z PrintWriter
+import java.io.PrintWriter;
+import java.io.IOException;
+try (PrintWriter pw = new PrintWriter("dane.txt")) {
+    pw.println("Jan Kowalski 30");
+    pw.printf("Imię: %s, Wiek: %d%n", "Anna", 25);
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+```java
+// Zapis pliku z Files.write()
+// Ta metoda działa najlepiej dla prostych danych, np jakaś lista
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+try {
+    Files.write(Paths.get("output.txt"), Arrays.asList("Linia 1", "Linia 2", "Linia 3"));
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+### Typy generyczne
+Możemy napisać jedną metodę, która przyjmuje wiele różnych typów danych. Korzystaliśmy z tego podczas tworzeniu np. ArrayList.
+```java
+// znacznik <Book> daje klasie List informacje, że tworzymy listę typu obiektowego Book.
+// Wadą typów generycznych jest to, że możemy tutaj tylko korzystać z typów obiektowych.
+// To znaczy, że nie możemy tutaj dać jako typ np. int.
+List<Book> books = new ArrayList<>();
+// Można ewentualnie skorzystać z obiektowego odpowiednika intów, Integer.
+List<Integer> numbers = new ArrayList<>();
 ```

@@ -46,10 +46,11 @@ public class CollectionSizeComparator implements Comparator<Collection<?>> {
 ### Klasa, Metody
 Klasa to szablon za pomocą którego tworzymy obiekty.
 
-Metoda to jakaś funkcja zapisana w klasie. Specjalne typy metod to akcesory (gettery) i mutatory (settery) - służą do zwracania wartości pól klasy lub ich zmieniania. Jest to potrzebne gdy mamy do czynienia z polami prywatnymi
+Metoda to jakaś funkcja zapisana w klasie. Specjalne typy metod to akcesory `(gettery)` i mutatory `(settery)` - służą do zwracania wartości pól klasy lub ich zmieniania. Jest to potrzebne gdy mamy do czynienia z polami prywatnymi
 
 ### Enkapsulacja
 Jest to sposób ograniczenia dostępu do pól i metod klasy
+
 1. `public` - brak ograniczenia dostępu
 ```java
 // Machine.java
@@ -157,6 +158,7 @@ public class RaceCar extends Car {
 
 ### Klasa abstrakcyjna
 Z klas abstrakcyjnych nie można tworzyć obiektów, zawierają one metody abstrakcyjne, które nie mają kodu, są tylko zdefiniowane. Wszystkie klasy dziedzicące po klasie abstrakcyjnej muszą implementować te metody.
+
 Taka klasa może mieć też zwykłe pola i metody.
 
 ```java
@@ -212,6 +214,7 @@ public class RaceCar extends Car implements Refuelable {
 W angielskim też znane jako Collections, są to w pewnym sensie rodzaje tablic/list.
 
 1. ArrayList / Lista
+
 Typowa lista, każdy element ma swój index. W przypadku ArrayList nie musimy podawać rozmiaru
 
 ```java
@@ -221,6 +224,7 @@ raceCars.add(new RaceCar(400.0f, 90.0f)); // raceCars[1]
 ```
 
 2. Set
+
 Nieuporządkowana lista - każdy element musi być unikalny (nie może być dwóch takich samych)
 
 ```java
@@ -231,6 +235,7 @@ raceCarBrands.add("Ford");
 ```
 
 3. Map / HashMap
+
 Można to potraktować jak lista, w której to my decydujemy jaki jest index elementów. Możemy nawet zmienić jego typ np. na String. Są to pary key : value, gdzie key (klucz) to nasz customowy index. Klucze nie mogą się powtarzać.
 
 ```java
@@ -249,6 +254,7 @@ RaceCar carBuh = raceCarNumbers.get("buh");
 ```
 
 4. Kolejka / Queue / FIFO
+
 Jest to coś jak lista, tylko nie mamy dostępu do indexów. Elementy są dodawane i wyjmowane wg. FIFO (first in first out) czyli jak normalna kolejka np. w sklepie.
 
 ```java
@@ -258,6 +264,7 @@ pitStopQueue.add(new RaceCar(390.0f, 88.0f));
 ```
 
 5. Stos / Stack
+
 Podobny do kolejki, tylko korzystamy z LIFO (last in first out), czyli jak np. stos talerzy lub książek. Dodajemy na górę i zdejmujemy z góry.
 
 ```java
@@ -299,10 +306,10 @@ public class RaceCar extends Car implements Refuelable {
 Ponieważ java ma pierdyliard różnych klas z których możemy korzystać, istnieje sporo metod na operacje z plikami
 
 Odczyt:
-
 ```java
 // Odczyt pliku z BufferedReader, FileReader
 import java.io.*;
+
 try (BufferedReader br = new BufferedReader(new FileReader("plik.txt"))) {
     String linia;
     while ((linia = br.readLine()) != null) {
@@ -318,6 +325,7 @@ try (BufferedReader br = new BufferedReader(new FileReader("plik.txt"))) {
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 try {
     File plik = new File("dane.txt");
     Scanner scanner = new Scanner(plik);
@@ -337,6 +345,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+
 try {
     List<String> linie = Files.readAllLines(Paths.get("plik.txt"));
     for (String linia : linie) {
@@ -353,6 +362,7 @@ Zapis:
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
 try (BufferedWriter writer = new BufferedWriter(new FileWriter("wynik.txt"))) {
     writer.write("To jest pierwszy wiersz.");
     writer.newLine();
@@ -366,6 +376,7 @@ try (BufferedWriter writer = new BufferedWriter(new FileWriter("wynik.txt"))) {
 // Zapis pliku z PrintWriter
 import java.io.PrintWriter;
 import java.io.IOException;
+
 try (PrintWriter pw = new PrintWriter("dane.txt")) {
     pw.println("Jan Kowalski 30");
     pw.printf("Imię: %s, Wiek: %d%n", "Anna", 25);
@@ -381,6 +392,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+
 try {
     Files.write(Paths.get("output.txt"), Arrays.asList("Linia 1", "Linia 2", "Linia 3"));
 } catch (IOException e) {
@@ -391,10 +403,62 @@ try {
 ### Typy generyczne
 Możemy napisać jedną metodę, która przyjmuje wiele różnych typów danych. Korzystaliśmy z tego podczas tworzeniu np. ArrayList.
 ```java
-// znacznik <Book> daje klasie List informacje, że tworzymy listę typu obiektowego Book.
+// Znacznik <Book> daje klasie List informacje, że tworzymy listę typu obiektowego Book.
 // Wadą typów generycznych jest to, że możemy tutaj tylko korzystać z typów obiektowych.
 // To znaczy, że nie możemy tutaj dać jako typ np. int.
 List<Book> books = new ArrayList<>();
 // Można ewentualnie skorzystać z obiektowego odpowiednika intów, Integer.
 List<Integer> numbers = new ArrayList<>();
+
+// Przykład klasy generycznej, znacznik T jest jakimkolwiek typem.
+public class CookieCutter<T> {
+    private T glaze;
+}
+CookieCutter<String> cookieCutter = new CookieCutter<>();
+```
+
+Klasa może mieć kilka typów generycznych. Korzysta z tego np. HashMap.
+```java
+public class Pair<T, S> {
+    private T first;
+    private S second;
+
+    public Pair(T first, S second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    public T getFirst() {
+        return first;
+    }
+
+    public S getSecond() {
+        return second;
+    }
+}
+```
+
+Możemy ustawić zestaw typów obiektowych, jakie przyjmuje nasza klasa używając `extends`.
+
+```java
+public interface Figure {
+    String getName();
+}
+
+public class Circle implements Figure {
+    public String getName() {
+        return "buh";
+    }
+}
+
+// <T extends Figure> oznacza, że typ musi dziedziczyć po Figure.
+public class BoxForFigures<T extends Figure> {
+    private T element;
+    public BoxForFigures(T element) {
+        this.element = element;
+    }
+}
+
+// Circle dziedziczy po Figure.
+BoxForFigures<Circle> circleBox = new BoxForFigures<>(new Circle());
 ```

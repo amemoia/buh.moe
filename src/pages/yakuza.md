@@ -1,7 +1,7 @@
 ---
 layout: ../components/YakuzaLayout.astro
 ---
-- [x] ⭐ Yakuza 0 <sub>60 hrs</sub>
+- [x] 👑 Yakuza 0 <sub>60 hrs</sub>
 - [x] ⭐ Yakuza Kiwami 1 <sub>35 hrs</sub>
 - [x] ⭐ Yakuza Kiwami 2 <sub>40 hrs</sub>
 - [x] 🔎 Yakuza 3 Remastered <sub>20 hrs</sub>
@@ -19,4 +19,6 @@ layout: ../components/YakuzaLayout.astro
 
 <sub>🔎 — Games I plan to come back to for side stories I missed</sub>
 
-<sub>⭐ — Games in which I completed all the side content I wanted to do</sub>
+<sub>⭐ — Side content completed</sub>
+
+<sub>👑 — 100% completion</sub>

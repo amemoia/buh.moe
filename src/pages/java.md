@@ -2,6 +2,8 @@
 layout: ../components/JavaLayout.astro
 ---
 
+### [part 2 tutaj](/java2)
+
 ### Quick Access
 - [Przydatna składnia](#przydatna-składnia)
 - [Klasa](#klasa-metody)

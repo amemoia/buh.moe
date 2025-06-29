@@ -307,8 +307,6 @@ System.out.println("Odpowiedź serwera: " + response);
 * Ułatwia to serializację i deserializację (konwersję do obiektów i odwrotnie).
 * Protokół musi być dobrze zdefiniowany — np. jedna wiadomość to jedna linia tekstu.
 
----
-
 ## 6. **Obsługa wielu klientów (wielowątkowość)**
 
 ### a) Problem

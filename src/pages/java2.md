@@ -859,9 +859,3 @@ public void saveDot(Dot dot) {
     }
 }
 ```
-
-## 10. **Uwagi końcowe**
-
-* SQLite jest szybkie i wygodne, ale nie nadaje się do bardzo dużych, wielodostępnych systemów.
-* W aplikacjach desktopowych jest świetnym wyborem do prostych lokalnych baz.
-* Ważne jest poprawne zarządzanie połączeniami i transakcjami (w bardziej złożonych aplikacjach).

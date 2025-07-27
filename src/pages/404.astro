@@ -1,18 +1,18 @@
 ---
 import { Image } from "astro:assets";
-import BaseLayout from "../components/BaseLayout.astro";
+import LayoutBase from "../components/LayoutBase.astro";
+import MessageBanner from "../components/MessageBanner.astro";
 const notFound = "/resources/NotFound.png"
 // Embed information
 const pageTitle = "ame / 404"
 const description = "buh"
+import '../styles/404.css';
 ---
-
-<BaseLayout pageTitle={pageTitle}>
-    <div class="flexcol">
-        <img src={notFound} alt="404 Not Found" />
-    </div>
-    <div class="container">
-        <h2>Oops!</h2>
-        <p class="lastp">The page you're looking for could not be found.</p>
-    </div>
-</BaseLayout>
+<LayoutBase>
+    <MessageBanner
+        message="Oops! You're not supposed to be here..."
+        button="Go back"
+        goto="/"
+    />
+    <img src={notFound} alt="404" class="notFound" />
+</LayoutBase>

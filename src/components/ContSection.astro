@@ -1,0 +1,10 @@
+---
+let { args } = Astro.props;
+if (args == null) args = "";
+else args = " "+args;
+const classes = "container-section"+args;
+---
+
+<div class={classes}>
+    <slot/>
+</div>

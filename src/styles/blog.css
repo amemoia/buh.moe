@@ -1,0 +1,26 @@
+.blogpost-entry-container {
+    margin: 1em;
+    font-family: var(--font-satoshi);
+    letter-spacing: 1px;
+}
+.blogpost-entry-link {
+    color: var(--text);
+}
+.blogpost-entry-tags a:hover, .blogpost-entry-title:hover, .tag-button:hover {
+    color: var(--accent-main);
+    transition: color 0.25s;
+}
+.blogpost-entry-tags, .blog-taglist {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+.blogpost-entry-title {
+    font-family: var(--font-main);
+}
+
+@media only screen and (max-width: 768px) {
+    .blog-taglist {
+        justify-content: center;
+    }
+}

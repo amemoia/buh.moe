@@ -1,8 +1,8 @@
 ---
-import NavHeader from "../components/NavHeader.astro"
-import ParseTwemoji from "../components/ParseTwemoji.astro"
-import Footer from "../components/Footer.astro"
-import BaseLayout from "../components/BaseLayout.astro"
+import LayoutBase from "../components/LayoutBase.astro"
+import Container from "../components/Container.astro"
+import ContSection from "../components/ContSection.astro"
+import SocialLink from "../components/SocialLink.astro"
 import FriendButton from "../components/FriendButton.astro"
 import { Image } from "astro:assets"
 const twitter = "https://x.com/amemoia"
@@ -10,70 +10,55 @@ const discord = "https://discord.com/users/254204775497859073"
 const github = "https://github.com/amemoia"
 const steam = "https://steamcommunity.com/id/amemoia/"
 const bsky = "https://bsky.app/profile/buh.moe"
+import "../styles/index.css"
 import nta from "../img/buttons/nta.png"
-// Embed information
 const pageTitle = "amemoia"
 const description = "buh"
 ---
-<BaseLayout pageTitle={pageTitle}>
-	<div class="container">
-		<h2>Hi there!</h2>
-		<p>I'm Alex, I'm a 21yo student from <span class="accent">Poland 🇵🇱</span></p>
-		<p class="lastp">I have an interest in programming, front-end development, UI design and video games. Feel free to look around :3</p>
-	</div>
-	<div class="flexcol container">
-		<h2>Contact</h2>
-		<p>You can find me on the following websites:</p>
-		<a href={bsky} target="_blank">
-			<i class="fa-brands fa-bluesky"></i>
-			Bluesky <span class="accent-none">— @buh.moe</span>
-		</a>
-		<a href={twitter} target="_blank">
-			<i class="fa-brands fa-twitter"></i>
-			Twitter / X <span class="accent-none">— @amemoia</span>
-		</a>
-		<a href={discord} target="_blank">
-			<i class="fa-brands fa-discord"></i>
-			Discord <span class="accent-none">— @amemoia</span>
-		</a>
-		<a href={github} target="_blank">
-			<i class="fa-brands fa-github"></i>
-			GitHub <span class="accent-none">— @amemoia</span>
-		</a>
-		<a href={steam} target="_blank">
-			<i class="fa-brands fa-steam"></i>
-			Steam <span class="accent-none">— /id/amemoia</span>
-		</a>
-	</div>
-	<div class="buttons-section flexcol container">
-		<h2>cool places and friends</h2>
-		<div class="buttons flexrow">
-			<FriendButton link="https://themooskyfish.nekoweb.org" image="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" />
-			<FriendButton link="https://remblanc.nekoweb.org" image="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" />
-			<FriendButton link="https://sapphic.moe" image="https://sapphic.moe/buttons/sapphic.png" alt="sapphic.moe" />
-			<FriendButton link="https://ada.cat" image="https://ada.cat/b/me.gif" alt="ada.cat" />
-			<FriendButton link="https://onz.ee/" image="https://onz.ee/assets/88x31s/png/onzecki.png" alt="onzecki" />
-			<FriendButton link="https://meow-d.github.io/" image="https://meow-d.github.io/assets/images/buttons/meow_d.webp" alt="meow_d" />
-			<FriendButton link="https://alyxia.dev/" image="https://alyxia.dev/static/img/88x31/self.png" alt="alexia" />
-			<FriendButton link="https://nanoshinono.me/" image="https://nanoshinono.me/prefetcher.gif" alt="prefetcher" />
-			<FriendButton link="https://ata.moe/" image="https://ata.moe/88x31.png" alt="ata.moe" />
-			<FriendButton link="https://aria.coffee/" image="https://aria.coffee/static/img/buttons/aria.gif" alt="aria.coffee" />
-			<FriendButton link="https://notnite.com/" image="https://notnite.com/buttons/notnite.png" alt="notnite" />
-			<FriendButton link="https://hl2.sh/" image="https://hl2.sh/buttons/jay.png" alt="hl2.sh" />
-			<FriendButton link="https://erisdump.neocities.org/" image="https://erisdump.neocities.org/buttons/88x31.gif" alt="eris" />
-			<FriendButton link="https://hayden.moe/" image="https://hayden.moe/88x31/hayden.png" alt="hayden" />
-			<FriendButton link="https://babybreaths.nekoweb.org" image="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" />
-			<FriendButton link="https://ntauthority.me/" image={nta} alt="nta" />
-			<FriendButton link="https://dimden.dev/" image="https://dimden.dev/services/images/88x31.gif" alt="dimden" />
-			<FriendButton link="https://nekoweb.org/" image="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" />
-			<FriendButton link="https://eightyeightthirty.one" image="https://eightyeightthirty.one/88x31.png" alt="eightyeightthirty.one" />
-		</div>
-		<div class="buttons-my">
-			<p>My button:</p>
-			<div class="myButtonDiv flexrow">
-				<a href="https://buh.moe/" target="_blank"><Image src="https://buh.moe/resources/buttons/88x31.gif" width="88" height="31" alt="amemoia" /></a>
-				<textarea onclick="this.select()" readonly cols="70" rows="2">&lt;a href="https://buh.moe/" target="_blank"&gt;&lt;img src="https://buh.moe/resources/buttons/88x31.gif"&gt;&lt;/a&gt;</textarea>
-			</div>
-		</div>
-	</div>
-</BaseLayout>
+<LayoutBase pageTitle={pageTitle}>
+    <Container title="ABOUT ME">
+        <ContSection>
+            <h1>Hi there!</h1>
+            <span>I'm alex, a 21yo student from <span class="accent">Poland 🇵🇱</span></span>    
+            <span>I have an interest in programming, front-end development, UI design and video games.</span>
+        </ContSection>
+    </Container>
+
+    <Container title="LINKS">
+        <ContSection>
+            <h1>Contact</h1>
+            <span>You can find me on the following websites:</span>
+            <div class="flex col links">
+                <SocialLink link={bsky} icon="bluesky" label="Bluesky" account="@buh.moe" />
+                <SocialLink link={twitter} icon="twitter" label="Twitter / X" account="@amemoia" />
+                <SocialLink link={discord} icon="discord" label="Discord" account="@buh.moe" />
+                <SocialLink link={github} icon="github" label="GitHub" account="@amemoia" />
+                <SocialLink link={steam} icon="steam" label="Steam" account="/id/amemoia" />
+            </div>
+        </ContSection>
+    </Container>
+
+    <Container title="BUTTONS">
+        <ContSection>
+            <h1>cool places and friends</h1>
+            <div class="buttons flexrow">
+                <FriendButton link="https://themooskyfish.nekoweb.org" image="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" />
+                <FriendButton link="https://sapphic.moe" image="https://sapphic.moe/buttons/sapphic.png" alt="sapphic.moe" />
+                <FriendButton link="https://ada.cat" image="https://ada.cat/b/me.gif" alt="ada.cat" />
+                <FriendButton link="https://babybreaths.nekoweb.org" image="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" />
+                <FriendButton link="https://remblanc.nekoweb.org" image="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" />
+                <FriendButton link="https://notnite.com/" image="https://notnite.com/buttons/notnite.png" alt="notnite" />
+                <FriendButton link="https://nanoshinono.me/" image="https://nanoshinono.me/prefetcher.gif" alt="prefetcher" />
+                <FriendButton link="https://ata.moe/" image="https://ata.moe/88x31.png" alt="ata.moe" />
+                <FriendButton link="https://nekoweb.org/" image="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" />
+            </div>
+            <div class="buttons-my">
+                <p>My button:</p>
+                <div class="myButtonDiv flexrow">
+                    <a href="https://buh.moe/" target="_blank"><Image src="https://buh.moe/resources/buttons/88x31.gif" width="88" height="31" alt="amemoia" /></a>
+                    <textarea onclick="this.select()" readonly cols="70" rows="2">&lt;a href="https://buh.moe/" target="_blank"&gt;&lt;img src="https://buh.moe/resources/buttons/88x31.gif"&gt;&lt;/a&gt;</textarea>
+                </div>
+            </div>
+        </ContSection>
+    </Container>
+</LayoutBase>

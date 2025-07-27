@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BlogPostLayout from '../../components/BlogPostLayout.astro';
+import LayoutBlogpost from '../../components/LayoutBlogpost.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -18,6 +18,6 @@ const mon = months[d.getMonth()];
 const day = d.getDate()
 const yr = d.getFullYear();
 ---
-<BlogPostLayout frontmatter={entry.data}>
+<LayoutBlogpost frontmatter={entry.data}>
     <Content />
-</BlogPostLayout>
+</LayoutBlogpost>

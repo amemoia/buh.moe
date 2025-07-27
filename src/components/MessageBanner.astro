@@ -1,0 +1,19 @@
+---
+const { message, button, goto } = Astro.props;
+---
+
+<div class="msg-banner-bg">
+    <div class="msg-banner">
+        <span class="msg-banner-text">{message}</span>
+    </div>
+</div>
+<script define:vars={{goto, button}}>
+    if (goto != null) {
+        const mainDiv = document.getElementsByClassName('msg-banner')[0];
+        const msgDiv = document.createElement('a');
+        msgDiv.classList.add('msg-banner-button');
+        msgDiv.href = goto;
+        msgDiv.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>${button}</span>`;
+        mainDiv.appendChild(msgDiv);
+    }
+</script>

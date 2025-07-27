@@ -1,0 +1,16 @@
+.specs-merged {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+.specs-merged > .container-section {
+    width: 50%;
+}
+@media only screen and (max-width: 768px) {
+	.specs-merged {
+        flex-direction: column;
+    }
+    .specs-merged > .container-section {
+        width: auto;
+    }
+}

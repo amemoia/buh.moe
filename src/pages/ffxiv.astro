@@ -1,29 +1,30 @@
 ---
-import BaseLayout from "../components/BaseLayout.astro";
-import { Image } from "astro:assets";
-const fcLink = "https://eu.finalfantasyxiv.com/lodestone/community_finder/f8f85cb264692976949160eb178f6d4de8ff72bc/";
 const charLink = "https://eu.finalfantasyxiv.com/lodestone/character/46616687/";
 const world = "✿ Phoenix (Light DC)";
-const msq = "Early Dawntrail";
+const msq = "Early Dawntrail (Inactive)"
 
 const jobs = {
     pictomancer: "90",
     redmage: "90",
     bard: "90",
     viper: "90",
-    samurai: "80",
-    reaper: "80"
+    reaper: "90",
+    samurai: "80"
 };
 
 import bocchiPlate from "../img/sites/bocchi-plate.png";
 import bocchiRender from "../img/sites/bocchi-render.jpg";
 
-// Embed information
+import LayoutBase from "../components/LayoutBase.astro";
+import Container from "../components/Container.astro";
+import ContSection from "../components/ContSection.astro";
+import { Image } from "astro:assets";
+import '../styles/ffxiv.css';
 const pageTitle = "ame / ffxiv"
 const description = "buh"
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<LayoutBase pageTitle={pageTitle}>
     <div class="ffxiv-divplate">
         <Image
             src={bocchiPlate}
@@ -31,30 +32,32 @@ const description = "buh"
             class="ffxiv-advplate"
         />
     </div>
-    <div class="container">
-        <h2><a href={charLink} target="_blank">B'occhi Rhock</a></h2>
-        <div class="ffxiv-characterinfo flexrow flexrow-mobile-override">
-            <Image
-                src={bocchiRender}
-                alt="A render of B'occhi Rhock"
-                class="ffxiv-render"
-            />
-            <div class="ffxiv-infopanel flexcol">
-                <div>
-                    <p class="bold">World</p>
-                    {world}
+
+    <Container title="THAL'S BALLS">
+        <ContSection>
+            <h1><a href={charLink} target="_blank">B'occhi Rhock</a></h1>
+            <div class="ffxiv-characterinfo flex row">
+                <Image
+                    src={bocchiRender}
+                    alt="A render of B'occhi Rhock"
+                    class="ffxiv-render"
+                />
+                <div class="ffxiv-infopanel flex col">
+                    <div>
+                        <p class="accent">World</p>
+                        {world}
+                    </div>
+                    <div>
+                        <p class="accent">Free Company</p>
+                        <span><p>None</p></span>
                 </div>
                 <div>
-                    <p class="bold">Free Company</p>
-                    <span><p>None right now!</p></span>
-                </div>
-                <div>
-                    <p class="bold">MSQ Progress</p>
+                    <p class="accent">MSQ Progress</p>
                     <p>{msq}</p>
                 </div>
                 <div>
-                    <p class="bold">Main Jobs</p>
-                    <div class="ffxiv-jobs flexrow">
+                    <p class="accent">Main Jobs</p>
+                    <div class="ffxiv-jobs flex row">
                         <script define:vars={{ jobs }}>
                             const jobdiv =
                                 document.getElementsByClassName(
@@ -78,7 +81,8 @@ const description = "buh"
                         </script>
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
-    </div>
-</BaseLayout>
+        </ContSection>
+    </Container>
+</LayoutBase>

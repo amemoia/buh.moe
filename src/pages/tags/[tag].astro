@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../components/BaseLayout.astro';
-import BlogPost from '../../components/BlogPost.astro';
+import LayoutBase from '../../components/LayoutBase.astro';
+import Blogpost from '../../components/Blogpost.astro';
 
 export async function getStaticPaths() {
     const allPosts = await getCollection('blog');
@@ -20,21 +20,28 @@ const { posts } = Astro.props;
 const postCount = posts.length
 var label = "post"
 if (postCount > 1) {label="posts"}
+
+import '../../styles/blog.css';
+import '../../styles/tag.css';
+import ContSection from '../../components/ContSection.astro';
+import Container from '../../components/Container.astro';
 ---
-<BaseLayout pageTitle={tag}>
-    <div class="navbar flexrow container globalTagList tagPageAdjust">
-        <span>{postCount} {label} tagged with</span>
-        <script is:inline define:vars={{tag}}>
-            const parent = document.getElementsByClassName('globalTagList')[0]
-            const a = document.createElement('a');
-            a.href = "/tags/"+tag
-            a.classList.add('tagbutton', 'fullnohover')
-            const hash = '<i class="fa-solid fa-hashtag fullnohover"></i>'
-            a.innerHTML = hash+"<span class='fullnohover'>"+tag+"</span>"
-            parent.append(a)
-        </script>
-    </div>
+<LayoutBase pageTitle={tag}>
+    <Container title="TAGS">
+        <ContSection args="tag-counter">
+            <span>{postCount} {label} tagged with <i class="fa-solid fa-hashtag accent"></i><span class="accent">{tag}</span></span>
+        </ContSection>  
+    </Container>
+    <script is:inline define:vars={{tag}}>
+        const parent = document.getElementsByClassName('globalTagList')[0]
+        const a = document.createElement('a');
+        a.href = "/tags/"+tag
+        a.classList.add('tagbutton', 'fullnohover')
+        const hash = '<i class="fa-solid fa-hashtag fullnohover"></i>'
+        a.innerHTML = hash+"<span class='fullnohover'>"+tag+"</span>"
+        parent.append(a)
+    </script>
     {
-        posts.map((post) => <BlogPost  id={post.id} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
+        posts.map((post) => <Blogpost  id={post.id} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />).reverse()
     }
-</BaseLayout>
+</LayoutBase>

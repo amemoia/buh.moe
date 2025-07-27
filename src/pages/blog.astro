@@ -1,7 +1,7 @@
 ---
-import BaseLayout from "../components/BaseLayout.astro";
-import BlogPost from "../components/BlogPost.astro";
-import BlogTaglist from "../components/BlogTaglist.astro";
+import LayoutBase from "../components/LayoutBase.astro";
+import Blogpost from "../components/Blogpost.astro";
+import Blogtags from "../components/Blogtags.astro";
 import rss, { pagesGlobToRssItems } from '@astrojs/rss';
 import { getCollection } from "astro:content";
 
@@ -9,11 +9,12 @@ const blogPosts = await getCollection('blog')
 // Embed information
 const pageTitle = "ame / blog"
 const description = "buh"
+import '../styles/blog.css'
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-    <BlogTaglist />
+<LayoutBase pageTitle={pageTitle}>
+    <Blogtags />
     {
-        blogPosts.map((post) => <BlogPost id={post.id} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
+        blogPosts.map((post) => <Blogpost id={post.id} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />).reverse()
     }
-</BaseLayout>
+</LayoutBase>

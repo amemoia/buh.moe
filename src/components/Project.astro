@@ -1,0 +1,20 @@
+---
+import Container from "./Container.astro";
+import ContSection from "./ContSection.astro";
+const { title, name, date, tags, link, description } = Astro.props;
+---
+<Container title={title}>
+    <ContSection>
+        <h1 class="project-name"><a href={link} target="_blank">{name}</a></h1>
+        <div class="project-info">
+            <span>
+                <span class="accent">Date:</span> {date}
+            </span>
+            <span>
+                {tags}
+            </span>
+            <hr>
+        </div>
+        <span class="project-desc">{description}</span>
+    </ContSection>
+</Container>

@@ -1,0 +1,45 @@
+html {
+    background: var(--container-bg);
+}
+.blogpost {
+    margin-top: 2em;
+    font-family: var(--font-satoshi);
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    max-width: 95%;
+    justify-self: center;
+}
+.blogpost-header-title {
+    font-family: var(--font-main);
+}
+
+.blogpost-header-tags {
+    display: flex;
+    gap: 0.5em;
+}
+.blogpost-tag:hover {
+    color: var(--accent-main);
+    transition: color 0.25s;
+}
+.blogpost-text p img {
+    max-width: 100%;
+    height: auto;
+    align-items: center;
+}
+.blogpost-text p:has(> img) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.blogpost-text {
+    padding-bottom: 2em;
+}
+sub {
+    width: fit-content;
+}
+code {
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--accent-main);
+}

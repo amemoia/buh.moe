@@ -1,0 +1,64 @@
+---
+import LayoutBase from "./LayoutBase.astro";
+import Container from "./Container.astro";
+import ContSection from "./ContSection.astro";
+import { Image } from "astro:assets";
+import '../styles/yakuza.css';
+const { frontmatter } = Astro.props;
+const pageTitle = "ame / yakuza"
+const description = "buh"
+---
+
+<LayoutBase pageTitle={pageTitle}>
+
+    <h1 class="yakuza-intro">Alex's Yakuza Series Progress</h1>
+
+    <Container title="LIKE A WHAT">
+        <ContSection>
+            <h1 class="yakuza-current">Currently on: <a href={frontmatter.currentGame}>{frontmatter.currentTitle}</a></h1>
+            <div class="yakuza-checklist">
+                <slot />
+            </div>
+        </ContSection>
+    </Container>
+    
+    <Container title="TIER LIST">
+        <ContSection args="yakuza-tierlist">
+            <script define:vars={ {frontmatter} }>
+                const divTierlist = document.getElementsByClassName('yakuza-tierlist')[0];
+                var rankIndex = 0;
+                for (const [rank, games] of Object.entries(frontmatter.tierlist)) {
+                    const divRank = document.createElement('div');
+                    divRank.classList.add(`yakuza-tierlist-tier`);
+                    const divRankLabel = document.createElement('div');
+                    divRankLabel.classList.add(`yakuza-tierlist-label`);
+                    divRankLabel.classList.add(`rank${rankIndex}`);
+                    if (rankIndex == Object.keys(frontmatter.tierlist).length-1) {
+                        divRankLabel.classList.add('rank-last');
+                    }
+
+                    const divRankGames = document.createElement('div');
+                    divRankGames.classList.add(`yakuza-tierlist-games`);
+
+                    const spanRankLabel = document.createElement('span');
+                    spanRankLabel.innerHTML = rank;
+                    divRankLabel.appendChild(spanRankLabel);
+                    divRank.appendChild(divRankLabel);
+
+                    for (const game of Object.values(games)) {
+                        const gameImage = document.createElement("img");
+                        gameImage.src = `/tierlist/${game}.png`;
+                        gameImage.alt = game;
+                        gameImage.classList.add("yakuza-tierlist-image");
+                        divRankGames.appendChild(gameImage);
+                    }
+    
+                    divRank.appendChild(divRankGames);
+
+                    divTierlist.appendChild(divRank);
+                    rankIndex++;
+                }
+            </script>
+        </ContSection>
+    </Container>
+</LayoutBase>

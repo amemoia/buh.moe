@@ -1,0 +1,17 @@
+---
+const { list, ref } = Astro.props;
+---
+<script define:vars={{ list, ref }}>
+    let x = 0;
+    for (const [component, name] of Object.entries(list)) {
+        div = document.getElementsByClassName(ref)[0];
+        p = document.createElement("p");
+        p.innerHTML =
+            "<span class='accent'>" +
+            component +
+            ":</span> " +
+            name;
+        x++;
+        div.appendChild(p);
+    }
+</script>

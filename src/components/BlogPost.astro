@@ -7,28 +7,26 @@ const mon = months[d.getMonth()];
 const day = d.getDate()
 const yr = d.getFullYear();
 const uniqueClass = "blogPostTags-"+id
+import Container from "./Container.astro";
+import ContSection from "./ContSection.astro";
 ---
-<a href={url} class="accent-none fullnohover">
-    <div class="container">
-        <div class="manualhover">
-            <h3 class="blogPostTitle">{title}</h3>
-            <p class="blogPostDescription">{description}</p>
-        </div>
-        <div class={uniqueClass+ " blogPostTags flexrow"}>
-            <p class="blogPostDate"><i class="fa-solid fa-calendar-days"></i> {mon + " " + day + ", " + yr}</p>
-            <script is:inline define:vars={{tags , uniqueClass}}>
-                const hashtagHTML = '<i class="fa-solid fa-hashtag"></i>';
-                const tagDiv = document.getElementsByClassName(uniqueClass)[0];
-                tags.forEach(tag => {
-                    const tagLink = document.createElement('a');
-                    tagLink.href = "/tags/"+tag
-                    const tagSpan = document.createElement('span');
-                    tagSpan.innerHTML = hashtagHTML + "" + tag
-                    tagSpan.classList.add('accent')
-                    tagLink.appendChild(tagSpan)
-                    tagDiv.appendChild(tagLink)
-                });
-            </script>
-        </div>
+<ContSection args="blogpost-entry-container">
+    <a href={url} target="_blank" class="blogpost-entry-link"><h3 class="blogpost-entry-title">{title}</h3></a>
+    <p class="blogpost-entry-description">{description}</p>
+    <p class="blogpost-entry-date"><i class="fa-solid fa-calendar-days accent"></i> {mon + " " + day + ", " + yr}</p>
+    <div class={uniqueClass+ " blogpost-entry-tags"}>
+        <script is:inline define:vars={{tags , uniqueClass}}>
+            const hashtagHTML = '<i class="fa-solid fa-hashtag accent"></i>';
+            const tagDiv = document.getElementsByClassName(uniqueClass)[0];
+            tags.forEach(tag => {
+                const tagLink = document.createElement('a');
+                tagLink.href = "/tags/"+tag
+                const tagSpan = document.createElement('span');
+                tagSpan.innerHTML = hashtagHTML + "" + tag
+                tagLink.appendChild(tagSpan)
+                tagLink.classList.add('accent-none')
+                tagDiv.appendChild(tagLink)
+            });
+        </script>
     </div>
-</a>
+</ContSection>

@@ -1,20 +1,44 @@
 ---
 import { Image } from "astro:assets"
 import pfp from "../img/sites/avatar.png"
+import Container from "./Container.astro"
 ---
-<div class="profile flexcol">
-    <Image src={pfp} class="pfp" alt="amemoia's pfp" />
-    <div class="profile-text flexrow">
-        <h2>amemoia</h2>
-        <span>🏳️‍🌈 🏳️‍⚧️ • she/her</span>
+<Container title="BUH.MOE">
+    <div class="flex row nav-profile container-section">
+        <Image
+            class="pfp"
+            src={pfp}
+            alt="A chibi image of Yuzuha from Zenless Zone Zero"
+            />
+        <div class="flex col">
+            <h1 class="nav-name">alex buh</h1>
+            <span class="nav-nick">amemoia</span>
+        </div>
     </div>
-
-</div>
-<div class="navbar flexrow container">
-    <a href="/">Home</a>
-    <a href="/blog">Blog</a>
-    <a href="/specs">Specs</a>
-    <a href="/portfolio">Portfolio</a>
-    <a href="/ffxiv">FFXIV</a>
-    <a href="/yakuza">Yakuza</a>
-</div>
+    <div class="flex row container-section nav-links">
+    
+        <a href="/" class="nav-links-first">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/specs">Specs</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/ffxiv">FFXIV</a>
+        <a href="/yakuza">Yakuza</a>
+        <script is:inline src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script is:inline>
+            $(function(){
+                var index = 1;
+                $('a').each(function(){
+                    if ($(this).parent().hasClass('nav-links')) {
+                        if ($(this).prop('href') == window.location.href) {
+                            $(this).addClass('nav-active');
+                        }
+                        else {
+                            $(this).addClass('nav-inactive');
+                        }
+                        index++;
+                    }
+                });
+            });
+        </script>
+    </div>
+</Container>

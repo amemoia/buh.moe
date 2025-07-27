@@ -1,0 +1,198 @@
+:root {
+    --red1: #EF5350;
+    --red2: #EC6563;
+    --orange1: #FFA967;
+    --orange2: #FFBE7C;
+    --orange3: #FED4A0;
+    --green1: #BFFF7F;
+    --green2: #9DF89D;
+
+    --rank0: var(--red1);
+    --rank1: var(--orange1);
+    --rank2: var(--orange2);
+    --rank3: var(--orange3);
+}
+.rank0 {background-color: var(--rank0);}
+.rank1 {background-color: var(--rank1);}
+.rank2 {background-color: var(--rank2);}
+.rank3 {background-color: var(--rank3);}
+.rank4 {background-color: var(--rank4);}
+.rank5 {background-color: var(--rank5);}
+
+.yakuza-intro {
+    font-family: 'Edo SZ';
+    font-size: 4em;
+    width: auto;
+    text-align: center;
+    text-shadow:
+         4px  4px 2px #000,
+        -4px  4px 2px #000,
+        -4px -4px 2px #000,
+         4px -4px 2px #000;
+}
+.yakuza-tierlist {
+    padding: 0;
+}
+.yakuza-checklist ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.yakuza-checklist li {
+    margin-bottom: 0.5em;
+}
+.yakuza-legend {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.yakuza-legend p {
+    margin: 0;
+}
+.yakuza-checklist em {
+    color: var(--text-soft);
+}
+.yakuza-checklist li sub img {
+    opacity: 50%;
+}
+.yakuza-current {
+    word-wrap: break-word;
+}
+
+.yakuza-tierlist-tier {
+    display: flex;
+    flex-direction: row;
+}
+.yakuza-tierlist-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    width: 1em;
+    height: auto;
+}
+.yakuza-tierlist-label span {
+    color: var(--container-bg);
+}
+.yakuza-tierlist-games {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.yakuza-tierlist-image {
+    width: 8em;
+    height: 8em;
+}
+.rank0 {
+    border-top-left-radius: 12px;
+}
+.rank-last {
+    border-bottom-left-radius: 12px;
+}
+
+/*
+    This section refers to the checklist on the Yakuza page.
+    EVIL HACK!!! Checkboxes cannot be styled!!
+    A good workaround is to hide them and create a ::before pseudo element as a replacement.
+    whoever at apple decided that checkboxes shouldnt be styled can go fuck themselves
+*/
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 16px;
+    height: 16px;
+    background-color: var(--accent-main);
+    border-radius: 4px;
+    transform: translate(2px, 6px);
+    display: grid;
+    place-content: center;
+}
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.5em;
+    height: 0.5em;
+    transform: scale(0);
+    background-color: var(--text);
+    box-shadow: inset 1em 1em var(--text);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+.task-list-item {
+    display: grid;
+    grid-template-columns: 20px 20px 50% auto;
+    gap: 0.5em;
+    text-align: left; 
+}
+li .emoji {
+    position: relative;
+    top: 2px;
+}
+
+@media only screen and (max-width: 768px) {
+    .task-list-item {
+        display: grid;
+        grid-template-columns: 20px 20px calc(70% - 40px) calc(30% - 40px);
+        gap: 0.5em;
+        text-align: left; 
+    }
+    .yakuza-tierlist-tier {
+        width: auto;
+        flex-direction: column;
+    }
+    .yakuza-tierlist-label {
+        width: 100%;
+        padding: 2em 0em;
+    }
+    .rank0 {
+        border-top-right-radius: 12px;
+    }
+    .yakuza-tierlist-tier:has(> .rank0) {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+    .yakuza-tierlist-games {
+        justify-content: center;
+    }
+    .rank-last {
+        border-bottom-left-radius: 0px;
+    }
+    /*
+    .yakuza-tierlist-label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2em;
+        width: 1em;
+        height: auto;
+    }
+    .yakuza-tierlist-label span {
+        color: var(--container-bg);
+    }
+    .yakuza-tierlist-games {
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .yakuza-tierlist-image {
+        width: 8em;
+        height: 8em;
+    }
+    .rank0 {
+        border-top-left-radius: 12px;
+    }
+    .rank-last {
+        border-bottom-left-radius: 12px;
+    }
+    */
+}

@@ -1,0 +1,8 @@
+---
+const { link,  icon, label, account } = Astro.props;
+const classes = "fa-brands fa-"+icon;
+---
+<a href={link} target="_blank">
+    <i class={classes}></i>
+    {label} <span class="accent-soft"> {account}</span>
+</a>

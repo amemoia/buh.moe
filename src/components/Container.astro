@@ -1,0 +1,10 @@
+---
+let { title } = Astro.props;
+if (title == null) title = "ALEX BUH FORGOT TO ADD A TITLE HERE";
+---
+<div class="container-outline">
+    <div class="container-main flex col">
+        <span class="container-header">{title.toUpperCase()}</span>
+        <slot />
+    </div>
+</div>

@@ -1,0 +1,35 @@
+.links {
+    margin-top: 1em;
+    gap: 1em;
+    width: fit-content;
+}
+textarea {
+    resize: none;
+    background-color: var(--background-alt);
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-code);
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    color: var(--text);
+    width: 40em;
+    font-size: 14;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 34px;
+    margin-left: 0.5em;
+    overflow-y: hidden;
+}
+textarea::selection {
+    background-color: var(--accent-textselect);
+}
+textarea:focus {
+    outline: none;
+}
+
+@media only screen and (max-width: 768px) {
+    textarea {
+        display: none;
+    }
+}

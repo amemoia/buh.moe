@@ -1,5 +1,6 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
+import ContSection from "./ContSection.astro";
+import LayoutBase from "./LayoutBase.astro";
 
 const { frontmatter } = Astro.props;
 const d = new Date(frontmatter.pubDate)
@@ -7,33 +8,34 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 const mon = months[d.getMonth()];
 const day = d.getDate()
 const yr = d.getFullYear();
+import '../styles/blogpost.css'
 ---
-<BaseLayout pageTitle={frontmatter.title}>
-    <div class="container blogPostContainer">
-        <div class="blogPostHeader flexcol">
-            <h1 class="blogPostTitle">{frontmatter.title}</h1>
-            <p class="blogPostDescription">{frontmatter.description}</p>
-            <div class="blogPostTags flexrow">
-                <p class="blogPostDate"><i class="fa-solid fa-calendar-days"></i> {mon + " " + day + ", " + yr}</p>
+<LayoutBase pageTitle={frontmatter.title}>
+    <div class="blogpost">
+        <div class="blogpost-header">
+            <h1 class="blogpost-header-title">{frontmatter.title}</h1>
+            <p class="blogpost-header-desc">{frontmatter.description}</p>
+            <p class="blogpost-header-date"><i class="fa-solid fa-calendar-days accent"></i> {mon + " " + day + ", " + yr}</p>
+            <div class="blogpost-header-tags">
                 <script is:inline define:vars={{frontmatter}}>
-                    const hashtagHTML = '<i class="fa-solid fa-hashtag"></i>';
-                    const tagDiv = document.getElementsByClassName('blogPostTags')[0];
+                    const hashtagHTML = '<i class="fa-solid fa-hashtag accent"></i>';
+                    const tagDiv = document.getElementsByClassName('blogpost-header-tags')[0];
                     const tags = frontmatter.tags;
                     tags.forEach(tag => {
                         const tagLink = document.createElement('a');
                         tagLink.href = "/tags/"+tag
                         const tagSpan = document.createElement('span');
                         tagSpan.innerHTML = hashtagHTML + "" + tag
-                        tagSpan.classList.add('accent')
+                        tagLink.classList.add('blogpost-tag')
+                        tagLink.classList.add('accent-none')
                         tagLink.appendChild(tagSpan)
                         tagDiv.appendChild(tagLink)
                     });
                 </script>
             </div>
         </div>
-        <div class="blogPostContent">
+        <div class="blogpost-text">
             <slot />
         </div>
     </div>
-    
-</BaseLayout>
+</LayoutBase>

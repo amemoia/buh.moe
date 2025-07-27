@@ -1,128 +1,71 @@
 ---
-import BaseLayout from "../components/BaseLayout.astro";
-
-const components = {
+const PC = {
     "CPU" : "i5-7400",
     "GPU" : "GTX 1650 Super",
     "RAM" : "16GB",
     "OS" : "Windows 10 Pro"
 };
-const peripherals = {
+const PERIPHERALS = {
     "Mouse": "Logitech G Pro Superlight",
     "Mousepad": "Logitech G640",
     "Keyboard": "HyperX Alloy FPS",
     "Audio": "Apple EarPods"
 };
-const laptop = {
+const LAPTOP = {
     "Model": "MacBook Air (2022)",
-    "OS": "macOS Sequoia 15.2 (Beta)",
+    "OS": "macOS Sequoia 26 (Beta)",
     "CPU": "Apple M2 (8-core) @ 3.50 GHz",
     "GPU": "Apple M2 (10-core)",
     "RAM": "16 GB",
     "Disk": "512 GB",
     "Display": "13,6-inch (2560 × 1664)"
 };
-const software = {
+const SOFTWARE = {
     "Browser": "Chrome",
     "Music" : "Cider (Apple Music)",
+    "Authenticator": "Ente Auth",
     "Notes": "Obsidian",
     "Digital Art" : "Krita",
-    "Authenticator": "Ente Auth",
     "Code Editor": "VS Code",
     "Code Assistant": "GitHub Copilot"
-};
+}
 
+import LayoutBase from "../components/LayoutBase.astro";
+import Container from "../components/Container.astro";
+import ContSection from "../components/ContSection.astro";
+import SpecsList from "../components/SpecsList.astro";
+import '../styles/specs.css';
 const pageTitle = "ame / specs"
 ---
+<LayoutBase pageTitle={pageTitle}>
+    <Container title="THERMONUCLEAR BOMB" args="row">
+        <div class="specs-merged">
+            <ContSection args="flex row">
+                <div class="specs-pc">
+                    <h1>My PC</h1>
+                    <SpecsList list={PC} ref="specs-pc" />
+                </div>
+            </ContSection>
+            <ContSection>
+                <div class="specs-peripherals">
+                    <h1>Gear</h1>
+                    <SpecsList list={PERIPHERALS} ref="specs-peripherals" />
+                </div>
+            </ContSection>
+        </div>
+    </Container>
 
-<BaseLayout pageTitle={pageTitle}>
-    <div class="container flexrow flexrow-mobile-override specs-div">
-        <div class="specs-pc">
-            <h2>My PC</h2>
-            <script define:vars={{ components }}>
-                let x = 0;
-                for (const [component, name] of Object.entries(components)) {
-                    div = document.getElementsByClassName("specs-pc")[0];
-                    p = document.createElement("p");
-                    p.innerHTML =
-                        "<span class='accent'>" +
-                        component +
-                        ":</span> " +
-                        name;
-                    x++;
-                    if (x == Object.keys(components).length) {
-                        p.classList.add("lastp");
-                    }
-                    div.appendChild(p);
-                }
-            </script>
+    <Container title="DAILY LIFE">
+        <div class="specs-merged">
+            <ContSection args="specs-laptop">
+                <h1>Laptop</h1>
+                <SpecsList list={LAPTOP} ref="specs-laptop" />
+            </ContSection>
+            <ContSection args="specs-soft">
+                <h1>Software</h1>
+                <SpecsList list={SOFTWARE} ref="specs-soft" />
+            </ContSection>
         </div>
-        <div class="specs-peripherals">
-            <h2>Peripherals</h2>
-            <script define:vars={{ peripherals }}>
-                let y = 0;
-                for (const [component, name] of Object.entries(peripherals)) {
-                    div =
-                        document.getElementsByClassName("specs-peripherals")[0];
-                    p = document.createElement("p");
-                    p.innerHTML =
-                        "<span class='accent'>" +
-                        component +
-                        ":</span> " +
-                        name;
-                    y++;
-                    if (y == Object.keys(peripherals).length) {
-                        p.classList.add("lastp");
-                    }
-                    div.appendChild(p);
-                }
-            </script>
-        </div>
-    </div>
-    <div class="container flexrow flexrow-mobile-override specs-div">
-        <div class="specs-laptop">
-            <h2>Laptop</h2>
-            <script define:vars={{ laptop }}>
-                let z = 0;
-                for (const [component, name] of Object.entries(laptop)) {
-                    div =
-                        document.getElementsByClassName("specs-laptop")[0];
-                    p = document.createElement("p");
-                    p.innerHTML =
-                        "<span class='accent'>" +
-                        component +
-                        ":</span> " +
-                        name;
-                    z++;
-                    if (z == Object.keys(laptop).length) {
-                        p.classList.add("lastp");
-                    }
-                    div.appendChild(p);
-                }
-            </script>
-        </div>
-    </div>
-    <div class="container flexrow flexrow-mobile-override specs-div">
-        <div class="specs-software">
-            <h2>Software</h2>
-            <script define:vars={{ software }}>
-                let a = 0;
-                for (const [component, name] of Object.entries(software)) {
-                    div =
-                        document.getElementsByClassName("specs-software")[0];
-                    p = document.createElement("p");
-                    p.innerHTML =
-                        "<span class='accent'>" +
-                        component +
-                        ":</span> " +
-                        name;
-                    a++;
-                    if (a == Object.keys(software).length) {
-                        p.classList.add("lastp");
-                    }
-                    div.appendChild(p);
-                }
-            </script>
-        </div>
-    </div>
-</BaseLayout>
+    </Container>
+    
+</LayoutBase>

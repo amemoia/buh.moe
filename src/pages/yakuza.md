@@ -5,8 +5,8 @@ currentTitle: "Yakuza Kiwami (Completionist)"
 # Y0, Kiwami1, Kiwami2, Kiwami2Majima, Y3, Y4, Y5, Y6, LAD7, LAD7Gaiden, LAD8, LAD8Gaiden, Judge, LostJudge, LostJudgeKaito, Ishin
 tierlist: {
     S  : ['Y0', 'LAD7', 'LAD8', 'LAD7Gaiden', 'LostJudge'],
-    A  : ['Judge', 'Y6', 'LAD8Gaiden', 'Ishin', 'LostJudgeKaito'],
-    A- : ['Kiwami1', 'Y3', 'Kiwami2', 'Y5', 'Y4'],
+    A  : ['Judge', 'Y6', 'LAD8Gaiden', 'Ishin'],
+    A- : ['Kiwami1', 'Kiwami2', 'LostJudgeKaito', 'Y3', 'Y5', 'Y4'],
     B  : ['Kiwami2Majima']
 }
 ---

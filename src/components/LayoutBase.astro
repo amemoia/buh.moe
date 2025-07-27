@@ -47,4 +47,16 @@ const { pageTitle, description } = Astro.props;
         </div>
     </body> 
     <ParseTwemoji />
+
+    <!-- evil flash of unstyled content fix -->
+    <style is:inline>
+        body {
+            visibility: hidden;
+        }
+    </style>
+    <style is:global>
+        body {
+            visibility: visible;
+        }
+    </style>
 </html>

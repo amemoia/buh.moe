@@ -15,6 +15,6 @@ import '../styles/blog.css'
 <LayoutBase pageTitle={pageTitle}>
     <Blogtags />
     {
-        blogPosts.map((post) => <Blogpost id={post.id} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />).reverse()
+        blogPosts.map((post) => <Blogpost id={post.id} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
     }
 </LayoutBase>

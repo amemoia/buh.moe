@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # obsidian
 /src/content/.obsidian
+
+# vercel
+.vercel/

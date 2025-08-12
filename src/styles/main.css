@@ -12,7 +12,7 @@
 /* Palette */
 :root {
 	--bg-line: #00000080;
-	--bg: #101010;
+	--bg: #080808;
 	--container-bg: #080808;
 	--container-outline: #101010;
 	--container-outerline: #FFFFFF10;
@@ -33,25 +33,16 @@
 }
 
 html {
+	/*
 	background: url("../img/sites/bg-zzz.webp");
 	background-repeat: no-repeat;
-	background-color: #000000;
+	*/
+	background-color: var(--bg)
 }
 body {
 	display: flex;
-	justify-content: center;
-	margin: 0 0 0 0;
-	/* 100vh height required for lines to not stop abruptly */
-	min-height: 100vh;
-	background: repeating-linear-gradient(
-		45deg,
-		var(--bg-line),
-		var(--bg-line) 6px,
-		transparent 6px,
-		transparent 12px
-	);
-}
-.main {
+	flex-direction: column;
+	justify-self: center;
 	margin: 1em 0em;
 	width: 60em;
   	font-family: var(--font-main);
@@ -219,7 +210,7 @@ a:hover {
 	}
 }
 @media only screen and (max-width: 768px) {
-	.main {
+	body {
 		max-width: 100%;
 		margin-top: 0;
 	}

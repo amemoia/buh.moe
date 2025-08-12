@@ -4,7 +4,7 @@
     padding: 1em;
     margin-bottom: 1em;
     display: grid;
-    justify-self: center;
+    align-self: center;
 }
 .ffxiv-advplate {
     object-fit: none;

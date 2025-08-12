@@ -41,10 +41,8 @@ const { pageTitle, description } = Astro.props;
         <SpeedInsights />
     </head>
     <body>
-        <div class="main">
-            <NavHeader />
-            <slot />
-        </div>
+        <NavHeader />
+        <slot />
     </body> 
     <ParseTwemoji />
 </html>

@@ -8,7 +8,7 @@ html {
     display: flex;
     flex-direction: column;
     max-width: 95%;
-    justify-self: center;
+    align-self: center;
 }
 .blogpost-header-title {
     font-family: var(--font-main);

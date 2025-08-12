@@ -1,13 +1,13 @@
 ---
 const charLink = "https://eu.finalfantasyxiv.com/lodestone/character/46616687/";
 const world = "✿ Phoenix (Light DC)";
-const msq = "Early Dawntrail (Inactive)"
+const msq = "Early Dawntrail"
 
 const jobs = {
+    viper: "100",
     pictomancer: "90",
     redmage: "90",
     bard: "90",
-    viper: "90",
     reaper: "90",
     samurai: "80"
 };
@@ -22,6 +22,8 @@ import { Image } from "astro:assets";
 import '../styles/ffxiv.css';
 const pageTitle = "ame / ffxiv"
 const description = "buh"
+// it turns out lodestone character images have a static url
+const lodestoneUrl = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a9dbf9d9fe_5047bc596a4bab2dc7f7c120bb22dec5fl0.jpg?1755017723";
 ---
 
 <LayoutBase pageTitle={pageTitle}>
@@ -38,9 +40,10 @@ const description = "buh"
             <h1><a href={charLink} target="_blank">B'occhi Rhock</a></h1>
             <div class="ffxiv-characterinfo flex row">
                 <Image
-                    src={bocchiRender}
+                    src={lodestoneUrl}
                     alt="A render of B'occhi Rhock"
                     class="ffxiv-render"
+                    inferSize={true}
                 />
                 <div class="ffxiv-infopanel flex col">
                     <div>

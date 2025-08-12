@@ -1,9 +1,10 @@
-.main:has(> .msg-banner-bg) {
+body:has(> .msg-banner-bg) {
     width: 100%;
     & .container-outline {
         width: 57.5em;
         justify-self: center;
     }
+    align-items: center;
 }
 .msg-banner-bg {
     display: flex;

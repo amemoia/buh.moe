@@ -73,6 +73,7 @@ textarea:focus {
 .buttons {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 4px;
 }
 @media only screen and (max-width: 767px) {
     textarea {

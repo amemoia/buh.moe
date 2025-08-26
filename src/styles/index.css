@@ -95,4 +95,10 @@ textarea:focus {
     .mina-banner {
         background-image: none;
     }
+    .container-section > .container-section > div {
+        gap: 0;
+        ul {
+            width: 50%;
+        }
+    }
 }

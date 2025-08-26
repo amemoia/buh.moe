@@ -21,6 +21,7 @@
 
 .yakuza-intro {
     font-family: 'Edo SZ';
+    color: var(--accent-white);
     font-size: 4em;
     width: auto;
     text-align: center;

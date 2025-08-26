@@ -253,6 +253,9 @@ a.accent-none:hover {
 	position: relative;
 	bottom: 0.1em;
 }
+.container-section ul {
+    padding-left: 0;
+}
 .li-fa {
     width: 1.35em;
     text-align: center;

@@ -38,50 +38,51 @@ import ContTitle from "../components/ContTitle.astro";
 const pageTitle = "ame / specs"
 ---
 <LayoutBase pageTitle={pageTitle}>
-    <div class="specs-merged">
-        <Container title="THERMONUCLEAR BOMB" args="container-color-orange">
-            <ContTitle>
-                <h3 class="subheader">PC</h3>
-                <h1>akame</h1>
-            </ContTitle>
-            <ContSection args="flex row">
-                <div class="specs-pc">
-                    <SpecsList list={PC} ref="specs-pc" />
-                </div>
-            </ContSection>
-        </Container>
-        <Container title="THERMONUCLEAR BOMB" args="container-color-purple">
-            <ContTitle>
-                <h3 class="subheader">PERIPHERALS</h3>
-                <h1>Gear</h1>
-            </ContTitle>
-            <ContSection>
-                <div class="specs-peripherals">
-                    <SpecsList list={PERIPHERALS} ref="specs-peripherals" color="purple" />
-                </div>
-            </ContSection>
-        </Container>
-    </div>
+    <div class="flex col" style="gap: 1em;">
+        <div class="specs-merged">
+            <Container title="THERMONUCLEAR BOMB" args="container-color-orange">
+                <ContTitle>
+                    <h3 class="subheader">PC</h3>
+                    <h1>akame</h1>
+                </ContTitle>
+                <ContSection args="flex row">
+                    <div class="specs-pc">
+                        <SpecsList list={PC} ref="specs-pc" />
+                    </div>
+                </ContSection>
+            </Container>
+            <Container title="THERMONUCLEAR BOMB" args="container-color-purple">
+                <ContTitle>
+                    <h3 class="subheader">PERIPHERALS</h3>
+                    <h1>Gear</h1>
+                </ContTitle>
+                <ContSection>
+                    <div class="specs-peripherals">
+                        <SpecsList list={PERIPHERALS} ref="specs-peripherals" color="purple" />
+                    </div>
+                </ContSection>
+            </Container>
+        </div>
 
-    <div class="specs-merged">
-        <Container args="container-color-orange">
-            <ContTitle>
-                <h3 class="subheader">LAPTOP</h3>
-                <h1>saeko</h1>
-            </ContTitle>
-            <ContSection args="specs-laptop">
-                <SpecsList list={LAPTOP} ref="specs-laptop" />
-            </ContSection>
-        </Container>
-        <Container args="container-color-purple">
-            <ContTitle>
-                <h3 class="subheader">TOOLSET</h3>
-                <h1>Software</h1>
-            </ContTitle>
-            <ContSection args="specs-soft">
-                <SpecsList list={SOFTWARE} ref="specs-soft" color="purple" />
-            </ContSection>
-        </Container>
+        <div class="specs-merged">
+            <Container args="container-color-orange">
+                <ContTitle>
+                    <h3 class="subheader">LAPTOP</h3>
+                    <h1>saeko</h1>
+                </ContTitle>
+                <ContSection args="specs-laptop">
+                    <SpecsList list={LAPTOP} ref="specs-laptop" />
+                </ContSection>
+            </Container>
+            <Container args="container-color-purple">
+                <ContTitle>
+                    <h3 class="subheader">TOOLSET</h3>
+                    <h1>Software</h1>
+                </ContTitle>
+                <ContSection args="specs-soft">
+                    <SpecsList list={SOFTWARE} ref="specs-soft" color="purple" />
+                </ContSection>
+            </Container>
+        </div>
     </div>
-    
 </LayoutBase>

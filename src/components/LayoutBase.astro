@@ -26,7 +26,9 @@ const { pageTitle, description } = Astro.props;
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
         <!-- Font preloading eliminates lag on load -->
-        <link rel="preload" href="/fonts/font_zzz.ttf" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/fonts/Radiance/radiance-regular.otf" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/fonts/valvepulp-bold.ttf" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/fonts/romance-fatal.ttf" as="font" type="font/woff2" crossorigin>
         <!-- RSS feed -->
         <link
             rel="alternate"
@@ -43,6 +45,7 @@ const { pageTitle, description } = Astro.props;
     <body>
         <NavHeader />
         <slot />
+        <Footer />
     </body> 
     <ParseTwemoji />
 </html>

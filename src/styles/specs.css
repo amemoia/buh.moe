@@ -3,14 +3,23 @@
     flex-direction: row;
     gap: 1em;
 }
-.specs-merged > .container-section {
+.specs-merged > .container-main {
     width: 50%;
 }
+
+.specs-merged i {
+    width: 1.25em;
+    text-align: center;
+}
+.specs-merged > .container-main > div, .specs-merged > .container-main > div > .container-section {
+    height: 100%;
+}
 @media only screen and (max-width: 768px) {
-	.specs-merged {
+    .specs-merged {
         flex-direction: column;
+        gap: 1em;
     }
-    .specs-merged > .container-section {
+    .specs-merged > .container-main {
         width: auto;
     }
 }

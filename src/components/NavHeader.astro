@@ -1,22 +1,21 @@
 ---
 import { Image } from "astro:assets"
-import pfp from "../img/sites/avatar.png"
-import Container from "./Container.astro"
+import pfp from "../img/sites/avatar old.png"
 ---
-<Container title="BUH.MOE">
-    <div class="flex row nav-profile container-section">
+<div class="flex col" style="gap: 1em;">
+    <div class="flex col nav-profile">
         <Image
             class="pfp"
             src={pfp}
-            alt="A chibi image of Yuzuha from Zenless Zone Zero"
+            alt="Audrey by MrPilo28"
+            loading="eager"
             />
         <div class="flex col">
-            <h1 class="nav-name">alex buh</h1>
-            <span class="nav-nick">amemoia</span>
+            <span class="nav-display">AMEMOIA</span>
         </div>
     </div>
-    <div class="flex row container-section nav-links">
-    
+    <div class="flex row nav-links">
+
         <a href="/" class="nav-links-first">Home</a>
         <a href="/blog">Blog</a>
         <a href="/specs">Specs</a>
@@ -41,4 +40,4 @@ import Container from "./Container.astro"
             });
         </script>
     </div>
-</Container>
+</div>

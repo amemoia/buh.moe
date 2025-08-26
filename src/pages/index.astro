@@ -1,6 +1,7 @@
 ---
 import LayoutBase from "../components/LayoutBase.astro"
 import Container from "../components/Container.astro"
+import ContTitle from "../components/ContTitle.astro"
 import ContSection from "../components/ContSection.astro"
 import SocialLink from "../components/SocialLink.astro"
 import FriendButton from "../components/FriendButton.astro"
@@ -12,36 +13,71 @@ const steam = "https://steamcommunity.com/id/amemoia/"
 const bsky = "https://bsky.app/profile/buh.moe"
 import "../styles/index.css"
 import nta from "../img/buttons/nta.png"
+import ContTitle from "../components/ContTitle.astro"
 const pageTitle = "amemoia"
 const description = "buh"
 ---
 <LayoutBase pageTitle={pageTitle}>
     <Container title="ABOUT ME">
-        <ContSection>
-            <h1>Hi there!</h1>
-            <span>I'm alex, a 21yo student from <span class="accent">Poland 🇵🇱</span></span>    
-            <span>I have an interest in programming, front-end development, UI design and video games.</span>
+        <div class="mina-layer mina-banner">
+            <div class="halftone">
+                <h3 class="subheader">ALEX BUH</h3>
+                <h1>Hi there!</h1>
+            </div>  
+        </div>
+        <ContSection tier={3}>
+            <span class="italic">Welcome to buh.moe</span>
+        </ContSection>
+        <ContSection tier={1}>
+            <p>I'm <span class="accent-red bold">buh</span>, a 21yo student from <span class="accent-red bold">🇵🇱 Poland</span></p>    
+            <p>I'm interested in:</p>
+            <ContSection>
+                <div class="flex row" style="gap: 1em;">
+                    <ul style="list-style: none; padding-left: 1em;">
+                        <li class="accent-purple"><i class="fa-solid fa-laptop"></i> Programming</li>
+                        <li class="accent-purple"><i class="fa-solid fa-pencil" style="margin: 0px 2px;"></i> UI design</li>
+                        <li class="accent-purple"><i class="fa-solid fa-gamepad"></i> Game design</li>
+                    </ul>
+                    <ul style="list-style: none; padding-left: 1em;">
+                        <li class="accent-red"><i class="fa-brands fa-steam li-fa"></i> Valve Software</li>
+                        <li class="accent-red"><i class="fa-solid fa-dragon" style="margin-right: 2px;"></i> Ryu Ga Gotoku Studio</li>
+                        <li class="accent-red"><i class="fa-solid fa-meteor li-fa"></i> Final Fantasy XIV</li>
+                    </ul>
+                </div>
+            </ContSection>
+        </ContSection>
+        <ContSection tier={2}>
+            This website is inspired by <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" class="dl-logo accent-green">Deadlock</a>, an upcoming game by Valve.
         </ContSection>
     </Container>
 
     <Container title="LINKS">
-        <ContSection>
+        <ContTitle>
             <h1>Contact</h1>
-            <span>You can find me on the following websites:</span>
-            <div class="flex col links">
-                <SocialLink link={bsky} icon="bluesky" label="Bluesky" account="@buh.moe" />
-                <SocialLink link={twitter} icon="twitter" label="Twitter / X" account="@amemoia" />
-                <SocialLink link={discord} icon="discord" label="Discord" account="@buh.moe" />
-                <SocialLink link={github} icon="github" label="GitHub" account="@amemoia" />
-                <SocialLink link={steam} icon="steam" label="Steam" account="/id/amemoia" />
-            </div>
+        </ContTitle>
+        <ContSection tier={3}>
+            <span class="italic">You can find me on the following socials</span>
         </ContSection>
+            <div class="flex row">
+                <div class="flex col links">
+                    <SocialLink link={bsky} icon="bluesky" label="Bluesky" account="@buh.moe" />
+                    <SocialLink link={twitter} icon="twitter" label="Twitter / X" account="@amemoia" />
+                    <SocialLink link={discord} icon="discord" label="Discord" account="@buh.moe" />
+                </div>
+                <div class="flex col links">
+                    <SocialLink link={github} icon="github" label="GitHub" account="@amemoia" />
+                    <SocialLink link={steam} icon="steam" label="Steam" account="/id/amemoia" />
+                    <div class="container-section-t1" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
     </Container>
 
     <Container title="BUTTONS">
-        <ContSection>
-            <h1>cool places and friends</h1>
-            <div class="buttons flexrow">
+        <ContTitle>
+            <h1>Cool places and friends</h1>
+        </ContTitle>
+        <ContSection tier={1}>
+            <div class="buttons flex row">
                 <FriendButton link="https://themooskyfish.nekoweb.org" image="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" />
                 <FriendButton link="https://sapphic.moe" image="https://sapphic.moe/buttons/sapphic.png" alt="sapphic.moe" />
                 <FriendButton link="https://ada.cat" image="https://ada.cat/b/me.gif" alt="ada.cat" />
@@ -53,12 +89,14 @@ const description = "buh"
                 <FriendButton link="https://ata.moe/" image="https://ata.moe/88x31.png" alt="ata.moe" />
                 <FriendButton link="https://nekoweb.org/" image="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" />
             </div>
-            <div class="buttons-my">
-                <p>My button:</p>
-                <div class="myButtonDiv flexrow">
-                    <a href="https://buh.moe/" target="_blank"><Image src="https://buh.moe/resources/buttons/88x31.gif" width="88" height="31" alt="amemoia" /></a>
-                    <textarea onclick="this.select()" readonly cols="70" rows="2">&lt;a href="https://buh.moe/" target="_blank"&gt;&lt;img src="https://buh.moe/resources/buttons/88x31.gif"&gt;&lt;/a&gt;</textarea>
-                </div>
+        </ContSection>
+        <ContSection tier={3}>
+            <span class="buttons-msg">Feel free to add my button to your site!</span>
+        </ContSection>
+        <ContSection tier={2}>
+            <div class="flex row" style="justify-content: center;">
+                <a href="https://buh.moe/" target="_blank"><Image src="https://buh.moe/resources/buttons/88x31.gif" width="88" height="31" alt="amemoia" /></a>
+                <textarea onclick="this.select()" readonly cols="70" rows="2">&lt;a href="https://buh.moe/" target="_blank"&gt;&lt;img src="https://buh.moe/resources/buttons/88x31.gif"&gt;&lt;/a&gt;</textarea>
             </div>
         </ContSection>
     </Container>

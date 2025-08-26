@@ -28,10 +28,10 @@ tierlist: {
 
 <div class="yakuza-legend">
 
-*🔎 — Games I plan to come back to for side stories I missed*
+*🔎 Games I plan to come back to for side stories I missed*
 
-*⭐ — Side content completed*
+*⭐ Side content completed*
 
-*👑 — 100% completion*
+*👑 100% completion*
 
 </div>

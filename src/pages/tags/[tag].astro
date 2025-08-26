@@ -22,23 +22,22 @@ var label = "post"
 if (postCount > 1) {label="posts"}
 
 import '../../styles/blog.css';
-import '../../styles/tag.css';
-import ContSection from '../../components/ContSection.astro';
+import ContTitle from '../../components/ContTitle.astro';
 import Container from '../../components/Container.astro';
 ---
-<LayoutBase pageTitle={tag}>
-    <Container title="TAGS">
-        <ContSection args="tag-counter">
-            <span>{postCount} {label} tagged with <i class="fa-solid fa-hashtag accent"></i><span class="accent">{tag}</span></span>
-        </ContSection>  
+<LayoutBase pageTitle={"#"+tag}>
+    <Container args="container-color-gray">
+        <ContTitle args="tag-counter no-halftone-override">
+            <span class="tag-label">{postCount} {label} tagged with <i class="fa-solid fa-hashtag accent-red"></i><span class="counter-tag accent-red">{tag}</span></span>
+        </ContTitle>  
     </Container>
     <script is:inline define:vars={{tag}}>
         const parent = document.getElementsByClassName('globalTagList')[0]
         const a = document.createElement('a');
         a.href = "/tags/"+tag
         a.classList.add('tagbutton', 'fullnohover')
-        const hash = '<i class="fa-solid fa-hashtag fullnohover"></i>'
-        a.innerHTML = hash+"<span class='fullnohover'>"+tag+"</span>"
+        const hash = '<i class="fa-solid fa-hashtag accent-none"></i>'
+        a.innerHTML = hash+"<span>"+tag+"</span>"
         parent.append(a)
     </script>
     {

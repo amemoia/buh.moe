@@ -4,6 +4,7 @@ import Container from "./Container.astro";
 import ContSection from "./ContSection.astro";
 import { Image } from "astro:assets";
 import '../styles/yakuza.css';
+import ContTitle from "./ContTitle.astro";
 const { frontmatter } = Astro.props;
 const pageTitle = "ame / yakuza"
 const description = "buh"
@@ -13,17 +14,23 @@ const description = "buh"
 
     <h1 class="yakuza-intro">Alex's Yakuza Series Progress</h1>
 
-    <Container title="LIKE A WHAT">
-        <ContSection>
-            <h1 class="yakuza-current">Currently on: <a href={frontmatter.currentGame}>{frontmatter.currentTitle}</a></h1>
-            <div class="yakuza-checklist">
-                <slot />
-            </div>
+    <Container>
+        <ContTitle>
+            <h1 class="yakuza-current">Checklist</h1>
+        </ContTitle>
+        <ContSection tier={3}>
+            Currently on: <a href={frontmatter.currentGame}>{frontmatter.currentTitle}</a>
         </ContSection>
+        <div class="yakuza-checklist">
+            <slot />
+        </div>
     </Container>
     
-    <Container title="TIER LIST">
-        <ContSection args="yakuza-tierlist">
+    <Container args="container-color-gray">
+        <ContTitle args="no-halftone-override">
+            <h1>Ranking</h1>
+        </ContTitle>
+        <div class="yakuza-tierlist">
             <script define:vars={ {frontmatter} }>
                 const divTierlist = document.getElementsByClassName('yakuza-tierlist')[0];
                 var rankIndex = 0;
@@ -59,6 +66,6 @@ const description = "buh"
                     rankIndex++;
                 }
             </script>
-        </ContSection>
+        </div>
     </Container>
 </LayoutBase>

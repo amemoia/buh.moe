@@ -1,0 +1,55 @@
+---
+import LayoutBase from "../components/LayoutBase.astro";
+import Container from "../components/Container.astro";
+import ContTitle from "../components/ContTitle.astro";
+import ContSection from "../components/ContSection.astro";
+const pageTitle = "ame / credits"
+const description = "buh"
+const dlAssetThread = "https://discord.com/channels/1231286446472691825/1329810133131464775"
+const dlAssetGdrive = "https://drive.google.com/drive/folders/1bz9JynTfk9gdFK1xxfUCUq37gPapjY_M"
+const fontRetail = "https://drive.google.com/drive/folders/181SDlcC4ormm-lqdVHN2z-Dt2fz_zWZd";
+const fontRomance = "https://www.dafont.com/romance-fatal-serif.font";
+const fontFira = "https://fonts.google.com/specimen/Fira+Code";
+const fontEdo = "https://www.cdnfonts.com/edo-sz.font";
+---
+<LayoutBase pageTitle={pageTitle}>
+    <Container>
+        <ContTitle>
+            <h1>Credits</h1>
+        </ContTitle>
+        <ContSection tier={3}>
+            <span class="italic">Assets and projects used in making this site</span>
+        </ContSection>
+        <ContSection tier={1}>
+            <p>Profile picture by <a href="https://x.com/MrPilo28" target="_blank">MrPilo28</a></p>
+            <p>This project wouldn't have been possible without the <span class="accent-green">Deadlock Graphical Library</span>, a repository of UI assets from the game.</p>
+            <p>Check out their <a href={dlAssetThread} target="_blank">Discord thread</a> in the official Deadlock server or their <a href={dlAssetGdrive} target="_blank">Google Drive</a>.</p>
+            <p>Another huge help was <a class="accent-green" href="https://itzfred.github.io/Deadlock-Graphic-Designer/">Deadlock Graphic Designer</a>, it greatly helped me understand certain aspects of Deadlock's UI.</p>
+        </ContSection>
+        <ContSection tier={2}>
+            <p>Fonts used (most taken from <span class="accent-green">Deadlock Graphical Library</span>):</p>
+            <ContSection>
+                <div class="flex row">
+                    <ul style="list-style-type: none">
+                        <li><a href={fontRomance} target="_blank" class="accent-blue">Romance Fatal Serif</a></li>
+                        <li><a target="_blank" href={fontFira} class="accent-blue">Fira Code</a></li>
+                        <li><a target="_blank" href={fontEdo} class="accent-blue">Edo SZ</a></li>
+                        <li><a href={fontRetail} target="_blank" class="accent-green">Valve Pulp</a></li>
+                    </ul>
+                    <ul style="list-style-type: none;">
+                        <li><a href={fontRetail} target="_blank" class="accent-green">Retail (Demo)</a></li>
+                        <li><a href={fontRetail} target="_blank" class="accent-green">Radiance</a></li>
+                        <li><a href={fontRetail} target="_blank" class="accent-green">Forevs</a></li>
+                        <li><a href={fontRetail} target="_blank" class="accent-green">Reaver</a></li>
+                    </ul>
+                </div>
+            </ContSection>
+        </ContSection>
+        <ContSection tier={3}>
+            <p>Some assets were taken directly from Deadlock.</p>
+            <p>Icons taken from <a href="https://fontawesome.com/" class="font-main" target="_blank">Font Awesome</a> and <span class="accent-green">Deadlock Graphical Library</span>, emoji in use are <a class="font-main" href="https://www.jsdelivr.com/package/npm/twemoji" target="_blank">Twemoji</a></p>
+            <p>FFXIV job icons taken from <a href="https://github.com/xivapi/classjob-icons">GitHub: xivapi/classjob-icons</a></p>
+            <p>Yakuza / Like a Dragon game covers taken from the <a href="https://tiermaker.com/create/all-yakuza-games-988007" target="_blank">All Yakuza Games Tier List Maker</a></p>
+        </ContSection>
+    </Container>
+</LayoutBase>

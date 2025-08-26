@@ -24,6 +24,7 @@
     font-size: 4em;
     width: auto;
     text-align: center;
+    font-weight: 500;
     text-shadow:
          4px  4px 2px #000,
         -4px  4px 2px #000,
@@ -36,13 +37,23 @@
 .yakuza-checklist ul {
     list-style: none;
     padding-left: 0;
+    margin-top: 0;
     margin-bottom: 0;
 }
 .yakuza-checklist li {
-    margin-bottom: 0.5em;
+    padding: 0.75em 0em 0.75em 0em;
+    padding-left: 1em;
+    font-weight: 700;
+}
+.yakuza-checklist li:nth-child(odd) {
+    background-color: var(--container-t1);
+}
+.yakuza-checklist li:nth-child(even) {
+    background-color: var(--container-t2);
 }
 .yakuza-legend {
-    margin-top: 2em;
+    background-color: var(--container-t3);
+    padding: 1em;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
@@ -50,8 +61,17 @@
 .yakuza-legend p {
     margin: 0;
 }
+.yakuza-checklist .emoji {
+    position: inherit;
+}
+.yakuza-legend .emoji {
+    margin-right: 8px;
+    position: relative;
+    bottom: 2px;
+}
 .yakuza-checklist em {
     color: var(--text-soft);
+    font-weight: 500;
 }
 .yakuza-checklist li sub img {
     opacity: 50%;
@@ -59,7 +79,6 @@
 .yakuza-current {
     word-wrap: break-word;
 }
-
 .yakuza-tierlist-tier {
     display: flex;
     flex-direction: row;
@@ -71,9 +90,11 @@
     padding: 2em;
     width: 1em;
     height: auto;
+    font-weight: 700;
+    font-family: var(--fonts-alt1);
 }
 .yakuza-tierlist-label span {
-    color: var(--container-bg);
+    color: var(--text-adjust-dark);
 }
 .yakuza-tierlist-games {
     height: auto;
@@ -85,13 +106,22 @@
     width: 8em;
     height: 8em;
 }
+/*
 .rank0 {
     border-top-left-radius: 12px;
 }
+*/
 .rank-last {
     border-bottom-left-radius: 12px;
 }
 
+/* even/odd are inverted because the script tag is counted as the 1st child */
+.yakuza-tierlist .yakuza-tierlist-tier:nth-child(even) {
+    background-color: var(--container-t2);
+}
+.yakuza-tierlist .yakuza-tierlist-tier:nth-child(odd) {
+    background-color: var(--container-t1);
+}
 /*
     This section refers to the checklist on the Yakuza page.
     EVIL HACK!!! Checkboxes cannot be styled!!
@@ -111,7 +141,7 @@ input[type="checkbox"] {
     height: 16px;
     background-color: var(--accent-main);
     border-radius: 4px;
-    transform: translate(2px, 6px);
+    transform: translate(0px, 4px);
     display: grid;
     place-content: center;
 }
@@ -133,10 +163,6 @@ input[type="checkbox"]:checked::before {
     gap: 0.5em;
     text-align: left; 
 }
-li .emoji {
-    position: relative;
-    top: 2px;
-}
 
 @media only screen and (max-width: 768px) {
     .task-list-item {
@@ -152,13 +178,6 @@ li .emoji {
     .yakuza-tierlist-label {
         width: 100%;
         padding: 2em 0em;
-    }
-    .rank0 {
-        border-top-right-radius: 12px;
-    }
-    .yakuza-tierlist-tier:has(> .rank0) {
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
     }
     .yakuza-tierlist-games {
         justify-content: center;
@@ -195,4 +214,10 @@ li .emoji {
         border-bottom-left-radius: 12px;
     }
     */
+}
+
+@media only screen and (max-width: 424px) {
+    .yakuza-checklist em {
+        font-size: 0.9em;
+    }
 }

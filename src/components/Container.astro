@@ -1,10 +1,11 @@
 ---
-let { title } = Astro.props;
-if (title == null) title = "ALEX BUH FORGOT TO ADD A TITLE HERE";
+const { args } = Astro.props;
+var classes = "container-main";
+if (args != null) classes=classes+" "+args;
+
 ---
-<div class="container-outline">
-    <div class="container-main flex col">
-        <span class="container-header">{title.toUpperCase()}</span>
+<div class={classes}>
+    <div class="halftone">
         <slot />
     </div>
 </div>

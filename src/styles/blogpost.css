@@ -10,9 +10,6 @@ html {
     max-width: 95%;
     align-self: center;
 }
-.blogpost-header-title {
-    font-family: var(--font-main);
-}
 
 .blogpost-header-tags {
     display: flex;

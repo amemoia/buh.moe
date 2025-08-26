@@ -19,14 +19,9 @@
     max-width: 264px;
     max-height: 360px;
     object-fit: fill;
-    border-radius: 12px;
-    border: 2px solid var(--container-outline);
-}
-.ffxiv-characterinfo {
-    gap: 1em;
-}
-.ffxiv-infopanel {
-    gap: 0.5em;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    margin-bottom: 0.5em;
 }
 .ffxiv-infopanel div p{
     margin: 0;
@@ -37,12 +32,24 @@
 .classjob {
     display: flex;
     justify-content: center;
-    background-color: var(--accent-hover);
     padding: 0.25em 0.5em;
     margin: 0.25em 0em;
     gap: 0.25em;
-    border-radius: 8px;
+    border-radius: 4px;
+    background-color: var(--container-t1);
+    font-family: var(--fonts-alt3);
 }
+/*
+.classjob-dps {
+    background-color: var(--accent-dps);
+}
+.classjob-healer {
+    background-color: var(--accent-healer);
+}
+.classjob-tank {
+    background-color: var(--accent-tank);
+}
+*/
 .ffxiv-jobicon {
     padding-top: 2px;
     width: 1.25em;
@@ -50,12 +57,13 @@
 }
 .ffxiv-jobs {
     gap: 0.5em;
+    row-gap: 0;
 }
 .classjob span {
     color: var(--text);
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1023px) {
     .ffxiv-characterinfo {
         flex-direction: column;
     }
@@ -75,5 +83,11 @@
     .ffxiv-render {
         width: auto;
         height: auto;
+    }
+}
+
+@media only screen and (max-width: 424px) {
+    .ffxiv-render {
+        align-self: center;
     }
 }

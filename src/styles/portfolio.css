@@ -1,12 +1,13 @@
-.project-info {
-    display: flex;
-    flex-direction: column;
-}
-.project-info hr {
-    width: 100%;
-}
-.project-name {
+.project-name a, .project-name h1 {
+    color: var(--text);
     word-wrap: break-word;
+    text-decoration: none;
+    text-decoration-color: transparent;
+    overflow-wrap: anywhere;
+}
+.project-name a:hover {
+    text-decoration: underline;
+    transition: text-decoration 0.25s;
 }
 /*
 .project-desc {

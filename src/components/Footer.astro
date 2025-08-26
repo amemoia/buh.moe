@@ -1,19 +1,39 @@
 ---
-const kofi = "https://ko-fi.com/amemoia"
+const creds = "/credits"
 const repo = "https://github.com/amemoia/amemoia.github.io/"
 const rss = "./rss.xml"
 ---
-<footer>
+<footer class="flex row">
     <a href={rss} target="_blank">
-        <i class="fa-solid fa-rss"></i>
-        RSS Feed
+        <div class="flex col">
+            <div class="footer-i-bg">
+                <i class="fa-solid fa-rss"></i>
+            </div>
+            <span class="footer-btn-label">rss</span>        
+        </div>
     </a>
-    <a href={repo} target="_blank">
-        <i class="fa-solid fa-code-branch"></i>
-        Source code
+    <a href={repo} target="_blank" class="footer-higher">
+        <div class="flex col">
+            <div class="footer-i-bg">
+                <i class="fa-solid fa-code-branch"></i>
+            </div>
+            <span class="footer-btn-label">src</span>
+        </div>
     </a>
-    <a href={kofi} target="_blank">
-        <i class="fa-solid fa-heart"></i>
-        Support me
+    <a href={creds} class="footer-higher">
+        <div class="flex col">
+            <div class="footer-i-bg">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <span class="footer-btn-label">creds</span>
+        </div>
     </a>
+    <button onclick="document.documentElement.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="flex col">
+            <div class="footer-i-bg">
+                <i class="fa-solid fa-angles-up"></i>
+            </div>
+            <span class="footer-btn-label">top</span>
+        </div>
+    </button>
 </footer>

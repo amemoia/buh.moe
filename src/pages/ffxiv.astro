@@ -1,16 +1,22 @@
 ---
 const charLink = "https://eu.finalfantasyxiv.com/lodestone/character/46616687/";
-const world = "✿ Phoenix (Light DC)";
-const msq = "Early Dawntrail"
+const world = "✿ Phoenix (Light)";
+const msq = "Post-Dawntrail"
 
 const jobs = {
     viper: "100",
-    pictomancer: "90",
+    pictomancer: "100",
     redmage: "90",
     bard: "90",
     reaper: "90",
-    samurai: "80"
+    samurai: "80",
+    whitemage: "50",
+    warrior: "40"
 };
+
+const healers =  ["whitemage", "scholar", "astrologian", "sage"];
+const tanks   =  ["paladin", "warrior", "dark knight", "gunbreaker"];
+
 
 import bocchiPlate from "../img/sites/bocchi-newplate.png";
 import bocchiRender from "../img/sites/bocchi-render.jpg";
@@ -20,6 +26,7 @@ import Container from "../components/Container.astro";
 import ContSection from "../components/ContSection.astro";
 import { Image } from "astro:assets";
 import '../styles/ffxiv.css';
+import ContTitle from "../components/ContTitle.astro";
 const pageTitle = "ame / ffxiv"
 const description = "buh"
 // it turns out lodestone character images have a static url
@@ -32,43 +39,44 @@ const lodestoneUrl = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a
             src={bocchiPlate}
             alt="B'occhi Rhock's Adventurer Plate"
             class="ffxiv-advplate"
+            loading="eager"
         />
     </div>
 
-    <Container title="THAL'S BALLS">
+    <Container args="container-color-blue">
+        <ContTitle>
+            <h3 class="subheader">{world}</h3>
+            <h1><a href={charLink} target="_blank" class="accent-none">B'occhi Rhock</a></h1>
+        </ContTitle>
         <ContSection>
-            <h1><a href={charLink} target="_blank">B'occhi Rhock</a></h1>
-            <div class="ffxiv-characterinfo flex row">
+            <div class="ffxiv-characterinfo flex row" style="gap: 2em; margin-top: 0.5em;">
                 <Image
                     src={lodestoneUrl}
                     alt="A render of B'occhi Rhock"
                     class="ffxiv-render"
                     inferSize={true}
                 />
-                <div class="ffxiv-infopanel flex col">
+                <div class="ffxiv-infopanel flex col" style="gap: 0.5em;">
                     <div>
-                        <p class="accent">World</p>
-                        {world}
+                        <h3>Free Company</h3>
+                        <p>None</p>
                     </div>
                     <div>
-                        <p class="accent">Free Company</p>
-                        <span><p>None</p></span>
-                </div>
+                        <h3>MSQ Progress</h3>
+                        <p>{msq}</p>
+                    </div>
                 <div>
-                    <p class="accent">MSQ Progress</p>
-                    <p>{msq}</p>
-                </div>
-                <div>
-                    <p class="accent">Main Jobs</p>
-                    <div class="ffxiv-jobs flex row">
-                        <script define:vars={{ jobs }}>
-                            const jobdiv =
-                                document.getElementsByClassName(
-                                    "ffxiv-jobs",
-                                )[0];
-                            for (const [jobname, level] of Object.entries(
-                                jobs,
-                            )) {
+                    <h3>Main Jobs</h3>
+                    <div class="ffxiv-jobs-container flex col">
+                        <script define:vars={{ jobs, healers, tanks }}>
+                            const jobDivTank = document.createElement("div");
+                            jobDivTank.classList.add("ffxiv-jobs", "flex", "row", "ffxiv-jobs-tank");
+                            const jobDivHealer = document.createElement("div");
+                            jobDivHealer.classList.add("ffxiv-jobs", "flex", "row", "ffxiv-jobs-healer");
+                            const jobDivDps = document.createElement("div");
+                            jobDivDps.classList.add("ffxiv-jobs", "flex", "row", "ffxiv-jobs-dps");
+                            const mainDiv = document.getElementsByClassName("ffxiv-jobs-container")[0];
+                            for (const [jobname, level] of Object.entries(jobs)) {
                                 const classjob = document.createElement("div");
                                 classjob.classList.add("classjob");
                                 const img = document.createElement("img");
@@ -77,10 +85,15 @@ const lodestoneUrl = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a
                                 img.classList.add("ffxiv-jobicon");
                                 const span = document.createElement("span");
                                 span.innerHTML = level;
-                                jobdiv.appendChild(classjob);
+                                if (healers.includes(jobname)) { classjob.classList.add("classjob-healer"); jobDivHealer.appendChild(classjob); }
+                                else if (tanks.includes(jobname)) { classjob.classList.add("classjob-tank"); jobDivTank.appendChild(classjob); }
+                                else {classjob.classList.add("classjob-dps"); jobDivDps.appendChild(classjob); }
                                 classjob.appendChild(img);
                                 classjob.appendChild(span);
                             }
+                            mainDiv.appendChild(jobDivDps);
+                            mainDiv.appendChild(jobDivTank);
+                            mainDiv.appendChild(jobDivHealer);
                         </script>
                     </div>
                 </div>

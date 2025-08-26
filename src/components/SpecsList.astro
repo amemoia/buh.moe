@@ -1,13 +1,16 @@
 ---
-const { list, ref } = Astro.props;
+const { list, ref, color } = Astro.props;
+var color_v;
+if (color == null) {color_v = "orange"}
+else {color_v = color;}
 ---
-<script define:vars={{ list, ref }}>
+<script define:vars={{ list, ref, color_v }}>
     let x = 0;
     for (const [component, name] of Object.entries(list)) {
         div = document.getElementsByClassName(ref)[0];
         p = document.createElement("p");
         p.innerHTML =
-            "<span class='accent'>" +
+            "<span class='accent-"+color_v+" bold'>" +
             component +
             ":</span> " +
             name;

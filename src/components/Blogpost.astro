@@ -9,14 +9,15 @@ const yr = d.getFullYear();
 const uniqueClass = "blogPostTags-"+id
 import Container from "./Container.astro";
 import ContSection from "./ContSection.astro";
+import ContTitle from "./ContTitle.astro";
 ---
-<ContSection args="blogpost-entry-container">
-    <a href={url} target="_blank" class="blogpost-entry-link"><h3 class="blogpost-entry-title">{title}</h3></a>
-    <p class="blogpost-entry-description">{description}</p>
-    <p class="blogpost-entry-date"><i class="fa-solid fa-calendar-days accent"></i> {mon + " " + day + ", " + yr}</p>
-    <div class={uniqueClass+ " blogpost-entry-tags"}>
+<Container args="blogpost-entry-container container-color-gray">
+    <ContTitle args="no-halftone-override">
+        <a href={url} target="_blank" class="blogpost-entry-link"><h2 class="blogpost-entry-title">{title}</h2></a>
+    </ContTitle>
+    <ContSection args={uniqueClass+ " blogpost-entry-tags"} tier={3}>
         <script is:inline define:vars={{tags , uniqueClass}}>
-            const hashtagHTML = '<i class="fa-solid fa-hashtag accent"></i>';
+            const hashtagHTML = '<i class="fa-solid fa-hashtag accent-red"></i>';
             const tagDiv = document.getElementsByClassName(uniqueClass)[0];
             tags.forEach(tag => {
                 const tagLink = document.createElement('a');
@@ -28,5 +29,9 @@ import ContSection from "./ContSection.astro";
                 tagDiv.appendChild(tagLink)
             });
         </script>
-    </div>
-</ContSection>
+    </ContSection>
+    <ContSection >
+        <p class="blogpost-entry-description">{description}</p>
+        <p class="blogpost-entry-date"><i class="fa-solid fa-calendar-days accent-green"></i> {mon + " " + day + ", " + yr}</p>
+    </ContSection>
+</Container>

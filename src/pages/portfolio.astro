@@ -4,37 +4,34 @@ import Project from "../components/Project.astro";
 import Container from "../components/Container.astro";
 import ContSection from "../components/ContSection.astro";
 import '../styles/portfolio.css';
+import ContTitle from "../components/ContTitle.astro";
 const github = "https://github.com/amemoia"
 const pageTitle = "ame / portfolio"
 const description = "buh"
 ---
 <LayoutBase pageTitle={pageTitle}>
     <Project
-        title="you're looking at her"
-        name="buh.moe v2"
-        date="July 2025"
+        name="buh.moe (current)"
+        date="August 2025"
         tags="HTML, CSS, JS, Astro"
         link="https://buh.moe/"
-        description="v1 of buh.moe had various issues that needed ironing out and I have a new hyperfixation. You can read more about the redesign process on my blog."
+        description="This includes the ZZZ and Deadlock designs I made for my site. While redesigning, I ironed out a bunch of issues under the hood to make adjusting the pages easier. I have a blogpost about my ZZZ design if you're interested."
     />
     <Project
-        title="i will never finish this"
         name="cheetoApp"
         date="December 2024"
         tags="Python, Discord, pycord"
         link="https://github.com/amemoia/cheetoApp"
-        description="Basically the final rewrite of the bots I listed below. This time it's actually necessary as discord.py is outdated. Serves mostly as my own personal toolbox and a way to dick around with friends. Source code is open should anyone want to use it."
+        description="On hold as I don't currently need a custom bot, but it was a nice way to dust off my Python knowledge. I'm likely going to finish it later down the line."
     />
     <Project
-        title="buh the first"
         name="buh.moe v1"
         date="August 2024"
         tags="HTML, CSS, JS, Astro"
         link="https://buh.moe/"
-        description="Probably my most well-designed website. This was my first time working with Astro and it's pretty fun to use. Game-related pages have neat little touches specific to their series, which I'm quite proud of."
+        description="This was my first time working with Astro and it's pretty fun to use. Game-related pages have neat little touches specific to their series, which I'm quite proud of."
     />
     <Project
-        title="internet for cats"
         name="amemoia.nekoweb.org"
         date="January 2024"
         tags="HTML, CSS, JS"
@@ -42,7 +39,6 @@ const description = "buh"
         description="A website modeled after Needy Streamer Overload's UI, trying to be as faithful to the game as possible. I mostly consider this abandoned as it was a pain to work with. Still available to view on my Nekoweb."
     />
     <Project
-        title="discord bots"
         name="Aigis, AtroxColors, EmoteListBot"
         date="June 2020"
         tags="Python, discord.py"
@@ -50,17 +46,43 @@ const description = "buh"
         description="A series of Discord bots I worked on in the past. Aigis is the final* name and rewrite for the main codebase I used. The rest are basically Aigis code bundled in a smaller package for more specific use cases."
     />
     <Container title="UHHHHHH I FORGOR">
-        <ContSection>
+        <ContTitle>
             <h1>Other</h1>
+        </ContTitle>
+        <ContSection tier={3}>
+            <span>If you have any work I could do, I'd appreciate a DM!</span>
+        </ContSection>
+        <ContSection>
             <p>You can see things I've worked on that aren't worth listing here on my <a href={github} target="_blank">GitHub</a>.</p>
             <p>Apart from the above, here's some other stuff I messed around in before:</p>
-            <div class="flexcol portfolio-tags">
-                <p><span class="accent">Video Editing</span> (After Effects, VEGAS Pro)</p>
-                <p><span class="accent">Image Editing and Logo Design</span> (Photoshop, Paint.NET)</p>
-                <p><span class="accent">Source Engine modding</span> (TF2 mods I'm not proud of)</p>
-                <p><span class="accent">Mapping in Hammer</span> (simple CS:GO maps)</p>
-            </div>
-            <p>If you have any work I could do, I'd appreciate a DM!</p>
+            <ContSection>
+                <ul style="list-style: none;">
+                    <li><span class="accent-blue">Video Editing</span> (After Effects, VEGAS Pro)</li>
+                    <li><span class="accent-blue">Image Editing and Logo Design</span> (Photoshop, Paint.NET)</li>
+                    <li><span class="accent-orange">Source Engine modding</span> (TF2 mods I'm not proud of)</li>
+                    <li><span class="accent-green">Mapping in Hammer</span> (simple CS:GO maps)</li>
+                </ul>
+            </ContSection>
+            <p>I'm still learning new things at university. Here's a full list of technologies I know and use in my projects:</p>
+            <ContSection>
+                <div class="flex row" style="gap: 1em;">
+                    <ul style="list-style: none;">
+                        <li class="accent-blue">C++</li>
+                        <li class="accent-blue">Java</li>
+                        <li class="accent-blue">Python</li>
+                        <li class="accent-blue">MySQL</li>
+                        <li class="accent-blue">T-SQL</li>
+                        <li class="accent-blue">SQL*Plus</li>
+                    </ul>
+                    <ul style="list-style: none;">
+                        <li class="accent-orange">Astro</li>
+                        <li class="accent-orange">HTML</li>
+                        <li class="accent-orange">JavaScript</li>
+                        <li class="accent-orange">CSS</li>
+                        <li class="accent-orange">PHP</li>
+                    </ul>
+                </div>
+            </ContSection>
         </ContSection>
     </Container>
 </LayoutBase>

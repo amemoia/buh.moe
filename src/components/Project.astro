@@ -1,20 +1,24 @@
 ---
 import Container from "./Container.astro";
 import ContSection from "./ContSection.astro";
-const { title, name, date, tags, link, description } = Astro.props;
+import ContTitle from "./ContTitle.astro";
+const { name, date, tags, link, description } = Astro.props;
 ---
-<Container title={title}>
-    <ContSection>
+<Container>
+    <ContTitle>
         <h1 class="project-name"><a href={link} target="_blank">{name}</a></h1>
-        <div class="project-info">
-            <span>
-                <span class="accent">Date:</span> {date}
-            </span>
-            <span>
-                {tags}
-            </span>
-            <hr>
-        </div>
-        <span class="project-desc">{description}</span>
+    </ContTitle>
+    <ContSection tier={3}>
+        <span style="font-family: var(--fonts-alt4); text-transform: uppercase;">
+            {tags}
+        </span>
+    </ContSection>
+    <ContSection tier={2}>
+        <span>
+            <i class="fa-solid fa-calendar-days accent-green"></i> {date}
+        </span>
+    </ContSection>
+    <ContSection tier={1}>
+        <p class="project-desc">{description}</p>
     </ContSection>
 </Container>

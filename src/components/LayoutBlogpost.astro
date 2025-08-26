@@ -15,10 +15,10 @@ import '../styles/blogpost.css'
         <div class="blogpost-header">
             <h1 class="blogpost-header-title">{frontmatter.title}</h1>
             <p class="blogpost-header-desc">{frontmatter.description}</p>
-            <p class="blogpost-header-date"><i class="fa-solid fa-calendar-days accent"></i> {mon + " " + day + ", " + yr}</p>
+            <p class="blogpost-header-date"><i class="fa-solid fa-calendar-days accent-green"></i> {mon + " " + day + ", " + yr}</p>
             <div class="blogpost-header-tags">
                 <script is:inline define:vars={{frontmatter}}>
-                    const hashtagHTML = '<i class="fa-solid fa-hashtag accent"></i>';
+                    const hashtagHTML = '<i class="fa-solid fa-hashtag accent-red"></i>';
                     const tagDiv = document.getElementsByClassName('blogpost-header-tags')[0];
                     const tags = frontmatter.tags;
                     tags.forEach(tag => {

@@ -1,9 +1,5 @@
-html {
-    background: var(--container-bg);
-}
 .blogpost {
     margin-top: 2em;
-    font-family: var(--font-satoshi);
     letter-spacing: 1px;
     display: flex;
     flex-direction: column;
@@ -12,12 +8,12 @@ html {
 }
 
 .blogpost-header-tags {
+    text-transform: uppercase;
     display: flex;
     gap: 0.5em;
 }
-.blogpost-tag:hover {
-    color: var(--accent-main);
-    transition: color 0.25s;
+.blogpost-tag {
+    font-family: var(--fonts-alt4);
 }
 .blogpost-text p img {
     max-width: 100%;
@@ -29,14 +25,14 @@ html {
     flex-direction: column;
     align-items: center;
 }
-.blogpost-text {
-    padding-bottom: 2em;
-}
 sub {
     width: fit-content;
 }
 code {
     font-family: var(--font-code);
     font-size: 0.9em;
-    color: var(--accent-main);
+    color: var(--accent-green);
+}
+hr {
+    color: var(--text);
 }

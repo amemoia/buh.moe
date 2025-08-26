@@ -13,7 +13,7 @@ import ContTitle from "./ContTitle.astro";
 ---
 <Container args="blogpost-entry-container container-color-gray">
     <ContTitle args="no-halftone-override">
-        <a href={url} target="_blank" class="blogpost-entry-link"><h2 class="blogpost-entry-title">{title}</h2></a>
+        <a href={url} class="blogpost-entry-link"><h2 class="blogpost-entry-title">{title}</h2></a>
     </ContTitle>
     <ContSection args={uniqueClass+ " blogpost-entry-tags"} tier={3}>
         <script is:inline define:vars={{tags , uniqueClass}}>

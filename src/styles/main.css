@@ -141,11 +141,13 @@
 
 html {
     background-color: var(--bg);
+    display: flex;
+    flex-direction: column;
 }
 body {
     display: flex;
     flex-direction: column;
-    justify-self: center;
+    align-self: center;
     gap: 2em;
     margin: 2em 0em 0em 0em;
     width: 60em;

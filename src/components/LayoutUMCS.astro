@@ -1,0 +1,67 @@
+---
+import "../styles/bloodppuccin.css"
+import ParseTwemoji from "../components/ParseTwemoji.astro"
+import { ViewTransitions } from "astro:transitions"
+import { Image } from "astro:assets"
+const { pageTitle, description } = Astro.props;
+import Analytics from '@vercel/analytics/astro'
+import  SpeedInsights  from "@vercel/speed-insights/astro"
+const embedImage = "https://buh.moe/resources/embed-avi.png"
+import pfp from "../img/blog/buhOverShakeyFlipExplode.gif"
+const kofi = "https://ko-fi.com/amemoia"
+const repo = "https://github.com/amemoia/amemoia.github.io/"
+const ghBlood = "https://github.com/amemoia/ProgramowanieJava2025"
+const rss = "./rss.xml"
+import { Code } from 'astro:components';
+const gfg = "https://www.geeksforgeeks.org/java-cheat-sheet/";
+const gfgCollections = "https://www.geeksforgeeks.org/collections-in-java-2/";
+const karkor = "https://github.com/KarKor?tab=repositories";
+---
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta property="description" content="amemoia's website" />
+		<meta property="og:title" content={pageTitle}>
+		<meta property="og:description" content="my silly little website" />
+		<meta property="og:image" content={embedImage}>
+		<meta property="og:site_name" content="buh.moe">
+		<meta property="og:url" content="https://buh.moe/">
+		<meta content="#e12340" data-react-helmet="true" name="theme-color" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+		<script src="https://kit.fontawesome.com/abd3ad257b.js" crossorigin="anonymous"></script>
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="amemoia's blog"
+            href={new URL("rss.xml", Astro.site)}
+        />
+		<title>java buh</title>
+		<Analytics />
+		<SpeedInsights />
+	</head>
+	<body>
+		<div class="profile flexcol">
+            <Image src={pfp} alt="buh" />
+            <div class="profile-text flexrow">
+                <h2>buh.moe</h2>
+                <!--
+                <span>🏳️‍🌈 🏳️‍⚧️ • she/her</span>
+                -->
+            </div>
+        </div>
+        <div class="navbar flexrow">
+            <a href={ghBlood} target="_blank">GitHub</a> •
+            <a href={gfg} target="_blank">GeeksForGeeks</a> •
+            <a href={gfgCollections} target="_blank">Kolekcje/Kontenery</a> •
+            <a href={karkor} target="_blank">GitHub Elevena</a>
+        </div>
+        <slot />
+        <a href="#quick-access" class="backToTop">↑</a>
+	</body>
+	<ParseTwemoji />
+</html>

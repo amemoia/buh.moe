@@ -10,7 +10,7 @@ tierlist: {
     B  : ['Kiwami2Majima']
 }
 ---
-- [x] 👑 Yakuza 0 *60 hrs*
+- [x] 👑 Yakuza 0 *120 hrs*
 - [x] ⭐ Yakuza Kiwami 1 *35 hrs*
 - [x] ⭐ Yakuza Kiwami 2 *40 hrs*
 - [x] 🔎 Yakuza 3 Remastered *20 hrs*

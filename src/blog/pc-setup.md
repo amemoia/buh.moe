@@ -57,7 +57,7 @@ As I said, I'm no privacy freak, so DuckDuckGo generally does not appeal to me (
 ## [Cider - Apple Music Client](https://cider.sh/)
 I'm very unsatisfied with Spotify and my frustration reached a boiling point when their "Smart Shuffle" feature nuked all local files from my playlist without warning. Apple Music offers very competitive pricing ESPECIALLY if you're a student, treats your local files properly and in my opinion their audio quality is much better than Spotify's. They are also rolling out a feature that lets you easily transfer your playlists from another service to Apple Music. My only complaint is their weird Windows client, which you can get around using Cider - a community-made Apple Music client for Windows, Linux and MacOS. It's highly customizable and adds many features like Discord Rich Presence. I still find myself coming back to the official client from time to time for features like Dolby Atmos, but it's my understanding that Cider's developer is working on these issues.
 
-## [Obsidian - notes](https://obsidian.md/)
+## [Obsidian - Notes](https://obsidian.md/)
 Obsidian is a heavily customizable notes app, where notes are all markdown files. While there are a lot of community plugins and themes available, I found myself mostly choosing to stick to the basic Obsidian experience. The UI on mobile is a bit janky and you'll either have to pay for the official Sync or use one of the available free community sync plugins. Other than that I think the app is very great and I use it for university, plus a Deadlock lore vault that I occasionally work on.
 
 ## [Raycast - Spotlight-style command palette](https://www.raycast.com/)
@@ -95,6 +95,20 @@ Proton's password manager is crazy good even on it's free plan. If you need an a
 I use [Proton Unlimited](https://proton.me/pricing), which includes the premium versions of Mail, Calendar, Pass, Drive, VPN, Wallet with 500GB of storage to use across these services. I'd still rather selfhost these, but Proton has left me with very little complaints and I think their password manager is very neat and user friendly, which I value a lot. I also appreciate that they offer installable Mail+Calendar clients. Despite not using VPN and Wallet, I think Proton offers a great deal at just 13 EUR a month, which I got down to under 10 EUR thanks to regional pricing on the App Store.
 
 My only complaint with Proton is that there is a lack of feature parity between some platforms (macOS seems to be far behind when it comes to Drive) and backing up to Drive can take a while if you have a lot of small files such as photos.
+
+### buh's full degoogle list
+- Browser: [Zen](https://zen-browser.app/)
+- Search: [DuckDuckGo](https://duckduckgo.com/)
+- Notes: [Obsidian](https://obsidian.md/)
+- Mail: [Proton Mail](https://proton.me/mail)
+- Calendar: [Proton Calendar](https://proton.me/calendar)
+- Cloud Storage: [Proton Drive](https://proton.me/drive)
+- Photos: P[roton Drive](https://proton.me/drive)
+- Password Manager: [Proton Pass](https://proton.me/pass)
+- Authenticator: [Proton Pass](https://proton.me/pass)
+- VPN: [Proton VPN](https://proton.me/vpn)
+- Music: [Apple Music](https://www.apple.com/apple-music/)
+- Maps: Google Maps is sadly hard not to use. I use [Waze](https://www.waze.com/) for navigation, but that's also owned by Google.
 
 <hr style="margin: 2em 0em;">
 

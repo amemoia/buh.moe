@@ -5,6 +5,7 @@ import Blogpost from '../../components/Blogpost.astro';
 
 export async function getStaticPaths() {
     const allPosts = await getCollection('blog');
+    allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
     const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
     return uniqueTags.map((tag) => {
         const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag));

@@ -6,6 +6,7 @@ import rss, { pagesGlobToRssItems } from '@astrojs/rss';
 import { getCollection } from "astro:content";
 
 const blogPosts = await getCollection('blog')
+blogPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 // Embed information
 const pageTitle = "ame / blog"
 const description = "buh"

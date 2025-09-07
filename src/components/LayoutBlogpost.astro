@@ -10,7 +10,7 @@ const day = d.getDate()
 const yr = d.getFullYear();
 import '../styles/blogpost.css'
 ---
-<LayoutBase pageTitle={frontmatter.title}>
+<LayoutBase pageTitle={frontmatter.title} description={frontmatter.description}>
     <div class="blogpost">
         <div class="blogpost-header">
             <h1 class="blogpost-header-title">{frontmatter.title}</h1>

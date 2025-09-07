@@ -7,6 +7,9 @@ import Analytics from '@vercel/analytics/astro'
 import  SpeedInsights  from "@vercel/speed-insights/astro"
 const embedImage = "https://buh.moe/resources/embed-avi.png"
 const { pageTitle, description } = Astro.props;
+var desc;
+if (description == null) desc = "my silly little website"
+else desc = description
 ---
 <html lang="en">
     <head>
@@ -16,7 +19,7 @@ const { pageTitle, description } = Astro.props;
         <!-- Embed information -->
 		<meta property="description" content="amemoia's website" />
 		<meta property="og:title" content={pageTitle}>
-		<meta property="og:description" content="my silly little website" />
+		<meta property="og:description" content={desc} />
 		<meta property="og:image" content={embedImage}>
 		<meta property="og:site_name" content="buh.moe">
 		<meta property="og:url" content="https://buh.moe/">

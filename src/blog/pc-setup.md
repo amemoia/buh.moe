@@ -103,7 +103,7 @@ My only complaint with Proton is that there is a lack of feature parity between 
 - Mail: [Proton Mail](https://proton.me/mail)
 - Calendar: [Proton Calendar](https://proton.me/calendar)
 - Cloud Storage: [Proton Drive](https://proton.me/drive)
-- Photos: P[roton Drive](https://proton.me/drive)
+- Photos: [Proton Drive](https://proton.me/drive)
 - Password Manager: [Proton Pass](https://proton.me/pass)
 - Authenticator: [Proton Pass](https://proton.me/pass)
 - VPN: [Proton VPN](https://proton.me/vpn)

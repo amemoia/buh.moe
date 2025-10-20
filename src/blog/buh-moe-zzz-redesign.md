@@ -19,7 +19,7 @@ As I mentioned, my blog needed some fixing too. Going into the redesign, I quick
 
 Admittedly, I haven't used my blog too much, because I can't bring myself to finish any of the various drafts I have lying around. Now that my blog redesign is complete, I hope to one day finish these drafts so that the prep work I did for them does not go to waste.
 
-Below you can see a snippet of Astro code. The custom components such as `Container` and `SocialLink` are fun to work with and remove the need to repeatedly copy and paste all the HTML making up something like a `SocialLink`. `ContSection` might seem redundant at first, but it's there in case I want to add multiple sections within one `Container` and adjust their positioning. This came in handy on my specs page, where you can see two sections side by side. The full code is viewable on my [GitHub](https://github.com/amemoia/amemoia.github.io).
+Below you can see a snippet of Astro code. The custom components such as `Container` and `SocialLink` are fun to work with and remove the need to repeatedly copy and paste all the HTML making up something like a `SocialLink`. `ContSection` might seem redundant at first, but it's there in case I want to add multiple sections within one `Container` and adjust their positioning. This came in handy on my specs page, where you can see two sections side by side. The full code is viewable on my [GitHub](https://github.com/amemoia/buh.moe).
 
 ![A block of code in Astro, showing my implementation of Containers and ContSections](../img/blog/buh-moe-zzz-redesign/AstroCode.png)
 
@@ -31,4 +31,4 @@ I didn't exactly stick to one particular UI element for my redesign, nor did I f
 
 You might notice that the agent info page is the main inspiration for my `Containers`. The 2nd image depicting a system message isn't used anywhere at the time of writing except my 404 page, with the button serving as a way to go back to the main page.
 
-Apart from all this, I don't think there's anything too notable to be found in the design. It's a bit more structured than what I was working on previously and my approach was a bit more modular. This blog post was meant to be a bit on the shorter side, but either way thank you for reading! Feel free to check out my [GitHub](https://github.com/amemoia/amemoia.github.io) if you're interested in the inner workings of it all, there are a bunch of things I didn't mention here.
+Apart from all this, I don't think there's anything too notable to be found in the design. It's a bit more structured than what I was working on previously and my approach was a bit more modular. This blog post was meant to be a bit on the shorter side, but either way thank you for reading! Feel free to check out my [GitHub](https://github.com/amemoia/buh.moe) if you're interested in the inner workings of it all, there are a bunch of things I didn't mention here.

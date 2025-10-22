@@ -1,0 +1,28 @@
+---
+interface Props {
+    src: string;
+    alt: string;
+    url: string;
+}
+
+const { src, alt, url } = Astro.props;
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer" class="friend-button">
+    <img src={src} alt={alt} width="88" height="31" />
+</a>
+
+<style>
+    .friend-button {
+        display: inline-block;
+        line-height: 0;
+    }
+    .friend-button img {
+        display: block;
+        width: 88px;
+        height: 31px;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+    }
+</style>

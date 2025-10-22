@@ -1,7 +1,262 @@
 ---
 import Base from '../layouts/Base.astro';
+import Block from '../components/Block.astro';
+import Profile from '../components/Profile.astro';
+import Clock from '../components/Clock.astro';
+import SocialButton from '../components/SocialButton.astro';
+import FriendButton from '../components/FriendButton.astro';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import '../styles/global.css'
+import Mina from '../assets/general/mina-banner.png';
+import DeadlockIcon from '../assets/icons/deadlock.png';
 ---
 
-<Base>
-	
+<Base title="amemoia" class="flex flex-col gap-4">
+
+    <div class="intro-section flex flex-col mb-8 mt-4 ml-4">
+        <span class="text-accent-red font-bold">buh.moe</span>
+        <p class="text-3xl font-bold">hi there!</p>
+        <p>I'm <span class="text-accent-red font-bold">alex / ola</span>, a 21yo student from <span class="text-accent-red font-bold">🇵🇱 Poland</span></p>
+    </div>
+
+	<Block title="Checking me out?" gradient="red" bannerImage={Mina}>
+        <div class="content-grid">
+            <div class="subsection">
+                <Profile />
+            </div>
+            <div class="subsection flex flex-col justify-center">
+                <Clock />
+            </div>
+            <div class="flex flex-col subsection">
+                <p class="font-semibold">Some of my interests:</p>
+                <div class="interests-container">
+                    <ul class="interest-list">
+                        <li><Icon name="fa6-solid:code" class="interest-icon" />Programming</li>
+                        <li><Icon name="fa6-solid:palette" class="interest-icon" />UI Design</li>
+                        <li><Icon name="fa6-solid:gamepad" class="interest-icon" />Game Design</li>
+                    </ul>
+                    <ul class="interest-list">
+                        <li><Icon name="simple-icons:steam" class="interest-icon" />Valve Software</li>
+                        <li><Icon name="fa6-solid:dragon" class="interest-icon" />RGG Studio</li>
+                        <li><Icon name="fa6-solid:meteor" class="interest-icon" />Final Fantasy XIV</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <p class="ml-1">My website is partially inspired by and uses assets from <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" rel="noopener noreferrer" class="deadlock-link"><span class="deadlock-text"><Image src={DeadlockIcon} alt="Deadlock icon" class="deadlock-icon" /><span class="text-deadlock-green font-bold">Deadlock</span></span></a>, an upcoming game by Valve.</p>
+    </Block>
+
+    <Block title="Socials" class="socials-block">
+        <div class="socials-grid">
+            <SocialButton 
+                icon="simple-icons:bluesky" 
+                name="Bluesky" 
+                handle="@buh.moe"
+                url="https://bsky.app/profile/buh.moe"
+                color="#0C7BFF"
+            />
+            <SocialButton 
+                icon="simple-icons:twitter" 
+                name="Twitter" 
+                handle="@amemoia"
+                url="https://twitter.com/amemoia"
+                color="#1DA1F2"
+            />
+            <SocialButton 
+                icon="simple-icons:discord" 
+                name="Discord" 
+                handle="@buh.moe"
+                color="#5865F2"
+            />
+            <SocialButton 
+                icon="simple-icons:steam" 
+                name="Steam" 
+                handle="/id/amemoia"
+                color="#1A9FFF"
+            />
+            <SocialButton 
+                icon="simple-icons:github" 
+                name="GitHub" 
+                handle="@buh.moe"
+                color="#8B5CF6"
+            />
+        </div>
+    </Block>
+
+    <div class="flex flex-col gap-4">
+        <div class="friends-container mt-2 gap-0">
+            <FriendButton src="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" url="https://themooskyfish.nekoweb.org" />
+            <FriendButton src="https://sapphic.moe/buttons/sapphic.png" alt="sapphic.moe" url="https://sapphic.moe" />
+            <FriendButton src="https://ada.cat/b/me.gif" alt="ada.cat" url="https://ada.cat" />
+            <FriendButton src="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" url="https://babybreaths.nekoweb.org" />
+            <FriendButton src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" url="https://remblanc.nekoweb.org" />
+            <FriendButton src="https://hoshimiuwu.github.io/HideawayHotlink.gif" alt="jumpyuvu" url="https://hoshimiuwu.github.io" />
+            <FriendButton src="https://notnite.com/buttons/notnite.png" alt="notnite" url="https://notnite.com/" />
+            <FriendButton src="https://nanoshinono.me/prefetcher.gif" alt="prefetcher" url="https://nanoshinono.me/" />
+            <FriendButton src="https://ata.moe/88x31.png" alt="ata.moe" url="https://ata.moe/" />
+            <FriendButton src="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" url="https://nekoweb.org/" />
+        </div>
+
+        <div class="my-button-section">
+            <button class="button-preview" id="copy-button" type="button" aria-label="Copy button code">
+                <img src="/resources/buttons/88x31.gif" alt="amemoia" width="88" height="31" />
+            </button>
+            <span class="text-sm copy-hint" id="copy-hint">(click to copy code)</span>
+        </div>
+    </div>
 </Base>
+
+<script>
+    const copyButton = document.getElementById('copy-button');
+    const copyHint = document.getElementById('copy-hint');
+    const codeText = '<a href="https://buh.moe/" target="_blank"><img src="https://buh.moe/resources/buttons/88x31.gif"></a>';
+    
+    if (copyButton && copyHint) {
+        copyButton.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(codeText);
+                copyHint.textContent = 'Copied!';
+                copyHint.classList.add('copied');
+                setTimeout(() => {
+                    copyHint.textContent = '(click to copy code)';
+                    copyHint.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                copyHint.textContent = 'Failed to copy';
+            }
+        });
+    }
+</script>
+
+<style>
+    .content-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .content-grid > * {
+        flex-shrink: 0;
+        width: 100%;
+    }
+    
+    @media (min-width: theme('screens.md')) {
+        .content-grid > * {
+            width: auto;
+        }
+        
+        .interests-container {
+            width: auto;
+        }
+    }
+    
+    .interests-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 2rem;
+        width: 100%;
+    }
+    
+    .interests-container ul {
+        min-width: max-content;
+    }
+
+    @media (max-width: theme('screens.md')) {
+        .interests-container ul {
+            min-width: unset;
+        }
+    }
+    
+    .interest-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .interest-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        flex-shrink: 0;
+        color: var(--accent-red);
+    }
+    
+    .deadlock-link {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .deadlock-text {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.25rem;
+    }
+    
+    .deadlock-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        display: inline-block;
+        transform: translateY(4px);
+    }
+
+    .socials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+    }
+
+    @media (max-width: 640px) {
+        .socials-grid {
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        }
+    }
+
+    .friends-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .my-button-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-preview {
+        flex-shrink: 0;
+        background: none;
+        border: 2px solid transparent;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 2px;
+    }
+
+    .button-preview:hover {
+        border-color: var(--accent-red);
+        transform: scale(1.05);
+    }
+
+    .button-preview:active {
+        transform: scale(0.95);
+    }
+
+    .button-preview img {
+        display: block;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+    }
+
+    .copy-hint {
+        transition: color 0.2s ease;
+        color: var(--text-tertiary);
+    }
+
+    .copy-hint.copied {
+        color: var(--accent-red);
+    }
+</style>

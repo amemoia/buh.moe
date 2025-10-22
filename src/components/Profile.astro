@@ -1,0 +1,112 @@
+---
+// uses Lanyard API for discord status
+const UID = import.meta.env.DISCORD_USER_ID;
+if (!UID) {
+    console.warn('DISCORD_USER_ID environment variable is not set');
+}
+let lanyardData = null;
+let avatarUrl = null;
+if (UID) {
+    try {
+        const response = await fetch(`https://api.lanyard.rest/v1/users/${UID}`);
+        if (response.ok) {
+            const data = await response.json();
+            lanyardData = data.data;
+            if (lanyardData.discord_user) {
+                const { id, avatar } = lanyardData.discord_user;
+                avatarUrl = `https://cdn.discordapp.com/avatars/${id}/${avatar}.png?size=256`;
+            }
+        } else {
+            console.error('Lanyard API error:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Failed to fetch Lanyard data:', error);
+    }
+}
+---
+<div class="flex flex-row gap-4 md:gap-8 profile-container">
+    {avatarUrl ? (
+        <img src={avatarUrl} alt="alex buh's avatar" class="profile-pfp"/>
+    ) : (
+        <div class="profile-pfp profile-pfp-placeholder"></div>
+    )}
+    <div class="flex flex-col profile-text">
+        <span class="text-xl md:text-2xl font-bold">{lanyardData?.discord_user?.global_name || 'amemoia'}</span>
+        {lanyardData && (
+            <div class="text-xs md:text-sm">
+                <span class="status-indicator" data-status={lanyardData.discord_status}></span>
+                <span>{lanyardData.discord_status}</span>
+            </div>
+        )}
+    </div>
+</div>
+
+<style>
+    :root {
+        --pfp-size: 64px;
+    }
+    @media (min-width: theme('screens.md')) {
+        :root {
+            --pfp-size: 96px;
+        }
+    }
+
+    .profile-container {
+        width: 100%;
+        padding-right: 1em;
+    }
+
+    .profile-pfp {
+        width: var(--pfp-size);
+        height: var(--pfp-size);
+        border-radius: var(--radius-default);
+        object-fit: cover;
+    }
+    
+    .profile-pfp-placeholder {
+        background-color: var(--bg-secondary);
+    }
+    
+    .profile-text {
+        justify-content: center;
+    }
+
+    .status-indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 4px;
+    }
+    .status-indicator[data-status="online"] {
+        background-color: var(--deadlock-green);
+        box-shadow: 0 0 8px rgba(106, 231, 154, 0.6);
+    }
+    .status-indicator[data-status="idle"] {
+        background-color: var(--deadlock-orange);
+        box-shadow: 0 0 8px rgba(236, 152, 26, 0.6);
+    }
+    .status-indicator[data-status="dnd"] {
+        background-color: var(--deadlock-red);
+        box-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
+    }
+    .status-indicator[data-status="offline"] {
+        background-color: #777777;
+        box-shadow: 0 0 8px rgba(119, 119, 119, 0.4);
+    }
+    
+    @media (prefers-color-scheme: light) {
+        .status-indicator[data-status="online"] {
+            box-shadow: 0 0 6px rgba(22, 163, 74, 0.5);
+        }
+        .status-indicator[data-status="idle"] {
+            box-shadow: 0 0 6px rgba(236, 152, 26, 0.5);
+        }
+        .status-indicator[data-status="dnd"] {
+            box-shadow: 0 0 6px rgba(220, 53, 69, 0.5);
+        }
+        .status-indicator[data-status="offline"] {
+            box-shadow: 0 0 4px rgba(119, 119, 119, 0.3);
+        }
+    }
+</style>

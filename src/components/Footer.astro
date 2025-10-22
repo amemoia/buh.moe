@@ -1,0 +1,97 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+<footer class="footer-container">
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
+                <Icon name="lucide:rss" />
+                <span>RSS</span>
+            </a>
+            <a href="https://github.com/amemoia/buh.moe" target="_blank" rel="noopener noreferrer">
+                <Icon name="lucide:github" />
+                <span>Source</span>
+            </a>
+            <a href="/credits">
+                <Icon name="lucide:heart" />
+                <span>Credits</span>
+            </a>
+        </div>
+        <div class="footer-info">
+            <span class="footer-text"><span class="text-accent-red font-bold">buh.moe v4</span> made by alex buh</span>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer-container {
+        background-color: var(--bg-primary);
+        position: relative;
+    }
+    
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 2em;
+        border-top: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 768px) {
+        .footer-content {
+            padding: 1em;
+        }
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 1em;
+        align-items: center;
+    }
+
+    @media (max-width: 768px) {
+        .footer-links {
+            gap: 1.5em;
+        }
+    }
+
+    .footer-links a {
+        color: var(--text-primary);
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        padding: 0.5em 0;
+        transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+        color: var(--accent-red);
+    }
+
+    @media (max-width: 768px) {
+        .footer-links a {
+            font-size: 0.95em;
+            padding: 0.75em 0.5em;
+        }
+    }
+
+    .footer-links a svg {
+        width: 1em;
+        height: 1em;
+        flex-shrink: 0;
+    }
+
+    .footer-info {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
+
+    .footer-text {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+</style>

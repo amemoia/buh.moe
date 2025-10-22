@@ -17,5 +17,9 @@
     "astro-icon": "^1.1.5",
     "tailwindcss": "^4.1.15",
     "twemoji": "^14.0.2"
+  },
+  "devDependencies": {
+    "@astrojs/cloudflare": "^12.6.10",
+    "wrangler": "^4.44.0"
   }
 }

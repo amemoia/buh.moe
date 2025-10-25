@@ -52,11 +52,11 @@
 
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
+    :root[data-theme="dark"] {
         --bg-primary: #101010;
         --bg-secondary: #1a1a1a;
-        --bg-project-1: #1e1e1e;
-        --bg-project-2: #212121;
+        --bg-project-1: #121212;
+        --bg-project-2: #161616;
         --bg-tertiary: #242424;
         --text-primary: #ffffff;
         --text-secondary: #cccccc;
@@ -78,12 +78,11 @@
         --deadlock-green: #6AE79A;
     }
 }
-
 :root[data-theme="dark"] {
     --bg-primary: #101010;
     --bg-secondary: #1a1a1a;
-    --bg-project-1: #1e1e1e;
-    --bg-project-2: #212121;
+    --bg-project-1: #121212;
+    --bg-project-2: #161616;
     --bg-tertiary: #242424;
     --text-primary: #ffffff;
     --text-secondary: #cccccc;

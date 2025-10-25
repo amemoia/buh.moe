@@ -34,8 +34,10 @@ const { icon, name, handle, url, color = 'var(--accent-red)' } = Astro.props;
         border-radius: 6px;
         background-color: var(--bg-tertiary);
         text-decoration: none;
-        min-width: 120px;
+        width: 100%; /* fill the grid column */
+        min-width: 0; /* allow shrinking inside grid */
         border: 1px solid var(--border-color-subtle);
+        box-sizing: border-box;
     }
 
     .social-icon-bg {

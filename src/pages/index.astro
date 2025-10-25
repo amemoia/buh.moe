@@ -29,13 +29,13 @@ const github = "https://github.com/amemoia"
 
 	<Block title="Checking me out?" gradient="red" bannerImage={Mina}>
         <div class="content-grid">
-            <div class="subsection">
+            <div class="subsection sec-profile">
                 <Profile />
             </div>
-            <div class="subsection flex flex-col justify-center">
+            <div class="subsection flex flex-col justify-center sec-clock">
                 <Clock />
             </div>
-            <div class="flex flex-col subsection">
+            <div class="flex flex-col subsection sec-interests">
                 <p class="font-semibold">Some of my interests:</p>
                 <div class="interests-container">
                     <ul class="interest-list">
@@ -144,22 +144,26 @@ const github = "https://github.com/amemoia"
 <style>
     .content-grid {
         display: flex;
-        flex-wrap: wrap;
         gap: 1rem;
     }
-    
-    .content-grid > * {
-        flex-shrink: 0;
-        width: 100%;
+    .sec-interests {
+            width: 100%;
     }
-    
-    @media (min-width: theme('screens.md')) {
-        .content-grid > * {
-            width: auto;
+    @media (max-width: 1024px) {
+        .sec-profile, .sec-clock {
+            width: calc(50% - 0.5rem);
         }
-        
-        .interests-container {
-            width: auto;
+        .content-grid {
+            flex-wrap: wrap;
+        }
+    }
+
+    @media (max-width: theme('screens.md')) {
+        .sec-profile, .sec-clock, .sec-interests {
+            width: 100%
+        }
+        .content-grid {
+            flex-wrap: wrap;
         }
     }
     
@@ -167,7 +171,6 @@ const github = "https://github.com/amemoia"
         display: flex;
         flex-wrap: wrap;
         gap: 0 2rem;
-        width: 100%;
     }
     
     .interests-container ul {
@@ -213,13 +216,30 @@ const github = "https://github.com/amemoia"
 
     .socials-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        /* auto-fit lets columns collapse to fill space; minmax ensures a sensible minimum
+           while 1fr makes columns stretch to fill the row so items fill the container */
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
         gap: 1rem;
+        align-items: stretch;
+        justify-items: stretch;
+    }
+
+    /* Explicit breakpoints so rows have equal length on narrower screens */
+    @media (max-width: 900px) {
+        .socials-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
     @media (max-width: 640px) {
         .socials-grid {
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 420px) {
+        .socials-grid {
+            grid-template-columns: repeat(1, 1fr);
         }
     }
 

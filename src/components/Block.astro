@@ -1,17 +1,24 @@
 ---
 import { Image } from 'astro:assets';
-
-const { title, gradient, bannerImage } = Astro.props;
+import { Icon } from 'astro-icon/components';
+const { title, gradient, bannerImage, link, class: className } = Astro.props;
 ---
 <div class="flex flex-col block-wrapper">
-    <div class="block-header" data-gradient={gradient}>
-        <div class="pattern-overlay"></div>
-        <span class="font-bold text-2xl">{title}</span>
-        {bannerImage && (
-            <Image src={bannerImage} alt="" class="character-overlay" />
-        )}
-    </div>
-    <div class="flex flex-col gap-2 block-content">
+    <a href={link} target="_blank">
+        <div class="block-header" data-gradient={gradient}>
+            <div class="pattern-overlay"></div>
+            <span class="font-bold text-2xl flex flex-row items-center gap-1">
+                {title}
+                {link && (
+                    <Icon name="lucide:square-arrow-out-up-right" class="text-tertiary text-base relative top-0.5" />
+                )}
+            </span>
+            {bannerImage && (
+                <Image src={bannerImage} alt="" class="character-overlay" />
+            )}
+        </div>
+    </a>
+    <div class={"flex flex-col gap-2 block-content "+className}>
         <slot />
     </div>
 </div>
@@ -97,5 +104,8 @@ const { title, gradient, bannerImage } = Astro.props;
     .block-content {
         border-bottom-left-radius: var(--radius-default);
         border-bottom-right-radius: var(--radius-default);
+    }
+    .p-0 {
+        padding: 0;
     }
 </style>

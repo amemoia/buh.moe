@@ -12,6 +12,8 @@
     /* Light theme */
     --bg-primary: #eff1f5;
     --bg-secondary: #e6e9ef;
+    --bg-project-1: #d6dae4;
+    --bg-project-2: #dee2ea;
     --bg-tertiary: #ccd0da;
     --text-primary: #222222;
     --text-secondary: #555555;
@@ -53,6 +55,8 @@
     :root:not([data-theme="light"]) {
         --bg-primary: #101010;
         --bg-secondary: #1a1a1a;
+        --bg-project-1: #1e1e1e;
+        --bg-project-2: #212121;
         --bg-tertiary: #242424;
         --text-primary: #ffffff;
         --text-secondary: #cccccc;
@@ -78,6 +82,8 @@
 :root[data-theme="dark"] {
     --bg-primary: #101010;
     --bg-secondary: #1a1a1a;
+    --bg-project-1: #1e1e1e;
+    --bg-project-2: #212121;
     --bg-tertiary: #242424;
     --text-primary: #ffffff;
     --text-secondary: #cccccc;
@@ -121,7 +127,6 @@ main {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 2em;
-    padding-bottom: 1em;
     position: relative;
     z-index: 1;
 }
@@ -159,6 +164,12 @@ body::before {
     .bg-accent-red-light { background-color: var(--accent-red-light); }
     .bg-accent-red-dark { background-color: var(--accent-red-dark); }
     .bg-accent-red-subtle { background-color: var(--accent-red-subtle); }
+
+    .bg-primary { background-color: var(--bg-primary); }
+    .bg-secondary { background-color: var(--bg-secondary); }
+    .bg-project-1 { background-color: var(--bg-project-1); }
+    .bg-project-2 { background-color: var(--bg-project-2); }
+    .bg-tertiary { background-color: var(--bg-tertiary); }
 
     .border-accent-red { border-color: var(--accent-red); }
     .border-accent-red-light { border-color: var(--accent-red-light); }
@@ -212,4 +223,5 @@ img.emoji {
     background-color: var(--bg-tertiary);
     border-radius: var(--radius-default);
     padding: 1em;
+    border: 1px solid var(--border-color-subtle);
 }

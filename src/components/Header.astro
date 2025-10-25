@@ -4,7 +4,7 @@ const currentPath = Astro.url.pathname;
 ---
 <header class="header-container">
     <div class="header-top">
-        <a class="header-brand" href="/">
+        <a class="header-icon" href="/">
             <img src="/favicon-32x32.png" alt="favicon" class="favicon" />
             <span class="brand-text">buh.moe</span>
         </a>
@@ -29,7 +29,7 @@ const currentPath = Astro.url.pathname;
                     <Icon name="lucide:cpu" />
                     <span>Specs</span>
                 </a>
-                <a href="/portfolio" class:list={[{ active: currentPath.startsWith('/portfolio') }]}>
+                <a href="/projects" class:list={[{ active: currentPath.startsWith('/projects') }]}>
                     <Icon name="lucide:cog" />
                     <span>Projects</span>
                 </a>
@@ -93,7 +93,7 @@ const currentPath = Astro.url.pathname;
         }
     }
 
-    .header-brand {
+    .header-icon {
         display: flex;
         align-items: center;
         gap: 0.5em;
@@ -158,7 +158,7 @@ const currentPath = Astro.url.pathname;
         -webkit-overflow-scrolling: touch;
         position: relative;
         scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE/Edge */
+        -ms-overflow-style: none; /* IE */
         border-bottom: 1px solid var(--border-color);
     }
 

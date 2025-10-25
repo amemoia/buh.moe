@@ -32,16 +32,9 @@ import { Icon } from 'astro-icon/components';
     .footer-content {
         display: flex;
         flex-direction: column;
-        align-items: center;
         gap: 0.5rem;
-        padding: 2em;
+        padding: 1em 4em 1.5em 4em;
         border-top: 1px solid var(--border-color);
-    }
-
-    @media (max-width: 768px) {
-        .footer-content {
-            padding: 1em;
-        }
     }
 
     .footer-links {
@@ -51,8 +44,10 @@ import { Icon } from 'astro-icon/components';
     }
 
     @media (max-width: 768px) {
-        .footer-links {
-            gap: 1.5em;
+        .footer-content {
+            padding: 0.5em 1em 1.5em 1em;
+            align-items: center;
+            gap: 0;
         }
     }
 

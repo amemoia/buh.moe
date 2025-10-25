@@ -7,15 +7,22 @@ import SocialButton from '../components/SocialButton.astro';
 import FriendButton from '../components/FriendButton.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
-import '../styles/global.css'
 import Mina from '../assets/general/mina-banner.png';
 import DeadlockIcon from '../assets/icons/deadlock.png';
+
+// social urls
+const bsky = "https://bsky.app/profile/buh.moe";
+const twitter = "https://twitter.com/amemoia";
+const discord = "https://discord.com/users/254204775497859073"
+const steam = "https://steamcommunity.com/id/amemoia/"
+const github = "https://github.com/amemoia"
+
 ---
 
 <Base title="amemoia" class="flex flex-col gap-4">
 
-    <div class="intro-section flex flex-col mb-8 mt-4 ml-4">
-        <span class="text-accent-red font-bold">buh.moe</span>
+    <div class="flex flex-col mb-8 mt-4 ml-4">
+        <span class="p-2 bg-accent-red w-fit font-black rounded-md text-sm mb-2 text-white">/ index</span>
         <p class="text-3xl font-bold">hi there!</p>
         <p>I'm <span class="text-accent-red font-bold">alex / ola</span>, a 21yo student from <span class="text-accent-red font-bold">🇵🇱 Poland</span></p>
     </div>
@@ -54,32 +61,35 @@ import DeadlockIcon from '../assets/icons/deadlock.png';
                 icon="simple-icons:bluesky" 
                 name="Bluesky" 
                 handle="@buh.moe"
-                url="https://bsky.app/profile/buh.moe"
+                url={bsky}
                 color="#0C7BFF"
             />
             <SocialButton 
                 icon="simple-icons:twitter" 
                 name="Twitter" 
                 handle="@amemoia"
-                url="https://twitter.com/amemoia"
+                url={twitter}
                 color="#1DA1F2"
             />
             <SocialButton 
                 icon="simple-icons:discord" 
                 name="Discord" 
                 handle="@buh.moe"
+                url={discord}
                 color="#5865F2"
             />
             <SocialButton 
                 icon="simple-icons:steam" 
                 name="Steam" 
                 handle="/id/amemoia"
+                url={steam}
                 color="#1A9FFF"
             />
             <SocialButton 
                 icon="simple-icons:github" 
                 name="GitHub" 
-                handle="@buh.moe"
+                handle="@amemoia"
+                url={github}
                 color="#8B5CF6"
             />
         </div>

@@ -1,45 +1,56 @@
----
-// uses Lanyard API for discord status
-const UID = "254204775497859073";
-if (!UID) {
-    console.warn('DISCORD_USER_ID environment variable is not set');
-}
-let lanyardData = null;
-let avatarUrl = null;
-if (UID) {
-    try {
-        const response = await fetch(`https://api.lanyard.rest/v1/users/${UID}`);
-        if (response.ok) {
-            const data = await response.json();
-            lanyardData = data.data;
-            if (lanyardData.discord_user) {
-                const { id, avatar } = lanyardData.discord_user;
-                avatarUrl = `https://cdn.discordapp.com/avatars/${id}/${avatar}.png?size=256`;
-            }
-        } else {
-            console.error('Lanyard API error:', response.status, response.statusText);
-        }
-    } catch (error) {
-        console.error('Failed to fetch Lanyard data:', error);
-    }
-}
----
 <div class="flex flex-row gap-4 md:gap-8 profile-container">
-    {avatarUrl ? (
-        <img src={avatarUrl} alt="alex buh's avatar" class="profile-pfp"/>
-    ) : (
-        <div class="profile-pfp profile-pfp-placeholder"></div>
-    )}
+    <div class="profile-pfp profile-pfp-placeholder" id="profile-avatar"></div>
     <div class="flex flex-col profile-text">
-        <span class="text-xl md:text-2xl font-bold">{lanyardData?.discord_user?.global_name || 'amemoia'}</span>
-        {lanyardData && (
-            <div class="text-xs md:text-sm">
-                <span class="status-indicator" data-status={lanyardData.discord_status}></span>
-                <span>{lanyardData.discord_status}</span>
-            </div>
-        )}
+        <span class="text-xl md:text-2xl font-bold" id="profile-name">amemoia</span>
+        <div class="text-xs md:text-sm" id="status-container">
+            <span class="status-indicator" id="status-indicator" data-status="offline"></span>
+            <span id="status-text">Offline</span>
+        </div>
     </div>
 </div>
+
+<script>
+    // client side lanyard api fetch
+    const UID = "254204775497859073";
+    const avatarElement = document.getElementById('profile-avatar');
+    const nameElement = document.getElementById('profile-name');
+    const statusIndicator = document.getElementById('status-indicator');
+    const statusText = document.getElementById('status-text');
+
+    async function fetchLanyardData() {
+        try {
+            const response = await fetch(`https://api.lanyard.rest/v1/users/${UID}`);
+            if (response.ok) {
+                const toJson = await response.json();
+                const lanyard = toJson.data;
+                if (lanyard.discord_user) {
+                    const { id, avatar, global_name } = lanyard.discord_user;
+                    const avatarUrl = `https://cdn.discordapp.com/avatars/${id}/${avatar}.png?size=256`;
+                    
+                    if (avatarElement) {
+                        avatarElement.style.backgroundImage = `url(${avatarUrl})`;
+                        avatarElement.classList.remove('profile-pfp-placeholder');
+                    }
+                    
+                    if (nameElement) {
+                        nameElement.textContent = global_name || 'amemoia';
+                    }
+                    
+                    if (statusIndicator && statusText) {
+                        statusIndicator.setAttribute('data-status', lanyard.discord_status);
+                        statusText.textContent = lanyard.discord_status;
+                    }
+                }
+            } else {
+                console.error('Lanyard API error:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Failed to fetch Lanyard data:', error);
+        }
+    }
+
+    fetchLanyardData();
+</script>
 
 <style>
     :root {
@@ -60,7 +71,9 @@ if (UID) {
         width: var(--pfp-size);
         height: var(--pfp-size);
         border-radius: var(--radius-default);
-        object-fit: cover;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
     
     .profile-pfp-placeholder {

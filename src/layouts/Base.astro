@@ -3,6 +3,11 @@ const { title, class: className } = Astro.props;
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import '../styles/global.css'
+var classNameTotal;
+if (className == null || className== '') {
+	classNameTotal = "flex flex-col gap-4"
+}
+else classNameTotal = className;
 ---
 <!doctype html>
 <html lang="en">
@@ -17,7 +22,7 @@ import '../styles/global.css'
 
 	<body>
 		<Header />
-		<main class={className}>
+		<main class={classNameTotal}>
 			<slot />
 		</main>
 		<Footer />

@@ -1,0 +1,191 @@
+---
+import Base from "../layouts/Base.astro"
+import Block from "../components/Block.astro"
+import Intro from "../components/Intro.astro"
+
+const curGame = "Yakuza Kiwami 1 (Completionist)"
+const curLink = "https://store.steampowered.com/app/834530/Yakuza_Kiwami/"
+const prog = [
+    {title: "Yakuza 0", hours: "100", icon: "👑", completed: true},
+    {title: "Yakuza Kiwami 1", hours: "40", icon: "✨", completed: true},
+    {title: "Yakuza Kiwami 2", hours: "40", icon: "⭐", completed: true},
+    {title: "Yakuza 3 Remastered", hours: "24", icon: "🔎", completed: true},
+    {title: "Yakuza 4 Remastered", hours: "20", icon: "🔎", completed: true},
+    {title: "Yakuza 5 Remastered", hours: "50", icon: "🔎", completed: true},
+    {title: "Yakuza 6: The Song of Life", hours: "32", icon: "🔎", completed: true},
+    {title: "Yakuza: Like a Dragon", hours: "80", icon: "⭐", completed: true},
+    {title: "Like a Dragon Gaiden", hours: "30", icon: "⭐", completed: true},
+    {title: "Like a Dragon: Infinite Wealth", hours: "115", icon: "🔎", completed: true},
+    {title: "Like a Dragon: Ishin!", hours: "28", icon: "🔎", completed: true},
+    {title: "Judgment", hours: "64", icon: "⭐", completed: true},
+    {title: "Lost Judgment", hours: "40", icon: "🔎", completed: true},
+    {title: "Lost Judgment: The Kaito Files", hours: "8", icon: "👑", completed: true},
+    {title: "Like a Dragon: Pirate Yakuza in Hawaii", hours: "55", icon: "⭐", completed: true},
+]
+
+const tierlist = {
+    S : ['Y0', 'LAD7', 'LAD8', 'LAD7Gaiden', 'LostJudge'],
+    A : ['Judge', 'Y6', 'LAD8Gaiden', 'Ishin'],
+    B : ['Kiwami1', 'Kiwami2', 'LostJudgeKaito', 'Y3', 'Y5', 'Y4'],
+    C : ['Kiwami2Majima']
+}
+---
+<Base title="buh / yakuza">
+
+    <Intro page="/ yakuza" title="alex buh's yakuza series progress" titleClass="yakuza-title text-6xl text-center">
+        <span>
+            <br>
+            Unfortunately, this list might not continue due to the ongoing #REMOVEKAGAWA situation surrounding Yakuza Kiwami 3,
+            as well as the lack of a proper response from RGG Studio or SEGA. Way to ruin a highly anticipated remake.
+            <br><br>
+            If you're like me and really want to experience Kiwami 3, I highly recommend looking into ways to pirate the game or buy it from gray-market key resellers.
+        </span>
+    </Intro>
+
+    <Block title="Checklist" gradient="red" class="block-no-padding">
+        <ul class="yakuza-list flex flex-col">
+            {prog.map(item => (
+                <li class="text-lg py-2 flex flex-row gap-2">
+                    <!-- checkbox -->
+                    <input type="checkbox" checked={item.completed} readonly="true" />
+                    <span class="font-extrabold">{item.icon} {item.title}</span>
+                    <span class="text-secondary">{item.hours} hrs</span>
+                </li>
+            ))}
+        </ul>
+    </Block>
+
+    <Block title="Tier List" class="block-no-padding">
+        <div class="yakuza-tierlist flex flex-col">
+            {Object.entries(tierlist).map(([rank, games], rankIndex) => (
+                <div class="yakuza-tierlist-tier flex-row flex">
+                    <div class={`yakuza-tierlist-label rank${rankIndex} flex`}>
+                        <span>{rank}</span>
+                    </div>
+                    <div class="yakuza-tierlist-games flex flex-row flex-wrap">
+                        {games.map(game => (
+                            <img
+                                src={`/tierlist/${game}.png`}
+                                alt={game}
+                                class="yakuza-tierlist-image"
+                                loading="lazy"
+                            />
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    </Block>
+</Base>
+
+<style>
+    :root {
+        --red1: #EF5350;
+        --red2: #EC6563;
+        --orange1: #FFA967;
+        --orange2: #FFBE7C;
+        --orange3: #FED4A0;
+        --green1: #BFFF7F;
+        --green2: #9DF89D;
+
+        --rank0: var(--red1);
+        --rank1: var(--orange1);
+        --rank2: var(--orange2);
+        --rank3: var(--orange3);
+    }
+    .rank0 {background-color: var(--rank0);}    
+    .rank1 {background-color: var(--rank1);}    
+    .rank2 {background-color: var(--rank2);}    
+    .rank3 {background-color: var(--rank3);}    
+    .rank4 {background-color: var(--rank4);}    
+    .rank5 {background-color: var(--rank5);}    
+
+    /* Tier list layout */
+    .yakuza-tierlist { display: flex; flex-direction: column; }
+    /* Ensure the tier row's children can stretch to the same height */
+    .yakuza-tierlist-tier { display: flex; flex-direction: row; align-items: stretch !important; }
+    .yakuza-tierlist-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: stretch; /* fill the available height of the parent */
+        min-height: 8em; /* keep a sensible minimum */
+        min-width: 8em;
+        font-weight: bolder;
+        color: #000;
+        flex-shrink: 0;
+        padding: 0.5rem; /* small padding so text isn't flush */
+    }
+
+    .yakuza-tierlist-games { display: flex; flex-wrap: wrap; align-items: flex-start; }
+    .yakuza-tierlist-image {
+        width: 8em;
+        height: 8em;
+        object-fit: contain;
+    }
+
+    /* Make tierlist responsive */
+    @media (max-width: 640px) {
+        .yakuza-tierlist-tier { flex-direction: column; align-items: flex-start; }
+        .yakuza-tierlist-label {
+            width: 100%;
+            height: auto;
+            justify-content: flex-start;
+        }
+        .yakuza-tierlist-games { width: 100%; justify-content: flex-start; }
+        .yakuza-tierlist-image { width: 8em; height: 8em; }
+    }
+
+    @media (min-width: 641px) and (max-width: 1024px) {
+        .yakuza-tierlist-image { width: 8em; height: 8em; }
+    }
+
+    /* Custom checkbox styling */
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        appearance: none;
+        /* For iOS < 15 to remove gradient background */
+        background-color: #fff;
+        /* Not removed via appearance */
+        margin: 0;
+        font: inherit;
+        color: currentColor;
+        width: 16px;
+        height: 16px;
+        background-color: var(--accent-red);
+        border-radius: 4px;
+        transform: translate(0px, 4px);
+        display: grid;
+        place-content: center;
+    }
+    input[type="checkbox"]::before {
+        content: "";
+        width: 0.5em;
+        height: 0.5em;
+        transform: scale(0);
+        background-color: #fff;
+        box-shadow: inset 1em 1em #fff;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+    input[type="checkbox"]:checked::before {
+        transform: scale(1);
+    }
+
+    .yakuza-list li {
+        padding: 1rem 1.5rem;
+    }
+    /* TODO adjust for themes */
+    .yakuza-list li:nth-child(even) {
+        background-color: var(--bg-project-1);
+    }
+    .yakuza-tierlist > div:nth-child(even) {
+        background-color: var(--bg-project-1);
+    }
+</style>
+<style is:global>
+    .yakuza-title {
+        font-family: var(--font-yakuza);
+        font-weight: 500;
+    }
+
+</style>

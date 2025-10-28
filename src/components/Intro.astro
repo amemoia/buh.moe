@@ -1,0 +1,15 @@
+---
+const { page, title, titleClass } = Astro.props;
+var titleClassFinal;
+if (titleClass == null || titleClass == '') {
+    titleClassFinal = "text-3xl font-bold";
+}
+else titleClassFinal = titleClass;
+---
+<div class="intro-section flex flex-col mb-8 mt-4 mx-4">
+    <span class="p-2 bg-accent-red w-fit font-black rounded-md text-sm mb-2 text-white"+>{page}</span>
+    <p class={titleClassFinal}>{title}</p>
+    <p>
+        <slot />
+    </p>
+</div>

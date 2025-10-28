@@ -5,6 +5,7 @@ import Profile from '../components/Profile.astro';
 import Clock from '../components/Clock.astro';
 import SocialButton from '../components/SocialButton.astro';
 import FriendButton from '../components/FriendButton.astro';
+import Intro from '../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import Mina from '../assets/general/mina-banner.png';
@@ -19,13 +20,11 @@ const github = "https://github.com/amemoia"
 
 ---
 
-<Base title="amemoia" class="flex flex-col gap-4">
+<Base title="amemoia">
 
-    <div class="flex flex-col mb-8 mt-4 ml-4">
-        <span class="p-2 bg-accent-red w-fit font-black rounded-md text-sm mb-2 text-white">/ index</span>
-        <p class="text-3xl font-bold">hi there!</p>
-        <p>I'm <span class="text-accent-red font-bold">alex / ola</span>, a 21yo student from <span class="text-accent-red font-bold">🇵🇱 Poland</span></p>
-    </div>
+    <Intro page="/ index" title="hi there!">
+        I'm <span class="text-accent-red font-bold">alex / ola</span>, a 21yo student from <span class="text-accent-red font-bold">🇵🇱 Poland</span>
+    </Intro>
 
 	<Block title="Checking me out?" gradient="red" bannerImage={Mina}>
         <div class="content-grid">

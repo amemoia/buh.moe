@@ -93,28 +93,38 @@ const tierlist = {
         --rank2: var(--orange2);
         --rank3: var(--orange3);
     }
-    .rank0 {background-color: var(--rank0);}    
-    .rank1 {background-color: var(--rank1);}    
-    .rank2 {background-color: var(--rank2);}    
-    .rank3 {background-color: var(--rank3);}    
-    .rank4 {background-color: var(--rank4);}    
-    .rank5 {background-color: var(--rank5);}    
+    .rank0 { background-color: var(--rank0); }    
+    .rank1 { background-color: var(--rank1); }    
+    .rank2 { background-color: var(--rank2); }    
+    .rank3 { background-color: var(--rank3); }    
+    .rank4 { background-color: var(--rank4); }    
+    .rank5 { background-color: var(--rank5); }    
 
-    /* Tier list layout */
-    .yakuza-tierlist { display: flex; flex-direction: column; }
-    /* Ensure the tier row's children can stretch to the same height */
-    .yakuza-tierlist-tier { display: flex; flex-direction: row; align-items: stretch !important; }
+    .yakuza-tierlist {
+        display: flex;
+        flex-direction: column;
+    }
+    .yakuza-tierlist-tier {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch !important;
+    }
     .yakuza-tierlist-label {
         display: flex;
         align-items: center;
         justify-content: center;
-        align-self: stretch; /* fill the available height of the parent */
-        min-height: 8em; /* keep a sensible minimum */
+        align-self: stretch; 
+        min-height: 8em; 
         min-width: 8em;
         font-weight: bolder;
         color: #000;
         flex-shrink: 0;
-        padding: 0.5rem; /* small padding so text isn't flush */
+        padding: 0.5rem;
+    }
+
+    .yakuza-tierlist:last-child > div {
+        border-bottom-left-radius: var(--radius-default);
+        border-bottom-right-radius: var(--radius-default);
     }
 
     .yakuza-tierlist-games { display: flex; flex-wrap: wrap; align-items: flex-start; }
@@ -124,19 +134,16 @@ const tierlist = {
         object-fit: contain;
     }
 
-    /* Make tierlist responsive */
     @media (max-width: 640px) {
-        .yakuza-tierlist-tier { flex-direction: column; align-items: flex-start; }
+        .yakuza-tierlist-tier { flex-direction: column; }
         .yakuza-tierlist-label {
             width: 100%;
             height: auto;
-            justify-content: flex-start;
+            min-height: 4em;
+            padding: 0em 0em;
+            justify-content: center;
         }
-        .yakuza-tierlist-games { width: 100%; justify-content: flex-start; }
-        .yakuza-tierlist-image { width: 8em; height: 8em; }
-    }
-
-    @media (min-width: 641px) and (max-width: 1024px) {
+        .yakuza-tierlist-games { width: 100%; justify-content: center; }
         .yakuza-tierlist-image { width: 8em; height: 8em; }
     }
 
@@ -174,12 +181,20 @@ const tierlist = {
     .yakuza-list li {
         padding: 1rem 1.5rem;
     }
-    /* TODO adjust for themes */
     .yakuza-list li:nth-child(even) {
         background-color: var(--bg-project-1);
     }
     .yakuza-tierlist > div:nth-child(even) {
         background-color: var(--bg-project-1);
+    }
+
+    @media (max-width: 640px) {
+        .yakuza-list li > span:first-of-type {
+            width: 20em;
+        }
+        .yakuza-list li > span:last-of-type {
+            width: 8em;
+        }
     }
 </style>
 <style is:global>

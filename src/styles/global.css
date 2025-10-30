@@ -136,6 +136,12 @@ main {
     z-index: 1;
 }
 
+@media (max-width: 900px) {
+    main {
+        padding: 1em;
+    }
+}
+
 body::before {
     content: '';
     position: absolute;

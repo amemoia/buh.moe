@@ -37,10 +37,11 @@ const posts: Post[] = (entries as any[])
 
 <Base title="buh / blog">
     <Intro page="/ blog" title="yapping section">
-        A small collection of posts.
+        witness the freshly pressed brain juice of an autistic person
     </Intro>
 
     <div class="flex flex-col gap-4">
+        <p class="p-4 font-bold text-center">No posts right now, starting fresh!</p>
         {posts.map((post) => (
             <a href={`/blog/${post.slug}`} class="p-4 bg-secondary radius-default flex flex-col gap-2 border-color-default border">
                 <div class="text-xl font-bold">{post.title}</div>

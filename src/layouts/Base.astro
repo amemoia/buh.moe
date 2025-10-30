@@ -6,9 +6,11 @@ const {
 	url,
 	class: className,
 } = Astro.props;
+
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import '../styles/global.css'
+
 var classNameTotal;
 if (className == null || className== '') {
 		classNameTotal = "flex flex-col gap-4"
@@ -42,13 +44,18 @@ const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : 
 		<meta property="og:url" content={pageUrl} />
 		<meta property="og:image" content={absoluteImage} />
 		<meta property="og:site_name" content="buh.moe" />
-		<meta name="theme-color" content="#d20f39">
+		<meta content="#d20f39" data-react-helmet="true" name="theme-color" />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={absoluteImage} />
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
 	</head>
 
 	<body>

@@ -1,0 +1,45 @@
+---
+import Base from "../../layouts/Base.astro";
+import Intro from "../../components/Intro.astro";
+
+import '../../styles/blogpost.css';
+
+export async function getStaticPaths() {
+  const blogfiles = import.meta.glob('../../blog/*.md', { eager: true }) as Record<string, any>;
+  return Object.keys(blogfiles).map((path) => {
+    const file = path.split('/').pop() || '';
+    const slug = file.replace('.md', '');
+    return { params: { slug } };
+  });
+}
+
+const { slug } = Astro.params;
+const blogfiles = import.meta.glob('../../blog/*.md', { eager: true }) as Record<string, any>;
+const key = `../../blog/${slug}.md`;
+const post = blogfiles[key] as any;
+if (!post) {
+  throw new Error(`Post not found: ${slug}`);
+}
+const frontmatter = post.frontmatter || post.metadata || {};
+const Content = post.default;
+
+const formatDate = (d: string | null | undefined) => {
+  if (!d) return '';
+  const dt = new Date(d);
+  const month = dt.toLocaleString('en-US', { month: 'long' });
+  const day = dt.getDate();
+  const year = dt.getFullYear();
+  return `${month} ${day}, ${year}`;
+};
+---
+
+<Base title={frontmatter.title} description={frontmatter.description}>
+    <Intro page={formatDate(frontmatter.date)} title={frontmatter.title}>
+        {frontmatter.description}
+    </Intro>
+    
+    <div class="mx-4 flex flex-col gap-2">
+        <Content />
+    </div>
+
+</Base>

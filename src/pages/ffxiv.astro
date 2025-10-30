@@ -1,87 +1,75 @@
 ---
-const charLink = "https://eu.finalfantasyxiv.com/lodestone/character/46616687/";
-const world = "✿ Phoenix (Light)";
-const msq = "Post-Dawntrail"
+const lodestone = "https://eu.finalfantasyxiv.com/lodestone/character/46616687/"
+const render = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a9dbf9d9fe_5047bc596a4bab2dc7f7c120bb22dec5fl0.jpg?1755017723"
 
-const jobs = {
+const name = "B'occhi Rhock";
+const world = "✿ Phoenix (Light)";
+const fc = "None";
+const msq = "Post-Dawntrail (7.3)"
+const levels = {
     viper: "100",
     pictomancer: "100",
     redmage: "90",
     bard: "90",
     reaper: "90",
     samurai: "80",
-    whitemage: "50",
-    warrior: "40"
-};
+    whitemage: "60",
+    warrior: "40",
+}
 
-const healers =  ["whitemage", "scholar", "astrologian", "sage"];
-const tanks   =  ["paladin", "warrior", "dark knight", "gunbreaker"];
+const healers = ["whitemage", "scholar", "astrologian", "sage"];
+const tanks   = ["paladin", "warrior", "dark knight", "gunbreaker"];
 
+import Base from '../layouts/Base.astro';
+import Block from '../components/Block.astro';
+import Intro from '../components/Intro.astro';
+import Image from 'astro/components/Image.astro';
 
-import bocchiPlate from "../img/sites/bocchi-newplate.png";
-import bocchiRender from "../img/sites/bocchi-render.jpg";
-
-import LayoutBase from "../components/LayoutBase.astro";
-import Container from "../components/Container.astro";
-import ContSection from "../components/ContSection.astro";
-import { Image } from "astro:assets";
-import '../styles/ffxiv.css';
-import ContTitle from "../components/ContTitle.astro";
-const pageTitle = "ame / ffxiv"
-const description = "buh"
-// it turns out lodestone character images have a static url
-const lodestoneUrl = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a9dbf9d9fe_5047bc596a4bab2dc7f7c120bb22dec5fl0.jpg?1755017723";
+const pageDesc = name+" "+world;
 ---
 
-<LayoutBase pageTitle={pageTitle}>
-    <div class="ffxiv-divplate">
-        <Image
-            src={bocchiPlate}
-            alt="B'occhi Rhock's Adventurer Plate"
-            class="ffxiv-advplate"
-            loading="eager"
-        />
-    </div>
+<Base title="buh / ffxiv" class="flex flex-col gap-4" description={pageDesc}>
 
-    <Container args="container-color-blue">
-        <ContTitle>
-            <h3 class="subheader">{world}</h3>
-            <h1><a href={charLink} target="_blank" class="accent-none">B'occhi Rhock</a></h1>
-        </ContTitle>
-        <ContSection>
-            <div class="ffxiv-characterinfo flex row" style="gap: 2em; margin-top: 0.5em;">
-                <Image
-                    src={lodestoneUrl}
-                    alt="A render of B'occhi Rhock"
-                    class="ffxiv-render"
-                    inferSize={true}
-                />
-                <div class="ffxiv-infopanel flex col" style="gap: 0.5em;">
-                    <div>
-                        <h3>Free Company</h3>
-                        <p>None</p>
-                    </div>
-                    <div>
-                        <h3>MSQ Progress</h3>
-                        <p>{msq}</p>
-                    </div>
-                <div>
-                    <h3>Main Jobs</h3>
-                    <div class="ffxiv-jobs-container flex col">
-                        <script define:vars={{ jobs, healers, tanks }}>
+    <Intro page="/ ffxiv" title="thal's balls!">
+        I'm not too active because I can't always afford my sub. My current goal for when I return to the game is to finish my plugin.
+    </Intro>
+
+    <Block title="B'occhi Rhock" link={lodestone} gradient="red" class="flex flex-col md:flex-row gap-4">
+        <Image src={render} alt="A render of B'occhi Rhock" inferSize={true} class="ffxiv-render" />
+
+        <div class="flex flex-col gap-2">
+            <div class="flex flex-col">
+                <span class="font-extrabold">World</span>
+                <span>{world}</span>
+            </div>
+
+            <div class="flex flex-col">
+                <span class="font-extrabold">Free Company</span>
+                <span>{fc}</span>
+            </div>
+
+            <div class="flex flex-col">
+                <span class="font-extrabold">MSQ Progress</span>
+                <span>{msq}</span>
+            </div>
+
+            <div>
+                <span class="font-extrabold">Main Jobs</span>
+                <div class="jobs-list flex flex-col gap-2">
+                    <script define:vars={{ levels, healers, tanks }}>
                             const jobDivTank = document.createElement("div");
-                            jobDivTank.classList.add("ffxiv-jobs", "flex", "row", "ffxiv-jobs-tank");
+                            jobDivTank.classList.add("job", "job-tank");
                             const jobDivHealer = document.createElement("div");
-                            jobDivHealer.classList.add("ffxiv-jobs", "flex", "row", "ffxiv-jobs-healer");
+                            jobDivHealer.classList.add("job", "job-healer");
                             const jobDivDps = document.createElement("div");
-                            jobDivDps.classList.add("ffxiv-jobs", "flex", "row", "ffxiv-jobs-dps");
-                            const mainDiv = document.getElementsByClassName("ffxiv-jobs-container")[0];
-                            for (const [jobname, level] of Object.entries(jobs)) {
+                            jobDivDps.classList.add("job", "job-dps", "gap-2");
+                            const mainDiv = document.getElementsByClassName("jobs-list")[0];
+                            for (const [jobname, level] of Object.entries(levels)) {
                                 const classjob = document.createElement("div");
                                 classjob.classList.add("classjob");
                                 const img = document.createElement("img");
                                 img.src =
-                                    "/resources/classjob/" + jobname + ".png";
+                                    "/classjob/" + jobname + ".png";
                                 img.classList.add("ffxiv-jobicon");
                                 const span = document.createElement("span");
                                 span.innerHTML = level;
@@ -94,11 +82,51 @@ const lodestoneUrl = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a
                             mainDiv.appendChild(jobDivDps);
                             mainDiv.appendChild(jobDivTank);
                             mainDiv.appendChild(jobDivHealer);
-                        </script>
-                    </div>
-                </div>
+                    </script>
                 </div>
             </div>
-        </ContSection>
-    </Container>
-</LayoutBase>
+        </div>
+	</Block>
+
+</Base>
+
+<style is:global>
+    .ffxiv-render {
+        width: 100%;
+        height: auto;
+        max-width: 420px; 
+        max-height: 310px;
+        object-fit: cover;
+        object-position: top;
+        border-radius: var(--radius-default);
+        border: 1px solid var(--border-color);
+    }
+    @media (min-width: 768px) {
+        .ffxiv-render {
+            width: auto;
+            height: 310px;
+            max-width: none;
+        }
+    }
+    .job {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+	.classjob {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.25rem;
+        background: var(--bg-default);
+        padding: 0.25rem;
+        padding-right: 0.30rem;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+    }
+	.ffxiv-jobicon {
+        width: 24px;
+        height: 24px;
+    }
+</style>
+

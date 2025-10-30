@@ -1,0 +1,44 @@
+---
+import Base from "../layouts/Base.astro";
+import Intro from "../components/Intro.astro";
+import Project from "../components/Project.astro";
+
+const pageDesc = "here's some stuff I worked on"
+---
+<Base title="buh / projects"  description={pageDesc}>
+
+    <Intro page="/ projects" title={pageDesc}>
+        Here's a few projects I feel good enough about to show off.
+        I also worked on a few other things like modding, mapping and datamining in Source Engine games,
+        as well as some Discord bots.
+        Additionally, I have experience with languages that aren't listed below, such as PHP and various SQL versions.
+        I'm also no stranger to running a server and selfhost a few services.
+    </Intro>
+
+    <Project
+        title="Astral Search"
+        date="still cooking..."
+        tags="C#, Dalamud, FFXIV"
+        description="A spotlight-like search plugin for FFXIV I made to learn C#, loosely based on another plugin called Wotsit. Among the changes are a new UI and backend changes to add more customizability, like disabling individual commands."
+    />
+    <Project
+        title="buh.moe (current)"
+        date="October 2025"
+        tags="HTML, CSS, JS, Astro"
+        link="https://buh.moe/"
+        description="I change the design of my website pretty often, I think this is the 3rd version this year? This design adds a few dynamic elements like my Discord status, uses more Astro features and keeps some cool things from my previous Deadlock theme. I also switched from vercel (ewwww) to cloudflare for hosting"
+    />
+    <Project
+        title="amemoia.nekoweb.org"
+        date="January 2024"
+        tags="HTML, CSS, JS"
+        link="https://amemoia.nekoweb.org/"
+        description="A website modeled after Needy Streamer Overload's UI, trying to be as faithful to the game as possible. I mostly consider this abandoned as it was a pain to update. Still available to view on my Nekoweb."
+    />
+    <Project
+        title="Various Discord bots"
+        date="2018-2021"
+        tags="Python, discord.py"
+        description="I made a bunch of bots over the years. They had a wide range of modules so you could take a few cogs and package it up as a more specialized bot, like for role color selection or creating a list of server emotes. The Python skills from this pretty much carried me through school which in turn got me into my university of choice."
+    />
+</Base>

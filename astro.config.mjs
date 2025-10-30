@@ -1,13 +1,31 @@
-import { defineConfig } from 'astro/config';
-// Import /static for a static site
-import vercel from '@astrojs/vercel';
+// @ts-check
+import { defineConfig } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
+import icon from "astro-icon";
+
+import cloudflare from "@astrojs/cloudflare";
+
+// https://astro.build/config
 export default defineConfig({
-    // Must be 'static' or 'hybrid'
-    site: "https://buh.moe",
-    output: 'static',
-    adapter: vercel({
-      webAnalytics: {
-        enabled: true,
+  integrations: [icon()],
+
+  vite: {
+    plugins: [tailwindcss()],
+    server: {
+      allowedHosts: [
+        'saeko'
+      ]
+    }
+  },
+
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
       },
-    }),
-  });
+    },
+  },
+
+  adapter: cloudflare(),
+});

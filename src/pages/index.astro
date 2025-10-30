@@ -1,103 +1,294 @@
 ---
-import LayoutBase from "../components/LayoutBase.astro"
-import Container from "../components/Container.astro"
-import ContTitle from "../components/ContTitle.astro"
-import ContSection from "../components/ContSection.astro"
-import SocialLink from "../components/SocialLink.astro"
-import FriendButton from "../components/FriendButton.astro"
-import { Image } from "astro:assets"
-const twitter = "https://x.com/amemoia"
+import Base from '../layouts/Base.astro';
+import Block from '../components/Block.astro';
+import Profile from '../components/Profile.astro';
+import Clock from '../components/Clock.astro';
+import SocialButton from '../components/SocialButton.astro';
+import FriendButton from '../components/FriendButton.astro';
+import Intro from '../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import Mina from '../assets/general/mina-banner.png';
+import DeadlockIcon from '../assets/icons/deadlock.png';
+
+// social urls
+const bsky = "https://bsky.app/profile/buh.moe";
+const twitter = "https://twitter.com/amemoia";
 const discord = "https://discord.com/users/254204775497859073"
-const github = "https://github.com/amemoia"
 const steam = "https://steamcommunity.com/id/amemoia/"
-const bsky = "https://bsky.app/profile/buh.moe"
-import "../styles/index.css"
-import nta from "../img/buttons/nta.png"
-import ContTitle from "../components/ContTitle.astro"
-const pageTitle = "amemoia"
-const description = "buh"
+const github = "https://github.com/amemoia"
+
 ---
-<LayoutBase pageTitle={pageTitle}>
-    <Container title="ABOUT ME">
-        <div class="mina-layer mina-banner">
-            <div class="halftone">
-                <h3 class="subheader">ALEX BUH</h3>
-                <h1>Hi there!</h1>
-            </div>  
+
+<Base title="amemoia">
+
+    <Intro page="/ index" title="hi there!">
+        I'm <span class="text-accent-red font-bold">alex / ola</span>, a 21yo student from <span class="text-accent-red font-bold">🇵🇱 Poland</span>
+    </Intro>
+
+	<Block title="Checking me out?" gradient="red" bannerImage={Mina}>
+        <div class="content-grid">
+            <div class="subsection sec-profile">
+                <Profile />
+            </div>
+            <div class="subsection flex flex-col justify-center sec-clock">
+                <Clock />
+            </div>
+            <div class="flex flex-col subsection sec-interests">
+                <p class="font-semibold">Some of my interests:</p>
+                <div class="interests-container">
+                    <ul class="interest-list">
+                        <li><Icon name="fa6-solid:code" class="interest-icon" />Programming</li>
+                        <li><Icon name="fa6-solid:palette" class="interest-icon" />UI Design</li>
+                        <li><Icon name="fa6-solid:gamepad" class="interest-icon" />Game Design</li>
+                    </ul>
+                    <ul class="interest-list">
+                        <li><Icon name="simple-icons:steam" class="interest-icon" />Valve Software</li>
+                        <li><Icon name="fa6-solid:dragon" class="interest-icon" />RGG Studio</li>
+                        <li><Icon name="fa6-solid:meteor" class="interest-icon" />Final Fantasy XIV</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <ContSection tier={3}>
-            <span class="italic">Welcome to buh.moe</span>
-        </ContSection>
-        <ContSection tier={1}>
-            <p>I'm <span class="accent-red bold">alex</span>, a 21yo student from <span class="accent-red bold">🇵🇱 Poland</span></p>    
-            <p>I'm interested in:</p>
-            <ContSection>
-                <div class="flex row" style="gap: 1em;">
-                    <ul style="list-style: none;">
-                        <li class="accent-purple"><i class="fa-solid fa-laptop"></i> Programming</li>
-                        <li class="accent-purple"><i class="fa-solid fa-pencil" style="margin: 0px 2px;"></i> UI design</li>
-                        <li class="accent-purple"><i class="fa-solid fa-gamepad"></i> Game design</li>
-                    </ul>
-                    <ul style="list-style: none;">
-                        <li class="accent-red"><i class="fa-brands fa-steam li-fa"></i> Valve Software</li>
-                        <li class="accent-red"><i class="fa-solid fa-dragon" style="margin-right: 2px;"></i> Ryu Ga Gotoku Studio</li>
-                        <li class="accent-red"><i class="fa-solid fa-meteor li-fa"></i> Final Fantasy XIV</li>
-                    </ul>
-                </div>
-            </ContSection>
-        </ContSection>
-        <ContSection tier={2}>
-            This website is inspired by <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" class="dl-logo accent-green">Deadlock</a>, an upcoming game by Valve.
-        </ContSection>
-    </Container>
 
-    <Container title="LINKS">
-        <ContTitle>
-            <h1>Contact</h1>
-        </ContTitle>
-        <ContSection tier={3}>
-            <span class="italic">You can find me on the following socials</span>
-        </ContSection>
-            <div class="flex row">
-                <div class="flex col links">
-                    <SocialLink link={bsky} icon="bluesky" label="Bluesky" account="@buh.moe" />
-                    <SocialLink link={twitter} icon="twitter" label="Twitter" account="@amemoia" />
-                    <SocialLink link={discord} icon="discord" label="Discord" account="@buh.moe" />
-                </div>
-                <div class="flex col links">
-                    <SocialLink link={github} icon="github" label="GitHub" account="@amemoia" />
-                    <SocialLink link={steam} icon="steam" label="Steam" account="/id/amemoia" />
-                    <div class="container-section-t1" style="width: 100%; height: 100%;"></div>
-                </div>
-            </div>
-    </Container>
+        <p class="ml-1">My website is partially inspired by and uses assets from <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" rel="noopener noreferrer" class="deadlock-link"><span class="deadlock-text"><Image src={DeadlockIcon} alt="Deadlock icon" class="deadlock-icon" /><span class="text-deadlock-green font-bold">Deadlock</span></span></a>, an upcoming game by Valve.</p>
+    </Block>
 
-    <Container title="BUTTONS">
-        <ContTitle>
-            <h1>Cool places and friends</h1>
-        </ContTitle>
-        <ContSection tier={1}>
-            <div class="buttons flex row">
-                <FriendButton link="https://themooskyfish.nekoweb.org" image="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" />
-                <FriendButton link="https://sapphic.moe" image="https://sapphic.moe/buttons/sapphic.png" alt="sapphic.moe" />
-                <FriendButton link="https://ada.cat" image="https://ada.cat/b/me.gif" alt="ada.cat" />
-                <FriendButton link="https://babybreaths.nekoweb.org" image="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" />
-                <FriendButton link="https://remblanc.nekoweb.org" image="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" />
-                <FriendButton link="https://hoshimiuwu.github.io" image="https://hoshimiuwu.github.io/HideawayHotlink.gif" alt="jumpyuvu" />
-                <FriendButton link="https://notnite.com/" image="https://notnite.com/buttons/notnite.png" alt="notnite" />
-                <FriendButton link="https://nanoshinono.me/" image="https://nanoshinono.me/prefetcher.gif" alt="prefetcher" />
-                <FriendButton link="https://ata.moe/" image="https://ata.moe/88x31.png" alt="ata.moe" />
-                <FriendButton link="https://nekoweb.org/" image="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" />
-            </div>
-        </ContSection>
-        <ContSection tier={3}>
-            <span class="buttons-msg">Feel free to add my button to your site!</span>
-        </ContSection>
-        <ContSection tier={2}>
-            <div class="flex row" style="justify-content: center;">
-                <a href="https://buh.moe/" target="_blank"><Image src="https://buh.moe/resources/buttons/88x31.gif" width="88" height="31" alt="amemoia" /></a>
-                <textarea onclick="this.select()" readonly cols="70" rows="2">&lt;a href="https://buh.moe/" target="_blank"&gt;&lt;img src="https://buh.moe/resources/buttons/88x31.gif"&gt;&lt;/a&gt;</textarea>
-            </div>
-        </ContSection>
-    </Container>
-</LayoutBase>
+    <Block title="Socials" class="socials-block">
+        <div class="socials-grid">
+            <SocialButton 
+                icon="simple-icons:bluesky" 
+                name="Bluesky" 
+                handle="@buh.moe"
+                url={bsky}
+                color="#0C7BFF"
+            />
+            <SocialButton 
+                icon="simple-icons:twitter" 
+                name="Twitter" 
+                handle="@amemoia"
+                url={twitter}
+                color="#1DA1F2"
+            />
+            <SocialButton 
+                icon="simple-icons:steam" 
+                name="Steam" 
+                handle="/id/amemoia"
+                url={steam}
+                color="#1A9FFF"
+            />
+            <SocialButton 
+                icon="simple-icons:discord" 
+                name="Discord" 
+                handle="@buh.moe"
+                url={discord}
+                color="#5865F2"
+            />
+            <SocialButton 
+                icon="simple-icons:github" 
+                name="GitHub" 
+                handle="@amemoia"
+                url={github}
+                color="#8B5CF6"
+            />
+        </div>
+    </Block>
+
+    <div class="flex flex-col gap-4">
+        <div class="friends-container mt-2 gap-0">
+            <FriendButton src="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" url="https://themooskyfish.nekoweb.org" />
+            <FriendButton src="https://sapphic.moe/buttons/sapphic.png" alt="sapphic.moe" url="https://sapphic.moe" />
+            <FriendButton src="https://ada.cat/b/me.gif" alt="ada.cat" url="https://ada.cat" />
+            <FriendButton src="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" url="https://babybreaths.nekoweb.org" />
+            <FriendButton src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" url="https://remblanc.nekoweb.org" />
+            <FriendButton src="https://hoshimiuwu.github.io/HideawayHotlink.gif" alt="jumpyuvu" url="https://hoshimiuwu.github.io" />
+            <FriendButton src="https://notnite.com/buttons/notnite.png" alt="notnite" url="https://notnite.com/" />
+            <FriendButton src="https://nanoshinono.me/prefetcher.gif" alt="prefetcher" url="https://nanoshinono.me/" />
+        <!--
+            rip ata.moe?
+            <FriendButton src="https://ata.moe/88x31.png" alt="ata.moe" url="https://ata.moe/" />
+        -->
+            <FriendButton src="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" url="https://nekoweb.org/" />
+        </div>
+
+        <div class="my-button-section">
+            <button class="button-preview" id="copy-button" type="button" aria-label="Copy button code">
+                <img src="/resources/buttons/88x31.gif" alt="amemoia" width="88" height="31" />
+            </button>
+            <span class="text-sm copy-hint" id="copy-hint">(click to copy code)</span>
+        </div>
+    </div>
+</Base>
+
+<script>
+    const copyButton = document.getElementById('copy-button');
+    const copyHint = document.getElementById('copy-hint');
+    const codeText = '<a href="https://buh.moe/" target="_blank"><img src="https://buh.moe/resources/buttons/88x31.gif"></a>';
+    
+    if (copyButton && copyHint) {
+        copyButton.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(codeText);
+                copyHint.textContent = 'Copied!';
+                copyHint.classList.add('copied');
+                setTimeout(() => {
+                    copyHint.textContent = '(click to copy code)';
+                    copyHint.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                copyHint.textContent = 'Failed to copy';
+            }
+        });
+    }
+</script>
+
+<style>
+    .content-grid {
+        display: flex;
+        gap: 1rem;
+    }
+    .sec-interests {
+            width: 100%;
+    }
+    @media (max-width: 1024px) {
+        .sec-profile, .sec-clock {
+            width: calc(50% - 0.5rem);
+        }
+        .content-grid {
+            flex-wrap: wrap;
+        }
+    }
+
+    @media (max-width: theme('screens.md')) {
+        .sec-profile, .sec-clock, .sec-interests {
+            width: 100%
+        }
+        .content-grid {
+            flex-wrap: wrap;
+        }
+    }
+    
+    .interests-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 2rem;
+    }
+    
+    .interests-container ul {
+        min-width: max-content;
+    }
+
+    @media (max-width: theme('screens.md')) {
+        .interests-container ul {
+            min-width: unset;
+        }
+    }
+    
+    .interest-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .interest-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        flex-shrink: 0;
+        color: var(--accent-red);
+    }
+    
+    .deadlock-link {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .deadlock-text {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.25rem;
+    }
+    
+    .deadlock-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        display: inline-block;
+        transform: translateY(4px);
+    }
+
+    .socials-grid {
+        display: grid;
+        /* auto-fit lets columns collapse to fill space; minmax ensures a sensible minimum
+           while 1fr makes columns stretch to fill the row so items fill the container */
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1rem;
+        align-items: stretch;
+        justify-items: stretch;
+    }
+
+    /* Explicit breakpoints so rows have equal length on narrower screens */
+    @media (max-width: 900px) {
+        .socials-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .socials-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 420px) {
+        .socials-grid {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    .friends-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .my-button-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-preview {
+        flex-shrink: 0;
+        background: none;
+        border: 2px solid transparent;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 2px;
+    }
+
+    .button-preview:hover {
+        border-color: var(--accent-red);
+        transform: scale(1.05);
+    }
+
+    .button-preview:active {
+        transform: scale(0.95);
+    }
+
+    .button-preview img {
+        display: block;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+    }
+
+    .copy-hint {
+        transition: color 0.2s ease;
+        color: var(--text-tertiary);
+    }
+
+    .copy-hint.copied {
+        color: var(--accent-red);
+    }
+</style>

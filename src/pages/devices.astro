@@ -1,0 +1,83 @@
+---
+const specs = {
+    akame: [
+        { icon: 'fa6-brands:windows', label: 'OS', value: 'Windows 10 Pro' },
+        { icon: 'lucide:cpu', label: 'CPU', value: 'i5-7400' },
+        { icon: 'lucide:monitor-cog', label: 'GPU', value: 'GTX 1650 Super' },
+        { icon: 'lucide:memory-stick', label: 'RAM', value: '16GB' },
+        { icon: 'lucide:hard-drive', label: 'Disk', 'value': '2TB Total' },
+    ],
+    saeko: [
+        { icon: 'simple-icons:apple', label: 'OS', value: 'macOS 26 Tahoe' },
+        { icon: 'lucide:laptop', label: 'Model', value: 'MacBook Air (2022)' },
+        { icon: 'lucide:cpu', label: 'CPU', value: 'Apple M2 (8-core)' },
+        { icon: 'lucide:monitor-cog', label: 'GPU', value: 'Apple M2 (10-core)' },
+        { icon: 'lucide:memory-stick', label: 'RAM', value: '16GB' },
+        { icon: 'lucide:hard-drive', label: 'Disk', value: '512GB' },
+    ],
+    yumi: [
+        { icon: 'lucide:cloud', label: 'Server', value: 'OVHcloud VPS-1' },
+        { icon: 'lucide:cpu', label: 'CPU', value: '4 vCores' },
+        { icon: 'lucide:memory-stick', label: 'RAM', value: '8 GB' },
+        { icon: 'lucide:hard-drive', label: 'Disk', value: '75 GB SSD' },
+    ],
+    services: [
+        { icon: 'lucide:cloud', label: 'glanceapp / Glance', value: 'Dashboard that puts all your feeds in one place' },
+        { icon: 'lucide:cloud', label: 'imputnet / cobalt', value: 'An instance of cobalt.tools for media downloading' },
+        { icon: 'lucide:cloud', label: 'Kyrela / FixTweetBot', value: 'For some reason the official bot goes down all the time' },
+        { icon: 'lucide:cloud', label: 'diced / Zipline', value: 'A ShareX / file upload server with a bunch of features' },
+    ],
+    peripherals: [
+        { icon: 'lucide:mouse', label: 'Mouse', value: 'Logitech G Pro Superlight' },
+        { icon: 'lucide:square', label: 'Mousepad', value: 'Logitech G640' },
+        { icon: 'lucide:keyboard', label: 'Keyboard', value: 'HyperX Alloy FPS' },
+        { icon: 'lucide:headphones', label: 'Audio', value: 'Razer Kraken Pro V2 / AirPods Pro 2' },
+    ],
+    software: [
+        { icon: 'lucide:globe', label: 'Browser', value: 'Helium - A no-bullshit chromium browser made by the guys behind cobalt.tools' },
+        { icon: 'lucide:search', label: 'Search', value: "DuckDuckGo - The best (free) choice if you don't want to use Google" },
+        { icon: 'lucide:music', label: 'Music', value: 'Cider - A community-made client for Apple Music' },
+        { icon: 'lucide:pen', label: 'Notes', value: 'Obsidian - A very good Markdown-based notes app with lots of community-made plugins'},
+        { icon: 'lucide:lock', label: 'Auth', value: 'Proton Pass - I just really like the UI, hoping to eventually switch to something selfhosted' },
+        { icon: 'lucide:code', label: 'Editor', value: 'VS Code - My first choice mainly due to the large amount of extensions to choose from' },
+    ]
+};
+
+import Base from "../layouts/Base.astro"
+import Intro from "../components/Intro.astro"
+import Block from "../components/Block.astro"
+import SpecsList from "../components/SpecsList.astro"
+
+const pageDesc = "I like spending time on big computer and going on small computer when I'm tired."
+---
+<Base title="buh / devices"  description={pageDesc}>
+    
+    <Intro page="/ devices" title="my gear">
+        {pageDesc}
+        I may or may not be naming these after Yakuza characters...
+    </Intro>
+
+    <div class="grid gap-4 md:grid-cols-2 not-md:grid-cols-1">
+        <Block title="akame" gradient="red">
+            <SpecsList items={specs.akame} />
+        </Block>
+
+        <Block title="saeko" gradient="red">
+            <SpecsList items={specs.saeko} />
+        </Block>
+
+        <Block title="yumi">
+            <SpecsList items={specs.yumi} />
+        </Block>
+
+        <Block title="peripherals">
+            <SpecsList items={specs.peripherals} />
+        </Block>
+
+
+    </div>
+
+    <Block title="software">
+        <SpecsList items={specs.software} />
+    </Block>
+</Base>

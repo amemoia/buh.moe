@@ -2,6 +2,7 @@
 const lodestone = "https://eu.finalfantasyxiv.com/lodestone/character/46616687/"
 const render = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a9dbf9d9fe_5047bc596a4bab2dc7f7c120bb22dec5fl0.jpg?1755017723"
 
+const name = "B'occhi Rhock";
 const world = "✿ Phoenix (Light)";
 const fc = "None";
 const msq = "Post-Dawntrail (7.3)"
@@ -23,9 +24,11 @@ import Base from '../layouts/Base.astro';
 import Block from '../components/Block.astro';
 import Intro from '../components/Intro.astro';
 import Image from 'astro/components/Image.astro';
+
+const pageDesc = name+" "+world;
 ---
 
-<Base title="buh / ffxiv" class="flex flex-col gap-4">
+<Base title="buh / ffxiv" class="flex flex-col gap-4" description={pageDesc}>
 
     <Intro page="/ ffxiv" title="thal's balls!">
         I'm not too active because I can't always afford my sub. My current goal for when I return to the game is to finish my plugin.

@@ -33,7 +33,7 @@ const formatDate = (d: string | null | undefined) => {
 };
 ---
 
-<Base title={frontmatter.title}>
+<Base title={frontmatter.title} description={frontmatter.description}>
     <Intro page={formatDate(frontmatter.date)} title={frontmatter.title}>
         {frontmatter.description}
     </Intro>

@@ -33,11 +33,13 @@ const posts: Post[] = (entries as any[])
         const tb = b.date ? new Date(b.date).getTime() : 0;
         return tb - ta;
     });
+
+const pageDesc = "witness the freshly pressed brain juice of an autistic person"
 ---
 
-<Base title="buh / blog">
+<Base title="buh / blog" description={pageDesc}>
     <Intro page="/ blog" title="yapping section">
-        witness the freshly pressed brain juice of an autistic person
+        {pageDesc}
     </Intro>
 
     <div class="flex flex-col gap-4">

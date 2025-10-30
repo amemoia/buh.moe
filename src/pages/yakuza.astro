@@ -29,10 +29,12 @@ const tierlist = {
     B : ['Kiwami1', 'Kiwami2', 'LostJudgeKaito', 'Y3', 'Y5', 'Y4'],
     C : ['Kiwami2Majima']
 }
----
-<Base title="buh / yakuza">
 
-    <Intro page="/ yakuza" title="alex buh's yakuza series progress" titleClass="yakuza-title text-6xl text-center">
+const pageDesc = "alex buh's yakuza series progress";
+---
+<Base title="buh / yakuza"  description={pageDesc}>
+
+    <Intro page="/ yakuza" title={pageDesc} titleClass="yakuza-title text-6xl text-center">
         <span>
             <br>
             Unfortunately, this list might not continue due to the ongoing #REMOVEKAGAWA situation surrounding Yakuza Kiwami 3,

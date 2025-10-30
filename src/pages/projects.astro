@@ -2,10 +2,12 @@
 import Base from "../layouts/Base.astro";
 import Intro from "../components/Intro.astro";
 import Project from "../components/Project.astro";
----
-<Base title="buh / projects">
 
-    <Intro page="/ projects" title="here's some stuff I worked on">
+const pageDesc = "here's some stuff I worked on"
+---
+<Base title="buh / projects"  description={pageDesc}>
+
+    <Intro page="/ projects" title={pageDesc}>
         Here's a few projects I feel good enough about to show off.
         I also worked on a few other things like modding, mapping and datamining in Source Engine games,
         as well as some Discord bots.

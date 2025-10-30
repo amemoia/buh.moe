@@ -47,11 +47,13 @@ import Base from "../layouts/Base.astro"
 import Intro from "../components/Intro.astro"
 import Block from "../components/Block.astro"
 import SpecsList from "../components/SpecsList.astro"
+
+const pageDesc = "I like spending time on big computer and going on small computer when I'm tired."
 ---
-<Base title="buh / devices">
+<Base title="buh / devices"  description={pageDesc}>
     
     <Intro page="/ devices" title="my gear">
-        I like spending time on big computer and going on small computer when I'm tired.
+        {pageDesc}
         I may or may not be naming these after Yakuza characters...
     </Intro>
 

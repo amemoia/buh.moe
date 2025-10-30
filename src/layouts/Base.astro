@@ -1,13 +1,29 @@
 ---
-const { title, class: className } = Astro.props;
+const {
+	title = "buh.moe",
+	description = "my little corner of the internet",
+	image = "/resources/avi-embed.png",
+	url,
+	class: className,
+} = Astro.props;
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import '../styles/global.css'
 var classNameTotal;
 if (className == null || className== '') {
-	classNameTotal = "flex flex-col gap-4"
+		classNameTotal = "flex flex-col gap-4"
 }
 else classNameTotal = className;
+
+const siteBase = import.meta.env.SITE ?? Astro.site ?? '';
+let absoluteImage = image;
+try {
+	if (image && !image.startsWith('http') && siteBase) {
+		absoluteImage = new URL(image, siteBase).href;
+	}
+} catch (e) {
+}
+const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : Astro.url.pathname);
 ---
 <!doctype html>
 <html lang="en">
@@ -17,7 +33,21 @@ else classNameTotal = className;
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<!-- Embed -->
+		<meta name="description" content={description} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={pageUrl} />
+		<meta property="og:image" content={absoluteImage} />
+		<meta property="og:site_name" content="buh.moe" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={absoluteImage} />
 	</head>
 
 	<body>

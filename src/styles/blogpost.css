@@ -1,0 +1,22 @@
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1em;
+    font-size: revert;
+    font-weight: revert;
+}
+ul {
+    list-style: revert;
+}
+ul > li {
+    margin-left: 2em;
+}
+hr {
+    color: var(--border-color);
+    margin: 1em;
+}
+.astro-code {
+    padding: 0.5em 1em;
+}
+a {
+    color: var(--accent-red-light);
+    font-weight: bold;
+}

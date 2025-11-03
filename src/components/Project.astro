@@ -1,24 +1,20 @@
 ---
-import Container from "./Container.astro";
-import ContSection from "./ContSection.astro";
-import ContTitle from "./ContTitle.astro";
-const { name, date, tags, link, description } = Astro.props;
+import Block from "./Block.astro";
+import { Icon } from "astro-icon/components";
+const { title, date, description, tags, link} = Astro.props;
 ---
-<Container>
-    <ContTitle>
-        <h1 class="project-name"><a href={link} target="_blank">{name}</a></h1>
-    </ContTitle>
-    <ContSection tier={3}>
-        <span style="font-family: var(--fonts-alt4); text-transform: uppercase;">
-            {tags}
-        </span>
-    </ContSection>
-    <ContSection tier={2}>
-        <span>
-            <i class="fa-solid fa-calendar-days accent-green"></i> {date}
-        </span>
-    </ContSection>
-    <ContSection tier={1}>
-        <p class="project-desc">{description}</p>
-    </ContSection>
-</Container>
+<Block title={title} link={link} class="p-0">
+    <div class="flex flex-row w-full">
+        <div class="w-40 flex flex-row items-center gap-1 text-deadlock-green font-bold bg-project-1 px-4 py-2">
+            <Icon name="lucide:calendar" class="project-icon"/>
+            <span>{date}</span>
+        </div>
+        <div class="flex flex-row items-center gap-1 font-bold bg-project-2 px-4 py-2 flex-1">{tags}</div>
+    </div>
+    <span class="px-4 pt-2 pb-4">{description}</span>
+</Block>
+<style>
+    .project-icon {
+        margin-top: -3px;
+    }
+</style>

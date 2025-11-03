@@ -1,0 +1,85 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    icon: string;
+    name: string;
+    handle: string;
+    url?: string;
+    color?: string;
+}
+
+const { icon, name, handle, url, color = 'var(--accent-red)' } = Astro.props;
+---
+
+<a class="social-button" href={url} target="_blank" rel="noopener noreferrer">
+    <div class="social-icon-bg" style={`background-color: ${color}; box-shadow: 0 2px 12px ${color}25;`}>
+        <Icon name={icon} class="social-icon" />
+    </div>
+    <div class="social-info">
+        <span class="social-name">
+            {name}
+            <Icon name="lucide:square-arrow-out-up-right" class="external-icon" />
+        </span>
+        <span class="social-handle">{handle}</span>
+    </div>
+</a>
+
+<style>
+    .social-button {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-radius: 6px;
+        background-color: var(--bg-tertiary);
+        text-decoration: none;
+        width: 100%; /* fill the grid column */
+        min-width: 0; /* allow shrinking inside grid */
+        border: 1px solid var(--border-color-subtle);
+        box-sizing: border-box;
+    }
+
+    .social-icon-bg {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social-icon {
+        width: 2rem;
+        height: 2rem;
+        color: white;
+    }
+
+    .social-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+    }
+
+    .social-name {
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .external-icon {
+        width: 14px;
+        height: 14px;
+        color: var(--text-secondary);
+        opacity: 0.7;
+        margin-top: -2px;
+    }
+
+    .social-handle {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+</style>

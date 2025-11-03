@@ -1,20 +1,55 @@
 ---
-const { list, ref, color } = Astro.props;
-var color_v;
-if (color == null) {color_v = "orange"}
-else {color_v = color;}
+import { Icon } from 'astro-icon/components';
+type Spec = { icon?: string; label: string; value: string };
+// Give the items prop an explicit type so map callbacks don't infer `any` for `item`.
+const items: Spec[] = (Astro.props.items ?? []) as Spec[];
 ---
-<script define:vars={{ list, ref, color_v }}>
-    let x = 0;
-    for (const [component, name] of Object.entries(list)) {
-        div = document.getElementsByClassName(ref)[0];
-        p = document.createElement("p");
-        p.innerHTML =
-            "<span class='accent-"+color_v+" bold'>" +
-            component +
-            ":</span> " +
-            name;
-        x++;
-        div.appendChild(p);
+<ul class="specs-list">
+    {items.map(item => (
+        <li>
+            <span class="spec-icon">{item.icon ? <Icon name={item.icon} /> : <span aria-hidden="true" />}</span>
+            <span class="spec-label">{item.label}</span>
+            <span class="spec-value">{item.value}</span>
+        </li>
+    ))}
+</ul>
+
+<style>
+    .specs-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: auto max-content 1fr;
+        column-gap: 0.75rem;
+        row-gap: 0.5rem;
+        align-items: center;
     }
-</script>
+    .specs-list > li {
+        display: contents;
+    }
+
+    .spec-icon > svg {
+        width: 1em;
+        height: 1em;
+        color: var(--accent-red);
+        display: block;
+    }
+
+    .spec-icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+    }
+
+    .spec-label {
+        white-space: nowrap;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .spec-value {
+        color: var(--text-secondary);
+        word-break: break-word;
+    }
+</style>

@@ -1,21 +1,55 @@
 ---
-import LayoutBase from "../components/LayoutBase.astro";
-import Blogpost from "../components/Blogpost.astro";
-import Blogtags from "../components/Blogtags.astro";
-import rss, { pagesGlobToRssItems } from '@astrojs/rss';
-import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Intro from "../components/Intro.astro";
+import { Icon } from "astro-icon/components";
 
-const blogPosts = await getCollection('blog')
-blogPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-// Embed information
-const pageTitle = "ame / blog"
-const description = "buh"
-import '../styles/blog.css'
+const blogfiles = import.meta.glob('../blog/*.md', { eager: true }) as Record<string, any>;
+
+const entries = Object.entries(blogfiles).map(([path, mod]) => {
+    const file = path.split('/').pop() || '';
+    const slug = file.replace('.md', '');
+    const fm = (mod && (mod.frontmatter || mod.metadata)) || {};
+    return {
+        slug,
+        title: fm.title || slug,
+        date: fm.date || null,
+        description: fm.description || fm.excerpt || '',
+    } as any;
+});
+
+const formatDate = (d: string | null | undefined) => {
+    if (!d) return '';
+    const dt = new Date(d);
+    const month = dt.toLocaleString('en-US', { month: 'long' });
+    const day = dt.getDate();
+    const year = dt.getFullYear();
+    return `${month} ${day}, ${year}`;
+};
+
+type Post = { slug: string; title: string; date: string | null; description: string };
+const posts: Post[] = (entries as any[])
+    .sort((a: Post, b: Post) => {
+        const ta = a.date ? new Date(a.date).getTime() : 0;
+        const tb = b.date ? new Date(b.date).getTime() : 0;
+        return tb - ta;
+    });
+
+const pageDesc = "witness the freshly pressed brain juice of an autistic person"
 ---
 
-<LayoutBase pageTitle={pageTitle}>
-    <Blogtags />
-    {
-        blogPosts.map((post) => <Blogpost id={post.id} title={post.data.title} description={post.data.description} date={post.data.pubDate} tags={post.data.tags} />)
-    }
-</LayoutBase>
+<Base title="buh / blog" description={pageDesc}>
+    <Intro page="/ blog" title="yapping section">
+        {pageDesc}
+    </Intro>
+
+    <div class="flex flex-col gap-4">
+        <p class="p-4 font-bold text-center">No posts right now, starting fresh!</p>
+        {posts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="p-4 bg-secondary radius-default flex flex-col gap-2 border-color-default border">
+                <div class="text-xl font-bold">{post.title}</div>
+                {post.date ? <div class="flex flex-row gap-1 text-deadlock-green font-semibold"><Icon name="lucide:calendar" class="relative top-0.5" />{formatDate(post.date)}</div> : null}
+                {post.description ? <p class="">{post.description}</p> : null}
+            </a>
+        ))}
+    </div>
+</Base>

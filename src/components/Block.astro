@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+const { title, gradient, bannerImage, link, class: className } = Astro.props;
+---
+<div class="flex flex-col block-wrapper">
+    <a href={link} target="_blank">
+        <div class="block-header" data-gradient={gradient}>
+            <div class="pattern-overlay"></div>
+            <span class="font-bold text-2xl flex flex-row items-center gap-1">
+                {title}
+                {link && (
+                    <Icon name="lucide:square-arrow-out-up-right" class="text-tertiary text-base relative top-0.5" />
+                )}
+            </span>
+            {bannerImage && (
+                <Image src={bannerImage} alt="" class="character-overlay" />
+            )}
+        </div>
+    </a>
+    <div class={"flex flex-col gap-2 block-content "+className}>
+        <slot />
+    </div>
+</div>
+<style>
+    .block-wrapper {
+        border-radius: var(--radius-default);
+        overflow: hidden;
+        /* Make the block fill its grid cell so sibling blocks have equal height */
+        height: 100%;
+    }
+    .block-header {
+        width: 100%;
+        padding: 1em;
+        background-color: var(--bg-tertiary);
+        position: relative;
+        overflow: hidden;
+        border-top-left-radius: var(--radius-default);
+        border-top-right-radius: var(--radius-default);
+        border: 1px solid var(--border-color);
+        border-bottom: none;
+    }
+    .pattern-overlay {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 1100px;
+        height: 1756px;
+        background-image: url('/src/assets/general/pattern-dots.png');
+        background-repeat: repeat;
+        background-size: 110%;
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 1;
+    }
+    @media (prefers-color-scheme: light) {
+        .pattern-overlay {
+            filter: invert(1);
+            opacity: 0.7;
+        }
+    }
+    .block-header > span {
+        position: relative;
+        z-index: 2;
+    }
+    .character-overlay {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 400%;
+        width: auto;
+        pointer-events: none;
+        opacity: 0.9;
+        object-fit: cover;
+        object-position: right center;
+        z-index: 0;
+    }
+    @media (max-width: 1024px) {
+        .character-overlay {
+            display: none;
+        }
+    }
+    .block-header[data-gradient="red"] {
+        background: linear-gradient(135deg, rgba(220, 53, 69, 0.08) 0%, rgba(220, 53, 69, 0.15) 100%);
+        background-color: var(--bg-tertiary);
+    }
+    @media (prefers-color-scheme: light) {
+        .block-header[data-gradient="red"] {
+            background: linear-gradient(135deg, rgba(210, 15, 57, 0.1) 0%, rgba(210, 15, 57, 0.2) 100%);
+            background-color: var(--bg-tertiary);
+        }
+    }
+    .block-content {
+        padding: 1em;
+        background-color: var(--bg-secondary);
+        border-bottom-left-radius: var(--radius-default);
+        border-bottom-right-radius: var(--radius-default);
+        border: 1px solid var(--border-color);
+        border-top: none;
+        flex: 1;
+    }
+    .block-wrapper {
+        border-radius: var(--radius-default);
+        overflow: hidden;
+    }
+    .block-content {
+        border-bottom-left-radius: var(--radius-default);
+        border-bottom-right-radius: var(--radius-default);
+    }
+    .p-0 {
+        padding: 0;
+    }
+</style>

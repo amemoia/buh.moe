@@ -1,23 +1,26 @@
 {
-  "name": "amemoia.github.io",
+  "name": "",
   "type": "module",
-  "version": "2.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.10",
-    "@astrojs/vercel": "^8.0.2",
-    "@vercel/analytics": "^1.4.1",
-    "@vercel/speed-insights": "^1.1.0",
-    "astro": "^5.1.0",
-    "markdown-it": "^14.1.0",
-    "sanitize-html": "^2.13.0",
-    "twemoji-parser": "^14.0.0",
-    "typescript": "^5.5.4"
+    "@iconify-json/fa6-brands": "^1.2.6",
+    "@iconify-json/fa6-solid": "^1.2.4",
+    "@iconify-json/lucide": "^1.2.70",
+    "@iconify-json/simple-icons": "^1.2.55",
+    "@tailwindcss/vite": "^4.1.15",
+    "astro": "^5.14.7",
+    "astro-icon": "^1.1.5",
+    "tailwindcss": "^4.1.15",
+    "twemoji": "^14.0.2"
+  },
+  "devDependencies": {
+    "@astrojs/cloudflare": "^12.6.10",
+    "wrangler": "^4.44.0"
   }
 }

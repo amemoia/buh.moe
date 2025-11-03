@@ -161,19 +161,23 @@ const pageDesc = "alex buh's yakuza series progress";
         color: currentColor;
         width: 16px;
         height: 16px;
+        min-width: 16px;
+        min-height: 16px;
         background-color: var(--accent-red);
         border-radius: 4px;
         transform: translate(0px, 4px);
         display: grid;
         place-content: center;
+        box-sizing: border-box;
+        flex: 0 0 auto;
     }
     input[type="checkbox"]::before {
         content: "";
-        width: 0.5em;
-        height: 0.5em;
+        width: 8px;
+        height: 8px;
         transform: scale(0);
         background-color: #fff;
-        box-shadow: inset 1em 1em #fff;
+        box-shadow: inset 8px 8px #fff;
         clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
     }
     input[type="checkbox"]:checked::before {

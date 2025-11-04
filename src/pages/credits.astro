@@ -1,0 +1,66 @@
+---
+import Base from "../layouts/Base.astro";
+import Intro from "../components/Intro.astro";
+import Block from "../components/Block.astro";
+
+const pageDesc = "stuff i used to make this"
+
+const dlAssetThread = "https://discord.com/channels/1231286446472691825/1329810133131464775"
+const dlAssetGdrive = "https://drive.google.com/drive/folders/1bz9JynTfk9gdFK1xxfUCUq37gPapjY_M"
+const fontRetail = "https://drive.google.com/drive/folders/181SDlcC4ormm-lqdVHN2z-Dt2fz_zWZd";
+const fontRomance = "https://www.dafont.com/romance-fatal-serif.font";
+const fontFira = "https://fonts.google.com/specimen/Fira+Code";
+const fontEdo = "https://www.cdnfonts.com/edo-sz.font";
+---
+<Base title="buh / credits"  description={pageDesc}>
+
+    <Intro page="/ credits" title={pageDesc}>
+        this site would not be possible without these!
+    </Intro>
+
+    <Block title="Tools">
+        <span class="text-xl font-bold">Built with <a href="https://astro.build/" target="_blank">Astro</a></span>
+        <ul class="list-disc">
+            <span class="text-xl font-bold">Integrations</span>
+            <li>Icon sets are handled with the <a href="https://github.com/natemoo-re/astro-icon" target="_blank">natemoo-re/astro-icon</a> integration</li>
+            <li>Database is handled by the official <a href="https://docs.astro.build/en/guides/integrations-guide/db/" target="_blank">@astrojs/db</a> integration and is hosted on Turso</li>
+        </ul>
+
+        <span>Discord profile and status is fetched through the <a href="https://lanyard.eggsy.xyz/" target="_blank">Lanyard API</a></span>
+    </Block>
+
+    <Block title="Icons and Fonts">
+        <ul class="list-disc">
+            <span class="text-xl font-bold">Fonts used</span>
+              <li>Main: <a href="https://fonts.google.com/specimen/Nunito" target="_blank">Nunito</a></li>
+              <li>Code: <a href="https://fonts.google.com/specimen/Fira+Code" target="_blank">Fira Code</a></li>
+              <li>Yakuza Font: <a href="https://www.cdnfonts.com/edo-sz.font" target="_blank">Edo SZ</a></li>
+        </ul>
+        <ul class="list-disc">
+            <span class="text-xl font-bold">Icon packs used</span>
+              <li><a href="https://fontawesome.com/icons?d=gallery&s=brands" target="_blank">fa6-brands</a></li>
+              <li><a href="https://fontawesome.com/icons?d=gallery&s=solid" target="_blank">fa6-solid</a></li>
+              <li><a href="https://lucide.dev/icons/" target="_blank">lucide</a></li>
+              <li><a href="https://simpleicons.org/" target="_blank">simple-icons</a></li>
+        </ul>
+        <p>FFXIV job icons taken from <a href="https://github.com/xivapi/classjob-icons">xivapi/classjob-icons</a></p>
+        <p>Yakuza / Like a Dragon game covers taken from <a href="https://tiermaker.com/create/all-yakuza-games-988007" target="_blank">All Yakuza Games Tier List Maker</a></p>
+    
+    </Block>
+
+    <Block title="Deadlock stuff">
+        <p>For Deadlock assets, check out <span class="text-deadlock-green">Deadlock Graphical Library</span>, a repository of UI assets from the game.</p>
+        <p>They can be found in this <a href={dlAssetThread} target="_blank">Discord thread</a> in the official Deadlock server or on their <a href={dlAssetGdrive} target="_blank">Google Drive</a>.</p>
+        <p>Another huge help was <a class="text-deadlock-green" href="https://itzfred.github.io/Deadlock-Graphic-Designer/">Deadlock Graphic Designer</a>, it greatly helped me understand certain aspects of Deadlock's UI.</p>
+    </Block>
+
+</Base>
+
+<style>
+    a {
+        color: var(--accent-red);
+    }
+    li {
+        margin-left: 2em;
+    }
+</style>

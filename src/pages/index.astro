@@ -131,7 +131,7 @@ import nta from '../assets/88x31/nta.png';
         copyButton.addEventListener('click', async () => {
             try {
                 await navigator.clipboard.writeText(codeText);
-                copyHint.textContent = 'Copied!';
+                copyHint.textContent = 'copied!';
                 copyHint.classList.add('copied');
                 setTimeout(() => {
                     copyHint.textContent = '(click to copy code)';

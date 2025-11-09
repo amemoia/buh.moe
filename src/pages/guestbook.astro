@@ -36,7 +36,7 @@ function makePageUrl(n: number) {
 const host = Astro.url?.hostname ?? '';
 const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
 const DUMMY_SITE_KEY = '1x00000000000000000000BB';
-const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : (process.env.PUBLIC_TURNSTILE_SITE_KEY ?? '');
+const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : (import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '');
 
 function getOrdinal(n: number) {
     const s = ["th", "st", "nd", "rd"];

@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/db": "^0.18.2",
+    "@astrojs/rss": "^4.0.13",
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/lucide": "^1.2.70",

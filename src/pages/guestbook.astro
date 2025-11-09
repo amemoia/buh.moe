@@ -1,0 +1,224 @@
+---
+export const prerender = false;
+import Base from '../layouts/Base.astro';
+import Intro from '../components/Intro.astro';
+import Block from '../components/Block.astro';
+import { db, Guestbook as GuestbookTable } from 'astro:db';
+
+let entries = await db.select().from(GuestbookTable);
+try {
+    entries = entries.sort((a, b) => {
+        const ta = new Date(a.createdAt).getTime();
+        const tb = new Date(b.createdAt).getTime();
+        return tb - ta;
+    });
+} catch (e) {
+}
+
+const rawPage = Astro.url.searchParams.get('page') ?? '1';
+let page = Number(rawPage);
+if (!Number.isFinite(page) || page < 1) page = 1;
+const PER_PAGE = 10;
+const totalEntries = entries.length;
+const totalPages = Math.max(1, Math.ceil(totalEntries / PER_PAGE));
+if (page > totalPages) page = totalPages;
+const startIndex = (page - 1) * PER_PAGE;
+const endIndex = startIndex + PER_PAGE;
+const entriesPage = entries.slice(startIndex, endIndex);
+
+function makePageUrl(n: number) {
+    const s = status ? `&status=${encodeURIComponent(status)}` : '';
+    return `/guestbook?page=${n}${s}`;
+}
+
+const status = Astro.url.searchParams.get('status') ?? '';
+
+// sitekey is exposed to client, switches to dummy key on localhost
+const host = Astro.url?.hostname ?? '';
+const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
+const DUMMY_SITE_KEY = '1x00000000000000000000BB';
+const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : import.meta.env.TURNSTILE_SITE_KEY;
+
+const pageDesc = "leave a message!";
+
+function getOrdinal(n: number) {
+    const s = ["th", "st", "nd", "rd"];
+    const v = n % 100;
+    return (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
+function formatDateISO(d: string | Date) {
+    const dt = new Date(d);
+    if (Number.isNaN(dt.getTime())) return String(d);
+    const month = dt.toLocaleString('en-US', { month: 'short' });
+    const day = dt.getDate();
+    const ord = getOrdinal(day);
+    const year = dt.getFullYear();
+    const hh = String(dt.getHours()).padStart(2, '0');
+    const mm = String(dt.getMinutes()).padStart(2, '0');
+    return `${month} ${day}${ord} ${year}, ${hh}:${mm}`;
+}
+---
+
+<Base title="buh / guestbook">
+    
+    <Intro page="/ guestbook" title={pageDesc}>
+        please be nice!!
+    </Intro>
+    
+    <button id="show-guestbook" aria-expanded="false" class="guestbook-toggle text-white py-4 w-42 font-extrabold">
+        Sign Guestbook
+    </button>
+
+    {turnstileSiteKey ? (
+        <script is:inline id="cf-turnstile-script" src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer async></script>
+    ) : (
+        <p class="text-accent-red">Turnstile site key not configured — widget disabled. Set PUBLIC_TURNSTILE_SITE_KEY in env.</p>
+    )}
+
+    <div id="guestbook-block" style={status ? 'display:block' : 'display:none'}>
+    <Block title="Sign Guestbook" gradient="red">
+        <div id="guestbook-form" class="mt-3">
+            <form action="/api/guestbook" method="post" class="flex flex-col gap-2">
+                <input id="guestbook-name" type="text" name="name" placeholder="Name" required maxlength="64" />
+                <div class="textarea-wrap" style="position:relative">
+                    <textarea id="guestbook-message" name="message" placeholder="Message" required maxlength="300" class="w-full"></textarea>
+                    <div id="char-count" class="char-counter">0</div>
+                </div>
+                <div class="form-controls">
+                    <button type="submit" class="submit-btn text-white py-3 px-6 font-extrabold">Sign</button>
+                    <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
+                </div>
+            </form>
+        </div>
+    </Block>
+    </div>
+
+    {status === 'ok' && <p class="ml-4">message sent!!</p>}
+    {status === 'toolong' && <p class="ml-4 text-accent-red">your message is too long! (max 300 chars)</p>}
+    {status === 'turnstile' && <p class="ml-4 text-accent-red">turnstile verification failed, try again</p>}
+    {status === 'error' && <p class="ml-4 text-accent-red">an error occurred :c</p>}
+
+
+    <Block title="Guestbook" class="block-no-padding">
+        <ul>
+            {entriesPage.map(entry => (
+                <li class="flex flex-col">
+                    <span class="font-bold">{entry.name}</span>
+                    <p class="guestbook-message">{entry.message}</p>
+                    <span>{formatDateISO(entry.createdAt)}</span>
+                </li>
+            ))}
+        </ul>
+    </Block>
+
+    {totalPages > 1 && (
+    <div class="mt-2 flex items-center gap-2 self-center">
+        {page > 1 && <a href={makePageUrl(page - 1)} class="px-3 py-1 bg-accent-red rounded font-bold">prev</a>}
+        {Array.from({ length: totalPages }).map((_, i) => {
+            const n = i + 1;
+            return (
+                <a href={makePageUrl(n)} class={`px-2 py-1 rounded ${n === page ? 'font-bold text-accent-red' : 'font-bold text-muted'}`}>{n}</a>
+            );
+        })}
+        {page < totalPages && <a href={makePageUrl(page + 1)} class="px-3 py-1 bg-accent-red rounded font-bold">next</a>}
+    </div>
+)}
+
+</Base>
+
+
+<style>
+    input, textarea {
+        background-color: var(--bg-tertiary);
+        padding: 1em;
+        border-radius: var(--radius-default);
+    }
+    button {
+        background-color: var(--accent-red);
+        border-radius: var(--radius-default);
+    }
+
+    li {
+        padding: 1rem;
+    }
+    li:nth-child(even) {
+        background-color: var(--bg-project-1);
+    }
+    li:last-child {
+        border-bottom-left-radius: var(--radius-default);
+        border-bottom-right-radius: var(--radius-default);
+    }
+    .textarea-wrap { position: relative; }
+    .char-counter {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        font-size: 0.85rem;
+        color: var(--muted, #6b7280);
+        pointer-events: none;
+        background: transparent;
+    }
+    .char-counter--max {
+        color: var(--accent-red, #d20f39);
+        font-weight: 700;
+    }
+    .guestbook-message {
+        white-space: pre-wrap; /* preserve newlines */
+        overflow-wrap: anywhere; /* break long words */
+        word-break: break-word; /* fallback */
+        margin: 0.25rem 0 0.5rem 0;
+    }
+    .submit-btn { min-width: 120px; }
+    .form-controls { display: flex; align-items: center; gap: 0.5rem; }
+    .cf-turnstile { transform: scale(1); transform-origin: left top; }
+    textarea.w-full { width: 100%; box-sizing: border-box; padding-right: 48px; }
+
+    @media (max-width: 640px) {
+        .guestbook-toggle { display: block; width: 100%; text-align: center; }
+        .form-controls { flex-direction: column; align-items: stretch; }
+        .cf-turnstile { transform: scale(0.95); }
+        .submit-btn { width: 100%; }
+        .char-counter { right: 10px; bottom: 10px; }
+    }
+
+    @media (max-width: 420px) {
+        .cf-turnstile { transform: scale(0.9); }
+    }
+</style>
+
+<script is:inline type="module">
+    const btn = document.getElementById('show-guestbook');
+    const blockWrap = document.getElementById('guestbook-block');
+    const nameInput = document.getElementById('guestbook-name');
+    const textarea = document.getElementById('guestbook-message');
+    const charCount = document.getElementById('char-count');
+
+    function updateCharCount() {
+        if (!textarea || !charCount) return;
+        const max = Number(textarea.getAttribute('maxlength') || 300);
+        const len = textarea.value.length;
+        charCount.textContent = String(len);
+        if (len >= max) {
+            charCount.classList.add('char-counter--max');
+        } else {
+            charCount.classList.remove('char-counter--max');
+        }
+    }
+
+    if (textarea) {
+        textarea.addEventListener('input', updateCharCount, { passive: true });
+        updateCharCount();
+    }
+
+    if (btn && blockWrap) {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isHidden = blockWrap.style.display === 'none' || getComputedStyle(blockWrap).display === 'none';
+            blockWrap.style.display = isHidden ? 'block' : 'none';
+            btn.setAttribute('aria-expanded', String(isHidden));
+            btn.textContent = isHidden ? 'Hide Form' : 'Sign Guestbook';
+            if (isHidden && nameInput) nameInput.focus();
+        });
+    }
+</script>

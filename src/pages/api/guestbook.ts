@@ -3,7 +3,7 @@ import { db, Guestbook } from 'astro:db';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, env }: { request: Request; env?: any }) => {
     try {
         const contentType = (request.headers.get('content-type') ?? '').toLowerCase();
         let name = '';
@@ -44,7 +44,7 @@ export const POST: APIRoute = async ({ request }) => {
         }
         
         async function processTurnstile(cf_turnstile_response: string) {
-            const secret = process.env.TURNSTILE_SITE_SECRET;
+            const secret = (env?.TURNSTILE_SITE_SECRET as string) ?? '';
             if (!secret) return { success: false, errorCodes: ['missing-site-secret'] };
             
             const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
@@ -83,10 +83,10 @@ export const POST: APIRoute = async ({ request }) => {
         await db.insert(Guestbook).values({ name, message });
 
         try {
-            const webhookUrl = (process.env.DISCORD_WEBHOOK_GUESTBOOK ?? '').toString().trim();
+            const webhookUrl = ((env?.DISCORD_WEBHOOK_GUESTBOOK as string) ?? '').toString().trim();
             if (webhookUrl) {
                 const embedDescription = message.length > 3900 ? message.slice(0, 3900) + '…' : message;
-                const mentionUserId = (process.env.DISCORD_UID ?? '')?.toString().trim();
+                const mentionUserId = ((env?.DISCORD_UID as string) ?? '')?.toString().trim();
                 const mentionContent = mentionUserId ? `<@${mentionUserId}>` : undefined;
 
                 const payload: any = {

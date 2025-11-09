@@ -5,9 +5,13 @@ import icon from "astro-icon";
 
 import cloudflare from "@astrojs/cloudflare";
 
+import db from "@astrojs/db";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [icon()],
+  site: 'https://buh.moe',
+  integrations: [icon(), db()],
+  output: 'server',
 
   vite: {
     plugins: [tailwindcss()],

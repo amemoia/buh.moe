@@ -1,0 +1,65 @@
+---
+export const prerender = false;
+import Base from '../layouts/Base.astro';
+import Intro from '../components/Intro.astro';
+import Block from '../components/Block.astro';
+
+const pageDesc = 'ask me anything, anonymously or not!!';
+const url = new URL(Astro.request.url);
+const status = url.searchParams.get('status') ?? '';
+---
+
+<Base title="buh / ask">
+    <Intro page="/ ask" title={pageDesc}>
+        these will be sent to me via a discord webhook and i will answer on my socials (bsky/twitter)
+    </Intro>
+
+    {status ? (
+        <div id="ask-status" class="ml-4 mb-4 text-accent-red" role="status">
+            {status === 'ok' ? (
+                <span>your message has been sent!</span>
+            ) : status === 'toolong' ? (
+                <span>your message was too long!!</span>
+            ) : (
+                <span>there was an error while sending your message :c</span>
+            )}
+        </div>
+    ) : null}
+
+    <Block title="Ask" gradient="red">
+        <form action="/api/ask" method="post" class="flex flex-col gap-3">
+            <input id="ask-name" name="name" type="text" placeholder="Name (optional)" maxlength="64" />
+            <div class="textarea-wrap" style="position:relative">
+                <textarea id="ask-message" name="message" placeholder="Your question" required maxlength="1000" class="w-full"></textarea>
+                <div id="ask-char-count" class="char-counter">0</div>
+            </div>
+            <button type="submit" class="submit-btn text-white py-3 px-6 font-extrabold">Send</button>
+        </form>
+    </Block>
+
+</Base>
+
+<style>
+    input, textarea { background-color: var(--bg-tertiary); padding: 1em; border-radius: var(--radius-default); }
+    .char-counter { position:absolute; right:8px; bottom:8px; font-size:0.85rem; color:var(--muted,#6b7280); }
+    .char-counter--max { color: var(--accent-red,#d20f39); font-weight:700 }
+    
+    button {
+        background-color: var(--accent-red);
+        border-radius: var(--radius-default);
+    }
+
+</style>
+
+<script is:inline type="module">
+    const ta = document.getElementById('ask-message');
+    const cc = document.getElementById('ask-char-count');
+    function update() {
+        if (!ta || !cc) return;
+        const max = Number(ta.getAttribute('maxlength') || 1000);
+        const len = ta.value.length;
+        cc.textContent = String(len);
+        cc.classList.toggle('char-counter--max', len >= max);
+    }
+    if (ta) { ta.addEventListener('input', update, { passive: true }); update(); }
+</script>

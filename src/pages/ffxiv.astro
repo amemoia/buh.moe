@@ -1,4 +1,5 @@
 ---
+export const prerender = true
 const lodestone = "https://eu.finalfantasyxiv.com/lodestone/character/46616687/"
 const render = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a9dbf9d9fe_5047bc596a4bab2dc7f7c120bb22dec5fl0.jpg?1755017723"
 
@@ -56,33 +57,36 @@ const pageDesc = name+" "+world;
             <div>
                 <span class="font-extrabold">Main Jobs</span>
                 <div class="jobs-list flex flex-col gap-2">
-                    <script define:vars={{ levels, healers, tanks }}>
-                            const jobDivTank = document.createElement("div");
-                            jobDivTank.classList.add("job", "job-tank");
-                            const jobDivHealer = document.createElement("div");
-                            jobDivHealer.classList.add("job", "job-healer");
-                            const jobDivDps = document.createElement("div");
-                            jobDivDps.classList.add("job", "job-dps", "gap-2");
-                            const mainDiv = document.getElementsByClassName("jobs-list")[0];
-                            for (const [jobname, level] of Object.entries(levels)) {
-                                const classjob = document.createElement("div");
-                                classjob.classList.add("classjob");
-                                const img = document.createElement("img");
-                                img.src =
-                                    "/classjob/" + jobname + ".png";
-                                img.classList.add("ffxiv-jobicon");
-                                const span = document.createElement("span");
-                                span.innerHTML = level;
-                                if (healers.includes(jobname)) { classjob.classList.add("classjob-healer"); jobDivHealer.appendChild(classjob); }
-                                else if (tanks.includes(jobname)) { classjob.classList.add("classjob-tank"); jobDivTank.appendChild(classjob); }
-                                else {classjob.classList.add("classjob-dps"); jobDivDps.appendChild(classjob); }
-                                classjob.appendChild(img);
-                                classjob.appendChild(span);
-                            }
-                            mainDiv.appendChild(jobDivDps);
-                            mainDiv.appendChild(jobDivTank);
-                            mainDiv.appendChild(jobDivHealer);
-                    </script>
+                    <div class="job job-dps gap-2">
+                        {Object.entries(levels)
+                            .filter(([jobname]) => !healers.includes(jobname) && !tanks.includes(jobname))
+                            .map(([jobname, level]) => (
+                                <div class="classjob classjob-dps">
+                                    <img src={`/classjob/${jobname}.png`} alt={jobname} class="ffxiv-jobicon" width="24" height="24" loading="lazy" decoding="async" />
+                                    <span>{level}</span>
+                                </div>
+                            ))}
+                    </div>
+                    <div class="job job-tank">
+                        {Object.entries(levels)
+                            .filter(([jobname]) => tanks.includes(jobname))
+                            .map(([jobname, level]) => (
+                                <div class="classjob classjob-tank">
+                                    <img src={`/classjob/${jobname}.png`} alt={jobname} class="ffxiv-jobicon" width="24" height="24" loading="lazy" decoding="async" />
+                                    <span>{level}</span>
+                                </div>
+                            ))}
+                    </div>
+                    <div class="job job-healer">
+                        {Object.entries(levels)
+                            .filter(([jobname]) => healers.includes(jobname))
+                            .map(([jobname, level]) => (
+                                <div class="classjob classjob-healer">
+                                    <img src={`/classjob/${jobname}.png`} alt={jobname} class="ffxiv-jobicon" width="24" height="24" loading="lazy" decoding="async" />
+                                    <span>{level}</span>
+                                </div>
+                            ))}
+                    </div>
                 </div>
             </div>
         </div>

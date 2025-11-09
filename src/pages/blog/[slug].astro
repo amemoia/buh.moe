@@ -1,45 +1,33 @@
 ---
+export const prerender = true
 import Base from "../../layouts/Base.astro";
 import Intro from "../../components/Intro.astro";
-
 import '../../styles/blogpost.css';
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const blogfiles = import.meta.glob('../../blog/*.md', { eager: true }) as Record<string, any>;
-  return Object.keys(blogfiles).map((path) => {
-    const file = path.split('/').pop() || '';
-    const slug = file.replace('.md', '');
-    return { params: { slug } };
-  });
+    const posts = await getCollection("blog");
+    return posts.map(post => ({ params: { slug: post.slug } }));
 }
 
 const { slug } = Astro.params;
-const blogfiles = import.meta.glob('../../blog/*.md', { eager: true }) as Record<string, any>;
-const key = `../../blog/${slug}.md`;
-const post = blogfiles[key] as any;
-if (!post) {
-  throw new Error(`Post not found: ${slug}`);
-}
-const frontmatter = post.frontmatter || post.metadata || {};
-const Content = post.default;
+const posts = await getCollection('blog');
+const post = posts.find((p) => p.slug === slug);
+if (!post) throw new Error(`Post not found: ${slug}`);
+const { Content } = await post.render();
 
-const formatDate = (d: string | null | undefined) => {
-  if (!d) return '';
-  const dt = new Date(d);
-  const month = dt.toLocaleString('en-US', { month: 'long' });
-  const day = dt.getDate();
-  const year = dt.getFullYear();
-  return `${month} ${day}, ${year}`;
+const formatDate = (d?: string) => {
+    if (!d) return '';
+    const dt = new Date(d);
+    return dt.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 };
 ---
 
-<Base title={frontmatter.title} description={frontmatter.description}>
-    <Intro page={formatDate(frontmatter.date)} title={frontmatter.title}>
-        {frontmatter.description}
+<Base title={post.data.title} description={post.data.description}>
+    <Intro page={formatDate(post.data.date)} title={post.data.title}>
+        {post.data.description}
     </Intro>
-    
     <div class="mx-4 flex flex-col gap-2">
         <Content />
     </div>
-
 </Base>

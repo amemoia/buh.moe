@@ -33,6 +33,14 @@ const currentPath = Astro.url.pathname;
                     <Icon name="lucide:cog" />
                     <span>Projects</span>
                 </a>
+                <a href="/guestbook" class:list={[{ active: currentPath.startsWith('/guestbook') }]}>
+                    <Icon name="lucide:book-open" />
+                    <span>Guestbook</span>
+                </a>
+                <a href="/ask" class:list={[{ active: currentPath.startsWith('/ask') }]}>
+                    <Icon name="lucide:mail-question-mark" />
+                    <span>Ask</span>
+                </a>
             </div>
             <div class="nav-right">
             <!--

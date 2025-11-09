@@ -40,7 +40,10 @@ export const POST: APIRoute = async ({ request }) => {
             const webhookUrl = import.meta.env.DISCORD_WEBHOOK_ASKS;
             if (webhookUrl) {
                 const embedDescription = message.length > 3900 ? message.slice(0, 3900) + '…' : message;
-                const payload = {
+                const mentionUserId = (import.meta.env.DISCORD_UID ?? '')?.toString().trim();
+                const mentionContent = mentionUserId ? `<@${mentionUserId}>` : undefined;
+
+                const payload: any = {
                     username: 'ask',
                     embeds: [
                         {
@@ -51,6 +54,9 @@ export const POST: APIRoute = async ({ request }) => {
                         }
                     ]
                 };
+
+                if (mentionContent) payload.content = mentionContent;
+                if (mentionUserId) payload.allowed_mentions = { users: [mentionUserId] };
 
                 const postWebhook = async () => {
                     return await fetch(webhookUrl, {

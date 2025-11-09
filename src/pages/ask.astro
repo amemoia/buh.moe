@@ -1,15 +1,30 @@
 ---
+export const prerender = false;
 import Base from '../layouts/Base.astro';
 import Intro from '../components/Intro.astro';
 import Block from '../components/Block.astro';
 
 const pageDesc = 'ask me anything, anonymously or not!!';
+const url = new URL(Astro.request.url);
+const status = url.searchParams.get('status') ?? '';
 ---
 
 <Base title="buh / ask">
     <Intro page="/ ask" title={pageDesc}>
         these will be sent to me via a discord webhook and i will answer on my socials (bsky/twitter)
     </Intro>
+
+    {status ? (
+        <div id="ask-status" class="ml-4 mb-4 text-accent-red" role="status">
+            {status === 'ok' ? (
+                <span>your message has been sent!</span>
+            ) : status === 'toolong' ? (
+                <span>your message was too long!!</span>
+            ) : (
+                <span>there was an error while sending your message :c</span>
+            )}
+        </div>
+    ) : null}
 
     <Block title="Ask" gradient="red">
         <form action="/api/ask" method="post" class="flex flex-col gap-3">

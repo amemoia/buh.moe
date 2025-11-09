@@ -11,6 +11,7 @@ import db from "@astrojs/db";
 export default defineConfig({
   site: 'https://buh.moe',
   integrations: [icon(), db()],
+  output: 'server',
 
   vite: {
     plugins: [tailwindcss()],

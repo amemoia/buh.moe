@@ -26,7 +26,7 @@ const status = url.searchParams.get('status') ?? '';
         </div>
     ) : null}
 
-    <Block title="Ask" gradient="red">
+    <Block title="what's up?" gradient="red">
         <form action="/api/ask" method="post" class="flex flex-col gap-3">
             <input id="ask-name" name="name" type="text" placeholder="Name (optional)" maxlength="64" />
             <div class="textarea-wrap" style="position:relative">

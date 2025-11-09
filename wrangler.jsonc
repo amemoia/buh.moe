@@ -2,6 +2,9 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "buh-moe",
 	"main": "dist/_worker.js/index.js",
+	"vars" : {
+		"PUBLIC_TURNSTILE_SITE_KEY" : "0x4AAAAAAB_Ml17slJnMc6IE",
+	},
 	"compatibility_date": "2025-11-09",
 	"compatibility_flags": [
 		"nodejs_compat",
@@ -12,13 +15,13 @@
 		"directory": "./dist",
 		"not_found_handling": "404-page"
 	},
-  "observability": {
-    "enabled": true,
-    "logs": {
-      "enabled": true,
-      "head_sampling_rate": 1,
-      "invocation_logs": true,
-      "persist": true
-    },
-  }
+	"observability": {
+		"enabled": true,
+		"logs": {
+			"enabled": true,
+			"head_sampling_rate": 1,
+			"invocation_logs": true,
+			"persist": true
+		},
+	}
 }

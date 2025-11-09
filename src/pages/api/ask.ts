@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, env }: { request: Request; env?: any }) => {
+export const POST: APIRoute = async ({ request }) => {
     try {
     const contentType = (request.headers.get('content-type') ?? '').toLowerCase();
     let name = '';
@@ -37,10 +37,10 @@ export const POST: APIRoute = async ({ request, env }: { request: Request; env?:
         }
 
         try {
-            const webhookUrl = ((env?.DISCORD_WEBHOOK_ASKS as string) ?? '').toString().trim();
+            const webhookUrl = (process.env.DISCORD_WEBHOOK_ASKS ?? '').toString().trim();
             if (webhookUrl) {
                 const embedDescription = message.length > 3900 ? message.slice(0, 3900) + '…' : message;
-                const mentionUserId = ((env?.DISCORD_UID as string) ?? '')?.toString().trim();
+                const mentionUserId = (process.env.DISCORD_UID ?? '')?.toString().trim();
                 const mentionContent = mentionUserId ? `<@${mentionUserId}>` : undefined;
 
                 const payload: any = {

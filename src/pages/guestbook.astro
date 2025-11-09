@@ -3,32 +3,13 @@ export const prerender = false;
 import Base from '../layouts/Base.astro';
 import Intro from '../components/Intro.astro';
 import Block from '../components/Block.astro';
-import getDbModules from '../lib/db';
+import { db, Guestbook as GuestbookTable } from 'astro:db';
 
-// db connection needs to be delayed so that cloudflare doesnt shit itself with env variables
-let entries: any[] = [];
-try {
-    const { db, Guestbook: GuestbookTable } = await getDbModules();
-    try {
-        entries = await db.select().from(GuestbookTable);
-    } catch (e) {
-        console.error('Guestbook DB read failed', e);
-        entries = [];
-    }
-    try {
-        entries = entries.sort((a, b) => {
-            const ta = new Date(a.createdAt).getTime();
-            const tb = new Date(b.createdAt).getTime();
-            return tb - ta;
-        });
-    } catch (e) {
-        console.error('Guestbook sort error', e);
-    }
-} catch (e) {
-    console.error('Failed to initialize Guestbook DB module', e);
-    entries = [];
-}
+const rawEntries = (await db.select().from(GuestbookTable)) ?? [];
+const entries = Array.isArray(rawEntries) ? rawEntries : [];
+entries.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
+const status = Astro.url.searchParams.get('status') ?? '';
 const rawPage = Astro.url.searchParams.get('page') ?? '1';
 let page = Number(rawPage);
 if (!Number.isFinite(page) || page < 1) page = 1;
@@ -37,23 +18,18 @@ const totalEntries = entries.length;
 const totalPages = Math.max(1, Math.ceil(totalEntries / PER_PAGE));
 if (page > totalPages) page = totalPages;
 const startIndex = (page - 1) * PER_PAGE;
-const endIndex = startIndex + PER_PAGE;
-const entriesPage = entries.slice(startIndex, endIndex);
+const entriesPage = entries.slice(startIndex, startIndex + PER_PAGE);
 
 function makePageUrl(n: number) {
     const s = status ? `&status=${encodeURIComponent(status)}` : '';
     return `/guestbook?page=${n}${s}`;
 }
 
-const status = Astro.url.searchParams.get('status') ?? '';
-
 // sitekey is exposed to client, switches to dummy key on localhost
 const host = Astro.url?.hostname ?? '';
 const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
 const DUMMY_SITE_KEY = '1x00000000000000000000BB';
-const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : import.meta.env.TURNSTILE_SITE_KEY;
-
-const pageDesc = "leave a message!";
+const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : process.env.TURNSTILE_SITE_KEY;
 
 function getOrdinal(n: number) {
     const s = ["th", "st", "nd", "rd"];
@@ -72,6 +48,9 @@ function formatDateISO(d: string | Date) {
     const mm = String(dt.getMinutes()).padStart(2, '0');
     return `${month} ${day}${ord} ${year}, ${hh}:${mm}`;
 }
+
+const pageDesc = "leave a message!";
+
 ---
 
 <Base title="buh / guestbook">

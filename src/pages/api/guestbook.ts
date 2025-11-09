@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import getDbModules from '../../lib/db';
+import { db, Guestbook } from 'astro:db';
 
 export const prerender = false;
 
@@ -44,7 +44,7 @@ export const POST: APIRoute = async ({ request }) => {
         }
         
         async function processTurnstile(cf_turnstile_response: string) {
-            const secret = import.meta.env.TURNSTILE_SITE_SECRET;
+            const secret = process.env.TURNSTILE_SITE_SECRET;
             if (!secret) return { success: false, errorCodes: ['missing-site-secret'] };
             
             const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
@@ -80,19 +80,13 @@ export const POST: APIRoute = async ({ request }) => {
             }
         }
         
-        try {
-            const { db, Guestbook } = await getDbModules();
-            await db.insert(Guestbook).values({ name, message });
-        } catch (e) {
-            console.error('Guestbook DB insert failed', e);
-            return new Response(null, { status: 303, headers: { Location: '/guestbook?status=error' } });
-        }
+        await db.insert(Guestbook).values({ name, message });
 
         try {
-            const webhookUrl = String(import.meta.env.DISCORD_WEBHOOK_GUESTBOOK ?? import.meta.env.DISCORD_WEBHOOK_URL ?? '').trim();
+            const webhookUrl = (process.env.DISCORD_WEBHOOK_GUESTBOOK ?? '').toString().trim();
             if (webhookUrl) {
                 const embedDescription = message.length > 3900 ? message.slice(0, 3900) + '…' : message;
-                const mentionUserId = (import.meta.env.DISCORD_UID ?? '')?.toString().trim();
+                const mentionUserId = (process.env.DISCORD_UID ?? '')?.toString().trim();
                 const mentionContent = mentionUserId ? `<@${mentionUserId}>` : undefined;
 
                 const payload: any = {

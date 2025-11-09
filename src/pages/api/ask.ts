@@ -37,10 +37,10 @@ export const POST: APIRoute = async ({ request }) => {
         }
 
         try {
-            const webhookUrl = import.meta.env.DISCORD_WEBHOOK_ASKS;
+            const webhookUrl = (process.env.DISCORD_WEBHOOK_ASKS ?? '').toString().trim();
             if (webhookUrl) {
                 const embedDescription = message.length > 3900 ? message.slice(0, 3900) + '…' : message;
-                const mentionUserId = (import.meta.env.DISCORD_UID ?? '')?.toString().trim();
+                const mentionUserId = (process.env.DISCORD_UID ?? '')?.toString().trim();
                 const mentionContent = mentionUserId ? `<@${mentionUserId}>` : undefined;
 
                 const payload: any = {

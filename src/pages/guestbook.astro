@@ -73,7 +73,7 @@ function formatDateISO(d: string | Date) {
     {turnstileSiteKey ? (
         <script is:inline id="cf-turnstile-script" src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer async></script>
     ) : (
-        <p class="text-accent-red">Turnstile site key not configured — widget disabled. Set PUBLIC_TURNSTILE_SITE_KEY in env.</p>
+        <p class="text-accent-red">turnstile site key not configured — widget disabled</p>
     )}
 
     <div id="guestbook-block" style={status ? 'display:block' : 'display:none'}>

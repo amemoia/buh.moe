@@ -44,7 +44,7 @@ export const POST: APIRoute = async ({ request }) => {
         }
         
         async function processTurnstile(cf_turnstile_response: string) {
-            const secret = import.meta.env.TURNSTILE_SITE_SECRET ?? import.meta.env.CF_TURNSTILE_SECRET ?? '';
+            const secret = import.meta.env.TURNSTILE_SITE_SECRET;
             if (!secret) return { success: false, errorCodes: ['missing-site-secret'] };
             
             const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
@@ -66,8 +66,7 @@ export const POST: APIRoute = async ({ request }) => {
         
         const hostHeader = request.headers.get('host') ?? '';
         const isLocal = hostHeader.includes('localhost') || hostHeader.includes('127.0.0.1') || hostHeader.includes('::1');
-        const skipInDev = import.meta.env.TURNSTILE_SKIP_IN_DEV === 'true';
-        if (isLocal || skipInDev) {
+        if (isLocal) {
             console.info('Skipping turnstile verification');
         } else {
             const turnstileResult = await processTurnstile(token);

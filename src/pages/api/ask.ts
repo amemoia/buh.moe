@@ -2,11 +2,26 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, env }: any) => {
     try {
     const contentType = (request.headers.get('content-type') ?? '').toLowerCase();
     let name = '';
     let message = '';
+
+        const getEnv = (k: string) => {
+            try {
+                if (env && typeof env[k] !== 'undefined') return env[k];
+            } catch (e) {}
+            try {
+                if (typeof process !== 'undefined' && (process as any).env && (process as any).env[k]) return (process as any).env[k];
+            } catch (e) {}
+            try {
+                // fallback to globalThis if set
+                // @ts-ignore
+                if (typeof globalThis !== 'undefined' && (globalThis as any)[k]) return (globalThis as any)[k];
+            } catch (e) {}
+            return undefined;
+        };
 
         if (contentType.includes('application/json')) {
             const json = await request.json();
@@ -37,10 +52,10 @@ export const POST: APIRoute = async ({ request }) => {
         }
 
         try {
-            const webhookUrl = (process.env.DISCORD_WEBHOOK_ASKS ?? '').toString().trim();
+            const webhookUrl = (getEnv('DISCORD_WEBHOOK_ASKS') ?? '').toString().trim();
             if (webhookUrl) {
                 const embedDescription = message.length > 3900 ? message.slice(0, 3900) + '…' : message;
-                const mentionUserId = (process.env.DISCORD_UID ?? '')?.toString().trim();
+                const mentionUserId = (getEnv('DISCORD_UID') ?? '')?.toString().trim();
                 const mentionContent = mentionUserId ? `<@${mentionUserId}>` : undefined;
 
                 const payload: any = {

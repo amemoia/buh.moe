@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { db, Guestbook } from 'astro:db';
+import getDbModules from '../../lib/db';
 
 export const prerender = false;
 
@@ -80,7 +80,13 @@ export const POST: APIRoute = async ({ request }) => {
             }
         }
         
-        await db.insert(Guestbook).values({ name, message });
+        try {
+            const { db, Guestbook } = await getDbModules();
+            await db.insert(Guestbook).values({ name, message });
+        } catch (e) {
+            console.error('Guestbook DB insert failed', e);
+            return new Response(null, { status: 303, headers: { Location: '/guestbook?status=error' } });
+        }
 
         try {
             const webhookUrl = String(import.meta.env.DISCORD_WEBHOOK_GUESTBOOK ?? import.meta.env.DISCORD_WEBHOOK_URL ?? '').trim();

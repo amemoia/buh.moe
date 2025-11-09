@@ -3,11 +3,18 @@ export const prerender = false;
 import Base from '../layouts/Base.astro';
 import Intro from '../components/Intro.astro';
 import Block from '../components/Block.astro';
-import { db, Guestbook as GuestbookTable } from 'astro:db';
+import getDbModules from '../lib/db';
 
+// db connection needs to be delayed so that cloudflare doesnt shit itself with env variables
 let entries: any[] = [];
 try {
-    entries = await db.select().from(GuestbookTable);
+    const { db, Guestbook: GuestbookTable } = await getDbModules();
+    try {
+        entries = await db.select().from(GuestbookTable);
+    } catch (e) {
+        console.error('Guestbook DB read failed', e);
+        entries = [];
+    }
     try {
         entries = entries.sort((a, b) => {
             const ta = new Date(a.createdAt).getTime();
@@ -18,7 +25,7 @@ try {
         console.error('Guestbook sort error', e);
     }
 } catch (e) {
-    console.error('Guestbook DB read failed', e);
+    console.error('Failed to initialize Guestbook DB module', e);
     entries = [];
 }
 
@@ -44,7 +51,7 @@ const status = Astro.url.searchParams.get('status') ?? '';
 const host = Astro.url?.hostname ?? '';
 const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
 const DUMMY_SITE_KEY = '1x00000000000000000000BB';
-const turnstileSiteKey = DUMMY_SITE_KEY;
+const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : import.meta.env.TURNSTILE_SITE_KEY;
 
 const pageDesc = "leave a message!";
 

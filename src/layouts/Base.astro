@@ -17,29 +17,15 @@ if (className == null || className== '') {
 }
 else classNameTotal = className;
 
-let siteBase = import.meta.env.SITE ?? Astro.site ?? '';
-// If SITE is set but missing a scheme (e.g. Cloudflare preview may provide hostname only),
-// coerce to https so URL() doesn't throw. This prevents SSR from failing with a 500.
-if (siteBase && !siteBase.startsWith('http://') && !siteBase.startsWith('https://')) {
-	siteBase = `https://${siteBase}`;
-}
-
+const siteBase = import.meta.env.SITE ?? Astro.site ?? '';
 let absoluteImage = image;
 try {
 	if (image && !image.startsWith('http') && siteBase) {
 		absoluteImage = new URL(image, siteBase).href;
 	}
 } catch (e) {
-	// If URL construction fails, leave the image as-is (relative) so page rendering can continue.
 }
-
-let pageUrl;
-try {
-	pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : Astro.url.pathname);
-} catch (e) {
-	// Fallback to pathname if the base URL is somehow invalid — safer than throwing and returning 500.
-	pageUrl = url ?? Astro.url.pathname;
-}
+const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : Astro.url.pathname);
 ---
 <!doctype html>
 <html lang="en">

@@ -15,11 +15,9 @@ try {
             return tb - ta;
         });
     } catch (e) {
-        // sorting failed; continue with unsorted entries
         console.error('Guestbook sort error', e);
     }
 } catch (e) {
-    // DB read failed (missing bindings or DB down). Log and continue with empty entries.
     console.error('Guestbook DB read failed', e);
     entries = [];
 }
@@ -46,7 +44,7 @@ const status = Astro.url.searchParams.get('status') ?? '';
 const host = Astro.url?.hostname ?? '';
 const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
 const DUMMY_SITE_KEY = '1x00000000000000000000BB';
-const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : import.meta.env.TURNSTILE_SITE_KEY;
+const turnstileSiteKey = DUMMY_SITE_KEY;
 
 const pageDesc = "leave a message!";
 

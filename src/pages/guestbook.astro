@@ -5,14 +5,23 @@ import Intro from '../components/Intro.astro';
 import Block from '../components/Block.astro';
 import { db, Guestbook as GuestbookTable } from 'astro:db';
 
-let entries = await db.select().from(GuestbookTable);
+let entries: any[] = [];
 try {
-    entries = entries.sort((a, b) => {
-        const ta = new Date(a.createdAt).getTime();
-        const tb = new Date(b.createdAt).getTime();
-        return tb - ta;
-    });
+    entries = await db.select().from(GuestbookTable);
+    try {
+        entries = entries.sort((a, b) => {
+            const ta = new Date(a.createdAt).getTime();
+            const tb = new Date(b.createdAt).getTime();
+            return tb - ta;
+        });
+    } catch (e) {
+        // sorting failed; continue with unsorted entries
+        console.error('Guestbook sort error', e);
+    }
 } catch (e) {
+    // DB read failed (missing bindings or DB down). Log and continue with empty entries.
+    console.error('Guestbook DB read failed', e);
+    entries = [];
 }
 
 const rawPage = Astro.url.searchParams.get('page') ?? '1';

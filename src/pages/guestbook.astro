@@ -77,6 +77,7 @@ const pageDesc = "leave a message!";
     )}
 
     {status === 'ok' && <p class="ml-4 text-accent-red">message sent!!</p>}
+    {status === 'ok_webhook_failed' && <p class="ml-4 text-accent-red">pls tell alex buh that there was a webhook error on the guestbook page!!!</p>}
     {status === 'toolong' && <p class="ml-4 text-accent-red">your message is too long! (max 300 chars)</p>}
     {status === 'turnstile' && <p class="ml-4 text-accent-red">turnstile verification failed, try again</p>}
     {status === 'error' && <p class="ml-4 text-accent-red">an error occurred :c</p>}

@@ -51,6 +51,7 @@ export const POST: APIRoute = async ({ request, env }: any) => {
             return new Response(null, { status: 303, headers: { Location: '/ask?status=toolong' } });
         }
 
+        let webhookFailed = false;
         try {
             const webhookUrl = (getEnv('DISCORD_WEBHOOK_ASKS') ?? '').toString().trim();
             if (webhookUrl) {
@@ -73,32 +74,107 @@ export const POST: APIRoute = async ({ request, env }: any) => {
                 if (mentionContent) payload.content = mentionContent;
                 if (mentionUserId) payload.allowed_mentions = { users: [mentionUserId] };
 
-                const postWebhook = async () => {
-                    return await fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload),
-                    });
+                // Optional KV-based throttle: prevent repeated sends from same client in short time
+                try {
+                    const clientIp = request.headers.get('cf-connecting-ip') ?? request.headers.get('x-forwarded-for') ?? 'anon';
+                    const throttleKey = `ask_throttle:${clientIp}`;
+                    if (env && typeof env.SESSION !== 'undefined' && env.SESSION && typeof env.SESSION.get === 'function') {
+                        try {
+                            const existing = await env.SESSION.get(throttleKey);
+                            if (existing) {
+                                console.warn('Throttling ask from', clientIp);
+                                return new Response(null, { status: 303, headers: { Location: '/ask?status=error' } });
+                            }
+                            // set short TTL to rate limit repeated posts from same client
+                            await env.SESSION.put(throttleKey, '1', { expirationTtl: 5 });
+                        } catch (e) {
+                            // KV may not be available in some runtimes; ignore and continue
+                            console.warn('KV throttle check failed', e);
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Throttle check unexpected error', e);
+                }
+
+                // Send webhook with bounded retries/timeouts to avoid hanging the request
+                const sendWebhook = async (url: string, bodyPayload: any, maxRetries = 1) => {
+                    let attempt = 0;
+                    const baseTimeout = 2000;
+                    const maxWaitMs = 5000;
+                    while (attempt <= maxRetries) {
+                        attempt++;
+                        const ac = new AbortController();
+                        const timeout = setTimeout(() => ac.abort(), baseTimeout);
+                        try {
+                            const res = await fetch(url, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(bodyPayload),
+                                signal: ac.signal,
+                            });
+                            clearTimeout(timeout);
+                            if (res.ok) return res;
+                            if (res.status === 429) {
+                                let retryAfterMs: number | undefined;
+                                try {
+                                    const j = await res.json().catch(() => null);
+                                    if (j && typeof j.retry_after !== 'undefined') {
+                                        const val = Number(j.retry_after);
+                                        if (Number.isFinite(val)) retryAfterMs = val > 1000 ? Math.ceil(val) : Math.ceil(val * 1000);
+                                    }
+                                } catch (e) {}
+                                if (!retryAfterMs) {
+                                    const header = res.headers.get('retry-after') ?? res.headers.get('Retry-After');
+                                    const num = header ? Number(header) : NaN;
+                                    if (Number.isFinite(num)) retryAfterMs = num > 1000 ? Math.ceil(num) : Math.ceil(num * 1000);
+                                }
+                                if (!retryAfterMs) retryAfterMs = 1000;
+                                retryAfterMs = Math.min(retryAfterMs, maxWaitMs);
+                                const text = await res.text().catch(() => '<unreadable>');
+                                console.warn('Ask webhook 429, attempt', attempt, 'wait', retryAfterMs, 'ms', 'body:', text, 'headers:', Object.fromEntries(res.headers.entries()));
+                                await new Promise((r) => setTimeout(r, retryAfterMs));
+                                continue;
+                            }
+                            const text = await res.text().catch(() => '<unreadable>');
+                            console.warn('Ask webhook failed', res.status, text);
+                            return res;
+                        } catch (e) {
+                            clearTimeout(timeout);
+                            if ((e as any)?.name === 'AbortError') {
+                                console.warn('Ask webhook aborted due to timeout (attempt', attempt, ')');
+                            } else {
+                                console.warn('Ask webhook error', e);
+                            }
+                            await new Promise((r) => setTimeout(r, 250 * attempt));
+                            continue;
+                        }
+                    }
+                    return null;
                 };
 
-                const res1 = await postWebhook();
-                if (!res1.ok) {
-                    if (res1.status === 429) {
-                        const retryAfterHeader = res1.headers.get('retry-after') ?? res1.headers.get('Retry-After');
-                        const retryAfterSec = retryAfterHeader ? Number(retryAfterHeader) : NaN;
-                        const waitMs = Number.isFinite(retryAfterSec) && retryAfterSec > 0 ? Math.ceil(retryAfterSec * 1000) : 1000;
-                        await new Promise((r) => setTimeout(r, waitMs));
-                        try { const res2 = await postWebhook(); if (!res2.ok) { const body = await res2.text().catch(()=>'<unreadable>'); console.warn('Ask webhook retry failed', res2.status, body); } } catch (e) { console.warn('Ask webhook retry error', e); }
-                    } else {
-                        const body = await res1.text().catch(() => '<unreadable>');
-                        console.warn('Ask webhook failed', res1.status, body);
+                try {
+                    const webhookRes = await sendWebhook(webhookUrl, payload, 1);
+                    if (!webhookRes) {
+                        console.warn('Ask webhook could not be sent after retries');
+                        webhookFailed = true;
+                    } else if (!webhookRes.ok) {
+                        const txt = await webhookRes.text().catch(() => '<unreadable>');
+                        console.warn('Ask webhook non-ok response', webhookRes.status, txt);
+                        webhookFailed = true;
                     }
+                } catch (e) {
+                    console.warn('Unexpected error sending Ask webhook', e);
+                    webhookFailed = true;
                 }
             } else {
                 console.info('DISCORD_WEBHOOK_ASK / DISCORD_WEBHOOK_URL not set — skipping ask webhook send');
             }
         } catch (e) {
             console.warn('Failed to send Ask Discord webhook', e);
+        }
+
+        if (typeof webhookFailed !== 'undefined' && webhookFailed) {
+            return new Response(null, { status: 303, headers: { Location: '/ask?status=ok_webhook_failed' } });
         }
 
         return new Response(null, { status: 303, headers: { Location: '/ask?status=ok' } });

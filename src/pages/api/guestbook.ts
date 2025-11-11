@@ -96,6 +96,7 @@ export const POST: APIRoute = async ({ request, env }: any) => {
         
         await db.insert(Guestbook).values({ name, message });
 
+        let webhookFailed = false;
         try {
             const webhookUrl = (getEnv('DISCORD_WEBHOOK_GUESTBOOK') ?? '').toString().trim();
             if (webhookUrl) {
@@ -118,40 +119,101 @@ export const POST: APIRoute = async ({ request, env }: any) => {
                 if (mentionContent) payload.content = mentionContent;
                 if (mentionUserId) payload.allowed_mentions = { users: [mentionUserId] };
 
-                const postWebhook = async () => {
-                    return await fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload),
-                    });
+                // Send webhook with a short timeout and limited retry to avoid blocking the request
+                const sendWebhook = async (url: string, bodyPayload: any, maxRetries = 1) => {
+                    let attempt = 0;
+                    const baseTimeout = 2000; // ms per attempt
+                    const maxWaitMs = 5000; // cap server-suggested waits
+
+                    while (attempt <= maxRetries) {
+                        attempt++;
+                        const ac = new AbortController();
+                        const timeout = setTimeout(() => ac.abort(), baseTimeout);
+                        try {
+                            const res = await fetch(url, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(bodyPayload),
+                                signal: ac.signal,
+                            });
+                            clearTimeout(timeout);
+
+                            if (res.ok) return res;
+
+                            if (res.status === 429) {
+                                // Prefer JSON retry_after (Discord returns a json body on 429)
+                                let retryAfterMs: number | undefined;
+                                try {
+                                    const j = await res.json().catch(() => null);
+                                    if (j && typeof j.retry_after !== 'undefined') {
+                                        const val = Number(j.retry_after);
+                                        if (Number.isFinite(val)) retryAfterMs = val > 1000 ? Math.ceil(val) : Math.ceil(val * 1000);
+                                    }
+                                } catch (e) {}
+
+                                if (!retryAfterMs) {
+                                    const header = res.headers.get('retry-after') ?? res.headers.get('Retry-After');
+                                    const num = header ? Number(header) : NaN;
+                                    if (Number.isFinite(num)) retryAfterMs = num > 1000 ? Math.ceil(num) : Math.ceil(num * 1000);
+                                }
+
+                                if (!retryAfterMs) retryAfterMs = 1000;
+                                // cap waits so we don't block for too long
+                                retryAfterMs = Math.min(retryAfterMs, maxWaitMs);
+
+                                const text = await res.text().catch(() => '<unreadable>');
+                                console.warn('Discord webhook 429, attempt', attempt, 'will wait', retryAfterMs, 'ms', 'body:', text, 'headers:', Object.fromEntries(res.headers.entries()));
+
+                                // wait then retry (but keep attempts small)
+                                await new Promise((r) => setTimeout(r, retryAfterMs));
+                                continue;
+                            }
+
+                            const text = await res.text().catch(() => '<unreadable>');
+                            console.warn('Discord webhook failed', res.status, text);
+                            return res;
+                        } catch (e) {
+                            clearTimeout(timeout);
+                            if ((e as any)?.name === 'AbortError') {
+                                console.warn('Discord webhook request aborted due to timeout (attempt', attempt, ')');
+                            } else {
+                                console.warn('Discord webhook error', e);
+                            }
+                            // small backoff before retry
+                            await new Promise((r) => setTimeout(r, 250 * attempt));
+                            continue;
+                        }
+                    }
+                    return null;
                 };
 
-                const res1 = await postWebhook();
-                if (res1.ok) {
-                } else if (res1.status === 429) {
-                    const retryAfterHeader = res1.headers.get('retry-after') ?? res1.headers.get('Retry-After');
-                    const retryAfterSec = retryAfterHeader ? Number(retryAfterHeader) : NaN;
-                    const waitMs = Number.isFinite(retryAfterSec) && retryAfterSec > 0 ? Math.ceil(retryAfterSec * 1000) : 1000;
-                    console.warn('Discord webhook rate limited, will retry after', waitMs, 'ms');
-                    await new Promise((r) => setTimeout(r, waitMs));
-                    try {
-                        const res2 = await postWebhook();
-                        if (!res2.ok) {
-                            const body = await res2.text().catch(() => '<unreadable>');
-                            console.warn('Discord webhook retry failed', res2.status, body);
-                        }
-                    } catch (e) {
-                        console.warn('Discord webhook retry error', e);
+                // Fire the webhook but keep retries/timeouts small so the request doesn't hang;
+                // the DB insert already happened so the user gets a prompt response.
+                let webhookFailed = false;
+                try {
+                    const webhookRes = await sendWebhook(webhookUrl, payload, 1);
+                    if (!webhookRes) {
+                        console.warn('Discord webhook could not be sent after retries');
+                        webhookFailed = true;
+                    } else if (!webhookRes.ok) {
+                        const txt = await webhookRes.text().catch(() => '<unreadable>');
+                        console.warn('Discord webhook non-ok response', webhookRes.status, txt);
+                        webhookFailed = true;
                     }
-                } else {
-                    const body = await res1.text().catch(() => '<unreadable>');
-                    console.warn('Discord webhook failed', res1.status, body);
+                } catch (e) {
+                    console.warn('Unexpected error sending Discord webhook', e);
+                    webhookFailed = true;
                 }
             } else {
                 console.info('DISCORD_WEBHOOK_GUESTBOOK / DISCORD_WEBHOOK_URL not set — skipping webhook send');
             }
         } catch (e) {
             console.warn('Failed to send Discord webhook for guestbook entry', e);
+        }
+
+        // If webhook failed to deliver, let the frontend show an informative message
+        if (typeof webhookFailed !== 'undefined' && webhookFailed) {
+            return new Response(null, { status: 303, headers: { Location: '/guestbook?status=ok_webhook_failed' } });
         }
 
         return new Response(null, { status: 303, headers: { Location: '/guestbook?status=ok' } });

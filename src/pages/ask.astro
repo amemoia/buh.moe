@@ -18,6 +18,8 @@ const status = url.searchParams.get('status') ?? '';
         <div id="ask-status" class="ml-4 mb-4 text-accent-red" role="status">
             {status === 'ok' ? (
                 <span>your message has been sent!</span>
+            ) : status === 'ok_webhook_failed' ? (
+                <span>there was a problem with the webhook, so i couldnt get your message :c</span>
             ) : status === 'toolong' ? (
                 <span>your message was too long!!</span>
             ) : (

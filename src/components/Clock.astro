@@ -15,8 +15,8 @@ import { Icon } from 'astro-icon/components';
     function updateClock() {
         const now = new Date();
         
-        const warsawTime = new Intl.DateTimeFormat('en-US', {
-            timeZone: 'Europe/Warsaw',
+        const polandTime = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Europe/Poland',
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
@@ -26,8 +26,8 @@ import { Icon } from 'astro-icon/components';
         const timeElement = document.getElementById('clock-time');
         const timezoneElement = document.getElementById('clock-timezone');
         
-        if (timeElement) timeElement.textContent = warsawTime;
-        if (timezoneElement) timezoneElement.textContent = 'Europe/Warsaw';
+        if (timeElement) timeElement.textContent = polandTime;
+        if (timezoneElement) timezoneElement.textContent = 'Europe/Poland';
     }
     
     updateClock();

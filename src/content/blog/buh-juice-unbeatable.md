@@ -36,4 +36,6 @@ i dont have too much to say about arcade mode, it's basically the proper rhythm 
 
 i dont want this blog post to be too long, so to summarize i think that [unbeatable](https://store.steampowered.com/app/2240620/UNBEATABLE/) is an **S-** or **A+** tier game, it has a lot of kinks that need to be ironed out but it was so good that i am willing to look past all of that. it's oozing with passion, the art is amazing, the music is amazing and i can't wait to see more from d-cell. please give it a shot!! i legit cannot recommend it enough.
 
+i can't wait until the soundtrack is released on streaming platforms... i'd buy it outright from their bandcamp if i could afford it rn
+
 (dcell please let me play the old version of waiting... it means so much to me)

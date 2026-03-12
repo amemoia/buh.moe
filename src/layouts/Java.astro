@@ -43,6 +43,12 @@ const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : 
 		<title>{title}</title>
 		<meta name="description" content={description} />
 
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={absoluteImage} />
+
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
@@ -50,12 +56,6 @@ const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : 
 		<meta property="og:url" content={pageUrl} />
 		<meta property="og:image" content={absoluteImage} />
 		<meta property="og:site_name" content="buh.moe" />
-
-		<!-- Twitter -->
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={absoluteImage} />
 
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

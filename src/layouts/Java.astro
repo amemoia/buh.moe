@@ -1,0 +1,88 @@
+---
+const {
+	title = "buh.moe",
+	description = "my little corner of the internet",
+	image = "/resources/avi-embed.png",
+	url,
+	class: className,
+} = Astro.props;
+
+import '../styles/global.css'
+import '../styles/blogpost.css'
+import Header from '../components/Header.astro'
+
+const gfg = "https://www.geeksforgeeks.org/java-cheat-sheet/";
+const gfgCollections = "https://www.geeksforgeeks.org/collections-in-java-2/";
+const karkor = "https://github.com/KarKor?tab=repositories";
+const ghBlood = "https://github.com/amemoia/ProgramowanieJava2025"
+
+
+var classNameTotal;
+if (className == null || className== '') {
+		classNameTotal = "flex flex-col gap-4"
+}
+else classNameTotal = className;
+
+const siteBase = import.meta.env.SITE ?? Astro.site ?? '';
+let absoluteImage = image;
+try {
+	if (image && !image.startsWith('http') && siteBase) {
+		absoluteImage = new URL(image, siteBase).href;
+	}
+} catch (e) {
+}
+const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : Astro.url.pathname);
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={pageUrl} />
+		<meta property="og:image" content={absoluteImage} />
+		<meta property="og:site_name" content="buh.moe" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={absoluteImage} />
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="buh.moe RSS" />
+	</head>
+
+	<body>
+	    <Header/>
+		<main class={classNameTotal}>
+            <div class="flex flex-row gap-2">
+                <a href={ghBlood} target="_blank">GitHub</a>
+                <a href={gfg} target="_blank">GeeksForGeeks</a>
+                <a href={gfgCollections} target="_blank">Kolekcje/Kontenery</a>
+                <a href={karkor} target="_blank">GH Karola</a>
+            </div>
+			<slot />
+		</main>
+	</body>
+</html>
+
+<script>
+	import twemoji from 'twemoji';
+	document.addEventListener('DOMContentLoaded', () => {
+		twemoji.parse(document.body, {
+			folder: 'svg',
+			ext: '.svg'
+		});
+	});
+</script>

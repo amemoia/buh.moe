@@ -42,11 +42,11 @@ const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : 
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={pageUrl} />
-		<meta property="og:thumbnail" content={absoluteImage} />
+		<meta property="og:image" content={absoluteImage} />
 		<meta property="og:site_name" content="buh.moe" />
 
 		<!-- Twitter -->
-		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={absoluteImage} />

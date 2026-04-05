@@ -43,6 +43,7 @@ export const POST: APIRoute = async ({ request, env }: any) => {
     if (name.length > 100 || !name || !message)
       return redirect("/guestbook?status=error");
     if (message.length > 300) return redirect("/guestbook?status=toolong");
+    if (message.startsWith(">") || message.startsWith("\">")) return redirect("/guestbook?status=goaway");
 
     const isLocal = isLocalRequest(request);
     if (!token && !isLocal) return redirect("/guestbook?status=turnstile");

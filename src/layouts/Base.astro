@@ -4,29 +4,19 @@ const {
 	description = "my little corner of the internet",
 	image = "/resources/avi-embed.png",
 	url,
-	class: className,
 } = Astro.props;
+
+const siteBase = Astro.site ?? '';
+const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : Astro.url.pathname);
+let absoluteImage = image;
+try { if (image && !image.startsWith('http') && siteBase) absoluteImage = new URL(image, siteBase).href; }
+catch (e) {}
 
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import '../styles/global.css'
-
-var classNameTotal;
-if (className == null || className== '') {
-		classNameTotal = "flex flex-col gap-4"
-}
-else classNameTotal = className;
-
-const siteBase = import.meta.env.SITE ?? Astro.site ?? '';
-let absoluteImage = image;
-try {
-	if (image && !image.startsWith('http') && siteBase) {
-		absoluteImage = new URL(image, siteBase).href;
-	}
-} catch (e) {
-}
-const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : Astro.url.pathname);
 ---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -46,10 +36,10 @@ const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : 
 		<meta property="og:site_name" content="buh.moe" />
 
 		<!-- Twitter -->
-		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={absoluteImage} />
+		<meta name="twitter:image" />
 
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -59,7 +49,7 @@ const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : 
 
 	<body>
 		<Header />
-		<main class={classNameTotal}>
+		<main>
 			<slot />
 		</main>
 		<Footer />

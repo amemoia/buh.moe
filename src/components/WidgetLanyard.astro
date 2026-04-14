@@ -1,0 +1,150 @@
+
+<div class="flex flex-row gap-4 discord-main">
+    <div class="profile-pfp profile-pfp-placeholder shadow-md" id="profile-avatar"></div>
+    <div class="flex flex-col profile-text">
+        <span class="flex flex-row gap-1.5 items-center font-medium">
+            <span class="text-xl md:text-2xl" id="profile-name">amemoia</span>
+            <span class="opacity-75">•</span>
+            <span class="text-litalic opacity-75" id="profile-username">@buh.moe</span>
+        </span>
+        <div class="text-left p-1" id="status-container">
+            <span class="status-indicator" id="status-indicator" data-status="offline"></span>
+            <span id="status-text">Offline</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // TAKEN FROM BUH.MOE
+    // client side lanyard api fetch
+    const UID = "254204775497859073";
+
+    async function fetchLanyardData() {
+        const avatarElement = document.getElementById('profile-avatar');
+        const nameElement = document.getElementById('profile-name');
+        const usernameElement = document.getElementById('profile-username');
+        const statusIndicator = document.getElementById('status-indicator');
+        const statusText = document.getElementById('status-text');
+
+        if (!avatarElement || !nameElement || !usernameElement || !statusIndicator || !statusText) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`https://api.lanyard.rest/v1/users/${UID}`);
+            if (response.ok) {
+                const toJson = await response.json();
+                const lanyard = toJson.data;
+                if (lanyard.discord_user) {
+                    const { id, avatar, global_name, username } = lanyard.discord_user;
+                    const avatarUrl = `https://cdn.discordapp.com/avatars/${id}/${avatar}.png?size=256`;
+                    
+                    if (avatarElement) {
+                        avatarElement.style.backgroundImage = `url(${avatarUrl})`;
+                        avatarElement.classList.remove('profile-pfp-placeholder');
+                    }
+                    
+                    if (nameElement) {
+                        nameElement.textContent = global_name || 'Geggos';
+                    }
+                    if (usernameElement) {
+                        usernameElement.textContent = `@${username || 'geggos'}`;
+                    }
+                    
+                    if (statusIndicator && statusText) {
+                        statusIndicator.setAttribute('data-status', lanyard.discord_status);
+                        let text = lanyard.discord_status.charAt(0).toUpperCase() + lanyard.discord_status.slice(1);
+                        if (text == "Dnd") text = "Do not disturb";
+                        statusText.textContent = text;
+                    }
+                }
+            } else {
+                console.error('Lanyard API error:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Failed to fetch Lanyard data:', error);
+        }
+    }
+
+    fetchLanyardData();
+    document.addEventListener('astro:page-load', fetchLanyardData);
+</script>
+
+<style>
+    :root {
+        --pfp-size: 100px;
+    }
+    @media (min-width: theme('screens.md')) {
+        :root {
+            --pfp-size: 100px;
+        }
+    }
+
+    .discord-main {
+        border: 4px solid var(--bg-accent-transparent);
+        border-radius: 16px;
+        padding: 1em;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .profile-container {
+        width: 100%;
+        padding: 0;
+        border-radius: 32px;
+        user-select: none;
+        will-change: transform;
+        position: relative;
+        gap: 0.5em;
+    }
+
+    .profile-pfp {
+        width: var(--pfp-size);
+        height: var(--pfp-size);
+        border: 4px solid var(--bg-accent-transparent);
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+    .profile-pfp-placeholder {
+        background-color: var(--bg-accent-transparenter);
+    }
+    
+    .profile-text {
+        justify-content: center;
+    }
+
+    #profile-name, .discord-header {
+        color: var(--accent);
+    }
+
+    .status-indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 4px;
+    }
+    .status-indicator[data-status="online"] {
+        background-color: #23a55a;
+    }
+    .status-indicator[data-status="idle"] {
+        background-color: #f0b232;
+    }
+    .status-indicator[data-status="dnd"] {
+        background-color: #f23f43;
+    }
+    .status-indicator[data-status="offline"] {
+        background-color: #80848e;
+    }
+    #status-text {
+        font-size: smaller;
+    }
+    @media (hover: hover) {
+        .discord-header.fancy:hover:not(:active) {
+            transform: rotate(-1deg);
+        }
+    }
+</style>

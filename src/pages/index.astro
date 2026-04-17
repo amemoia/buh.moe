@@ -35,7 +35,8 @@ import b_nta from '../assets/88x31/nta.png'
 import b_ada from '../assets/88x31/ada.gif'
 import b_notnite from '../assets/88x31/notnite.png'
 import b_sapphic from '../assets/88x31/sapphic.png'
-import b_prefetcher from '../assets/88x31/prefetcher.gif'
+import b_nano from '../assets/88x31/nano.gif'
+import b_prefetcher from '../assets/88x31/prefetcher.png'
 import b_ata from '../assets/88x31/ata.png'
 --- 
 
@@ -70,9 +71,10 @@ import b_ata from '../assets/88x31/ata.png'
 						<WidgetLanyard />
 					</div>
 				</div>
-				<div class="flex flex-col justify-center profile-text">
+				<div class="flex flex-col justify-center profile-text p-2">
 					<p class="font-bold text-2xl md:text-3xl">hi there!</p>
 					<p>im alex buh, a {age}yo student from <span class="accent">Poland</span></p>
+					<p>i like to play games, mess around with computers and be generally unproductive!</p>
 					<p class="italic">this website is inspired by and uses assets from <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" class="accent-green"> <Image src={icon_dl} alt="A green deadlock logo" style="width: 1.25rem; height: 1.25rem; display: inline-block; position: relative; bottom: 2px; left: 2px;"}/> Deadlock</a>, an upcoming game by Valve</p>
 				</div>
 			</div>
@@ -80,10 +82,28 @@ import b_ata from '../assets/88x31/ata.png'
 
 	</div>
 	<div class="index-main flex flex-col">
-		<div class="index-socials justify-center items-center bg-texture font-light text-xl md:text-2xl">
+		<div class="flex flex-col index-socials justify-center items-center bg-texture font-light text-xl md:text-2xl">
 			<div class="scratch-mask-bottom pb-12"></div>
+			<h1 class="pulp text-center text-3xl">About me</h1>
+			<div class="flex flex-col self-center items-center my-8 px-8 w-fit lg:max-w-2/3">
+				<div>
+					<p>I'm currently studying computer science at the <span class="italic">Maria Curie-Skłodowska University</span> in Lublin.</p>
+					<p>I have a bit of an interest in art as well as design, most of which I express here on my website!</p>
+					<p class="italic opacity-80">Though, I am a little bit lazy, so I don't draw too often...</p>
+					<br>
+					<p>I enjoy web design a lot and have experience making websites not just for myself, but for others as well.</p>
+					<p>You can see a non-exhaustive list of my work on my <a href="/projects" class="accent-green">projects</a> page.</p>
+					<br>
+					<p>I also have a few not-so-useful IT certificates <span class="italic opacity-80">(INF.02, INF.03 and two Cisco CCNA certs)</span> as well as hands-on experience in software development and  IT admin work.</p>
+				</div>
+				
+			</div>
+			<div class="scratch-mask-top-dark pt-12"></div>
+		</div>
+		<div class="flex flex-col bg-texture-dark pt-2">
+
 			<h1 class="pulp text-center text-3xl">Socials</h1>
-			<div class="socials-grid flex flex-row px-4 justify-center items-center flex-wrap gap-2 md:gap-4 mt-8">
+			<div class="socials-grid flex flex-row px-4 justify-center items-center text-xl font-light flex-wrap gap-2 md:gap-4 mt-4">
 				<SocialButton 
 					icon={BlueskyIcon}
 					name="Bluesky" 
@@ -120,37 +140,67 @@ import b_ata from '../assets/88x31/ata.png'
 					color="#8B5CF6"
 				/>
 			</div>
-			<div class="scratch-mask-top-dark pt-12"></div>
-		</div>
-		<div class="flex flex-col bg-texture-dark pt-2">
-			<h1 class="pulp text-center text-3xl">Friends</h1>
-			<div class="flex flex-row flex-wrap my-8 items-center self-center justify-center px-4">
+
+			<h1 class="pulp text-center text-3xl mt-4">Friends</h1>
+
+			<div class="flex flex-row flex-wrap my-8 items-center self-center justify-center px-4 ">
 				<FriendButton src="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" url="https://themooskyfish.nekoweb.org" />
 				<FriendButton src={b_sapphic.src} alt="sapphic.moe" url="https://sapphic.moe" />
 				<FriendButton src={b_ada.src} alt="ada.cat" url="https://ada.cat" />
-				<FriendButton src="https://notnite.com/buttons/notnite.png" alt="notnite" url="https://notnite.com/" />
 				<FriendButton src="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" url="https://babybreaths.nekoweb.org" />
 				<FriendButton src={b_nta.src} alt="nta" url="https://ntauthority.me/" />
 				<FriendButton src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" url="https://remblanc.nekoweb.org" />
 				<FriendButton src="https://hoshimiuwu.github.io/HideawayHotlink.gif" alt="jumpyuvu" url="https://hoshimiuwu.github.io" />
 				<FriendButton src="https://erisdump.neocities.org/buttons/88x31.gif" alt="eris" url="https://erisdump.neocities.org/" />
-				<FriendButton src={b_prefetcher.src} alt="prefetcher" url="https://nanoshinono.me/" />
+				<FriendButton src={b_prefetcher.src} alt="prefetcher" url="https://prefetcher.net/" />
+				<FriendButton src={b_nano.src} alt="nano" url="https://nanoshinono.me/" />
 				<FriendButton src={b_ata.src} alt="ata.moe" url="https://ata.moe/" />
-				<FriendButton src="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" url="https://nekoweb.org/" />
 			</div>
 			<h1 class="pulp text-center text-xl">My button</h1>
-			<!-- TODO 88x31 copy field -->
+			<div class="flex flex-col items-center my-4 px-4">
+				<button class="button-preview" id="copy-button" type="button" aria-label="Copy button code">
+					<img src="/resources/buttons/88x31.png" alt="amemoia" width="88" height="31" />
+				</button>
+			
+            	<span class="font-light text-sm copy-hint opacity-50" id="copy-hint">(click to copy code!)</span>
+			</div>
 			<div class="scratch-mask-top pt-12"></div>
 		</div>
 	</div>
 </Base>
+
+<script>
+    const copyButton = document.getElementById('copy-button');
+    const copyHint = document.getElementById('copy-hint');
+    const codeText = '<a href="https://buh.moe/" target="_blank"><img src="https://buh.moe/resources/buttons/88x31.png"></a>';
+    
+    if (copyButton && copyHint) {
+        copyButton.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(codeText);
+                copyHint.textContent = 'copied!';
+				copyHint.classList.remove('opacity-50');
+                copyHint.classList.add('opacity-100');
+                setTimeout(() => {
+                    copyHint.textContent = '(click to copy code!)';
+                    copyHint.classList.remove('opacity-100');
+                    copyHint.classList.add('opacity-50');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                copyHint.textContent = 'Failed to copy';
+            }
+        });
+    }
+</script>
+
 <style>
 	.hero {
 		display: grid;
 		grid-template-columns: 64px 600px 1fr;
-		min-height: calc(100svh - 64px);
+		min-height: calc(90svh - 64px);
 		height: auto;
-		grid-template-rows: minmax(320px, 60vh) auto;
+		grid-template-rows: minmax(320px, 40vh) auto;
 		grid-template-areas:
 			"side block deco"
 			"side intro intro";
@@ -290,7 +340,7 @@ import b_ata from '../assets/88x31/ata.png'
 		}
 	}
 
-	@media (min-width: 1345px) {
+	@media (min-width: 1496px) {
 		.profile-text {
 			text-align: left;
 		}
@@ -304,4 +354,17 @@ import b_ata from '../assets/88x31/ata.png'
 		align-items: center;
 		flex-grow: 1;
 	}
+
+	.button-preview {
+		border: 1px solid transparent;
+	}
+
+    .button-preview:hover {
+		border-color: #BE193150;
+    }
+
+    .button-preview:active {
+		border-color: #BE1931;
+    }
+
 </style>

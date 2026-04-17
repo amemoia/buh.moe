@@ -16,7 +16,7 @@ const { icon: IconComponent, name, handle, url, color } = Astro.props;
                 {name} 
             </span>
         </span>
-        <span class="social-handle opacity-75">{handle}</span>
+        <span class="social-handle">{handle}</span>
     </div>
 </a>
 
@@ -36,24 +36,25 @@ const { icon: IconComponent, name, handle, url, color } = Astro.props;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        transition: transform 0.2s ease;
+    }
+
+    .social-handle {
+        opacity: 0.75;
+        transition: opacity 0.2s ease;
     }
 
     .social-site {
-        transform: skew(var(--social-skew)) rotate(0deg);
         padding: 0.5rem 1rem;
+        border-radius: 8px;
     }
+
     .social-button:hover {
-        .social-site {
-            transform: skew(var(--social-skew)) rotate(1deg);
+        .social-info {
+            transform: scale(1.025);
+        }
+        .social-handle {
+            opacity: 1;
         }
     }
 </style>
-
-<script>
-    const socialSites = document.querySelectorAll<HTMLElement>('[data-social-site]');
-
-    for (const site of socialSites) {
-        const randomSkewDeg = -(5 + Math.random() * 5).toFixed(1);
-        site.style.setProperty('--social-skew', `${randomSkewDeg}deg`);
-    }
-</script>

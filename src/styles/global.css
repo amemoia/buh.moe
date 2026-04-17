@@ -127,6 +127,7 @@ body {
     background-color: black;
     margin: 0;
     color: white;
+	overflow-x: hidden;
 }
 .accent {
     color: #BE1931;
@@ -160,4 +161,39 @@ body {
 .bg-texture-darkest {
 	background-image: url('/resources/bg_texture_darkest.jpg');
 	background-size: cover;
+}
+
+.block {
+	margin: 1rem;
+	border-radius: 8px;
+	border: 1px solid #BE1931;
+	padding: 1rem;
+}
+.scratch-mask-bottom {
+	background-image: url('/resources/scratch_mask_bottom.png');
+	background-position: center bottom;
+	height: 50px;
+	width: 100%;
+	z-index: 10;
+    position: relative;
+    background-size: auto 100%;
+}
+.scratch-mask-top {
+	background-image: url('/resources/scratch_mask_top.png');
+	background-position: center top;
+	height: 50px;
+	width: 100%;
+	z-index: 10;
+    position: relative;
+    background-size: auto 100%;
+}
+
+.scratch-mask-top-dark {
+	background-image: url('/resources/scratch_mask_top_dark.png');
+	background-position: center top;
+	height: 50px;
+	width: 100%;
+	z-index: 10;
+    position: relative;
+    background-size: auto 100%;
 }

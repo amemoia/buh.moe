@@ -7,18 +7,17 @@ import HeroBanner from "../assets/hero-banner.png";
 import HeroName from "../assets/hero-name.svg";
 import WidgetLanyard from "../components/WidgetLanyard.astro";
 import SocialButton from "../components/SocialButton.astro";
+import FriendButton from "../components/FriendButton.astro";
 
-
+import icon_dl from "../assets/deadlock.webp";
 
 const birthday = new Date('2004-03-21');
 const today = new Date();
 let age = today.getFullYear() - birthday.getFullYear();
 const m_diff = today.getMonth() - birthday.getMonth();
 const d_diff = today.getDate() - birthday.getDate();
+if (m_diff < 0 || (m_diff === 0 && d_diff < 0)) age -= 1;
 
-if (m_diff < 0 || (m_diff === 0 && d_diff < 0)) {
-	age -= 1;
-}
 
 // social urls
 const bsky = "https://bsky.app/profile/buh.moe";
@@ -31,6 +30,13 @@ const steam = "https://steamcommunity.com/id/amemoia/"
 import SteamIcon from "~icons/simple-icons/steam";
 const github = "https://github.com/amemoia"
 import GithubIcon from "~icons/simple-icons/github";
+
+import b_nta from '../assets/88x31/nta.png'
+import b_ada from '../assets/88x31/ada.gif'
+import b_notnite from '../assets/88x31/notnite.png'
+import b_sapphic from '../assets/88x31/sapphic.png'
+import b_prefetcher from '../assets/88x31/prefetcher.gif'
+import b_ata from '../assets/88x31/ata.png'
 --- 
 
 <Base>
@@ -46,7 +52,7 @@ import GithubIcon from "~icons/simple-icons/github";
 		</div>
 		<div class="hero-deco">
 			<div class="hero-deco-inner bg-texture-darkest p-8 flex flex-col gap-4">
-				<h1 class="pulp text-3xl">Testimonials</h1>
+				<h1 class="pulp text-2xl md:text-3xl">Testimonials</h1>
 				<span>would put random guestbook messages here</span>
 				<span>would put random guestbook messages here</span>
 				<span>would put random guestbook messages here</span>
@@ -58,25 +64,26 @@ import GithubIcon from "~icons/simple-icons/github";
 			-->
 		</div>
 		<div class="hero-profile">
-			<div class="index-section-grid p-8 gap-4 lg:gap-8 bg-texture-dark font-light text-2xl">
+			<div class="index-section-grid p-4 md:p-8 gap-4 lg:gap-8 bg-texture-dark font-light text-xl md:text-2xl">
 				<div class="flex flex-col justify-center items-center">
 					<div class="bg-texture-darkest w-fit rounded-lg shadow-md px-2 self-center justify-center">
 						<WidgetLanyard />
 					</div>
 				</div>
 				<div class="flex flex-col justify-center profile-text">
-					<p class="font-bold text-3xl">hi there!</p>
+					<p class="font-bold text-2xl md:text-3xl">hi there!</p>
 					<p>im alex buh, a {age}yo student from <span class="accent">Poland</span></p>
-					<p class="italic">this website is inspired by and uses assets from <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" class="accent-green">Deadlock</a>, an upcoming game by Valve</p>
+					<p class="italic">this website is inspired by and uses assets from <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" class="accent-green"> <Image src={icon_dl} alt="A green deadlock logo" style="width: 1.25rem; height: 1.25rem; display: inline-block; position: relative; bottom: 2px; left: 2px;"}/> Deadlock</a>, an upcoming game by Valve</p>
 				</div>
 			</div>
 		</div>
 
 	</div>
 	<div class="index-main flex flex-col">
-		<div class="index-socials justify-center items-center px-8 py-16 bg-texture font-light text-2xl">
+		<div class="index-socials justify-center items-center bg-texture font-light text-xl md:text-2xl">
+			<div class="scratch-mask-bottom pb-12"></div>
 			<h1 class="pulp text-center text-3xl">Socials</h1>
-			<div class="socials-grid flex flex-row justify-center items-center flex-wrap gap-4 mt-8">
+			<div class="socials-grid flex flex-row px-4 justify-center items-center flex-wrap gap-2 md:gap-4 mt-8">
 				<SocialButton 
 					icon={BlueskyIcon}
 					name="Bluesky" 
@@ -113,6 +120,27 @@ import GithubIcon from "~icons/simple-icons/github";
 					color="#8B5CF6"
 				/>
 			</div>
+			<div class="scratch-mask-top-dark pt-12"></div>
+		</div>
+		<div class="flex flex-col bg-texture-dark pt-2">
+			<h1 class="pulp text-center text-3xl">Friends</h1>
+			<div class="flex flex-row flex-wrap my-8 items-center self-center justify-center px-4">
+				<FriendButton src="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" url="https://themooskyfish.nekoweb.org" />
+				<FriendButton src={b_sapphic.src} alt="sapphic.moe" url="https://sapphic.moe" />
+				<FriendButton src={b_ada.src} alt="ada.cat" url="https://ada.cat" />
+				<FriendButton src="https://notnite.com/buttons/notnite.png" alt="notnite" url="https://notnite.com/" />
+				<FriendButton src="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" url="https://babybreaths.nekoweb.org" />
+				<FriendButton src={b_nta.src} alt="nta" url="https://ntauthority.me/" />
+				<FriendButton src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" url="https://remblanc.nekoweb.org" />
+				<FriendButton src="https://hoshimiuwu.github.io/HideawayHotlink.gif" alt="jumpyuvu" url="https://hoshimiuwu.github.io" />
+				<FriendButton src="https://erisdump.neocities.org/buttons/88x31.gif" alt="eris" url="https://erisdump.neocities.org/" />
+				<FriendButton src={b_prefetcher.src} alt="prefetcher" url="https://nanoshinono.me/" />
+				<FriendButton src={b_ata.src} alt="ata.moe" url="https://ata.moe/" />
+				<FriendButton src="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" url="https://nekoweb.org/" />
+			</div>
+			<h1 class="pulp text-center text-xl">My button</h1>
+			<!-- TODO 88x31 copy field -->
+			<div class="scratch-mask-top pt-12"></div>
 		</div>
 	</div>
 </Base>
@@ -132,7 +160,9 @@ import GithubIcon from "~icons/simple-icons/github";
 		background: #BE1931;
 		z-index: 1;
 		width: 100%;
-		height: 100%;
+		height: auto;
+		border-bottom-right-radius: 8px;
+		margin-bottom: 1rem;
 	}
 	.hero-block {
 		grid-area: block;

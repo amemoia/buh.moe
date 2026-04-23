@@ -1,11 +1,10 @@
 ---
-import Image from "astro/components/Image.astro";
 const { deco, class: className, decoLarger, ...rest } = Astro.props;
-var decoClass = "block-deco absolute pointer-events-none select-none w-auto h-auto ";
+var decoClass = "block-deco absolute w-auto h-auto ";
 if (decoLarger) decoClass += "max-h-32 -top-3 -right-16";
 else decoClass += "max-h-16 -top-6 -right-4";
 ---
 <div class:list={["block relative", className]} {...rest}>
-    {deco ? <img src={deco.src} alt="" aria-hidden="true" class={decoClass} /> : null}
+    {deco ? <img src={deco.src} alt="" aria-hidden="true" class={decoClass + " pointer-events-none select-none"} /> : null}
     <slot />
 </div>

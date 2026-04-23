@@ -4,11 +4,7 @@ const { icon: IconComponent, name, handle, url, color } = Astro.props;
 ---
 <a class="social-button" href={url} target="_blank" rel="noopener noreferrer">
     <div class="social-info items-center">
-        <span
-            class="social-site shadow-lg items-center font-semibold flex flex-row gap-2"
-              data-social-site
-              style={`background-color: ${color}; --social-skew: -10deg;`}
-        >
+        <span class="social-site shadow-lg items-center font-semibold flex flex-row gap-2" style={`background-color: ${color}80; border: 1px solid ${color};`}>
             <span>
                 {IconComponent && <IconComponent class="social-icon" />}
             </span>

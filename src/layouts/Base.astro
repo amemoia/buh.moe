@@ -47,9 +47,9 @@ import '../styles/global.css'
 		<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="buh.moe RSS" />
 	</head>
 
-	<body>
+	<body class="flex flex-col">
 		<Header />
-		<main>
+		<main class="flex flex-col text-lg lg:text-xl lg:w-4xl self-center mt-8 mx-8 lg:mx-0">
 			<slot />
 		</main>
 		<Footer />

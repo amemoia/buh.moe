@@ -1,0 +1,46 @@
+---
+import RssIcon from "~icons/lucide/rss";
+import SourceIcon from "~icons/lucide/git-branch";
+import CreditsIcon from "~icons/lucide/heart";
+
+---
+<footer class="footer-container text-lg flex flex-col self-center my-8">
+    <div class="footer-content flex flex-col gap-4">
+        <div class="footer-links flex flex-row gap-8">
+            <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
+                <RssIcon />
+                <span>RSS</span>
+            </a>
+            <a href="https://github.com/amemoia/buh.moe" target="_blank" rel="noopener noreferrer">
+                <SourceIcon />
+                <span>Source</span>
+            </a>
+            <a href="/credits">
+                <CreditsIcon />
+                <span>Credits</span>
+            </a>
+        </div>
+        <div class="footer-info flex flex-col text-center">
+            <span class="footer-text text-base"><span class="accent font-bold">buh.moe v5</span> made with ❤️ by amemoia</span>
+            <span class="footer-text text-base">built with <a href="https://astro.build" target="_blank" class="accent-green">Astro</a></span>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer-links > a {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5em;
+        align-self: center;
+        transition: color 0.15s ease;
+    }
+    .footer-links > a > svg {
+        position: relative;
+        top: 3px;
+    }
+    .footer-links > a:hover {
+        color: #e94f66;
+        transition: color 0.15s ease;
+    }
+</style>

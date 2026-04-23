@@ -3,19 +3,23 @@ import Image from "astro/components/Image.astro"
 import HeaderLogo from "../assets/buh-inverse.png";
 ---
 
-<header>
-    <div class="header-icon">
-        <Image src={HeaderLogo} alt="buh.moe">
+<header class="mt-4">
+    <div class="flex flex-col lg:flex-row w-full lg:max-w-4xl mx-auto">
+        <a class="header-icon w-full lg:w-auto justify-center lg:justify-start" href="/">
+            <span class="text-2xl">💢 buh.moe</span>
+        </a>
+        <nav class="header-links w-full lg:w-auto justify-center lg:justify-end self-stretch lg:self-center flex-wrap py-2 px-4 lg:p-0">
+            <a href="/">home</a>
+            <a href="/about">about</a>
+            <a href="/blog">blog</a>
+            <a href="/projects">projects</a>
+            <a href="/devices">devices</a>
+            <a href="/guestbook">guestbook</a>
+            <a href="/ask">ask</a>
+            <a href="/ffxiv">ffxiv</a>
+        </nav>
+
     </div>
-    <nav class="header-links">
-        <a href="/">home</a>
-        <a href="/blog">blog</a>
-        <a href="/projects">projects</a>
-        <a href="/devices">devices</a>
-        <a href="/guestbook">guestbook</a>
-        <a href="/ask">ask</a>
-        <a href="/ffxiv">ffxiv</a>
-    </nav>
 </header>
 <script>
     const normalizePath = (path: string | undefined) => {
@@ -39,7 +43,6 @@ import HeaderLogo from "../assets/buh-inverse.png";
     .header-icon {
         display: flex;
         align-items: center;
-        height: 100%;
         flex-shrink: 0;
     }
     header {
@@ -48,7 +51,7 @@ import HeaderLogo from "../assets/buh-inverse.png";
         background-color: black;
         border-bottom: 1px solid #BE1931;
         font-size: 18px;
-        height: 64px;
+        min-height: 64px;
         color: white;
 
         display: flex;
@@ -60,13 +63,12 @@ import HeaderLogo from "../assets/buh-inverse.png";
     .header-links {
         display: flex;
         flex-direction: row;
-        gap: 2em;
+        gap: 1rem 2em;
         align-items: center;
         overflow-x: auto;
         overflow-y: hidden;
         flex: 1;
-        height: 100%;
-        padding: 0 2em;
+        min-height: 64px;
         white-space: nowrap;
     }
     .header-links a {
@@ -83,8 +85,39 @@ import HeaderLogo from "../assets/buh-inverse.png";
         background-color: #BE1931;
     }
     .header-icon img {
-        height: calc(100% + 1px);
+        height: 100%;
         width: 64px;
         min-width: 64px;
+    }
+
+    @media (min-width: 1024px) {
+        header {
+            height: 64px;
+        }
+
+        .header-links {
+            height: 100%;
+        }
+    }
+
+    @media (max-width: 1023px) {
+        header {
+            align-items: stretch;
+            border-color: transparent;
+        }
+
+        .header-links a.active::after {
+            bottom: -4px;
+        }
+
+        .header-icon {
+            height: 64px;
+            width: 100%;
+        }
+
+        .header-links {
+            width: 100%;
+            flex: 0 0 auto;
+        }
     }
 </style>

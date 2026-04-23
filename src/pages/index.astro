@@ -3,8 +3,7 @@ export const prerender = false;
 import Base from "../layouts/Base.astro"
 import Image from "astro/components/Image.astro";
 
-import HeroBanner from "../assets/hero-banner.png";
-import HeroName from "../assets/hero-name.svg";
+import Block from "../components/Block.astro";
 import WidgetLanyard from "../components/WidgetLanyard.astro";
 import SocialButton from "../components/SocialButton.astro";
 import FriendButton from "../components/FriendButton.astro";
@@ -38,136 +37,143 @@ import b_sapphic from '../assets/88x31/sapphic.png'
 import b_nano from '../assets/88x31/nano.gif'
 import b_prefetcher from '../assets/88x31/prefetcher.png'
 import b_ata from '../assets/88x31/ata.png'
+import b_alyxia from '../assets/88x31/alyxia.png'
+
+import d_wave from '../assets/blocks/wave2.png'
+import d_quill from '../assets/blocks/quill.png'
+import d_minibuh from '../assets/blocks/minibuh.png'
 --- 
 
 <Base>
-	<div class="hero">
-		<div class="hero-side"></div>
-		<div class="hero-block flex flex-col text-3xl">
-			<div class="hero-block-inner flex flex-col">
-				<div class="self-end mt-auto flex flex-col hero-block-text">
-					<span>welcome to buh.moe</span>
-					<span>my little corner of the internet</span>
-				</div>
-			</div>
-		</div>
-		<div class="hero-deco">
-			<div class="hero-deco-inner bg-texture-darkest p-8 flex flex-col gap-4">
-				<h1 class="pulp text-2xl md:text-3xl">Testimonials</h1>
-				<span>would put random guestbook messages here</span>
-				<span>would put random guestbook messages here</span>
-				<span>would put random guestbook messages here</span>
-			</div>
-			<!-- 
-			<Image src={HeroName} alt="Mina's Nameplate" class="hero-name"/>
-			<span class="hero-quote montiac uppercase text-shadow-black text-shadow-lg">I'll make them bleed</span>
-			<Image src={HeroBanner} alt="Mina Ha from Deadlock" class="hero-banner" />
-			-->
-		</div>
-		<div class="hero-profile">
-			<div class="index-section-grid p-4 md:p-8 gap-4 lg:gap-8 bg-texture-dark font-light text-xl md:text-2xl">
-				<div class="flex flex-col justify-center items-center">
-					<div class="bg-texture-darkest w-fit rounded-lg shadow-md px-2 self-center justify-center">
-						<WidgetLanyard />
-					</div>
-				</div>
-				<div class="flex flex-col justify-center profile-text p-2">
-					<p class="font-bold text-2xl md:text-3xl">hi there!</p>
-					<p>im alex buh, a {age}yo student from <span class="accent">Poland</span></p>
-					<p>i like to play games, mess around with computers and be generally unproductive!</p>
-					<p class="italic">this website is inspired by and uses assets from <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" class="accent-green"> <Image src={icon_dl} alt="A green deadlock logo" style="width: 1.25rem; height: 1.25rem; display: inline-block; position: relative; bottom: 2px; left: 2px;"}/> Deadlock</a>, an upcoming game by Valve</p>
-				</div>
-			</div>
-		</div>
+    <div class="index-main">
+        <div class="hero">
+            <div class="flex flex-col md:flex-row">
+                <Block deco={d_wave} class="hero-intro grow text-right justify-end text-fancy">
+                    <span>welcome to buh.moe</span>
+                    <span>my little corner of the internet</span>
+                </Block>
+                <Block deco={d_quill} class="grow text-fancy bg-red">
+                    <h1 class="pulp text-2xl">Testimonials</h1>
+                    <span>would put random guestbook messages here</span>
+                    <span>would put random guestbook messages here</span>
+                    <span>would put random guestbook messages here</span>
+                </Block>
+            </div>
 
-	</div>
-	<div class="index-main flex flex-col">
-		<div class="flex flex-col index-socials justify-center items-center bg-texture font-light text-xl md:text-2xl">
-			<div class="scratch-mask-bottom pb-12"></div>
-			<h1 class="pulp text-center text-3xl">About me</h1>
-			<div class="flex flex-col self-center items-center my-8 px-8 w-fit lg:max-w-2/3">
-				<div>
-					<p>I'm currently studying computer science at the <span class="italic">Maria Curie-Skłodowska University</span> in Lublin.</p>
-					<p>I have a bit of an interest in art as well as design, most of which I express here on my website!</p>
-					<p class="italic opacity-80">Though, I am a little bit lazy, so I don't draw too often...</p>
-					<br>
-					<p>I enjoy web design a lot and have experience making websites not just for myself, but for others as well.</p>
-					<p>You can see a non-exhaustive list of my work on my <a href="/projects" class="accent-green">projects</a> page.</p>
-					<br>
-					<p>I also have a few not-so-useful IT certificates <span class="italic opacity-80">(INF.02, INF.03 and two Cisco CCNA certs)</span> as well as hands-on experience in software development and  IT admin work.</p>
-				</div>
-				
-			</div>
-			<div class="scratch-mask-top-dark pt-12"></div>
-		</div>
-		<div class="flex flex-col bg-texture-dark pt-2">
+            <Block deco={d_minibuh} decoLarger={true}>
+                <div class="mb-4">
+                    <WidgetLanyard />
+                </div>
+                <div>
+                    <p class="font-bold text-2xl md:text-3xl text-fancy">hi there!</p>
+                    <p>im alex buh, a {age}yo student from <span class="accent">Poland 🇵🇱</span></p>
+                    <p>i like to play games, mess around with computers and be generally unproductive!</p>
+                    <p class="italic">this website is inspired by and uses assets from <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" class="accent-green"> <Image src={icon_dl} alt="A green deadlock logo" style="width: 1.25rem; height: 1.25rem; display: inline-block; position: relative; bottom: 2px; left: 2px;"}/> Deadlock</a>, an upcoming game by Valve</p>
+                </div>
+            </Block>
+        </div>
 
-			<h1 class="pulp text-center text-3xl">Socials</h1>
-			<div class="socials-grid flex flex-row px-4 justify-center items-center text-xl font-light flex-wrap gap-2 md:gap-4 mt-4">
-				<SocialButton 
-					icon={BlueskyIcon}
-					name="Bluesky" 
-					handle="@buh.moe"
-					url={bsky}
-					color="#0C7BFF"
-				/>
-				<SocialButton 
-					icon={TwitterIcon}
-					name="Twitter" 
-					handle="@amemoia"
-					url={twitter}
-					color="#1DA1F2"
-				/>
-				<SocialButton 
-					icon={SteamIcon}
-					name="Steam" 
-					handle="/id/amemoia"
-					url={steam}
-					color="#1A9FFF"
-				/>
-				<SocialButton 
-					icon={DiscordIcon}
-					name="Discord" 
-					handle="@buh.moe"
-					url={discord}
-					color="#5865F2"
-				/>
-				<SocialButton 
-					icon={GithubIcon}
-					name="GitHub" 
-					handle="@amemoia"
-					url={github}
-					color="#8B5CF6"
-				/>
-			</div>
+        <div class="flex flex-col gap-1 mt-4">
+            <Block class="noborder p-0!">
+                <h1 class="pulp text-3xl text-center">Socials</h1>
+                <div class="flex flex-row flex-wrap justify-center">
+                    <SocialButton 
+                        icon={BlueskyIcon}
+                        name="Bluesky" 
+                        handle="@buh.moe"
+                        url={bsky}
+                        color="#0C7BFF"
+                    />
+                    <SocialButton 
+                        icon={TwitterIcon}
+                        name="Twitter" 
+                        handle="@amemoia"
+                        url={twitter}
+                        color="#1DA1F2"
+                    />
+                    <SocialButton 
+                        icon={SteamIcon}
+                        name="Steam" 
+                        handle="/id/amemoia"
+                        url={steam}
+                        color="#1A9FFF"
+                    />
+                    <SocialButton 
+                        icon={DiscordIcon}
+                        name="Discord" 
+                        handle="@buh.moe"
+                        url={discord}
+                        color="#5865F2"
+                    />
+                    <SocialButton 
+                        icon={GithubIcon}
+                        name="GitHub" 
+                        handle="@amemoia"
+                        url={github}
+                        color="#8B5CF6"
+                    />
+                </div>
+            </Block>
 
-			<h1 class="pulp text-center text-3xl mt-4">Friends</h1>
+            <Block class="noborder p-0!">
+                <h1 class="pulp text-3xl text-center">Friends</h1>
+                <div class="flex flex-row flex-wrap my-2 justify-center">
+                    <FriendButton src={b_sapphic.src} alt="sapphic.moe" url="https://sapphic.moe" />
+                    <FriendButton src={b_ada.src} alt="ada.cat" url="https://ada.cat" />
+                    <FriendButton src="https://hoshimiuwu.github.io/HideawayHotlink.gif" alt="jumpyuvu" url="https://hoshimiuwu.github.io" />
+                    <FriendButton src="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" url="https://themooskyfish.nekoweb.org" />
+                    <FriendButton src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" url="https://remblanc.nekoweb.org" />
+                    <FriendButton src={b_alyxia.src} alt="alyxia" url="https://alyxia.dev/" />
+                    <FriendButton src={b_notnite.src} alt="notnite" url="https://notnite.com/" />
+                    <FriendButton src="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" url="https://babybreaths.nekoweb.org" />
+                    <FriendButton src={b_nta.src} alt="nta" url="https://ntauthority.me/" />
+                    <FriendButton src="https://erisdump.neocities.org/buttons/88x31.gif" alt="eris" url="https://erisdump.neocities.org/" />
+                    <FriendButton src={b_prefetcher.src} alt="prefetcher" url="https://prefetcher.net/" />
+                    <FriendButton src={b_nano.src} alt="nano" url="https://nanoshinono.me/" />
+                    <FriendButton src={b_ata.src} alt="ata.moe" url="https://ata.moe/" />
+                </div>
 
-			<div class="flex flex-row flex-wrap my-8 items-center self-center justify-center px-4 ">
-				<FriendButton src="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" url="https://themooskyfish.nekoweb.org" />
-				<FriendButton src={b_sapphic.src} alt="sapphic.moe" url="https://sapphic.moe" />
-				<FriendButton src={b_ada.src} alt="ada.cat" url="https://ada.cat" />
-				<FriendButton src="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" url="https://babybreaths.nekoweb.org" />
-				<FriendButton src={b_nta.src} alt="nta" url="https://ntauthority.me/" />
-				<FriendButton src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" url="https://remblanc.nekoweb.org" />
-				<FriendButton src="https://hoshimiuwu.github.io/HideawayHotlink.gif" alt="jumpyuvu" url="https://hoshimiuwu.github.io" />
-				<FriendButton src="https://erisdump.neocities.org/buttons/88x31.gif" alt="eris" url="https://erisdump.neocities.org/" />
-				<FriendButton src={b_prefetcher.src} alt="prefetcher" url="https://prefetcher.net/" />
-				<FriendButton src={b_nano.src} alt="nano" url="https://nanoshinono.me/" />
-				<FriendButton src={b_ata.src} alt="ata.moe" url="https://ata.moe/" />
-			</div>
-			<h1 class="pulp text-center text-xl">My button</h1>
-			<div class="flex flex-col items-center my-4 px-4">
-				<button class="button-preview" id="copy-button" type="button" aria-label="Copy button code">
-					<img src="/resources/buttons/88x31.png" alt="amemoia" width="88" height="31" />
-				</button>
-			
-            	<span class="font-light text-sm copy-hint opacity-50" id="copy-hint">(click to copy code!)</span>
-			</div>
-			<div class="scratch-mask-top pt-12"></div>
-		</div>
-	</div>
+                <div class="flex flex-col items-center">
+                    <h1 class="pulp text-xl">My button</h1>
+                    <button class="button-preview" id="copy-button" type="button" aria-label="Copy button code">
+                        <img src="/resources/buttons/88x31.png" alt="amemoia" width="88" height="31" />
+                    </button>
+                    <span class="font-light text-sm copy-hint opacity-50" id="copy-hint">(click to copy code!)</span>
+                </div>
+            </Block>
+        </div>
+
+    </div>
 </Base>
+
+<style>
+	.side {
+		background: #BE1931;
+		z-index: 1;
+		width: 64px;
+		height: 80svh;
+		border-bottom-right-radius: 8px;
+        position: absolute;
+        left: 0;
+	}
+    .hero-intro {
+		user-select: none;
+		background: url("../assets/bg-gothic.png"), #BE193190;
+        background-size: auto auto;
+		background-position: center center;
+		background-blend-mode: color-burn;
+		text-align: right;
+	}
+    .button-preview {
+		border: 1px solid transparent;
+	}
+    .button-preview:hover {
+		border-color: #be193280;
+    }
+    .button-preview:active {
+		border-color: #BE1931;
+    }
+</style>
 
 <script>
     const copyButton = document.getElementById('copy-button');
@@ -193,178 +199,3 @@ import b_ata from '../assets/88x31/ata.png'
         });
     }
 </script>
-
-<style>
-	.hero {
-		display: grid;
-		grid-template-columns: 64px 600px 1fr;
-		min-height: calc(90svh - 64px);
-		height: auto;
-		grid-template-rows: minmax(320px, 40vh) auto;
-		grid-template-areas:
-			"side block deco"
-			"side intro intro";
-	}
-	.hero-side {
-		grid-area: side;
-		background: #BE1931;
-		z-index: 1;
-		width: 100%;
-		height: auto;
-		border-bottom-right-radius: 8px;
-		margin-bottom: 1rem;
-	}
-	.hero-block {
-		grid-area: block;
-		z-index: 1;
-		width: 100%;
-		height: 100%;
-		min-height: 256px;
-	}
-	.hero-block-inner {
-		user-select: none;
-		background: url("../assets/bg-gothic.png"), #BE193190;
-		background-position: bottom center;
-		background-size: auto, auto;
-		background-blend-mode: color-burn;
-		text-align: right;
-		padding: 1em 1em 2em 0em;
-	}
-	.hero-block-text {
-		text-shadow:    -3px -3px 0 #00000040,
-						3px -3px 0 #00000040,
-						-3px 3px 0 #00000040,
-						3px 3px 0 #00000040,
-						-3px 0 0 #00000040,
-						3px 0 0 #00000040,
-						0 -3px 0 #00000040,
-						0 3px 0 #00000040,
-						2px 0 8px #000;
-	}
-	@media (max-width: 500px) {
-		.hero-block-inner {
-			padding: 0.75em;
-		}
-		.hero-block-text {
-			font-size: 1.5rem;
-		}
-	}
-
-	.hero-deco {
-		grid-area: deco;
-		overflow: hidden;
-		display: flex;
-	}
-	.hero-deco-inner, .hero-block-inner {
-		flex-grow: 1;
-		margin: 1rem;
-		border-radius: 8px;
-		border: 1px solid #BE1931;
-	}
-	.hero-profile {
-		grid-area: intro;
-		display: flex;
-		flex-grow: 1;
-		margin: 1rem;
-		border-radius: 8px;
-		border: 1px solid #BE1931;
-		margin-top: 0;
-	}
-	.hero-profile > div { border-radius: 8px; }
-
-	.hero-deco-inner { margin-top: 0; }
-	
-	@media (min-width: 1001px) {
-		.hero-deco-inner { margin-left: 0; margin-top: 1em; }		
-	}
-
-	.hero-banner {
-		position: absolute;
-		object-fit: cover;
-		height: 100%;
-		object-position: top;
-		z-index: -1;
-		top: 0;
-		right: 0;
-	}
-	.hero-name {
-		position: absolute;
-		bottom: 1em;
-		right: 1em;
-		width: min(80%, 300px);
-		filter: drop-shadow(0 0px 4px #00000080);
-	}
-	.hero-quote {
-		position: absolute;
-		width: min(600px, 80%);
-		align-self: flex-start;
-		z-index: 1;
-		margin: 32px 0 0 32px;
-		font-size: 72px;
-	}
-
-	@keyframes grain-shift {
-		0% {
-			background-position: 0 0;
-		}
-		25% {
-			background-position: -25% 10%;
-		}
-		50% {
-			background-position: 15% -20%;
-		}
-		75% {
-			background-position: -10% -12%;
-		}
-		100% {
-			background-position: 0 0;
-		}
-	}
-	.profile-text { text-align: center; }
-
-	@media (max-width: 1000px) {
-		.hero {
-			grid-template-columns: 64px 1fr;
-			min-height: fit-content;
-			grid-template-rows: minmax(240px, auto) minmax(320px, auto) auto;
-			grid-template-areas:
-				"side block"
-				"side deco"
-				"side intro";
-		}
-		.hero-profile {
-			min-height: fit-content;
-		}
-		.hero-quote {
-			font-size: 36px;
-		}
-	}
-
-	@media (min-width: 1496px) {
-		.profile-text {
-			text-align: left;
-		}
-	}
-
-	.index-section-grid {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
-		flex-grow: 1;
-	}
-
-	.button-preview {
-		border: 1px solid transparent;
-	}
-
-    .button-preview:hover {
-		border-color: #BE193150;
-    }
-
-    .button-preview:active {
-		border-color: #BE1931;
-    }
-
-</style>

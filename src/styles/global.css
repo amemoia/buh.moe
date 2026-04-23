@@ -1,55 +1,5 @@
 @import "tailwindcss";
 
-
-@font-face {
-	font-family: 'Montiac';
-	src: url('/fonts/Montiac-Regular.woff2') format('woff2');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Montiac';
-	src: url('/fonts/Montiac-Italic.woff2') format('woff2');
-	font-weight: 400;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Montiac Mono';
-	src: url('/fonts/Montiac-Mono.woff2') format('woff2');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Montiac Mono';
-	src: url('/fonts/Montiac-ItalicMono.woff2') format('woff2');
-	font-weight: 400;
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Montiac Semi Mono';
-	src: url('/fonts/Montiac-SemiMono.woff2') format('woff2');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Montiac Semi Mono';
-	src: url('/fonts/Montiac-ItalicSemiMono.woff2') format('woff2');
-	font-weight: 400;
-	font-style: italic;
-	font-display: swap;
-}
-
-
 @font-face {
 	font-family: 'Valve Oracle';
 	src: url('/fonts/valveoracle-thin.ttf') format('truetype');
@@ -130,7 +80,7 @@ body {
 	overflow-x: hidden;
 }
 .accent {
-    color: #BE1931;
+    color: #e94f66;
     font-weight: 500;
 }
 .accent-green {
@@ -164,10 +114,17 @@ body {
 }
 
 .block {
-	margin: 1rem;
+	margin: 0.5rem;
 	border-radius: 8px;
-	border: 1px solid #BE1931;
-	padding: 1rem;
+	border: 2px solid #BE1931;
+	background-color: #BE193130;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+}
+.noborder {
+	border-color: transparent;
+	background-color: transparent;
 }
 .scratch-mask-bottom {
 	background-image: url('/resources/scratch_mask_bottom.png');
@@ -196,4 +153,24 @@ body {
 	z-index: 10;
     position: relative;
     background-size: auto 100%;
+}
+
+.text-fancy {
+	text-shadow:    -2px -2px 0 #00000040,
+					2px -2px 0 #00000040,
+					-2px 2px 0 #00000040,
+					2px 2px 0 #00000040,
+					-2px 0 0 #00000040,
+					2px 0 0 #00000040,
+					0 -2px 0 #00000040,
+					0 2px 0 #00000040,
+					2px 0 8px #000;
+}
+
+.emoji {
+	width: 1em;
+	height: 1em;
+	position: relative;
+	bottom: 2px;
+	display: inline-block;
 }

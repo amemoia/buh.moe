@@ -1,9 +1,208 @@
 ---
-import Base from "../layouts/Base.astro";
----
+const lodestone = "https://eu.finalfantasyxiv.com/lodestone/character/46616687/"
+const render = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a9dbf9d9fe_f2d324d722b28bbe681b2898bcdca8bffl0.jpg?1776977463"
 
+const name = "Mina Ha";
+const world = "✿ Halicarnassus";
+const datacenter = "Dynamis"
+const fc = "Mouro";
+const msq = "Post-Dawntrail 7.4"
+const levels = {
+    viper: "100",
+    pictomancer: "100",
+    bard: "100",
+    // whitemage: "60",
+    // warrior: "50",
+    carpenter: "100",
+    blacksmith: "100",
+    armorer: "100",
+    goldsmith: "100",
+    leatherworker: "100",
+    weaver: "100",
+    alchemist: "100",
+    culinarian: "100",
+    miner: "100",
+    botanist: "100",
+    fisher: "100",
+}
+
+const healers = ["whitemage", "scholar", "astrologian", "sage"];
+const tanks   = ["paladin", "warrior", "dark knight", "gunbreaker"];
+const crafters = ["carpenter", "blacksmith", "armorer", "goldsmith", "leatherworker", "weaver", "alchemist", "culinarian"];
+const gatherers = ["miner", "botanist", "fisher"];
+
+const entries = Object.entries(levels);
+const tankJobs = entries.filter(([jobname]) => tanks.includes(jobname));
+const healerJobs = entries.filter(([jobname]) => healers.includes(jobname));
+const dpsJobs = entries.filter(([jobname]) => !healers.includes(jobname) && !tanks.includes(jobname) && !crafters.includes(jobname) && !gatherers.includes(jobname));
+const crafterJobs = entries.filter(([jobname]) => crafters.includes(jobname));
+const gathererJobs = entries.filter(([jobname]) => gatherers.includes(jobname));
+
+import Base from '../layouts/Base.astro';
+const pageDesc = name+" "+world;
+---
 <Base>
-    <div class="block font-light">
-        <h1 class="font-bold text-2xl md:text-3xl text-fancy">Mina Ha</h1>
+    <div class="block noborder font-light gap-4">
+        <a href={lodestone} target="_blank" class="font-bold text-2xl md:text-3xl text-fancy text-center">Mina Ha</a>
+
+        <div class="flex flex-row gap-8">
+
+                <a href={lodestone} target="_blank" class="ffxiv-render-wrap">
+                    <img src={render} class="ffxiv-render" alt="Mina Ha character render" loading="lazy" decoding="async" />
+                </a>
+
+            <div class="flex flex-col gap-4 grow self-center font-medium">
+
+                <div class="flex flex-col">
+                    <span class="accent-blue text-2xl">World</span>
+                    <span>{world} <span class="font-light opacity-80">({datacenter})</span></span>
+                </div>
+
+                <div class="flex flex-col">
+                    <span class="accent-purple text-2xl">Free Company</span>
+                    <span>{fc} <span class="font-light opacity-80">(Engineer)</span></span>
+                </div>
+
+                <div class="flex flex-col">
+                    <span class="accent-yellow text-2xl">MSQ Progress</span>
+                    <span>{msq}</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-2 items-center">
+            <span class="font-extrabold">Jobs</span>
+            <div class="jobs-list flex flex-col gap-2 font-medium items-center">
+                {tankJobs.length > 0 && (
+                <div class="job job-tank">
+                    {tankJobs.map(([jobname, level]) => (
+                            <div class="classjob classjob-tank">
+                                <img src={`/classjob/${jobname}.png`} alt={jobname} class="ffxiv-jobicon" width="24" height="24" loading="lazy" decoding="async" />
+                                <span>{level}</span>
+                            </div>
+                        ))}
+                </div>
+                )}
+                {healerJobs.length > 0 && (
+                <div class="job job-healer">
+                    {healerJobs.map(([jobname, level]) => (
+                            <div class="classjob classjob-healer">
+                                <img src={`/classjob/${jobname}.png`} alt={jobname} class="ffxiv-jobicon" width="24" height="24" loading="lazy" decoding="async" />
+                                <span>{level}</span>
+                            </div>
+                        ))}
+                </div>
+                )}
+                {dpsJobs.length > 0 && (
+                <div class="job job-dps gap-2">
+                    {dpsJobs.map(([jobname, level]) => (
+                            <div class="classjob classjob-dps">
+                                <img src={`/classjob/${jobname}.png`} alt={jobname} class="ffxiv-jobicon" width="24" height="24" loading="lazy" decoding="async" />
+                                <span>{level}</span>
+                            </div>
+                        ))}
+                </div>
+                )}
+                {crafterJobs.length > 0 && (
+                <div class="job job-crafter gap-2">
+                    {crafterJobs.map(([jobname, level]) => (
+                            <div class="classjob classjob-crafter">
+                                <img src={`/classjob/${jobname}.png`} alt={jobname} class="ffxiv-jobicon" width="24" height="24" loading="lazy" decoding="async" />
+                                <span>{level}</span>
+                            </div>
+                        ))}
+                </div>
+                )}
+                {gathererJobs.length > 0 && (
+                <div class="job job-gatherer gap-2">
+                    {gathererJobs.map(([jobname, level]) => (
+                            <div class="classjob classjob-gatherer">
+                                <img src={`/classjob/${jobname}.png`} alt={jobname} class="ffxiv-jobicon" width="24" height="24" loading="lazy" decoding="async" />
+                                <span>{level}</span>
+                            </div>
+                        ))}
+                </div>
+                )}
+            </div>
+        </div>
+
+        <div class="block ffxiv-lore gap-4 text-2xl mt-8! noborder">
+            <h1 class="font-bold text-2xl md:text-3xl text-fancy text-center">A new start...</h1>
+            <p>Previously forced to work as a weapons engineer for the Garlean Empire, Mina hoped that escaping to her homeland of Gridania would mean distancing herself from wars. Suffice it to say that she does not particularly enjoy being the Warrior of Light.</p>
+            <p>After more than her fair share of fighting, this experienced adventurer seeks to lay down her weapon and contribute to various war restoration efforts across the star, though fate usually has other plans.</p>
+            <p>Additionally, she now lends her technical expertise to her Free Company, handling all manner of engineering projects for her friends.</p>
+        </div>
+    </div>
+
+    <div class="block noborder font-light pt-0!">
+        <h1 class="font-bold text-2xl md:text-3xl pulp text-center">Gallery</h1>
     </div>
 </Base>
+
+<style>
+    .ffxiv-render-wrap {
+        width: 50%;
+        height: 300px;
+        overflow: hidden;
+        border-radius: 8px;
+        border: 2px solid #7a8bd9;
+        flex-shrink: 0;
+    }
+
+    .ffxiv-render {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        transform: scale(1.6);
+        transform-origin: center top;
+    }
+    .job {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .classjob {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.25em;
+        background: #1c1113;
+        padding: 0.25em;
+        padding-right: 0.30em;
+        border-radius: 6px;
+        border: 1px solid #BE193180;
+    }
+
+    .classjob-tank {
+        background: #13202e;
+        border-color: #7aa6d9;
+    }
+
+    .classjob-healer {
+        background: #14241b;
+        border-color: #67b487;
+    }
+
+    .classjob-dps {
+        background: #2a1717;
+        border-color: #c78181;
+    }
+
+    .classjob-crafter {
+        background: #24162d;
+        border-color: #a888c7;
+    }
+
+    .classjob-gatherer {
+        background: #2a2116;
+        border-color: #c9a366;
+    }
+
+    .ffxiv-jobicon {
+        width: 24px;
+        height: 24px;
+    }
+</style>

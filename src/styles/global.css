@@ -90,6 +90,19 @@ body {
 	color: #6ae79a;
     font-weight: 500;
 }
+.accent-purple {
+	color: #ee51ff;
+	font-weight: 500;
+}
+.accent-blue {
+	color: #3fdcff;
+	font-weight: 500;
+}
+.accent-yellow {
+	color: #ffb649;
+	font-weight: 500;
+}
+
 .pulp {
 	font-family: 'Valve Pulp', sans-serif;
 	font-weight: 700;

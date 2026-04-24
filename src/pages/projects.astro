@@ -1,15 +1,46 @@
 ---
+import Project from "../components/Project.astro";
 import Base from "../layouts/Base.astro";
 ---
 
 <Base>
-    <div class="block font-light">
-        <h1 class="font-bold text-2xl md:text-3xl text-fancy">buh works</h1>
+    <div class="block font-light text-2xl noborder">
+        <h1 class="font-bold text-2xl md:text-3xl text-fancy pulp">buh works</h1>
         <p>This is a <span class="font-medium">non-exhaustive</span> list of my own projects that I worked on.</p>
         <p>I'd love for this to be longer and I have some great ideas cooking up, but currently I have to focus on making it through university.</p>
         <br>
         <p class="italic opacity-80">A bunch of my abandoned projects are too small to list here, like a custom catppuccin-based theme set or numerous custom Discord bots. You can see some of them on my GitHub.</p>
-        <br>
-        <p>I also contributed small fixes to numerous projects by friends as well as some open source ones like Wotsit or MyDockFinder</p>
     </div>
+
+    <Project 
+        title="buh.moe"
+        date="April 2026"
+        url="https://github.com/amemoia/buh.moe"
+        tags={["Design", "Astro", "Artwork"]}
+        desc="You're looking at 'er now! I refresh the design of my website pretty regularly to try out new ideas and reflect my interests. This design is the result of a lot of trial and error, but I like it a lot!"
+    />
+
+    <Project 
+        title="geggos.net"
+        date="March 2026"
+        url="https://geggos.net"
+        tags={["Design", "Astro", "Pages CMS", "Cloudflare", "DNS"]}
+        desc="My friend Geggos was overpaying by having his website hosted on GoDaddy and built using their website maker. I made him a shiny new site from scratch and migrated everything over to Cloudflare to save costs. I also implemented a somewhat user-friendly way for him to add blog posts via Pages CMS."
+    />
+
+    <Project 
+        title="Astral Search"
+        date="waiting..."
+        tags={["C#", "Dalamud", "FFXIV"]}
+        desc="I always wanted to make my own spotlight-like command palette plugin for FFXIV, partly because I find Wotsit too cluttered. It's on the backburner for now as I'm kind of hoping I can hit two birds with one stone by also making this my thesis project for university."
+    />
+
+    <Project 
+        title="amemoia.nekoweb.org"
+        date="January 2024"
+        url="https://amemoia.nekoweb.org"
+        tags={["HTML", "CSS", "JavaScript"]}
+        desc="A website modeled after Needy Streamer Overload, as faithful to the game as possible. It's honestly horrible from a technical standpoint, but many people enjoyed it and this page is what eventually got me into the Deadlock alpha not long after it leaked."
+    />
+
 </Base>

@@ -1,9 +1,87 @@
 ---
 import Base from "../layouts/Base.astro";
+import WindowsIcon from "~icons/fa6-brands/windows";
+import AppleIcon from "~icons/simple-icons/apple";
+import CpuIcon from "~icons/lucide/cpu";
+import MonitorCogIcon from "~icons/lucide/monitor-cog";
+import MemoryStickIcon from "~icons/lucide/memory-stick";
+import HardDriveIcon from "~icons/lucide/hard-drive";
+import LaptopIcon from "~icons/lucide/laptop";
+import MouseIcon from "~icons/lucide/mouse";
+import SquareIcon from "~icons/lucide/square";
+import KeyboardIcon from "~icons/lucide/keyboard";
+import HeadphonesIcon from "~icons/lucide/headphones";
+import GlobeIcon from "~icons/lucide/globe";
+import MusicIcon from "~icons/lucide/music";
+import PenIcon from "~icons/lucide/pen";
+import LockIcon from "~icons/lucide/lock";
+import CodeIcon from "~icons/lucide/code";
+import MicIcon from "~icons/lucide/mic"
+
+const specs = {
+    akame: [
+        { icon: WindowsIcon, label: 'OS', value: 'Windows 11' },
+        { icon: CpuIcon, label: 'CPU', value: 'i5-7400' },
+        { icon: MonitorCogIcon, label: 'GPU', value: 'GTX 1650 Super 4GB' },
+        { icon: MemoryStickIcon, label: 'RAM', value: '16 GB' },
+        { icon: HardDriveIcon, label: 'Disk 1', value: 'Crucial MX500 1 TB SSD' },
+        { icon: HardDriveIcon, label: 'Disk 2', value: 'Western Digital 1 TB HDD' },
+    ],
+    saeko: [
+        { icon: AppleIcon, label: 'OS', value: 'macOS 26 Tahoe' },
+        { icon: LaptopIcon, label: 'Model', value: 'MacBook Air (2022)' },
+        { icon: CpuIcon, label: 'CPU', value: 'Apple M2 (8-core)' },
+        { icon: MonitorCogIcon, label: 'GPU', value: 'Apple M2 (10-core)' },
+        { icon: MemoryStickIcon, label: 'RAM', value: '16 GB' },
+        { icon: HardDriveIcon, label: 'Disk', value: '512 GB' },
+    ],
+    peripherals: [
+        { icon: MouseIcon, label: 'Mouse', value: 'Hitscan Hyperlight' },
+        { icon: SquareIcon, label: 'Mousepad', value: 'Logitech G640' },
+        { icon: KeyboardIcon, label: 'Keyboard', value: 'Razer BlackWidow Elite' },
+        { icon: HeadphonesIcon, label: 'Audio', value: 'JBL Quantum 50 / AirPods Pro 2' },
+        { icon: MicIcon, label: 'Microphone', value: 'Fifine K669B' },
+    ],
+    software: [
+        { icon: GlobeIcon, label: 'Browser', value: 'Helium' },
+        { icon: LockIcon, label: 'Auth', value: 'Proton Pass' },
+        { icon: MusicIcon, label: 'Music', value: 'Cider / Apple Music' },
+        { icon: PenIcon, label: 'Notes', value: 'Obsidian' },
+        { icon: CodeIcon, label: 'Editor', value: 'VS Code' },
+    ],
+};
+
+const devices = Object.entries(specs);
 ---
 
 <Base>
-    <div class="block font-light">
-        <h1 class="font-bold text-2xl md:text-3xl text-fancy">buh puters</h1>
+    <div class="block font-light text-2xl noborder">
+        <h1 class="font-bold text-2xl md:text-3xl text-fancy pulp">buh puters</h1>
+        <p>It's not the best, but it's mine!</p>
+        <p class="italic opacity-80">I may or may not be naming my devices after Yakuza characters...</p>
+    </div>
+
+    <div class="grid gap-4 lg:grid-cols-2">
+        {devices.map(([name, entries]) => (
+            <section class="block grow">
+                <h2 class="font-bold text-2xl md:text-3xl text-fancy pulp">{name}</h2>
+                <div class="mt-4 space-y-2">
+                    {entries.map((entry) => {
+                        const IconComponent = entry.icon;
+                        return (
+                            <div class="flex items-start gap-3 rounded-lg bg-black/20 p-3">
+                                <span class="mt-0.5 text-accent-green shrink-0">
+                                    <IconComponent class="h-5 w-5" />
+                                </span>
+                                <div class="flex flex-row gap-2 items-center">
+                                    <p class="font-semibold leading-tight">{entry.label}</p>
+                                    <p class="text-base opacity-80 wrap-break-word">{entry.value}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </section>
+        ))}
     </div>
 </Base>

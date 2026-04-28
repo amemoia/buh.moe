@@ -190,3 +190,9 @@ body {
 	bottom: 2px;
 	display: inline-block;
 }
+
+p > a {
+	text-decoration: underline;
+	text-decoration-style: solid;
+	text-underline-offset: 2px;
+}

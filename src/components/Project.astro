@@ -1,10 +1,14 @@
 ---
 const { title, date, url, tags, desc } = Astro.props;
 import CalendarIcon from "~icons/lucide/calendar";
+import NewTabIcon from "~icons/lucide/square-arrow-out-up-right";
 ---
 
 <div class="block gap-2">
-    <a class="font-bold text-2xl md:text-3xl text-fancy" href={url} target="_blank">{title}</a>
+    <a class="flex flex-row gap-2 font-bold text-2xl md:text-3xl text-fancy" href={url} target="_blank">
+        {title}
+        {url ? <span class="self-center relative top-0.5" style="font-size: 0.5em;"><NewTabIcon /></span> : null}
+    </a>
     <span class="text-sm flex flex-row gap-2">
         <span class="flex flex-row gap-1 accent-green"><CalendarIcon /> {date}</span>
         <span>•</span>

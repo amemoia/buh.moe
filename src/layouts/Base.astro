@@ -12,8 +12,8 @@ let absoluteImage = image;
 if (image) {
 	if (image.startsWith('https')) {
 		absoluteImage = image;
-	} else if (image.startsWith('/') && siteBase) {
-		absoluteImage = new URL(image, siteBase).href;
+	} else if (image.startsWith('/')) {
+		absoluteImage = new URL(image, Astro.url).href;
 	}
 }
 

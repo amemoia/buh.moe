@@ -9,8 +9,13 @@ const {
 const siteBase = Astro.site ?? '';
 const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : Astro.url.pathname);
 let absoluteImage = image;
-try { if (image && !image.startsWith('http') && siteBase) absoluteImage = new URL(image, siteBase).href; }
-catch (e) {}
+if (image) {
+	if (image.startsWith('https')) {
+		absoluteImage = image;
+	} else if (image.startsWith('/') && siteBase) {
+		absoluteImage = new URL(image, siteBase).href;
+	}
+}
 
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'

@@ -1,12 +1,231 @@
 ---
+export const prerender = false;
+
 import Base from "../layouts/Base.astro";
+import Block from "../components/Block.astro";
+import { env } from "cloudflare:workers";
+import CalendarIcon from "~icons/lucide/calendar";
+
+const PER_PAGE = 10;
+const url = new URL(Astro.request.url);
+const status = url.searchParams.get('status') ?? '';
+const formInitiallyOpen = Boolean(status && status !== 'ok');
+const parsedPage = Number(url.searchParams.get('page') ?? '1');
+let page = Number.isInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+
+const countRow = await env.DB
+    .prepare('SELECT COUNT(*) AS total FROM Guestbook')
+    .first<{ total: number | string }>();
+
+const totalEntries = Number(countRow?.total ?? 0);
+const totalPages = Math.max(1, Math.ceil(totalEntries / PER_PAGE));
+if (page > totalPages) page = totalPages;
+
+const offset = (page - 1) * PER_PAGE;
+const { results: entries } = await env.DB
+    .prepare(`SELECT id, name, message, created_at FROM Guestbook ORDER BY created_at DESC, id DESC LIMIT ${PER_PAGE} OFFSET ${offset}`)
+    .all<{ id: number; name: string; message: string; created_at: number }>();
+
+function pageHref(n: number) {
+    return `/guestbook?page=${n}`;
+}
+
+function formatEntryDate(unixSeconds: number) {
+    const date = new Date(unixSeconds * 1000);
+    return date.toLocaleString('en-GB', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+}
 ---
 
 <Base
     title = "buh / guestbook"
     description = "feel free to leave a message!"
 >
-    <div class="block font-light">
-        <h1 class="font-bold text-2xl md:text-3xl text-fancy">Guestbook</h1>
+    <div class="block noborder text-2xl font-light">
+        <h1 class="font-bold text-2xl md:text-3xl text-fancy pulp">Guestbook</h1>
+        <p>leave a message! please be nice!</p>
+    </div>
+
+    <button id="show-guestbook" class="mt-4 guestbook-toggle font-bold pulp" type="button" aria-expanded={formInitiallyOpen ? 'true' : 'false'} aria-controls="guestbook-block">
+        {formInitiallyOpen ? 'Hide Form' : 'Sign Guestbook'}
+    </button>
+
+    <div id="guestbook-block" class="block font-light" style={formInitiallyOpen ? 'display:block' : 'display:none'}>
+        <h1 class="font-bold text-2xl md:text-3xl text-fancy">Sign here...</h1>
+        <form action="/api/guestbook" method="post" class="flex flex-col gap-2 mt-4">
+            <input id="guestbook-name" type="text" name="name" placeholder="Name" required maxlength="50" />
+            <div class="textarea-wrap">
+                <textarea id="guestbook-message" name="message" placeholder="Message" required maxlength="300" class="w-full"></textarea>
+                <div id="char-count" class="char-counter">0</div>
+            </div>
+            <div class="form-controls">
+                <button type="submit" class="submit-btn py-3 px-6 font-extrabold">Sign</button>
+                <!-- <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div> -->
+            </div>
+
+            {status === 'ok' && <p class="status accent-green">message sent!!</p>}
+            {status === 'ok_webhook_failed' && <p class="status accent">saved, but webhook failed</p>}
+            {status === 'toolong' && <p class="status accent">your message is too long! (max 300 chars)</p>}
+            {status === 'turnstile' && <p class="status accent">turnstile verification failed, try again</p>}
+            {status === 'turnstile_invalid_domain' && <p class="status accent">turnstile key/secret invalid for this domain</p>}
+            {status === 'goaway' && <p class="status accent">what are you doing?</p>}
+            {status === 'error' && <p class="status accent">an error occurred :c</p>}
+            {status === 'timeout' && <p class="status accent">slow down!!!</p>}
+        </form>
+    </div>
+
+    <div class="mt-4 flex flex-col">
+
+        {entries.map((entry) => (
+            <div class="block gap-1 font-light text-2xl">
+                <p class="guestbook-name pulp">{entry.name}</p>
+                <p class="guestbook-message">{entry.message}</p>
+                <span class="text-sm flex flex-row gap-2">
+                    <span class="flex flex-row gap-1 accent-green"><CalendarIcon /> {formatEntryDate(entry.created_at)}</span>
+                </span>
+            </div>
+        ))}
+
+        {totalPages > 1 && (
+            <div class="block noborder font-light">
+                <nav class="pagination" aria-label="Guestbook pagination">
+                    {page > 1 ? (
+                        <a class="page-btn" href={pageHref(page - 1)} aria-label={`Previous page, page ${page - 1}`}>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="page-btn-label">Prev</span>
+                        </a>
+                    ) : (
+                        <span class="page-btn disabled" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="page-btn-label">Prev</span>
+                        </span>
+                    )}
+
+                    <span class="page-meta">Page {page} / {totalPages}</span>
+
+                    {page < totalPages ? (
+                        <a class="page-btn" href={pageHref(page + 1)} aria-label={`Next page, page ${page + 1}`}>
+                            <span class="page-btn-label">Next</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                    ) : (
+                        <span class="page-btn disabled" aria-hidden="true">
+                            <span class="page-btn-label">Next</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                    )}
+                </nav>
+            </div>
+        )}
+
     </div>
 </Base>
+
+<style>
+    .textarea-wrap {
+        position: relative;
+    }
+
+    .char-counter {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        font-size: 0.85rem;
+        line-height: 1;
+        opacity: 0.75;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    #guestbook-message {
+        padding-bottom: 2rem;
+        min-height: 8rem;
+        resize: none;
+    }
+
+    button {
+        background-color: #BE1931AA;
+        font-family: var(--font-pulp);
+        margin-left: 1rem;
+        transition: 0.2s background-color;
+        cursor: pointer;
+        width: fit-content;
+        padding: 0.5rem 1rem;
+
+    }
+    button:hover {
+        background-color: var(--color-border);
+    }
+
+</style>
+
+<style>
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .page-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.7rem;
+        border-radius: 6px;
+        border: 1px solid var(--color-border);
+        color: inherit;
+        text-decoration: none;
+        background-color: var(--color-bg);
+        font-weight: 700;
+    }
+
+    .page-btn.disabled {
+        opacity: 0.35;
+        pointer-events: none;
+    }
+
+    .page-meta {
+        font-size: 0.95rem;
+        opacity: 0.9;
+    }
+
+    .page-btn svg {
+        display: block;
+    }
+
+    .page-btn-label {
+        display: inline-block;
+    }
+</style>
+
+<script is:inline type="module">
+    const button = document.getElementById('show-guestbook');
+    const blockWrap = document.getElementById('guestbook-block');
+    const textarea = document.getElementById('guestbook-message');
+    const charCount = document.getElementById('char-count');
+
+    function updateCharCount() {
+        if (!textarea || !charCount) return;
+        const max = Number(textarea.getAttribute('maxlength') ?? 300);
+        charCount.textContent = `${textarea.value.length}/${max}`;
+    }
+
+    if (button && blockWrap) {
+        button.addEventListener('click', () => {
+            const isHidden = getComputedStyle(blockWrap).display === 'none';
+            blockWrap.style.display = isHidden ? 'block' : 'none';
+            button.setAttribute('aria-expanded', String(isHidden));
+            button.textContent = isHidden ? 'Hide Form' : 'Sign Guestbook';
+        });
+    }
+
+    if (textarea && charCount) {
+        textarea.addEventListener('input', updateCharCount);
+        updateCharCount();
+    }
+</script>

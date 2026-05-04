@@ -13,12 +13,13 @@
     "generate-types": "wrangler types"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.1.8",
+    "@astrojs/cloudflare": "^13.3.1",
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/lucide": "^1.2.102",
     "@iconify-json/simple-icons": "^1.2.77",
     "@tailwindcss/vite": "^4.2.2",
-    "astro": "^6.1.5",
+    "astro": "^6.2.2",
+    "drizzle-orm": "^0.45.2",
     "tailwindcss": "^4.2.2",
     "twemoji": "^14.0.2",
     "wrangler": "^4.81.1"
@@ -27,6 +28,7 @@
     "vite": "^7"
   },
   "devDependencies": {
+    "drizzle-kit": "^0.31.10",
     "unplugin-icons": "^23.0.1"
   }
 }

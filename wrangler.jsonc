@@ -28,5 +28,12 @@
 			"id": "91ec4a98a41c4208b236469cedf8b1bd",
 			"remote": true
 		}
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "guestbook",
+			"database_id": "b8ef61aa-75f4-45a4-a710-0323c0108edf"
+		}
 	]
 }

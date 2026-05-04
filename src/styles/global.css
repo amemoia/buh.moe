@@ -64,57 +64,64 @@
     display: none; /* Chrome, Safari, Opera */
 }
 :root {
-	--rsm-weight-fine: 100;
-	--rsm-weight-light: 200;
-	--rsm-weight-regular: 340;
-	--rsm-weight-medium: 470;
-	--rsm-weight-bold: 620;
-	--rsm-weight-dark: 770;
-	--rsm-weight-black: 900;
+	--font-oracle: 'Valve Oracle', sans-serif;
+	--font-pulp: 'Valve Pulp', sans-serif;
+	--color-bg: #BE193130;
+	--color-bg-alt: #00000060;
+	--color-surface-alt: #BE1931;
+	--color-border: #BE1931;
+	--color-accent-red: #e94f66;
+	--color-accent-green: #6ae79a;
+	--color-accent-purple: #ee51ff;
+	--color-accent-blue: #3fdcff;
+	--color-accent-yellow: #ffb649;
+	--shadow-text-fancy: -2px -2px 0 #00000040,
+					 2px -2px 0 #00000040,
+					 -2px 2px 0 #00000040,
+					 2px 2px 0 #00000040,
+					 -2px 0 0 #00000040,
+					 2px 0 0 #00000040,
+					 0 -2px 0 #00000040,
+					 0 2px 0 #00000040,
+					 2px 0 8px #000;
+	--radius-default: 8px;
+	--radius-input: 6px;
+	--space-page-x: 0.5rem;
+	--space-page-y: 2rem;
 }
 html {
 	overflow-x: hidden;
 }
 body {
-    font-family: 'Valve Oracle', sans-serif;
-    background-color: black;
+    font-family: var(--font-oracle);
+    background-color: #000000;
     margin: 0;
-    color: white;
+	color: #ffffff;
 	overflow-x: hidden;
 }
 .accent {
-    color: #e94f66;
+	color: var(--color-accent-red);
     font-weight: 500;
 }
 .accent-green {
-	color: #6ae79a;
+	color: var(--color-accent-green);
     font-weight: 500;
 }
 .accent-purple {
-	color: #ee51ff;
+	color: var(--color-accent-purple);
 	font-weight: 500;
 }
 .accent-blue {
-	color: #3fdcff;
+	color: var(--color-accent-blue);
 	font-weight: 500;
 }
 .accent-yellow {
-	color: #ffb649;
+	color: var(--color-accent-yellow);
 	font-weight: 500;
 }
-
 .pulp {
-	font-family: 'Valve Pulp', sans-serif;
+	font-family: var(--font-pulp);
 	font-weight: 700;
-}
-.montiac-mono {
-	font-family: 'Montiac Mono', monospace;
-}
-.montiac-semi-mono {
-	font-family: 'Montiac Semi Mono', monospace;
-}
-.montiac {
-	font-family: 'Montiac', sans-serif;
 }
 .bg-texture {
 	background-image: url('/resources/bg_texture.jpg');
@@ -132,8 +139,8 @@ body {
 .block {
 	margin: 0.5rem;
 	border-radius: 8px;
-	border: 2px solid #BE1931;
-	background-color: #BE193130;
+	border: 2px solid var(--color-border);
+	background-color: var(--color-bg);
 	padding: 2rem;
 	display: flex;
 	flex-direction: column;
@@ -172,15 +179,7 @@ body {
 }
 
 .text-fancy {
-	text-shadow:    -2px -2px 0 #00000040,
-					2px -2px 0 #00000040,
-					-2px 2px 0 #00000040,
-					2px 2px 0 #00000040,
-					-2px 0 0 #00000040,
-					2px 0 0 #00000040,
-					0 -2px 0 #00000040,
-					0 2px 0 #00000040,
-					2px 0 8px #000;
+	text-shadow: var(--shadow-text-fancy);
 }
 
 .emoji {
@@ -195,4 +194,15 @@ p > a {
 	text-decoration: underline;
 	text-decoration-style: solid;
 	text-underline-offset: 2px;
+}
+form textarea, form input {
+	background-color: var(--color-bg-alt);
+	padding: 0.5rem;
+	resize: vertical;
+	border-radius: var(--radius-input);
+}
+
+input:focus-visible, textarea:focus-visible {
+	outline: none;
+	outline: var(--color-border) 2px solid;
 }

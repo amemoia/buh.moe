@@ -1,0 +1,20 @@
+---
+import { db, Guestbook, sql } from 'astro:db';
+
+const messages = await db.select().from(Guestbook).orderBy(sql`RANDOM()`).limit(3);
+---
+
+<div class="widget-guestbook">
+    <div class="flex flex-col gap-2 mt-2">
+        {messages.map((entry) => (
+            <div class="message-item">
+                <span class="font-bold">{entry.name}:</span>
+                <span class="italic text-sm line-clamp-2">"{entry.message}"</span>
+            </div>
+        ))}
+        {messages.length === 0 && <span class="italic opacity-50">No messages yet...</span>}
+    </div>
+</div>
+
+<style>
+</style>

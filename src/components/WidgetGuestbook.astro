@@ -11,7 +11,7 @@ const { results: messages } = await env.DB
         {messages.map((entry) => (
             <div class="flex flex-col">
                 <span class="font-bold fancy pulp">{entry.name}</span>
-                <span class="italic">"{entry.message}"</span>
+                <span class="italic wrap-anywhere">"{entry.message}"</span>
             </div>
         ))}
         {messages.length === 0 && <span class="italic opacity-50">No messages yet...</span>}

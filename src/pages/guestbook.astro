@@ -70,9 +70,9 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
                 <textarea id="guestbook-message" name="message" placeholder="Message" required maxlength="300" class="w-full"></textarea>
                 <div id="char-count" class="char-counter">0</div>
             </div>
-            <div class="form-controls">
-                <button type="submit" class="submit-btn py-3 px-6 font-extrabold">Sign</button>
-                <!-- <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div> -->
+            <div class="flex flex-col md:flex-row w-full form-controls">
+                <button type="submit" class="submit-btn self-center md:justify-self-center py-3 px-6 font-extrabold">Sign</button>
+                <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
             </div>
 
             {status === 'ok' && <p class="status accent-green">message sent!!</p>}
@@ -178,9 +178,6 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
         background-color: var(--color-border);
     }
 
-</style>
-
-<style>
     .pagination {
         display: flex;
         align-items: center;

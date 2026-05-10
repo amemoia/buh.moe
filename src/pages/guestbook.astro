@@ -2,9 +2,10 @@
 export const prerender = false;
 
 import Base from "../layouts/Base.astro";
-import Block from "../components/Block.astro";
 import { env } from "cloudflare:workers";
 import CalendarIcon from "~icons/lucide/calendar";
+import ChevronLeftIcon from "~icons/lucide/chevron-left";
+import ChevronRightIcon from "~icons/lucide/chevron-right";
 
 const PER_PAGE = 10;
 const url = new URL(Astro.request.url);
@@ -38,6 +39,9 @@ function formatEntryDate(unixSeconds: number) {
         day: 'numeric',
     });
 }
+
+const testKey = "1x00000000000000000000AA";
+const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY ?? '');
 ---
 
 <Base
@@ -62,8 +66,8 @@ function formatEntryDate(unixSeconds: number) {
                 <div id="char-count" class="char-counter">0</div>
             </div>
             <div class="form-controls">
+                <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
                 <button type="submit" class="submit-btn py-3 px-6 font-extrabold">Sign</button>
-                <!-- <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div> -->
             </div>
 
             {status === 'ok' && <p class="status accent-green">message sent!!</p>}
@@ -77,10 +81,10 @@ function formatEntryDate(unixSeconds: number) {
         </form>
     </div>
 
-    <div class="mt-4 flex flex-col">
+    <div class="mt-4 flex flex-col gap-2 ">
 
         {entries.map((entry) => (
-            <div class="block gap-1 font-light text-2xl">
+            <div class="guestbook-entry gap-1 font-light text-2xl">
                 <p class="guestbook-name pulp">{entry.name}</p>
                 <p class="guestbook-message">{entry.message}</p>
                 <span class="text-sm flex flex-row gap-2">
@@ -91,15 +95,15 @@ function formatEntryDate(unixSeconds: number) {
 
         {totalPages > 1 && (
             <div class="block noborder font-light">
-                <nav class="pagination" aria-label="Guestbook pagination">
+                <nav class="pages" aria-label="Guestbook pages">
                     {page > 1 ? (
                         <a class="page-btn" href={pageHref(page - 1)} aria-label={`Previous page, page ${page - 1}`}>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <ChevronLeftIcon />
                             <span class="page-btn-label">Prev</span>
                         </a>
                     ) : (
                         <span class="page-btn disabled" aria-hidden="true">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <ChevronLeftIcon />
                             <span class="page-btn-label">Prev</span>
                         </span>
                     )}
@@ -109,12 +113,12 @@ function formatEntryDate(unixSeconds: number) {
                     {page < totalPages ? (
                         <a class="page-btn" href={pageHref(page + 1)} aria-label={`Next page, page ${page + 1}`}>
                             <span class="page-btn-label">Next</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <ChevronRightIcon />
                         </a>
                     ) : (
                         <span class="page-btn disabled" aria-hidden="true">
                             <span class="page-btn-label">Next</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <ChevronRightIcon />
                         </span>
                     )}
                 </nav>
@@ -125,6 +129,12 @@ function formatEntryDate(unixSeconds: number) {
 </Base>
 
 <style>
+    .guestbook-entry {
+        border: 2px solid var(--color-border);
+        border-radius: 8px;
+        padding: 1rem;
+        background-color: var(--color-bg);
+    }
     .textarea-wrap {
         position: relative;
     }
@@ -163,7 +173,7 @@ function formatEntryDate(unixSeconds: number) {
 </style>
 
 <style>
-    .pagination {
+    .pages {
         display: flex;
         align-items: center;
         gap: 1rem;

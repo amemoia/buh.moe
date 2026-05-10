@@ -44,6 +44,14 @@ export const POST: APIRoute = async (context) => {
     if (name.startsWith(">") || name.startsWith('\">') || message.startsWith(">") || message.startsWith('\">'))
         return redirect("/guestbook?status=goaway");
 
+    const clientIp = request.headers.get("cf-connecting-ip") ?? request.headers.get("x-forwarded-for") ?? "anon";
+    try {
+        if (env.SESSION?.get) {
+            if (await env.SESSION.get(`guestbook_throttle:${clientIp}`)) return redirect("/guestbook?status=timeout");
+            await env.SESSION.put(`guestbook_throttle:${clientIp}`, "1", { expirationTtl: 60 });
+        }
+    } catch { }
+
     const isLocal = isLocalRequest(request);
     if (!token && !isLocal) return redirect("/guestbook?status=turnstile");
 
@@ -57,14 +65,6 @@ export const POST: APIRoute = async (context) => {
             return redirect("/guestbook?status=turnstile");
         }
     }
-
-    const clientIp = request.headers.get("cf-connecting-ip") ?? request.headers.get("x-forwarded-for") ?? "anon";
-    try {
-        if (env.SESSION?.get) {
-            if (await env.SESSION.get(`guestbook_throttle:${clientIp}`)) return redirect("/guestbook?status=timeout");
-            await env.SESSION.put(`guestbook_throttle:${clientIp}`, "1", { expirationTtl: 60 });
-        }
-    } catch { }
 
     if (!env.DB) return redirect("/guestbook?status=error");
     const d1 = db(env.DB);

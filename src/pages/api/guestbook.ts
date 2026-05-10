@@ -1,46 +1,19 @@
+export const prerender = false;
+
 import type { APIRoute } from "astro";
 import { db } from "../../db";
 import { Guestbook } from "../../db/schema";
-import { isLocalRequest, verifyTurnstile, sendDiscordWebhook } from "../../lib/api";
+import { isLocalRequest, verifyTurnstile, sendDiscordWebhook, parseFormOrJson, ratelimit, redirect } from "../../lib/api";
 import { env } from "cloudflare:workers";
-
-export const prerender = false;
-
-const redirect = (path: string) =>
-    new Response(null, {
-        status: 303,
-        headers: { Location: path },
-    });
-
 
 export const POST: APIRoute = async (context) => {
     const { request } = context;
 
-    let name = "";
-    let message = "";
-    let token = "";
-
-    const form = await request.formData().catch(() => null);
-    if (form && form.get("name")) {
-        name = String(form.get("name") ?? "").trim();
-        message = String(form.get("message") ?? "").trim();
-        token = String(form.get("cf-turnstile-response") ?? "");
-    } else {
-        try {
-            const json = (await request.json()) as any;
-            name = String(json.name ?? "").trim();
-            message = String(json.message ?? "").trim();
-            token = String(json["cf-turnstile-response"] ?? json.token ?? "");
-        } catch {
-            const params = new URLSearchParams(await request.text());
-            name = String(params.get("name") ?? "").trim();
-            message = String(params.get("message") ?? "").trim();
-            token = String(params.get("cf-turnstile-response") ?? "");
-        }
-    }
+    const { name, message, token } = await parseFormOrJson(request);
 
     if (!name || !message || name.length > 50) return redirect("/guestbook?status=error");
     if (message.length > 300) return redirect("/guestbook?status=toolong");
+
     if (name.startsWith(">") || name.startsWith('\">') || message.startsWith(">") || message.startsWith('\">'))
         return redirect("/guestbook?status=goaway");
 
@@ -67,6 +40,7 @@ export const POST: APIRoute = async (context) => {
     }
 
     if (!env.DB) return redirect("/guestbook?status=error");
+
     const d1 = db(env.DB);
     await d1.insert(Guestbook).values({ name, message });
 

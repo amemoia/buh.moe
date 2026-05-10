@@ -7,6 +7,11 @@ import CalendarIcon from "~icons/lucide/calendar";
 import ChevronLeftIcon from "~icons/lucide/chevron-left";
 import ChevronRightIcon from "~icons/lucide/chevron-right";
 
+const host = Astro.url?.hostname ?? '';
+const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
+const DUMMY_SITE_KEY = '1x00000000000000000000BB';
+const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : (env.PUBLIC_TURNSTILE_SITE_KEY ?? '');
+
 const PER_PAGE = 10;
 const url = new URL(Astro.request.url);
 const status = url.searchParams.get('status') ?? '';
@@ -53,7 +58,7 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
         <p>leave a message! please be nice!</p>
     </div>
 
-    <button id="show-guestbook" class="mt-4 guestbook-toggle font-bold pulp" type="button" aria-expanded={formInitiallyOpen ? 'true' : 'false'} aria-controls="guestbook-block">
+    <button id="show-guestbook" class="mt-4 self-center md:self-start md:ml-10 guestbook-toggle font-bold pulp" type="button" aria-expanded={formInitiallyOpen ? 'true' : 'false'} aria-controls="guestbook-block">
         {formInitiallyOpen ? 'Hide Form' : 'Sign Guestbook'}
     </button>
 
@@ -66,8 +71,8 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
                 <div id="char-count" class="char-counter">0</div>
             </div>
             <div class="form-controls">
-                <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
                 <button type="submit" class="submit-btn py-3 px-6 font-extrabold">Sign</button>
+                <!-- <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div> -->
             </div>
 
             {status === 'ok' && <p class="status accent-green">message sent!!</p>}
@@ -150,6 +155,11 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
         user-select: none;
     }
 
+    .char-counter.max {
+        color: var(--color-accent-red);
+        font-weight: 700;
+    }
+
     #guestbook-message {
         padding-bottom: 2rem;
         min-height: 8rem;
@@ -159,9 +169,7 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
     button {
         background-color: #BE1931AA;
         font-family: var(--font-pulp);
-        margin-left: 1rem;
         transition: 0.2s background-color;
-        cursor: pointer;
         width: fit-content;
         padding: 0.5rem 1rem;
 
@@ -173,7 +181,7 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
 </style>
 
 <style>
-    .pages {
+    .pagination {
         display: flex;
         align-items: center;
         gap: 1rem;

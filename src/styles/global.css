@@ -198,7 +198,6 @@ p > a {
 form textarea, form input {
 	background-color: var(--color-bg-alt);
 	padding: 0.5rem;
-	resize: vertical;
 	border-radius: var(--radius-input);
 }
 

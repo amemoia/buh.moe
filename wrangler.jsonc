@@ -33,7 +33,8 @@
 		{
 			"binding": "DB",
 			"database_name": "guestbook",
-			"database_id": "b8ef61aa-75f4-45a4-a710-0323c0108edf"
+			"database_id": "b8ef61aa-75f4-45a4-a710-0323c0108edf",
+			"migrations_dir": "db/migrations"
 		}
 	]
 }

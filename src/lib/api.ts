@@ -1,3 +1,9 @@
+export const redirect = (path: string) =>
+    new Response(null, {
+        status: 303,
+        headers: { Location: path },
+    });
+
 export const isLocalRequest = (request: Request): boolean => {
     const host = request.headers.get("host") ?? "";
     return (
@@ -8,10 +14,7 @@ export const isLocalRequest = (request: Request): boolean => {
     );
 };
 
-export const verifyTurnstile = async (
-    secret: string,
-    token: string,
-): Promise<{ success: boolean; codes: string[] }> => {
+export const verifyTurnstile = async (secret: string, token: string): Promise<{ success: boolean; codes: string[] }> => {
     const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -69,4 +72,41 @@ export const sendDiscordWebhook = async (url: string, payload: any): Promise<boo
     }
 
     return false;
+};
+
+export const parseFormOrJson = async (request: Request) => {
+    let name = "";
+    let message = "";
+    let token = "";
+
+    const form = await request.formData().catch(() => null);
+    if (form && (form.get("name") !== null || form.get("message") !== null)) {
+        name = String(form.get("name") ?? "").trim();
+        message = String(form.get("message") ?? "").trim();
+        token = String(form.get("cf-turnstile-response") ?? "");
+    } else {
+        try {
+            const json = (await request.json()) as any;
+            name = String(json.name ?? "").trim();
+            message = String(json.message ?? "").trim();
+            token = String(json["cf-turnstile-response"] ?? json.token ?? "");
+        } catch {
+            const params = new URLSearchParams(await request.text());
+            name = String(params.get("name") ?? "").trim();
+            message = String(params.get("message") ?? "").trim();
+            token = String(params.get("cf-turnstile-response") ?? "");
+        }
+    }
+
+    return { name, message, token };
+};
+
+export const ratelimit = async (id: string, prefix: string, limitSeconds: number = 60, session: any): Promise<boolean> => {
+    if (!session?.get) return false;
+    try {
+        const key = `${prefix}:${id}`;
+        if (await session.get(key)) return true;
+        await session.put(key, "1", { expirationTtl: limitSeconds });
+        return false;
+    } catch { return false; }
 };

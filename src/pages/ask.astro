@@ -1,12 +1,109 @@
 ---
+export const prerender = false;
+
 import Base from "../layouts/Base.astro";
+import { env } from "cloudflare:workers";
+
+const host = Astro.url?.hostname ?? '';
+const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
+const DUMMY_SITE_KEY = '1x00000000000000000000BB';
+const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : (env.PUBLIC_TURNSTILE_SITE_KEY ?? '');
+
+const pageDesc = 'ask me anything, anonymously or not!!';
+const url = new URL(Astro.request.url);
+const status = url.searchParams.get('status') ?? '';
 ---
 
 <Base
     title = "buh / ask"
-    description = "ask me anything, anonymously or not"
+    description = {pageDesc}
 >
+    <div class="block noborder text-2xl font-light">
+        <h1 class="font-bold text-2xl md:text-3xl text-fancy pulp">Ask</h1>
+        <p>{pageDesc}</p>
+        <p class="italic opacity-80">these will be sent to me via a discord webhook and i will answer on my socials (bsky/twitter)</p>
+    </div>
+
     <div class="block font-light">
-        <h1 class="font-bold text-2xl md:text-3xl text-fancy">Ask anything!</h1>
+        <h1 class="font-bold text-2xl md:text-3xl text-fancy">what's up?</h1>
+        <form action="/api/ask" method="post" class="flex flex-col gap-2 mt-4">
+            <input id="ask-name" type="text" name="name" placeholder="Name (optional)" maxlength="64" />
+            <div class="textarea-wrap">
+                <textarea id="ask-message" name="message" placeholder="Your question" required maxlength="1000" class="w-full resize-none"></textarea>
+                <div id="char-count" class="char-counter">0</div>
+            </div>
+            <div class="flex flex-col md:flex-row w-full form-controls">
+                <button type="submit" class="submit-btn self-center md:justify-self-center py-3 px-6 font-extrabold">Send</button>
+                <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
+            </div>
+
+            {status === 'ok' && <p class="status accent-green">your message has been sent!</p>}
+            {status === 'ok_webhook_failed' && <p class="status accent">there was a problem with the webhook, so i couldnt get your message :c</p>}
+            {status === 'toolong' && <p class="status accent">your message was too long!!</p>}
+            {status === 'turnstile' && <p class="status accent">turnstile verification failed, try again</p>}
+            {status === 'turnstile_invalid_domain' && <p class="status accent">turnstile key/secret invalid for this domain</p>}
+            {status === 'goaway' && <p class="status accent">what are you doing?</p>}
+            {status === 'error' && <p class="status accent">an error occurred :c</p>}
+            {status === 'timeout' && <p class="status accent">slow down!!!</p>}
+        </form>
     </div>
 </Base>
+
+<style>
+    .textarea-wrap {
+        position: relative;
+    }
+
+    .char-counter {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        font-size: 0.85rem;
+        line-height: 1;
+        opacity: 0.75;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .char-counter.max {
+        color: var(--color-accent-red);
+        font-weight: 700;
+    }
+
+    #ask-message {
+        min-height: 8rem;
+    }
+
+    button {
+        background-color: #BE1931AA;
+        font-family: var(--font-pulp);
+        transition: 0.2s background-color;
+        width: fit-content;
+        padding: 0.5rem 1rem;
+
+    }
+    button:hover {
+        background-color: var(--color-border);
+    }
+</style>
+
+<script is:inline>
+    const textarea = document.getElementById('ask-message');
+    const counter = document.getElementById('char-count');
+
+    if (textarea && counter) {
+        const updateCounter = () => {
+            const len = textarea.value.length;
+            const max = parseInt(textarea.getAttribute('maxlength') || '1000');
+            counter.textContent = len;
+            if (len >= max) {
+                counter.classList.add('max');
+            } else {
+                counter.classList.remove('max');
+            }
+        };
+
+        textarea.addEventListener('input', updateCounter);
+        updateCounter();
+    }
+</script>

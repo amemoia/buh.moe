@@ -40,7 +40,57 @@ const gathererJobs = entries.filter(([jobname]) => gatherers.includes(jobname));
 
 import Base from '../layouts/Base.astro';
 import Block from "../components/Block.astro";
+import Lightbox from "../components/Lightbox.astro";
+import type { ImageMetadata } from 'astro';
+
 const pageDesc = name+" "+world+" ("+datacenter+")";
+
+const customDescriptions: Record<string, string> = {
+    "screenshot-24-09-2023.png": "a young b'occhi rhock during ARR... she does not know what awaits her...",
+    "screenshot-30-09-2023.png": "late ARR bocchi!",
+    "screenshot-07-11-2023.jpg": "stormblood bocchi in a very scary shirogane...",
+    "screenshot-09-11-2023.jpg": "stormblood bocchi on top of kugane tower!",
+    "screenshot-25-11-2023.png": "pretty much the only time i've modded my character, this was for an event held by my old FC",
+    "screenshot-28-02-2024.png": "she owns a car now",
+    "screenshot-13-03-2024.png": "Shadowbringers complete!",
+    "screenshot-21-04-2024.png": "hanging out with my favorite little chud son",
+    "gpose-25-05-2024.png": "beach photoshoot with my old FC! idk what happened to the original image so heres a screenshot of discord screenshare",
+    "screenshot-07-06-2024.png": "truth nvke",
+    "screenshot-13-06-2024.png": "hanging out with my chud son whom i love",
+    "screenshot-28-06-2024.png": "she is a little bit shady",
+    "screenshot-29-06-2024.jpg": "checking out the graphics update!",
+    "screenshot2-03-07-2024.jpg": "bocchi was still using a different hairstyle in-game at this time, but the plan was to go back to this one for Dawntrail",
+    "screenshot1-03-07-2024.jpg": "dawntrail benchmark cat! getting ready to explore",
+    "screenshot-04-07-2024.png": "very rare handsome red mage bocchi",
+    "screenshot2-28-07-2024.jpg" : "concerning.",
+    "screenshot1-28-07-2024.png" : "she does not understand a single thing thats going on",
+    "screenshot-28-07-2024.png": "there is not a single thought behind those blue orbs. late endwalker bocchi",
+    "screenshot-29-07-2024.png": "she thinks shes so tuff. edgy red mage",
+    "screenshot-05-08-2024.jpg": "a pictomancer but kinda edgy and fucked up",
+    "screenshot-23-08-2024.jpg": "B'occhi between Endwalker and Dawntrail",
+    "screenshot1-06-09-2024.png": "Goro Majima outfit for my Ninja job",
+    "screenshot2-06-09-2024.png": "Kiryu glamour for Monk",
+    "gpose1-06-08-2025.jpg": "Viper Gpose (1)",
+    "gpose2-06-08-2025.jpg": "Viper Gpose (2)",
+    "gpose3-06-08-2025.jpg": "Viper Gpose (3)",
+    "gpose-10-04-2026.jpg": "Gpose: Cosplaying Snake from METAL GEAR SOLID 3 and MGSV Ground Zeroes",
+    "screenshot-13-04-2026.png": "A new adventurer plate!",
+    "screenshot-18-04-2026.jpg": "Mina rocking a new hairstyle for post-Dawntrail",
+};
+
+const images = Object.values(import.meta.glob<{ default: ImageMetadata }>('../assets/gallery/ffxiv/*.{jpg,jpeg,png,webp}', { eager: true }))
+    .map(m => m.default)
+    .sort((a, b) => {
+        const getDateString = (src: string) => src.match(/(\d{2})-(\d{2})-(\d{4})/)?.slice(1).reverse().join('-');
+        return (getDateString(b.src) || '').localeCompare(getDateString(a.src) || '');
+    })
+    .map(m => {
+        const filename = m.src.split('/').pop()?.split('?')[0] || '';
+        return {
+            src: m.src,
+            description: customDescriptions[filename] || ""
+        };
+    });
 ---
 <Base
     title = "buh / ffxiv"
@@ -48,7 +98,10 @@ const pageDesc = name+" "+world+" ("+datacenter+")";
     image = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a9dbf9d9fe_f2d324d722b28bbe681b2898bcdca8bffc0.jpg?1777373463"
 >
     <Block class="noborder font-light gap-4 px-1! lg:px-0!">
-        <a href={lodestone} target="_blank" class="font-bold text-2xl md:text-3xl text-fancy text-center">Mina Ha</a>
+        <a href={lodestone} target="_blank" class="flex-col flex font-bold text-2xl md:text-3xl text-fancy text-center">
+            <span>{name}</span>
+            <span class="text-center italic text-xl font-normal opacity-80">(Formerly B'occhi Rhock)</span>
+        </a>
 
         <div class="flex flex-row gap-8">
 
@@ -143,6 +196,24 @@ const pageDesc = name+" "+world+" ("+datacenter+")";
     <Block class="noborder font-light pt-0!">
         <h1 class="font-bold text-2xl md:text-3xl pulp text-center">Gallery</h1>
         
+        <div class="gallery-grid">
+            {images.map((image, index) => (
+                <button 
+                    onclick={`window.openLightbox(${index})`}
+                    class="gallery-item"
+                >
+                    <img
+                        src={image.src}
+                        alt={image.description}
+                        loading="lazy"
+                        decoding="async"
+                        class="gallery-image"
+                    />
+                </button>
+            ))}
+        </div>
+        
+        <Lightbox images={images} />
     </Block>
 </Base>
 
@@ -211,4 +282,40 @@ const pageDesc = name+" "+world+" ("+datacenter+")";
         width: 24px;
         height: 24px;
     }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        max-width: 810px;
+        margin-inline: auto;
+    }
+
+    .gallery-item {
+        overflow: hidden;
+        border-radius: 4px;
+        aspect-ratio: 16 / 9;
+        cursor: pointer;
+        border: none;
+        padding: 0;
+        background: none;
+    }
+
+    .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .gallery-item:hover .gallery-image {
+        filter: brightness(1.1);
+    }
+
+    @media (max-width: 768px) {
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
 </style>

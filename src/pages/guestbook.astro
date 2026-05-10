@@ -9,7 +9,7 @@ import ChevronRightIcon from "~icons/lucide/chevron-right";
 
 const host = Astro.url?.hostname ?? '';
 const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
-const DUMMY_SITE_KEY = '1x00000000000000000000BB';
+const DUMMY_SITE_KEY = '1x00000000000000000000AA';
 const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : (env.PUBLIC_TURNSTILE_SITE_KEY ?? '');
 
 const PER_PAGE = 10;
@@ -44,9 +44,6 @@ function formatEntryDate(unixSeconds: number) {
         day: 'numeric',
     });
 }
-
-const testKey = "1x00000000000000000000AA";
-const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY ?? '');
 ---
 
 <Base
@@ -58,7 +55,7 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
         <p>leave a message! please be nice!</p>
     </div>
 
-    <button id="show-guestbook" class="mt-4 self-center md:self-start md:ml-10 guestbook-toggle font-bold pulp" type="button" aria-expanded={formInitiallyOpen ? 'true' : 'false'} aria-controls="guestbook-block">
+    <button id="show-guestbook" class="mt-0 self-center md:self-start md:ml-10 guestbook-toggle font-bold pulp" type="button" aria-expanded={formInitiallyOpen ? 'true' : 'false'} aria-controls="guestbook-block">
         {formInitiallyOpen ? 'Hide Form' : 'Sign Guestbook'}
     </button>
 
@@ -86,15 +83,18 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
         </form>
     </div>
 
-    <div class="mt-4 flex flex-col gap-2 ">
+    <div class="mt-4 flex flex-col gap-2 mx-2">
 
         {entries.map((entry) => (
             <div class="guestbook-entry gap-1 font-light text-2xl">
-                <p class="guestbook-name pulp">{entry.name}</p>
+                <div class="flex flex-col sm:flex-row gap-2 sm:items-center">
+                    <p class="guestbook-name pulp">{entry.name}</p>
+                    <span class="opacity-80 hidden sm:block">•</span>
+                    <span class="text-sm flex flex-row gap-2">
+                        <span class="flex flex-row gap-1 accent-green"><CalendarIcon /> {formatEntryDate(entry.created_at)}</span>
+                    </span>
+                </div>
                 <p class="guestbook-message">{entry.message}</p>
-                <span class="text-sm flex flex-row gap-2">
-                    <span class="flex flex-row gap-1 accent-green"><CalendarIcon /> {formatEntryDate(entry.created_at)}</span>
-                </span>
             </div>
         ))}
 
@@ -137,7 +137,7 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
     .guestbook-entry {
         border: 2px solid var(--color-border);
         border-radius: 8px;
-        padding: 1rem;
+        padding: 1.5rem;
         background-color: var(--color-bg);
     }
     .textarea-wrap {
@@ -178,7 +178,7 @@ const turnstileSiteKey = import.meta.env.DEV ? testKey : (env.TURNSTILE_SITE_KEY
         background-color: var(--color-border);
     }
 
-    .pagination {
+    .pages {
         display: flex;
         align-items: center;
         gap: 1rem;

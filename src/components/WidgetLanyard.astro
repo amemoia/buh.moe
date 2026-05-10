@@ -32,7 +32,7 @@
         try {
             const response = await fetch(`https://api.lanyard.rest/v1/users/${UID}`);
             if (response.ok) {
-                const toJson = await response.json();
+                const toJson = (await response.json()) as any;
                 const lanyard = toJson.data;
                 if (lanyard.discord_user) {
                     const { id, avatar, global_name, username } = lanyard.discord_user;

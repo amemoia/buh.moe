@@ -1,16 +1,18 @@
-export const redirect = (path: string) =>
-    new Response(null, {
+export const redirect = (path: string) => {
+    return new Response(null, {
         status: 303,
-        headers: { Location: path },
+        headers: { 
+            "Location": path
+        },
     });
+};
 
 export const isLocalRequest = (request: Request): boolean => {
     const host = request.headers.get("host") ?? "";
     return (
         host.includes("localhost") ||
         host.includes("127.0.0.1") ||
-        host.includes("::1") ||
-        host.endsWith(".workers.dev")
+        host.includes("::1")
     );
 };
 
@@ -79,19 +81,24 @@ export const parseFormOrJson = async (request: Request) => {
     let message = "";
     let token = "";
 
-    const form = await request.formData().catch(() => null);
-    if (form && (form.get("name") !== null || form.get("message") !== null)) {
-        name = String(form.get("name") ?? "").trim();
-        message = String(form.get("message") ?? "").trim();
-        token = String(form.get("cf-turnstile-response") ?? "");
+    const contentType = request.headers.get("content-type") || "";
+
+    if (contentType.includes("form") || contentType.includes("multipart")) {
+        const form = await request.formData().catch(() => null);
+        if (form) {
+            name = String(form.get("name") ?? "").trim();
+            message = String(form.get("message") ?? "").trim();
+            token = String(form.get("cf-turnstile-response") ?? "");
+        }
+    } else if (contentType.includes("json")) {
+        const json = (await request.json().catch(() => ({}))) as any;
+        name = String(json.name ?? "").trim();
+        message = String(json.message ?? "").trim();
+        token = String(json["cf-turnstile-response"] ?? json.token ?? "");
     } else {
-        try {
-            const json = (await request.json()) as any;
-            name = String(json.name ?? "").trim();
-            message = String(json.message ?? "").trim();
-            token = String(json["cf-turnstile-response"] ?? json.token ?? "");
-        } catch {
-            const params = new URLSearchParams(await request.text());
+        const text = await request.text().catch(() => "");
+        if (text) {
+            const params = new URLSearchParams(text);
             name = String(params.get("name") ?? "").trim();
             message = String(params.get("message") ?? "").trim();
             token = String(params.get("cf-turnstile-response") ?? "");

@@ -229,6 +229,11 @@ function formatEntryDate(unixSeconds: number) {
         if (!textarea || !charCount) return;
         const max = Number(textarea.getAttribute('maxlength') ?? 300);
         charCount.textContent = `${textarea.value.length}/${max}`;
+        if (textarea.value.length >= max) {
+            charCount.classList.add('max');
+        } else {
+            charCount.classList.remove('max');
+        }
     }
 
     if (button && blockWrap) {

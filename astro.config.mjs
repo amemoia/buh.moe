@@ -16,7 +16,8 @@ export default defineConfig({
     plugins: [tailwindcss(), Icons({ compiler: 'astro' })],
     server: {
       allowedHosts: [
-        'saeko'
+        'saeko',
+        'AKAME'
       ]
     }
   },

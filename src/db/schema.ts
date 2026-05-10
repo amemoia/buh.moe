@@ -2,7 +2,7 @@ import { sqliteTable, text, integer, check } from 'drizzle-orm/sqlite-core';
 import { sql } from 'drizzle-orm';
 
 export const Guestbook = sqliteTable('Guestbook', {
-    id: integer('id').primaryKey({ autoIncrement: true }),
+    id: integer('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),
     name: text('name').notNull(),
     message: text('message').notNull(),
     created_at: integer('created_at', { mode: 'timestamp' }).notNull().default(sql`(unixepoch())`),

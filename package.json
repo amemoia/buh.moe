@@ -28,7 +28,9 @@
     "vite": "^7"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "drizzle-kit": "^0.31.10",
+    "typescript": "^6.0.3",
     "unplugin-icons": "^23.0.1"
   }
 }

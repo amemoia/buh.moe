@@ -4,6 +4,7 @@ import Base from "../../layouts/Base.astro";
 import Block from "../../components/Block.astro";
 
 import CalendarIcon from "~icons/lucide/calendar";
+import ClockIcon from "~icons/lucide/clock";
 
 import d_quill from "../../assets/blocks/quill.png";
 import "../../styles/blog.css";
@@ -23,28 +24,54 @@ const { Content } = await render(post);
 
 <Base title={post.data.title} description={post.data.description}>
 	<Block deco={d_quill} class="noborder">
-		<div class="mb-8">
-			<div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-4">
+		<div class="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start mb-4">
+			<div class="flex flex-col gap-4 min-w-0">
 				<h1 class="text-3xl md:text-4xl font-bold text-fancy pulp">{post.data.title}</h1>
-				<div class="text-sm flex flex-row gap-2">
-					<span class="flex flex-row gap-1 accent-green"><CalendarIcon /> {post.data.pubDate.toLocaleDateString("en-US", {
+				<p class="text-xl font-light italic opacity-80 border-l-2 border-red/30 pl-4">
+					{post.data.description}
+				</p>
+			</div>
+			<div class="mt-2 text-sm flex flex-row md:flex-col gap-2 md:items-end md:text-right">
+				<span class="flex flex-row gap-1 accent-green md:justify-end"><CalendarIcon /> {post.data.pubDate.toLocaleDateString("en-US", {
+					year: "numeric",
+					month: "long",
+					day: "numeric",
+				})}</span>
+				{post.data.updatedDate && (
+					<span class="md:hidden">•</span>
+					<span class="flex flex-row gap-1 accent-yellow md:justify-end"><ClockIcon /> {post.data.updatedDate.toLocaleDateString("en-US", {
 						year: "numeric",
 						month: "long",
 						day: "numeric",
 					})}</span>
-					<span>•</span>
-					<span>{post.data.tags.join(", ")}</span>
-				</div>
-			</div>
-			<p class="text-xl font-light italic opacity-80 mb-8 border-l-2 border-red/30 pl-4">
-				{post.data.description}
-			</p>
-			<div class="blog-content max-w-none text-xl font-light">
-				<Content />
+				)}
+				<span class="md:hidden">•</span>
+				<span>{post.data.tags.map((tag) => `#${tag}`).join(", ")}</span>
 			</div>
 		</div>
-		<div class="mt-12 pt-8 border-t border-white/10">
-			<a href="/blog" class="accent-green hover:underline">← Back to blog</a>
+		<div class="blog-content max-w-none text-xl font-light">
+			<Content />
 		</div>
+	</Block>
+
+	<Block class="noborder">
+		<div class="flex flex-col py-4 border-t border-white/10">
+				<a href="/blog" class="accent-green hover:underline self-center">← back to blog</a>
+		</div>
+		<script src="https://giscus.app/client.js"
+			data-repo="amemoia/giscus"
+			data-repo-id="R_kgDOSZWb3A"
+			data-category="Announcements"
+			data-category-id="DIC_kwDOSZWb3M4C8tbd"
+			data-mapping="title"
+			data-strict="0"
+			data-reactions-enabled="1"
+			data-emit-metadata="0"
+			data-input-position="bottom"
+			data-theme="transparent_dark"
+			data-lang="en"
+			crossorigin="anonymous"
+			async>
+		</script>
 	</Block>
 </Base>

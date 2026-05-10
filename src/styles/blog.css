@@ -33,14 +33,16 @@
 
 .blog-content ul {
     list-style-type: disc;
-    list-style-position: inside;
-    margin-bottom: 1rem;
+    list-style-position: outside;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
 }
 
 .blog-content ol {
     list-style-type: decimal;
-    list-style-position: inside;
-    margin-bottom: 1rem;
+    list-style-position: outside;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
 }
 
 .blog-content blockquote {
@@ -88,4 +90,17 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+@media (width < 64rem) {
+    .block-deco {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+}
+
+svg {
+    position: relative;
+    top: 2px;
 }

@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import Base from "../layouts/Base.astro";
+import Block from "../components/Block.astro";
 import { env } from "cloudflare:workers";
 
 const host = Astro.url?.hostname ?? '';
@@ -18,13 +19,13 @@ const status = url.searchParams.get('status') ?? '';
     title = "buh / ask"
     description = {pageDesc}
 >
-    <div class="block noborder text-2xl font-light">
+    <Block class="noborder text-2xl font-light">
         <h1 class="font-bold text-2xl md:text-3xl text-fancy pulp">Ask</h1>
         <p>{pageDesc}</p>
         <p class="italic opacity-80">these will be sent to me via a discord webhook and i will answer on my socials (bsky/twitter)</p>
-    </div>
+    </Block>
 
-    <div class="block font-light">
+    <Block class="font-light">
         <h1 class="font-bold text-2xl md:text-3xl text-fancy">what's up?</h1>
         <form action="/api/ask" method="post" class="flex flex-col gap-2 mt-4">
             <input id="ask-name" type="text" name="name" placeholder="Name (optional)" maxlength="64" />
@@ -46,7 +47,7 @@ const status = url.searchParams.get('status') ?? '';
             {status === 'error' && <p class="status accent">an error occurred :c</p>}
             {status === 'timeout' && <p class="status accent">slow down!!!</p>}
         </form>
-    </div>
+    </Block>
 </Base>
 
 <style>

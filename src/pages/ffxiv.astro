@@ -39,6 +39,7 @@ const crafterJobs = entries.filter(([jobname]) => crafters.includes(jobname));
 const gathererJobs = entries.filter(([jobname]) => gatherers.includes(jobname));
 
 import Base from '../layouts/Base.astro';
+import Block from "../components/Block.astro";
 const pageDesc = name+" "+world+" ("+datacenter+")";
 ---
 <Base
@@ -46,7 +47,7 @@ const pageDesc = name+" "+world+" ("+datacenter+")";
     description = {pageDesc}
     image = "https://img2.finalfantasyxiv.com/f/64b19500c983d0191dadd6a9dbf9d9fe_f2d324d722b28bbe681b2898bcdca8bffc0.jpg?1777373463"
 >
-    <div class="block noborder font-light gap-4 px-1! lg:px-0!">
+    <Block class="noborder font-light gap-4 px-1! lg:px-0!">
         <a href={lodestone} target="_blank" class="font-bold text-2xl md:text-3xl text-fancy text-center">Mina Ha</a>
 
         <div class="flex flex-row gap-8">
@@ -131,18 +132,18 @@ const pageDesc = name+" "+world+" ("+datacenter+")";
             </div>
         </div>
 
-        <div class="block ffxiv-lore gap-4 text-xl md:text-2xl lg:mt-8! noborder px-1! lg:px-2!">
+        <Block class="ffxiv-lore gap-4 text-xl md:text-2xl lg:mt-8! noborder px-1! lg:px-2!">
             <h1 class="font-bold text-2xl md:text-3xl text-fancy text-center">A new start...</h1>
             <p>Previously forced to work as a weapons engineer for the Garlean Empire, Mina hoped that escaping to her homeland of Gridania would mean distancing herself from wars. Suffice it to say that she does not particularly enjoy being the Warrior of Light.</p>
             <p>After more than her fair share of fighting, this experienced adventurer seeks to lay down her weapon and contribute to various war restoration efforts across the star, though fate usually has other plans.</p>
             <p>Additionally, she now lends her technical expertise to her Free Company, handling all manner of engineering projects for her friends.</p>
-        </div>
-    </div>
+        </Block>
+    </Block>
 
-    <div class="block noborder font-light pt-0!">
+    <Block class="noborder font-light pt-0!">
         <h1 class="font-bold text-2xl md:text-3xl pulp text-center">Gallery</h1>
         
-    </div>
+    </Block>
 </Base>
 
 <style>

@@ -1,142 +1,197 @@
 ---
-export const prerender = true;
-import Base from '../layouts/Base.astro';
-import Block from '../components/Block.astro';
-import Profile from '../components/Profile.astro';
-import Clock from '../components/Clock.astro';
-import SocialButton from '../components/SocialButton.astro';
-import FriendButton from '../components/FriendButton.astro';
-import Intro from '../components/Intro.astro';
-import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
-import Mina from '../assets/general/mina-banner.png';
-import DeadlockIcon from '../assets/icons/deadlock.png';
+export const prerender = false;
+import Base from "../layouts/Base.astro"
+import Image from "astro/components/Image.astro";
+
+import Block from "../components/Block.astro";
+import WidgetLanyard from "../components/WidgetLanyard.astro";
+import WidgetGuestbook from "../components/WidgetGuestbook.astro";
+import SocialButton from "../components/SocialButton.astro";
+import FriendButton from "../components/FriendButton.astro";
+
+import icon_dl from "../assets/deadlock.webp";
+
+const birthday = new Date('2004-03-21');
+const today = new Date();
+let age = today.getFullYear() - birthday.getFullYear();
+const m_diff = today.getMonth() - birthday.getMonth();
+const d_diff = today.getDate() - birthday.getDate();
+if (m_diff < 0 || (m_diff === 0 && d_diff < 0)) age -= 1;
+
 
 // social urls
 const bsky = "https://bsky.app/profile/buh.moe";
+import BlueskyIcon from "~icons/simple-icons/bluesky";
 const twitter = "https://twitter.com/amemoia";
+import TwitterIcon from "~icons/simple-icons/twitter";
 const discord = "https://discord.com/users/254204775497859073"
+import DiscordIcon from "~icons/simple-icons/discord";
 const steam = "https://steamcommunity.com/id/amemoia/"
+import SteamIcon from "~icons/simple-icons/steam";
 const github = "https://github.com/amemoia"
+import GithubIcon from "~icons/simple-icons/github";
 
-import nta from '../assets/88x31/nta.png';
+import b_nta from '../assets/88x31/nta.png'
+import b_ada from '../assets/88x31/ada.gif'
+import b_notnite from '../assets/88x31/notnite.png'
+import b_sapphic from '../assets/88x31/sapphic.png'
+import b_nano from '../assets/88x31/nano.gif'
+import b_prefetcher from '../assets/88x31/prefetcher.png'
+import b_ata from '../assets/88x31/ata.png'
+import b_alyxia from '../assets/88x31/alyxia.png'
 
----
+import d_wave from '../assets/blocks/wave2.png'
+import d_quill from '../assets/blocks/quill.png'
+import d_minibuh from '../assets/blocks/minibuh.png'
+--- 
 
-<Base title="amemoia">
-
-    <Intro page="/ index" title="hi there!">
-        I'm <span class="text-accent-red font-bold">alex / ola</span>, a 21yo student from <span class="text-accent-red font-bold">🇵🇱 Poland</span>
-    </Intro>
-
-	<Block title="Checking me out?" gradient="red" bannerImage={Mina}>
-        <div class="content-grid">
-            <div class="subsection sec-profile">
-                <Profile />
+<Base
+    title="amemoia"
+>
+    <div class="index-main">
+        <div class="hero">
+            <div class="flex flex-col md:flex-row">
+                <Block deco={d_wave} class="hero-intro grow text-right justify-end text-fancy">
+                    <span>welcome to buh.moe</span>
+                    <span>my little corner of the internet</span>
+                </Block>
+                <Block deco={d_quill} class="grow md:w-1/2 text-fancy bg-red">
+                    <h1 class="pulp text-2xl">Testimonials</h1>
+                    <WidgetGuestbook />
+                </Block>
             </div>
-            <div class="subsection flex flex-col justify-center sec-clock">
-                <Clock />
-            </div>
-            <div class="flex flex-col subsection sec-interests">
-                <p class="font-semibold">Some of my interests:</p>
-                <div class="interests-container">
-                    <ul class="interest-list">
-                        <li><Icon name="fa6-solid:code" class="interest-icon" />Programming</li>
-                        <li><Icon name="fa6-solid:palette" class="interest-icon" />UI Design</li>
-                        <li><Icon name="fa6-solid:gamepad" class="interest-icon" />Game Design</li>
-                    </ul>
-                    <ul class="interest-list">
-                        <li><Icon name="simple-icons:steam" class="interest-icon" />Valve Software</li>
-                        <li><Icon name="fa6-solid:dragon" class="interest-icon" />RGG Studio</li>
-                        <li><Icon name="fa6-solid:meteor" class="interest-icon" />Final Fantasy XIV</li>
-                    </ul>
+
+            <Block deco={d_minibuh} decoLarger={true}>
+                <div class="mb-4">
+                    <WidgetLanyard />
                 </div>
-            </div>
+                <div>
+                    <p class="font-bold text-2xl md:text-3xl text-fancy">hi there!</p>
+                    <p>im alex buh, a {age}yo student from <span class="accent">Poland 🇵🇱</span></p>
+                    <p>i like to play games, mess around with computers and be generally unproductive!</p>
+                    <p class="italic">this website is inspired by and uses assets from <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" class="accent-green"> <Image src={icon_dl} alt="A green deadlock logo" style="width: 1.25rem; height: 1.25rem; display: inline-block; position: relative; bottom: 2px; left: 2px;"}/> Deadlock</a>, an upcoming game by Valve</p>
+                </div>
+            </Block>
         </div>
 
-        <p class="ml-1">My website is partially inspired by and uses assets from <a href="https://store.steampowered.com/app/1422450/Deadlock/" target="_blank" rel="noopener noreferrer" class="deadlock-link"><span class="deadlock-text"><Image src={DeadlockIcon} alt="Deadlock icon" class="deadlock-icon" /><span class="text-deadlock-green font-bold">Deadlock</span></span></a>, an upcoming game by Valve.</p>
-    </Block>
+        <div class="flex flex-col gap-1 mt-4">
+            <Block class="noborder p-0!">
+                <h1 class="pulp text-3xl text-center">Socials</h1>
+                <div class="flex flex-row flex-wrap justify-center">
+                    <SocialButton 
+                        icon={BlueskyIcon}
+                        name="Bluesky" 
+                        handle="@buh.moe"
+                        url={bsky}
+                        color="#0C7BFF"
+                    />
+                    <SocialButton 
+                        icon={TwitterIcon}
+                        name="Twitter" 
+                        handle="@amemoia"
+                        url={twitter}
+                        color="#1DA1F2"
+                    />
+                    <SocialButton 
+                        icon={SteamIcon}
+                        name="Steam" 
+                        handle="/id/amemoia"
+                        url={steam}
+                        color="#1A9FFF"
+                    />
+                    <SocialButton 
+                        icon={DiscordIcon}
+                        name="Discord" 
+                        handle="@buh.moe"
+                        url={discord}
+                        color="#5865F2"
+                    />
+                    <SocialButton 
+                        icon={GithubIcon}
+                        name="GitHub" 
+                        handle="@amemoia"
+                        url={github}
+                        color="#8B5CF6"
+                    />
+                </div>
+            </Block>
 
-    <Block title="Socials" class="socials-block">
-        <div class="socials-grid">
-            <SocialButton 
-                icon="simple-icons:bluesky" 
-                name="Bluesky" 
-                handle="@buh.moe"
-                url={bsky}
-                color="#0C7BFF"
-            />
-            <SocialButton 
-                icon="simple-icons:twitter" 
-                name="Twitter" 
-                handle="@amemoia"
-                url={twitter}
-                color="#1DA1F2"
-            />
-            <SocialButton 
-                icon="simple-icons:steam" 
-                name="Steam" 
-                handle="/id/amemoia"
-                url={steam}
-                color="#1A9FFF"
-            />
-            <SocialButton 
-                icon="simple-icons:discord" 
-                name="Discord" 
-                handle="@buh.moe"
-                url={discord}
-                color="#5865F2"
-            />
-            <SocialButton 
-                icon="simple-icons:github" 
-                name="GitHub" 
-                handle="@amemoia"
-                url={github}
-                color="#8B5CF6"
-            />
-        </div>
-    </Block>
+            <Block class="noborder p-0!">
+                <h1 class="pulp text-3xl text-center">Friends</h1>
+                <div class="flex flex-row flex-wrap my-2 justify-center">
+                    <FriendButton src={b_sapphic.src} alt="sapphic.moe" url="https://sapphic.moe" />
+                    <FriendButton src={b_ada.src} alt="ada.cat" url="https://ada.cat" />
+                    <FriendButton src="https://hoshimiuwu.github.io/HideawayHotlink.gif" alt="jumpyuvu" url="https://hoshimiuwu.github.io" />
+                    <FriendButton src="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" url="https://themooskyfish.nekoweb.org" />
+                    <FriendButton src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" url="https://remblanc.nekoweb.org" />
+                    <FriendButton src={b_alyxia.src} alt="alyxia" url="https://alyxia.dev/" />
+                    <FriendButton src={b_notnite.src} alt="notnite" url="https://notnite.com/" />
+                    <FriendButton src="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" url="https://babybreaths.nekoweb.org" />
+                    <FriendButton src={b_nta.src} alt="nta" url="https://ntauthority.me/" />
+                    <FriendButton src="https://erisdump.neocities.org/buttons/88x31.gif" alt="eris" url="https://erisdump.neocities.org/" />
+                    <FriendButton src={b_prefetcher.src} alt="prefetcher" url="https://prefetcher.net/" />
+                    <FriendButton src={b_nano.src} alt="nano" url="https://nanoshinono.me/" />
+                    <FriendButton src={b_ata.src} alt="ata.moe" url="https://ata.moe/" />
+                </div>
 
-    <div class="flex flex-col gap-4">
-        <div class="friends-container mt-2 gap-0">
-            <FriendButton src="https://themooskyfish.nekoweb.org/res/moosky.gif" alt="TheMooskyFish" url="https://themooskyfish.nekoweb.org" />
-            <FriendButton src="https://sapphic.moe/buttons/sapphic.png" alt="sapphic.moe" url="https://sapphic.moe" />
-            <FriendButton src="https://ada.cat/b/me.gif" alt="ada.cat" url="https://ada.cat" />
-            <FriendButton src="https://notnite.com/buttons/notnite.png" alt="notnite" url="https://notnite.com/" />
-            <FriendButton src="https://babybreaths.nekoweb.org/images/babibutton.png" alt="babi" url="https://babybreaths.nekoweb.org" />
-            <FriendButton src={nta.src} alt="nta" url="https://ntauthority.me/" />
-            <FriendButton src="https://remblanc.nekoweb.org/images/button.png" alt="remblanc" url="https://remblanc.nekoweb.org" />
-            <FriendButton src="https://hoshimiuwu.github.io/HideawayHotlink.gif" alt="jumpyuvu" url="https://hoshimiuwu.github.io" />
-            <FriendButton src="https://onz.ee/assets/88x31s/png/onzecki.png" alt="onzecki" url="https://onz.ee/" />
-            <FriendButton src="https://erisdump.neocities.org/buttons/88x31.gif" alt="eris" url="https://erisdump.neocities.org/" />
-            <FriendButton src="https://nanoshinono.me/prefetcher.gif" alt="prefetcher" url="https://nanoshinono.me/" />
-            <FriendButton src="https://ata.moe/88x31.png" alt="ata.moe" url="https://ata.moe/" />
-            <FriendButton src="https://nekoweb.org/assets/buttons/button6.gif" alt="Nekoweb" url="https://nekoweb.org/" />
+                <div class="flex flex-col items-center">
+                    <h1 class="pulp text-xl">My button</h1>
+                    <button class="button-preview" id="copy-button" type="button" aria-label="Copy button code">
+                        <img src="/resources/buttons/88x31.png" alt="amemoia" width="88" height="31" />
+                    </button>
+                    <span class="font-light text-sm copy-hint opacity-50" id="copy-hint">(click to copy code!)</span>
+                </div>
+            </Block>
         </div>
 
-        <div class="my-button-section">
-            <button class="button-preview" id="copy-button" type="button" aria-label="Copy button code">
-                <img src="/resources/buttons/88x31.gif" alt="amemoia" width="88" height="31" />
-            </button>
-            <span class="text-sm copy-hint" id="copy-hint">(click to copy code)</span>
-        </div>
     </div>
 </Base>
+
+<style>
+	.side {
+		background: #BE1931;
+		z-index: 1;
+		width: 64px;
+		height: 80svh;
+		border-bottom-right-radius: 8px;
+        position: absolute;
+        left: 0;
+	}
+    .hero-intro {
+		user-select: none;
+		background: url("../assets/bg-gothic.png"), #BE193190;
+        background-size: auto auto;
+		background-position: center center;
+		background-blend-mode: color-burn;
+		text-align: right;
+	}
+    .button-preview {
+		border: 1px solid transparent;
+	}
+    .button-preview:hover {
+		border-color: #be193280;
+    }
+    .button-preview:active {
+		border-color: #BE1931;
+    }
+</style>
 
 <script>
     const copyButton = document.getElementById('copy-button');
     const copyHint = document.getElementById('copy-hint');
-    const codeText = '<a href="https://buh.moe/" target="_blank"><img src="https://buh.moe/resources/buttons/88x31.gif"></a>';
+    const codeText = '<a href="https://buh.moe/" target="_blank"><img src="https://buh.moe/resources/buttons/88x31.png"></a>';
     
     if (copyButton && copyHint) {
         copyButton.addEventListener('click', async () => {
             try {
                 await navigator.clipboard.writeText(codeText);
                 copyHint.textContent = 'copied!';
-                copyHint.classList.add('copied');
+				copyHint.classList.remove('opacity-50');
+                copyHint.classList.add('opacity-100');
                 setTimeout(() => {
-                    copyHint.textContent = '(click to copy code)';
-                    copyHint.classList.remove('copied');
+                    copyHint.textContent = '(click to copy code!)';
+                    copyHint.classList.remove('opacity-100');
+                    copyHint.classList.add('opacity-50');
                 }, 2000);
             } catch (err) {
                 console.error('Failed to copy:', err);
@@ -145,153 +200,3 @@ import nta from '../assets/88x31/nta.png';
         });
     }
 </script>
-
-<style>
-    .content-grid {
-        display: flex;
-        gap: 1rem;
-    }
-    .sec-interests {
-            width: 100%;
-    }
-    @media (max-width: 1024px) {
-        .sec-profile, .sec-clock {
-            width: calc(50% - 0.5rem);
-        }
-        .content-grid {
-            flex-wrap: wrap;
-        }
-    }
-
-    @media (max-width: theme('screens.md')) {
-        .sec-profile, .sec-clock, .sec-interests {
-            width: 100%
-        }
-        .content-grid {
-            flex-wrap: wrap;
-        }
-    }
-    
-    .interests-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0 2rem;
-    }
-    
-    .interests-container ul {
-        min-width: max-content;
-    }
-
-    @media (max-width: theme('screens.md')) {
-        .interests-container ul {
-            min-width: unset;
-        }
-    }
-    
-    .interest-list li {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    .interest-icon {
-        width: 1.25rem;
-        height: 1.25rem;
-        flex-shrink: 0;
-        color: var(--accent-red);
-    }
-    
-    .deadlock-link {
-        text-decoration: none;
-        color: inherit;
-    }
-    
-    .deadlock-text {
-        display: inline-flex;
-        align-items: baseline;
-        gap: 0.25rem;
-    }
-    
-    .deadlock-icon {
-        width: 1.25rem;
-        height: 1.25rem;
-        display: inline-block;
-        transform: translateY(4px);
-    }
-
-    .socials-grid {
-        display: grid;
-        /* auto-fit lets columns collapse to fill space; minmax ensures a sensible minimum
-           while 1fr makes columns stretch to fill the row so items fill the container */
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 1rem;
-        align-items: stretch;
-        justify-items: stretch;
-    }
-
-    /* Explicit breakpoints so rows have equal length on narrower screens */
-    @media (max-width: 900px) {
-        .socials-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    @media (max-width: 640px) {
-        .socials-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 420px) {
-        .socials-grid {
-            grid-template-columns: repeat(1, 1fr);
-        }
-    }
-
-    .friends-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .my-button-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .button-preview {
-        flex-shrink: 0;
-        background: none;
-        border: 2px solid transparent;
-        padding: 0;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        border-radius: 2px;
-    }
-
-    .button-preview:hover {
-        border-color: var(--accent-red);
-        transform: scale(1.05);
-    }
-
-    .button-preview:active {
-        transform: scale(0.95);
-    }
-
-    .button-preview img {
-        display: block;
-        image-rendering: pixelated;
-        image-rendering: -moz-crisp-edges;
-        image-rendering: crisp-edges;
-    }
-
-    .copy-hint {
-        transition: color 0.2s ease;
-        color: var(--text-tertiary);
-    }
-
-    .copy-hint.copied {
-        color: var(--accent-red);
-    }
-</style>

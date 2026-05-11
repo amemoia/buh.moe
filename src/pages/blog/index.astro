@@ -1,0 +1,35 @@
+---
+import Base from "../../layouts/Base.astro";
+import BlogPost from "../../components/BlogPost.astro";
+import Block from "../../components/Block.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Base
+	title="buh / blog"
+	description="come get your freshly pressed buh brain juice"
+>
+	<Block class="font-light text-2xl noborder">
+		<h1 class="font-bold text-2xl md:text-3xl text-fancy pulp">buh blog</h1>
+		<p>come get your freshly pressed buh brain juice</p>
+	</Block>
+
+	{
+		posts.map((post) => (
+			<BlogPost
+				title={post.data.title}
+				date={post.data.pubDate.toLocaleDateString("en-US", {
+					year: "numeric",
+					month: "long",
+				})}
+				url={`/blog/${post.id}/`}
+				tags={post.data.tags.map((tag) => `#${tag}`)}
+				desc={post.data.description}
+			/>
+		))
+	}
+</Base>

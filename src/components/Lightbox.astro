@@ -1,0 +1,176 @@
+---
+const { images } = Astro.props;
+---
+
+<div id="lightbox-container" class="hidden">
+    <button
+        id="lightbox-close"
+        class="lightbox-btn"
+        onclick="this.parentElement.classList.add('hidden')"
+        aria-label="Close"
+    >
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            ><line x1="18" y1="6" x2="6" y2="18"></line><line
+                x1="6"
+                y1="6"
+                x2="18"
+                y2="18"></line></svg
+        >
+    </button>
+    <button id="lightbox-prev" class="lightbox-btn lightbox-nav">
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg
+        >
+    </button>
+    <div class="lightbox-main">
+        <img id="lightbox-image" src="" alt="" />
+        <div class="lightbox-info"></div>
+    </div>
+    <button id="lightbox-next" class="lightbox-btn lightbox-nav">
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg
+        >
+    </button>
+</div>
+
+<style>
+    #lightbox-container {
+        position: fixed;
+        inset: 0;
+        background: #000e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 20px;
+        gap: 20px;
+    }
+    #lightbox-container.hidden {
+        display: none;
+    }
+    .lightbox-btn {
+        background: var(--color-bg);
+        border: 2px solid var(--color-border);
+        color: #fff;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+    .lightbox-btn:hover {
+        background: var(--color-surface-alt);
+        border-color: var(--color-border);
+    }
+    #lightbox-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 1001;
+    }
+    .lightbox-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+    }
+    #lightbox-image {
+        max-width: 100%;
+        max-height: 85vh;
+        border-radius: 4px;
+        object-fit: contain;
+    }
+    .lightbox-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #ccc;
+        font-size: 1rem;
+        gap: 4px;
+    }
+    @media (max-width: 600px) {
+        #lightbox-container {
+            padding: 10px;
+        }
+        .lightbox-nav {
+            position: absolute;
+            bottom: 15px;
+        }
+        #lightbox-prev {
+            left: 15px;
+        }
+        #lightbox-next {
+            right: 15px;
+        }
+    }
+</style>
+
+<script define:vars={{ images }}>
+    let currentIndex = 0;
+    const getEl = (id) => document.getElementById(id);
+    const updateLightbox = () => {
+        const currentItem = images[currentIndex];
+        getEl("lightbox-image").src = currentItem.src;
+
+        const dateMatch = currentItem.src.match(/(\d{2})-(\d{2})-(\d{4})/);
+        let dateFormatted = "";
+        if (dateMatch) {
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const day = parseInt(dateMatch[1]);
+            const month = monthNames[parseInt(dateMatch[2]) - 1];
+            const year = dateMatch[3];
+            dateFormatted = `${day} ${month} ${year}`;
+        }
+
+        const infoContainer = document.querySelector(".lightbox-info");
+        infoContainer.innerHTML = `
+            ${dateFormatted ? `<div>${dateFormatted}</div>` : ""}
+            ${currentItem.description ? `<div>${currentItem.description}</div>` : ""}
+            <div class="lightbox-counter"><span>${currentIndex + 1}</span> / ${images.length}</div>
+        `;
+    };
+    window.openLightbox = (index) => {
+        currentIndex = index;
+        updateLightbox();
+        getEl("lightbox-container").classList.remove("hidden");
+    };
+    getEl("lightbox-next").onclick = () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateLightbox();
+    };
+    getEl("lightbox-prev").onclick = () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateLightbox();
+    };
+    getEl("lightbox-container").onclick = (e) => {
+        if (e.target === getEl("lightbox-container"))
+            getEl("lightbox-container").classList.add("hidden");
+    };
+    document.addEventListener("keydown", (e) => {
+        if (getEl("lightbox-container").classList.contains("hidden")) return;
+        if (e.key === "ArrowRight") getEl("lightbox-next").onclick();
+        if (e.key === "ArrowLeft") getEl("lightbox-prev").onclick();
+        if (e.key === "Escape")
+            getEl("lightbox-container").classList.add("hidden");
+    });
+</script>

@@ -1,112 +1,73 @@
-import type { APIRoute } from "astro";
-import { db, Guestbook } from "astro:db";
-import {
-  getEnv,
-  isLocalRequest,
-  verifyTurnstile,
-  sendDiscordWebhook,
-} from "../../lib/api";
+import type { APIRoute } from 'astro';
+import { env } from "cloudflare:workers";
+import { parseFormOrJson, verifyTurnstile, isLocalRequest, redirect, sendDiscordWebhook } from '../../lib/api';
 
 export const prerender = false;
 
-const redirect = (path: string) =>
-  new Response(null, { status: 303, headers: { Location: path } });
-
-export const POST: APIRoute = async ({ request, env }: any) => {
-  try {
-    const contentType = (
-      request.headers.get("content-type") ?? ""
-    ).toLowerCase();
-    let name = "",
-      message = "",
-      token = "";
-
-    if (contentType.includes("application/json")) {
-      const json = await request.json();
-      name = (json.name ?? "").toString().trim();
-      message = (json.message ?? "").toString().trim();
-      token = (json["cf-turnstile-response"] ?? json.token ?? "").toString();
-    } else {
-      try {
-        const form = await request.formData();
-        name = form.get("name")?.toString().trim() ?? "";
-        message = form.get("message")?.toString().trim() ?? "";
-        token = form.get("cf-turnstile-response")?.toString() ?? "";
-      } catch {
-        const params = new URLSearchParams(await request.text());
-        name = (params.get("name") ?? "").toString().trim();
-        message = (params.get("message") ?? "").toString().trim();
-        token = (params.get("cf-turnstile-response") ?? "").toString();
-      }
-    }
-
-    if (name.length > 100 || !name || !message)
-      return redirect("/guestbook?status=error");
-    if (message.length > 300) return redirect("/guestbook?status=toolong");
-    if (name.startsWith(">") || name.startsWith("\">") || message.startsWith(">") || message.startsWith("\">")) return redirect("/guestbook?status=goaway");
-
-    const isLocal = isLocalRequest(request);
-    if (!token && !isLocal) return redirect("/guestbook?status=turnstile");
-
-    if (!isLocal) {
-      const secret = getEnv(env, "TURNSTILE_SITE_SECRET");
-      if (!secret) return redirect("/guestbook?status=turnstile");
-      const { success, codes } = await verifyTurnstile(secret, token);
-      if (!success) {
-        if (
-          codes.includes("invalid-or-unknown-site-key") ||
-          codes.includes("invalid-site-secret") ||
-          codes.includes("missing-site-secret")
-        )
-          return redirect("/guestbook?status=turnstile_invalid_domain");
-        return redirect("/guestbook?status=turnstile");
-      }
-    }
-
+export const POST: APIRoute = async ({ request }) => {
     try {
-      const clientIp =
-        request.headers.get("cf-connecting-ip") ??
-        request.headers.get("x-forwarded-for") ??
-        "anon";
-      if (typeof env?.SESSION?.get === "function") {
-        if (await env.SESSION.get(`guestbook_throttle:${clientIp}`))
-          return redirect("/guestbook?status=error");
-        await env.SESSION.put(`guestbook_throttle:${clientIp}`, "1", {
-          expirationTtl: 60,
-        });
-      }
-    } catch {}
+        const ip = request.headers.get("CF-Connecting-IP") || "127.0.0.1";
+        const rateLimitKey = `rl:guestbook:${ip}`;
+        
+        const isRateLimited = await env.SESSION.get(rateLimitKey);
+        if (isRateLimited && !isLocalRequest(request)) {
+            return redirect('/guestbook?status=timeout');
+        }
 
-    await db.insert(Guestbook).values({ name, message });
+        const { name: rawName, message: rawMessage, token } = await parseFormOrJson(request);
+        const name = rawName.trim();
+        const message = rawMessage.trim();
+        if (!name || !message) {
+            return redirect('/guestbook?status=goaway');
+        }
 
-    const webhookUrl = getEnv(env, "DISCORD_WEBHOOK_GUESTBOOK")
-      ?.toString()
-      .trim();
-    if (!webhookUrl) return redirect("/guestbook?status=ok");
+        if (name.length > 50 || message.length > 300) {
+            return redirect('/guestbook?status=toolong');
+        }
 
-    const mentionUserId = getEnv(env, "DISCORD_UID")?.toString().trim();
-    const payload: any = {
-      username: "guestbook",
-      embeds: [
-        {
-          title: name,
-          description:
-            message.length > 3900 ? message.slice(0, 3900) + "…" : message,
-          timestamp: new Date().toISOString(),
-          color: 0xdc3545,
-        },
-      ],
-    };
-    if (mentionUserId) {
-      payload.content = `<@${mentionUserId}>`;
-      payload.allowed_mentions = { users: [mentionUserId] };
+        const turnstileSecret = env.TURNSTILE_SITE_SECRET;
+        if (turnstileSecret && token) {
+            const { success } = await verifyTurnstile(turnstileSecret, token);
+            if (!success && !isLocalRequest(request)) {
+                return redirect('/guestbook?status=turnstile');
+            }
+        }
+        await env.DB.prepare('INSERT INTO Guestbook (name, message) VALUES (?, ?)')
+            .bind(name, message)
+            .run();
+
+        // Set rate limit cooldown (KV minimum TTL is 60 seconds)
+        await env.SESSION.put(rateLimitKey, "1", { expirationTtl: 60 });
+
+        const webhookUrl = env.DISCORD_WEBHOOK_GUESTBOOK;
+        if (webhookUrl) {
+            const mentionUserId = env.DISCORD_UID;
+            const payload: any = {
+                username: "guestbook",
+                embeds: [
+                    {
+                        title: name,
+                        description: message.length > 3900 ? message.slice(0, 3900) + "…" : message,
+                        timestamp: new Date().toISOString(),
+                        color: 0xdc3545,
+                    },
+                ],
+            };
+
+            if (mentionUserId) {
+                payload.content = `<@${mentionUserId}>`;
+                payload.allowed_mentions = { users: [mentionUserId] };
+            }
+
+            const success = await sendDiscordWebhook(webhookUrl, payload);
+            if (!success) {
+                return redirect('/guestbook?status=ok_webhook_failed');
+            }
+        }
+
+        return redirect('/guestbook?status=ok');
+    } catch (e) {
+        console.error(e);
+        return redirect('/guestbook?status=error');
     }
-
-    const ok = await sendDiscordWebhook(webhookUrl, payload);
-    return redirect(
-      ok ? "/guestbook?status=ok" : "/guestbook?status=ok_webhook_failed",
-    );
-  } catch {
-    return redirect("/guestbook?status=error");
-  }
 };

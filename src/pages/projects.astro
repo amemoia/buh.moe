@@ -1,44 +1,50 @@
 ---
-import Base from "../layouts/Base.astro";
-import Intro from "../components/Intro.astro";
 import Project from "../components/Project.astro";
-
-const pageDesc = "here's some stuff I worked on"
+import Base from "../layouts/Base.astro";
+import Block from "../components/Block.astro";
 ---
-<Base title="buh / projects"  description={pageDesc}>
 
-    <Intro page="/ projects" title={pageDesc}>
-        Here's a few projects I feel good enough about to show off.
-        I also worked on a few other things like modding, mapping and datamining in Source Engine games,
-        as well as some Discord bots.
-        Additionally, I have experience with languages that aren't listed below, such as PHP and various SQL versions.
-        I'm also no stranger to running a server and selfhost a few services.
-    </Intro>
+<Base
+    title = "buh / projects"
+    description = "stuff i worked on that i feel good enough about to brag a little"
+>
+    <Block class="font-light text-2xl noborder">
+        <h1 class="font-bold text-2xl md:text-3xl text-fancy pulp">buh works</h1>
+        <p>This is a <span class="font-medium">non-exhaustive</span> list of my own projects that I worked on.</p>
+        <p>I'd love for this to be longer and I have some great ideas cooking up, but currently I have to focus on making it through university.</p>
+        <br>
+        <p class="italic opacity-80">A bunch of my abandoned projects are too small to list here, like a custom catppuccin-based theme set or numerous custom Discord bots. You can see some of them on my GitHub.</p>
+    </Block>
 
-    <Project
+    <Project 
+        title="buh.moe"
+        date="April 2026"
+        url="https://github.com/amemoia/buh.moe"
+        tags={["Design", "Astro", "Artwork"]}
+        desc="You're looking at 'er now! I refresh the design of my website pretty regularly to try out new ideas and reflect my interests. This design is the result of a lot of trial and error, but I like it a lot!"
+    />
+
+    <Project 
+        title="geggos.net"
+        date="March 2026"
+        url="https://geggos.net"
+        tags={["Design", "Astro", "Pages CMS"]}
+        desc="My friend Geggos was paying too much for a website. I made a shiny new one from scratch and migrated everything over to Cloudflare to save costs. I also implemented a somewhat user-friendly way to add blog posts via Pages CMS."
+    />
+
+    <Project 
         title="Astral Search"
-        date="still cooking..."
-        tags="C#, Dalamud, FFXIV"
-        description="A spotlight-like search plugin for FFXIV I made to learn C#, loosely based on another plugin called Wotsit. Among the changes are a new UI and backend changes to add more customizability, like disabling individual commands."
+        date="waiting..."
+        tags={["C#", "Dalamud", "FFXIV"]}
+        desc="I always wanted to make my own spotlight-like command palette plugin for FFXIV, partly because I find Wotsit too cluttered. It's on the backburner for now as I'm kind of hoping I can hit two birds with one stone by also making this my thesis project for university."
     />
-    <Project
-        title="buh.moe (current)"
-        date="October 2025"
-        tags="HTML, CSS, JS, Astro"
-        link="https://buh.moe/"
-        description="I change the design of my website pretty often, I think this is the 3rd version this year? This design adds a few dynamic elements like my Discord status, uses more Astro features and keeps some cool things from my previous Deadlock theme. I also switched from vercel (ewwww) to cloudflare for hosting"
-    />
-    <Project
+
+    <Project 
         title="amemoia.nekoweb.org"
         date="January 2024"
-        tags="HTML, CSS, JS"
-        link="https://amemoia.nekoweb.org/"
-        description="A website modeled after Needy Streamer Overload's UI, trying to be as faithful to the game as possible. I mostly consider this abandoned as it was a pain to update. Still available to view on my Nekoweb."
+        url="https://amemoia.nekoweb.org"
+        tags={["HTML", "CSS", "JavaScript"]}
+        desc="A website modeled after Needy Streamer Overload, as faithful to the game as possible. It's honestly horrible from a technical standpoint, but many people enjoyed it and this page is what eventually got me into the Deadlock alpha not long after it leaked."
     />
-    <Project
-        title="Various Discord bots"
-        date="2018-2021"
-        tags="Python, discord.py"
-        description="I made a bunch of bots over the years. They had a wide range of modules so you could take a few cogs and package it up as a more specialized bot, like for role color selection or creating a list of server emotes. The Python skills from this pretty much carried me through school which in turn got me into my university of choice."
-    />
+
 </Base>

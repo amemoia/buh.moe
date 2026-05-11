@@ -2,31 +2,26 @@
 const {
 	title = "buh.moe",
 	description = "my little corner of the internet",
-	image = "/resources/avi-embed.png",
+	image = "/resources/minibuh.png",
 	url,
-	class: className,
 } = Astro.props;
+
+const siteBase = Astro.site ?? '';
+const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : Astro.url.pathname);
+let absoluteImage = image;
+if (image) {
+	if (image.startsWith('https')) {
+		absoluteImage = image;
+	} else if (image.startsWith('/')) {
+		absoluteImage = new URL(image, Astro.url).href;
+	}
+}
 
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import '../styles/global.css'
-
-var classNameTotal;
-if (className == null || className== '') {
-		classNameTotal = "flex flex-col gap-4"
-}
-else classNameTotal = className;
-
-const siteBase = import.meta.env.SITE ?? Astro.site ?? '';
-let absoluteImage = image;
-try {
-	if (image && !image.startsWith('http') && siteBase) {
-		absoluteImage = new URL(image, siteBase).href;
-	}
-} catch (e) {
-}
-const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : Astro.url.pathname);
 ---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -36,12 +31,7 @@ const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : 
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-
-		<!-- Twitter -->
-		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={absoluteImage} />
+		<meta name="theme-color" content="#BE1931" />
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
@@ -51,15 +41,21 @@ const pageUrl = url ?? (siteBase ? new URL(Astro.url.pathname, siteBase).href : 
 		<meta property="og:image" content={absoluteImage} />
 		<meta property="og:site_name" content="buh.moe" />
 
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={absoluteImage} />
+
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 		<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="buh.moe RSS" />
 	</head>
 
-	<body>
+	<body class="flex flex-col">
 		<Header />
-		<main class={classNameTotal}>
+		<main class="flex flex-col text-lg lg:text-xl lg:w-4xl self-center mt-8 mx-2 lg:mx-0 w-full">
 			<slot />
 		</main>
 		<Footer />

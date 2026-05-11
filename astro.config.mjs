@@ -1,35 +1,32 @@
 // @ts-check
-import { defineConfig } from "astro/config";
-import tailwindcss from "@tailwindcss/vite";
-import icon from "astro-icon";
+import { defineConfig } from 'astro/config';
+import Icons from 'unplugin-icons/vite';
 
-import cloudflare from "@astrojs/cloudflare";
+import tailwindcss from '@tailwindcss/vite';
 
-import db from "@astrojs/db";
+import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://buh.moe',
-  integrations: [icon(), db()],
-  output: 'server',
+  
+  integrations: [],
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), Icons({ compiler: 'astro' })],
     server: {
       allowedHosts: [
-        'saeko'
+        'saeko',
+        'AKAME'
       ]
     }
   },
 
   markdown: {
     shikiConfig: {
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark',
-      },
+      theme: 'github-dark'
     },
   },
 
-  adapter: cloudflare(),
+  adapter: cloudflare()
 });

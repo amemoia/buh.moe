@@ -65,21 +65,21 @@ const { images } = Astro.props;
         display: none;
     }
     .lightbox-btn {
-        background: #fff1;
-        border: 1px solid #fff2;
+        background: var(--color-bg);
+        border: 2px solid var(--color-border);
         color: #fff;
         cursor: pointer;
         width: 40px;
         height: 40px;
-        border-radius: 4px;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.2s;
     }
     .lightbox-btn:hover {
-        background: #fff2;
-        border-color: #fff4;
+        background: var(--color-surface-alt);
+        border-color: var(--color-border);
     }
     #lightbox-close {
         position: absolute;
@@ -132,7 +132,6 @@ const { images } = Astro.props;
         const currentItem = images[currentIndex];
         getEl("lightbox-image").src = currentItem.src;
 
-        // Date extraction and formatting to "21 Mar 2026"
         const dateMatch = currentItem.src.match(/(\d{2})-(\d{2})-(\d{4})/);
         let dateFormatted = "";
         if (dateMatch) {

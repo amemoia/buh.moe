@@ -8,7 +8,7 @@ tags: ["OpinionAlarm"]
 
 (inspired by https://notnite.com/blog/oytg)
 
-this is a sort of non-exhaustive list of games I really like!
+this is a sort of non-exhaustive list of games I really like! i'm generally a huge fan of movement mechanics in games and im obsessed with ones that have a strong stylistic direction
 
 ## Adventure
 - [DELTARUNE](https://store.steampowered.com/app/1671210/DELTARUNE/): the parallel story to UNDERTALE, it fascinates me in ways i cannot fully explain

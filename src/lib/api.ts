@@ -7,15 +7,6 @@ export const redirect = (path: string) => {
     });
 };
 
-export const isLocalRequest = (request: Request): boolean => {
-    const host = request.headers.get("host") ?? "";
-    return (
-        host.includes("localhost") ||
-        host.includes("127.0.0.1") ||
-        host.includes("::1")
-    );
-};
-
 export const verifyTurnstile = async (secret: string, token: string): Promise<{ success: boolean; codes: string[] }> => {
     const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
         method: "POST",

@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { env } from "cloudflare:workers";
-import { parseFormOrJson, verifyTurnstile, isLocalRequest, redirect, sendDiscordWebhook } from '../../lib/api';
+import { parseFormOrJson, verifyTurnstile, redirect, sendDiscordWebhook } from '../../lib/api';
 
 export const prerender = false;
 
@@ -10,7 +10,7 @@ export const POST: APIRoute = async ({ request }) => {
         const rateLimitKey = `rl:ask:${ip}`;
 
         const isRateLimited = await env.SESSION.get(rateLimitKey);
-        if (isRateLimited && !isLocalRequest(request)) {
+        if (isRateLimited) {
             return redirect('/ask?status=timeout');
         }
 
@@ -29,7 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
         const turnstileSecret = env.TURNSTILE_SITE_SECRET;
         if (turnstileSecret && token) {
             const { success } = await verifyTurnstile(turnstileSecret, token);
-            if (!success && !isLocalRequest(request)) {
+            if (!success) {
                 return redirect('/ask?status=turnstile');
             }
         }
@@ -61,7 +61,6 @@ export const POST: APIRoute = async ({ request }) => {
         const success = await sendDiscordWebhook(webhookUrl, payload);
 
         if (success) {
-            // Set rate limit cooldown (KV minimum TTL is 60 seconds)
             await env.SESSION.put(rateLimitKey, "1", { expirationTtl: 60 });
         } else {
             return redirect('/ask?status=ok_webhook_failed');

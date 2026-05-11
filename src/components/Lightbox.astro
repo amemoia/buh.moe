@@ -77,9 +77,11 @@ const { images } = Astro.props;
         justify-content: center;
         transition: all 0.2s;
     }
-    .lightbox-btn:hover {
-        background: var(--color-surface-alt);
-        border-color: var(--color-border);
+    @media (hover: hover) {
+        .lightbox-btn:hover {
+            background: var(--color-surface-alt);
+            border-color: var(--color-border);
+        }
     }
     #lightbox-close {
         position: absolute;

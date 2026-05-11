@@ -73,23 +73,25 @@ const customDescriptions: Record<string, string> = {
     "gpose1-06-08-2025.jpg": "Viper Gpose (1)",
     "gpose2-06-08-2025.jpg": "Viper Gpose (2)",
     "gpose3-06-08-2025.jpg": "Viper Gpose (3)",
+    "screenshot2-21-03-2026.webp": "driving with my friends before a raid !!",
+    "screenshot1-21-03-2026.webp": "waiting on one last person before raiding...",
+    "screenshot-18-04-2026.png": "Buh is watching.",
     "gpose-10-04-2026.jpg": "Gpose: Cosplaying Snake from METAL GEAR SOLID 3 and MGSV Ground Zeroes",
     "screenshot-13-04-2026.png": "A new adventurer plate!",
     "screenshot-18-04-2026.jpg": "Mina rocking a new hairstyle for post-Dawntrail",
 };
 
-const images = Object.values(import.meta.glob<{ default: ImageMetadata }>('../assets/gallery/ffxiv/*.{jpg,jpeg,png,webp}', { eager: true }))
-    .map(m => m.default)
+const images = Object.entries(import.meta.glob<{ default: ImageMetadata }>('../assets/gallery/ffxiv/*.{jpg,jpeg,png,webp}', { eager: true }))
+    .map(([path, m]) => {
+        const filename = path.split('/').pop() || '';
+        return {
+            src: m.default.src,
+            description: customDescriptions[filename] || ""
+        };
+    })
     .sort((a, b) => {
         const getDateString = (src: string) => src.match(/(\d{2})-(\d{2})-(\d{4})/)?.slice(1).reverse().join('-');
         return (getDateString(b.src) || '').localeCompare(getDateString(a.src) || '');
-    })
-    .map(m => {
-        const filename = m.src.split('/').pop()?.split('?')[0] || '';
-        return {
-            src: m.src,
-            description: customDescriptions[filename] || ""
-        };
     });
 ---
 <Base

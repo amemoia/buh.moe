@@ -23,7 +23,7 @@
     "drizzle-orm": "^0.45.2",
     "tailwindcss": "^4.2.2",
     "twemoji": "^14.0.2",
-    "wrangler": "^4.81.1"
+    "wrangler": "^4.103.0"
   },
   "overrides": {
     "vite": "^7"

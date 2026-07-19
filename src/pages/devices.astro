@@ -39,8 +39,8 @@ const specs = {
     ],
     peripherals: [
         { icon: MouseIcon, label: 'Mouse', value: 'Hitscan Hyperlight' },
-        { icon: SquareIcon, label: 'Mousepad', value: 'Logitech G640' },
-        { icon: KeyboardIcon, label: 'Keyboard', value: 'Razer BlackWidow Elite' },
+        { icon: SquareIcon, label: 'Mousepad', value: 'Dark Project Terra Nostra' },
+        { icon: KeyboardIcon, label: 'Keyboard', value: 'Dark Project 87 Fuji V2' },
         { icon: HeadphonesIcon, label: 'Audio', value: 'JBL Quantum 50 / AirPods Pro 2' },
         { icon: MicIcon, label: 'Microphone', value: 'Fifine K669B' },
     ],
@@ -79,7 +79,7 @@ const devices = Object.entries(specs);
                                     <IconComponent class="h-5 w-5" />
                                 </span>
                                 <div class="flex flex-row gap-2 items-center">
-                                    <p class="font-semibold leading-tight">{entry.label}</p>
+                                    <p class="font-semibold text-base leading-tight">{entry.label}</p>
                                     <p class="text-base opacity-80 wrap-break-word">{entry.value}</p>
                                 </div>
                             </div>

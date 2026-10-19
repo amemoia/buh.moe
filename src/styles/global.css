@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
 @font-face {
@@ -66,6 +67,7 @@
 :root {
 	--font-oracle: 'Valve Oracle', sans-serif;
 	--font-pulp: 'Valve Pulp', sans-serif;
+	--font-jost: 'Jost', sans-serif;
 	--color-bg: #BE193130;
 	--color-bg-alt: #00000060;
 	--color-surface-alt: #BE1931;
@@ -119,6 +121,12 @@ body {
 	color: var(--color-accent-yellow);
 	font-weight: 500;
 }
+.jost-300 {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
 .pulp {
 	font-family: var(--font-pulp);
 	font-weight: 700;
@@ -144,6 +152,10 @@ body {
 	padding: 2rem;
 	display: flex;
 	flex-direction: column;
+}
+.block > p {
+	font-family: var(--font-jost);
+	font-size: 22px;
 }
 .noborder {
 	border-color: transparent;

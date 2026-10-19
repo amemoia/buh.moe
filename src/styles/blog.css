@@ -1,5 +1,6 @@
 .blog-content {
     line-height: 1.6;
+    font-family: var(--font-jost);
 }
 
 .blog-content h1, 

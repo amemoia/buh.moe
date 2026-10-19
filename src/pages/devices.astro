@@ -39,7 +39,7 @@ const specs = {
     ],
     peripherals: [
         { icon: MouseIcon, label: 'Mouse', value: 'Hitscan Hyperlight' },
-        { icon: SquareIcon, label: 'Mousepad', value: 'Dark Project Terra Nostra' },
+        { icon: SquareIcon, label: 'Mousepad', value: 'Dark Project Terra Nostra XL' },
         { icon: KeyboardIcon, label: 'Keyboard', value: 'Dark Project 87 Fuji V2' },
         { icon: HeadphonesIcon, label: 'Audio', value: 'JBL Quantum 50 / AirPods Pro 2' },
         { icon: MicIcon, label: 'Microphone', value: 'Fifine K669B' },
@@ -74,14 +74,10 @@ const devices = Object.entries(specs);
                     {entries.map((entry) => {
                         const IconComponent = entry.icon;
                         return (
-                            <div class="flex items-start gap-3 rounded-lg bg-black/20 p-3">
-                                <span class="mt-0.5 text-accent-green shrink-0">
-                                    <IconComponent class="h-5 w-5" />
-                                </span>
-                                <div class="flex flex-row gap-2 items-center">
-                                    <p class="font-semibold text-base leading-tight">{entry.label}</p>
-                                    <p class="text-base opacity-80 wrap-break-word">{entry.value}</p>
-                                </div>
+                            <div class="flex flex-row text-base items-center gap-2 self-center rounded-lg bg-black/20 p-3">
+                                <IconComponent class="h-4 w-4" />
+                                <p class="font-semibold">{entry.label}</p>
+                                <p class="opacity-80 wrap-break-word">{entry.value}</p>
                             </div>
                         );
                     })}

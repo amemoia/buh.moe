@@ -7,7 +7,7 @@ import { env } from "cloudflare:workers";
 
 const host = Astro.url?.hostname ?? '';
 const isLocalhost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
-const DUMMY_SITE_KEY = '1x00000000000000000000BB';
+const DUMMY_SITE_KEY = '1x00000000000000000000AA';
 const turnstileSiteKey = isLocalhost ? DUMMY_SITE_KEY : (env.PUBLIC_TURNSTILE_SITE_KEY ?? '');
 
 const pageDesc = 'ask me anything, anonymously or not!!';
@@ -33,9 +33,9 @@ const status = url.searchParams.get('status') ?? '';
                 <textarea id="ask-message" name="message" placeholder="Your question" required maxlength="1000" class="w-full resize-none"></textarea>
                 <div id="char-count" class="char-counter">0</div>
             </div>
-            <div class="flex flex-col md:flex-row w-full form-controls">
+            <div class="flex flex-col gap-4 md:flex-row w-full form-controls">
                 <button type="submit" class="submit-btn self-center md:justify-self-center py-3 px-6 font-extrabold">Send</button>
-                <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>
+                <div class="cf-turnstile self-center" data-sitekey={turnstileSiteKey}></div>
             </div>
 
             {status === 'ok' && <p class="status accent-green">your message has been sent!</p>}
@@ -49,6 +49,8 @@ const status = url.searchParams.get('status') ?? '';
         </form>
     </Block>
 </Base>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <style>
     .textarea-wrap {
